@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace G4L.UserManagement.DA.Migrations
 {
-    public partial class second_migration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,16 +11,16 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "Sponsors",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RegisteredName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TradeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhysicalAdrress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostalAdrress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Contact = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    RegisteredName = table.Column<string>(type: "text", nullable: true),
+                    TradeName = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    PhysicalAdrress = table.Column<string>(type: "text", nullable: true),
+                    PostalAdrress = table.Column<string>(type: "text", nullable: true),
+                    Website = table.Column<string>(type: "text", nullable: true),
+                    Contact = table.Column<string>(type: "text", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,19 +31,19 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IdNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Career = table.Column<int>(type: "int", nullable: false),
-                    Role = table.Column<int>(type: "int", nullable: false),
-                    LearnershipStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SponsorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Surname = table.Column<string>(type: "text", nullable: true),
+                    IdNumber = table.Column<string>(type: "text", nullable: true),
+                    Phone = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Career = table.Column<int>(type: "integer", nullable: false),
+                    Role = table.Column<int>(type: "integer", nullable: false),
+                    LearnershipStartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: true),
+                    SponsorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,14 +60,14 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "Attendances",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    ClockIn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ClockOut = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    CheckInTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CheckOutTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,16 +84,16 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "Leaves",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LeaveType = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UsedDays = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    LeaveType = table.Column<int>(type: "integer", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UsedDays = table.Column<decimal>(type: "numeric(10,2)", precision: 10, scale: 2, nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    Comments = table.Column<string>(type: "text", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,8 +110,8 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "SponsoredUsers",
                 columns: table => new
                 {
-                    SponsorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    SponsorId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,18 +134,18 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "Goals",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    GoalTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Duration = table.Column<TimeSpan>(type: "time", nullable: false),
-                    GoalStatus = table.Column<int>(type: "int", nullable: false),
-                    PauseCount = table.Column<int>(type: "int", nullable: false),
-                    ArchiveCount = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TimeRemaining = table.Column<TimeSpan>(type: "time", nullable: false),
-                    AttendanceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Duration = table.Column<string>(type: "text", nullable: true),
+                    GoalStatus = table.Column<int>(type: "integer", nullable: false),
+                    PausedCount = table.Column<int>(type: "integer", nullable: false),
+                    ArchiveCount = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    TimeRemaining = table.Column<string>(type: "text", nullable: true),
+                    AttendanceId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -162,13 +162,13 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "Approvers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    status = table.Column<int>(type: "int", nullable: false),
-                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LeaveId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    status = table.Column<int>(type: "integer", nullable: false),
+                    Comments = table.Column<string>(type: "text", nullable: true),
+                    LeaveId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,12 +185,12 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "Documents",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LeaveId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    FileName = table.Column<string>(type: "text", nullable: true),
+                    FilePath = table.Column<string>(type: "text", nullable: true),
+                    LeaveId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,13 +207,13 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "LeaveSchedules",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LeaveDayType = table.Column<int>(type: "int", nullable: false),
-                    HalfDaySchedule = table.Column<int>(type: "int", nullable: false),
-                    LeaveId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LeaveDayType = table.Column<int>(type: "integer", nullable: false),
+                    HalfDaySchedule = table.Column<int>(type: "integer", nullable: false),
+                    LeaveId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,12 +230,12 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "GoalComment",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GoalStatus = table.Column<int>(type: "int", nullable: false),
-                    GoalId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Comment = table.Column<string>(type: "text", nullable: true),
+                    CommentType = table.Column<int>(type: "integer", nullable: false),
+                    GoalId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -249,21 +249,21 @@ namespace G4L.UserManagement.DA.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GoalTask",
+                name: "GoalTasks",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Complete = table.Column<bool>(type: "bit", nullable: false),
-                    GoalId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Complete = table.Column<bool>(type: "boolean", nullable: false),
+                    GoalId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GoalTask", x => x.Id);
+                    table.PrimaryKey("PK_GoalTasks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GoalTask_Goals_GoalId",
+                        name: "FK_GoalTasks_Goals_GoalId",
                         column: x => x.GoalId,
                         principalTable: "Goals",
                         principalColumn: "Id",
@@ -296,8 +296,8 @@ namespace G4L.UserManagement.DA.Migrations
                 column: "AttendanceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GoalTask_GoalId",
-                table: "GoalTask",
+                name: "IX_GoalTasks_GoalId",
+                table: "GoalTasks",
                 column: "GoalId");
 
             migrationBuilder.CreateIndex(
@@ -333,7 +333,7 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "GoalComment");
 
             migrationBuilder.DropTable(
-                name: "GoalTask");
+                name: "GoalTasks");
 
             migrationBuilder.DropTable(
                 name: "LeaveSchedules");
