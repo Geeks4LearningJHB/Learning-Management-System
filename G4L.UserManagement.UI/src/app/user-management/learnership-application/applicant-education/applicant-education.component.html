@@ -219,7 +219,7 @@
                     </div>
                 </div>
                 <br>
-
+                
             </div>
             <!-- Drop-downs for Math and English marks -->
             <div>Math Mark:
@@ -319,7 +319,7 @@
             </div>
             <div class="button-row">
                 <!-- Button 1: Arrow pointing to the left -->
-                <button class="arrow-left">Return to personal details</button>
+                <button (click)="routeToPersonalInformation()" class="arrow-left">Return to personal details</button>
 
                 <!-- Button 2: Save and Close with icon -->
                 <button class="save-close-button">
@@ -329,8 +329,8 @@
                 </button>
 
                 <!-- Button 3: Arrow pointing to the right -->
-                <button class="arrow-right">Proceed to attachments</button>
-
+                <button  class="arrow-right">Proceed to attachments</button>
+                <!--Put code inbetween class and button(click)="routeToAttachments()" -->
             </div>
             
         </div>

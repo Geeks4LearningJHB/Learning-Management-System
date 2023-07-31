@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-applicant-education',
@@ -8,14 +9,32 @@ import { Router } from '@angular/router';
 })
 export class ApplicantEducationComponent implements OnInit {
 
-  constructor(private route: Router) { }
-
+   personalInformationForm!: FormGroup;
+  constructor(private route: Router, private formBuilder: FormBuilder) { }
+  
   ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+  
+  
+
+  routeToPersonalInformation() {
+    this.route.navigate(["learnership-application", "personal-information"])
+
   }
 
- 
-   routeToEducation() {
-     this.route.navigate(["learnership-application", "personal-information"])
+}
 
-}
-}
+
+// getFormControl(control: String): AbstractControl {
+  //   return this.personalInformationForm.controls[`${control}`];
+  // }
+
+  // ngOnInit() {
+    // Initialize the form with the form controls and their validations
+  //   this.personalInformationForm = new FormGroup({
+  //     Firstname: new FormControl(null, [Validators.required, Validators.required]),
+  //     Surname: new FormControl(null, Validators.required),
+      
+  //   });
+  // }
