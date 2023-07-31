@@ -11,6 +11,8 @@ import { IconsComponent } from './login/icons/icons.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserManagementComponent } from './user-management.component';
+import { LearnershipApplicationModule } from './learnership-application/learnership-application.module';
+
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { UserManagementComponent } from './user-management.component';
     EnrolComponent,
     IconsComponent,
     FooterComponent,
+    
+  
   ],
   imports: [
     CommonModule,
@@ -28,6 +32,7 @@ import { UserManagementComponent } from './user-management.component';
     MdbModalModule,
     PipesModule,
     MaterialModule,
+    LearnershipApplicationModule
   ],
 })
 export class UserManagementModule {}

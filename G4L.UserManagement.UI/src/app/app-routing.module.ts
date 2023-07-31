@@ -3,12 +3,21 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './user-management/login/guards/login.guard';
 
+
 const routes: Routes = [
 
   {
     path: 'login',
     component: LoginComponent,
   },
+  {
+    path: 'learnership-application',
+    loadChildren: () =>
+      import('./user-management/learnership-application/learnership-application.module').then(
+        (m) => m.LearnershipApplicationModule
+      ),
+  },
+
   {
     path: '',
     loadChildren: () =>
@@ -28,4 +37,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -15,6 +15,7 @@ import { AttendanceRegisterModule } from '../attendance-register/attendance-regi
 import { GoalManagementComponent } from '../goal-management/goal-management.component';
 import { GoalManagementModule } from '../goal-management/goal-management.module';
 
+
 const routes: Routes = [
   {
     path: '',
@@ -59,7 +60,8 @@ const routes: Routes = [
     LeaveManagementModule,
     IkmManagementModule,
     AttendanceRegisterModule,
-    GoalManagementModule
+    GoalManagementModule,
+
   ],
 })
 export class MasterLayoutRoutingModule {
