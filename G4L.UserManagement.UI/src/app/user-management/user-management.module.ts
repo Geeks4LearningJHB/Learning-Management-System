@@ -11,6 +11,7 @@ import { IconsComponent } from './login/icons/icons.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserManagementComponent } from './user-management.component';
+import { ApplicationProgressComponent } from './application-progress/application-progress.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { UserManagementComponent } from './user-management.component';
     EnrolComponent,
     IconsComponent,
     FooterComponent,
+    ApplicationProgressComponent,
   ],
   imports: [
     CommonModule,
