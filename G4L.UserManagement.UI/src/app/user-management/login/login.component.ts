@@ -20,6 +20,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
+
+ redirectToSignup() {
+    this.router.navigate(['/signup']);
+  }
   getFormControl(control: String): AbstractControl {
     return this.loginForm.controls[`${control}`];
   }
@@ -45,6 +49,8 @@ export class LoginComponent implements OnInit {
       this.clearFormControlErrors();
     })
   }
+
+ 
 
   get currentDateTime(): string {
     let tzoffset = Math.abs(new Date().getTimezoneOffset() * 60000);
@@ -99,5 +105,7 @@ export class LoginComponent implements OnInit {
           this.loginForm.updateValueAndValidity();
           this.serverErrorMessage = error?.message;
         });
+
+       
   }
 }

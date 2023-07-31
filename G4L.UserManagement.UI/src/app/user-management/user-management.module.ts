@@ -11,11 +11,17 @@ import { IconsComponent } from './login/icons/icons.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserManagementComponent } from './user-management.component';
+import { SignupComponent } from './signup/signup.component';
+import { SignupModalComponent } from './signup-modal/signup-modal.component';
+
+
 
 @NgModule({
   declarations: [
     UserManagementComponent,
     LoginComponent,
+    SignupComponent,
+    SignupModalComponent,
     RegisterComponent,
     EnrolComponent,
     IconsComponent,

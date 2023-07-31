@@ -19,7 +19,8 @@ export class UserManagementComponent implements OnInit {
   constructor(
     private userService: UserService,
     private modalService: MdbModalService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+  
   ) {}
 
   ngOnInit(): void {
@@ -78,4 +79,5 @@ export class UserManagementComponent implements OnInit {
       this.getAllUsers();
     });
   }
+ 
 }
