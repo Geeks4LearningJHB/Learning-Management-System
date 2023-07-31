@@ -19,11 +19,14 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { APP_SERVICE_CONFIG, APP_CONFIG } from './shared/app-config/app-config.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LoaderComponent,
+  
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
