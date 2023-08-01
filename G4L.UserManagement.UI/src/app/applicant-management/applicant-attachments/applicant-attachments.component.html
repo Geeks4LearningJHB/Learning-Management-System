@@ -14,48 +14,55 @@
       <div class="left-att">
         <div class="file-upload">
           <h6>Cv</h6>
-          <div class="att-file-filter">
-            <i class="fa-solid fa-file-arrow-up fa-2xl"></i>
-            <p><a>Click to upload</a> or drag and drop</p>
-            <span>Maximum file 50MB</span>
-          </div>
+          <label for="fileInput" class="custom-file-upload">
+            <input type="file" id="fileInput" name="fileInput" />
+              <i class="fa-solid fa-file-arrow-up fa-2xl"></i>
+              <p><a>Click to upload</a> or drag and drop</p>
+              <span>Maximum file 5MB</span>
+          </label>
         </div>
         <div class="file-upload">
           <h6>Photo</h6>
-          <div class="att-file-filter">
-            <i class="fa-solid fa-file-arrow-up fa-2xl"></i>
-            <p><a>Click to upload</a> or drag and drop</p>
-            <span>Maximum file 50MB</span>
-          </div>
+          <label for="fileInput" class="custom-file-upload">
+            <input type="file" id="fileInput" name="fileInput" />
+              <i class="fa-solid fa-file-arrow-up fa-2xl"></i>
+              <p><a>Click to upload</a> or drag and drop</p>
+              <span>Maximum file 5MB</span>
+          </label>
         </div>
       </div>
       <div class="vertical-line"></div>
       <div class="right-attments">
         <div class="file-upload">
           <h6>ID Copy</h6>
-          <div class="att-file-filter">
-            <i class="fa-solid fa-file-arrow-up fa-2xl"></i>
-            <p><a>Click to upload</a> or drag and drop</p>
-            <span>Maximum file 50MB</span>
-          </div>
+          <label for="fileInput" class="custom-file-upload">
+            <input type="file" id="fileInput" name="fileInput" />
+              <i class="fa-solid fa-file-arrow-up fa-2xl"></i>
+              <p><a>Click to upload</a> or drag and drop</p>
+              <span>Maximum file 5MB</span>
+          </label>
         </div>
-
+        
         <div class="file-upload">
           <h6>Vaccination Card</h6>
-          <div class="att-file-filter">
-            <i class="fa-solid fa-file-arrow-up fa-2xl"></i>
-            <p><a>Click to upload</a> or drag and drop</p>
-            <span>Maximum file 50MB</span>
-          </div>
+          <label for="fileInput" class="custom-file-upload">
+            <input type="file" id="fileInput" name="fileInput" />
+              <i class="fa-solid fa-file-arrow-up fa-2xl"></i>
+              <p><a>Click to upload</a> or drag and drop</p>
+              <span>Maximum file 5MB</span>
+          </label>
         </div>
       </div>
     </div>
     <div class="file-upload-down">
       <h6>Qualifications</h6>
-      <div class="att-file-filter">
-        <i class="fa-solid fa-file-arrow-up fa-2xl"></i>
-        <p><a>Click to upload</a> or drag and drop</p>
-        <span>Maximum file 50MB</span>
+      <div class="container d-flex justify-content-center align-items-center">
+        <label for="fileInput" class="custom-file-upload text-center  custom-rounded">
+          <input type="file" id="fileInput" name="fileInput" class="d-none" />
+          <i class="fa-solid fa-file-arrow-up fa-2x"></i>
+          <p><a>Click to upload</a> or drag and drop</p>
+          <span>Maximum file 5MB</span>
+        </label>
       </div>
     </div>
   </div>
@@ -68,7 +75,7 @@
       <i class="fa-solid fa-floppy-disk fa-2xl"></i>
       <span>Save and continue</span>
     </div>
-    <button class="btn btn-primary" (click)="openCompleteAppication()">
+    <button class="btn btn-primary " (click)="openCompleteAppication()" style="height: 6vh; width: 200px;">
       Complete application
     </button>
   </div>

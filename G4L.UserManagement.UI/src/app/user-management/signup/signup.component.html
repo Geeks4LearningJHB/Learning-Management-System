@@ -52,24 +52,35 @@
         </div>
       </div>
       <div class="col">
-        <label for="inputLastName" class="form-label">Last Name
+        <label for="inputLastName" class="form-label"
+          >Last Name
           <span class="validation-error-text">*</span>
         </label>
-      
-        <input type="text" class="form-control" id="inputLastName" formControlName="LastName" />
-      
-        <div class="validation-error-text" *ngIf="getFormControl('LastName').touched && getFormControl('LastName').hasError('required')">
+
+        <input
+          type="text"
+          class="form-control"
+          id="inputLastName"
+          formControlName="LastName"
+        />
+
+        <div
+          class="validation-error-text"
+          *ngIf="
+            getFormControl('LastName').touched &&
+            getFormControl('LastName').hasError('required')
+          "
+        >
           <i class="fa fa-exclamation-circle"></i> Please enter your last name.
         </div>
         <div
-        class="validation-error-text"
-        *ngIf="getFormControl('LastName').hasError('specialCharacters')"
-      >
-        <i class="fa-solid fa-exclamation-circle"></i> Special characters are
-        not allowed
+          class="validation-error-text"
+          *ngIf="getFormControl('LastName').hasError('specialCharacters')"
+        >
+          <i class="fa-solid fa-exclamation-circle"></i> Special characters are
+          not allowed
+        </div>
       </div>
-      </div>
-      
     </div>
     <div class="row g-3 mb-3">
       <div class="col">

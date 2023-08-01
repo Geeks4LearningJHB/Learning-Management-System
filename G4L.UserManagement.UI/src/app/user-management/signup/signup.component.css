@@ -110,4 +110,13 @@
    font-size: 16px;
    font-weight: 500;
   }
+  .create-account> a{
+  font-size: 16px;
+  opacity: 0.8;
+}
+.create-account> a:hover{
+  font-size: 16px;
+  color: #3c6aaf;
+  opacity: 0.9;
+}
   
