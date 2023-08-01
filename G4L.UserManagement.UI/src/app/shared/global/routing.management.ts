@@ -39,3 +39,9 @@ export const GoalManagement: IRouter = {
     route: '/goal-management',
     faIcon: 'fa-bullseye'
 }
+
+export const Applicant: IRouter = {
+    name: 'Goal Management',
+    route: '/goal-management',
+    faIcon: 'fa-house'
+}

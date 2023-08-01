@@ -10,22 +10,22 @@ import {
   IKMManagement,
   LeaveManagement,
   UserManagement,
-  Applicant
 } from 'src/app/shared/global/routing.management';
 import { EnrolComponent } from 'src/app/user-management/enrol/enrol.component';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 import { UserService } from 'src/app/user-management/services/user.service';
-import { NavItem } from '../models/nav-item';
+//import { NavItem } from '../models/nav-item';
 
 @Component({
-  selector: 'app-side-nav',
-  templateUrl: './side-nav.component.html',
-  styleUrls: ['./side-nav.component.css'],
+  selector: 'app-applicant-dashboard',
+  templateUrl: './applicant-dashboard.component.html',
+  styleUrls: ['./applicant-dashboard.component.css']
 })
-export class SideNavComponent implements OnInit {
+export class ApplicantDashboardComponent implements OnInit {
+
   holdingArray: FormGroup = new FormGroup({});
   user: any;
-  navItems: NavItem[] = [];
+  //navItems: NavItem[] = [];
   modalDialog: MdbModalRef<EnrolComponent> | null = null;
   logoutTime: any;
   userId: any;
@@ -56,7 +56,7 @@ export class SideNavComponent implements OnInit {
   getUserDetails(userId: string | null) {
     this.userService.getUserById(userId).subscribe((response: any) => {
       this.user = response;
-      this.navItems = this.getNavItems(this.user);
+      //this.navItems = this.getNavItems(this.user);
     });
   }
 
@@ -89,8 +89,6 @@ export class SideNavComponent implements OnInit {
           IKMManagement,
           GoalManagement,
         ];
-        case Roles.Applicant:
-          return [Applicant]
       default:
         return [];
     }
@@ -152,3 +150,4 @@ export class SideNavComponent implements OnInit {
     }
   }
 }
+
