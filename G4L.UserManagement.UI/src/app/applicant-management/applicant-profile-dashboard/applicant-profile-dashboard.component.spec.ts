@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApplicantProfileDashbordComponent } from './applicant-profile-dashbord.component';
+import { ApplicantProfileDashbordComponent } from './personal-information.component';
 
 describe('ApplicantProfileDashbordComponent', () => {
   let component: ApplicantProfileDashbordComponent;

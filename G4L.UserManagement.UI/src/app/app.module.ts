@@ -21,6 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApplicantManagementModule } from './applicant-management/applicant-management.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

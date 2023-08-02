@@ -15,4 +15,13 @@ export class ApplicantProfileDashboardComponent implements OnInit {
 onSubmitApplication(){
   this.router.navigateByUrl('applicant-success')
 }
+routeToPersonalDetails(){
+  this.router.navigateByUrl('personal-details')
+}
+routeToEducation(){
+  this.router.navigateByUrl('applicant-education')
+}
+routeToAttachments(){
+  this.router.navigateByUrl('applicant-attachments')
+}
 }

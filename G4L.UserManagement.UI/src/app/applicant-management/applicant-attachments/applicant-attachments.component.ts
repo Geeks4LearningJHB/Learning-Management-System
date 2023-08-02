@@ -37,6 +37,9 @@ export class ApplicantAttachmentsComponent implements OnInit {
   ngOnInit(): void {
   }
   openCompleteAppication(){
-    this.router.navigateByUrl('applicant-attachments');
+    this.router.navigateByUrl('applicant-profile-dashboard');
+  }
+  routeToEducation(){
+    this.router.navigateByUrl('applicant-education');
   }
 }

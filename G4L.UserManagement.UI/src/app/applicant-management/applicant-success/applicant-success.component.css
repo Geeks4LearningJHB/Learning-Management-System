@@ -1,6 +1,6 @@
 .application-success-message-container {
     position: relative;
-    height: 90vh;
+    /* height: 90vh; */
     display: flex;
     margin-top: 16px;
     justify-content: center;
@@ -26,11 +26,10 @@
   .application-success-message-container .app-success-wrapper .success-done-btn button{
     background-color: #3F51B5;
     padding: .5rem 2rem;
-    border: 0;
     margin-bottom: 20px;
+    border: 0;
     border-radius: .5rem;
     color: #fff;
-  
     font-size: 12pt;
   
   }
