@@ -12,9 +12,7 @@ export const APP_CONFIG : AppConfig ={
     firebase: {
         projectId: environment.firebase.projectId,
         appId:  environment.firebase.appId,
-        databaseURL:  environment.firebase.databaseURL,
         storageBucket: environment.firebase.storageBucket,
-        locationId: environment.firebase.locationId,
         apiKey: environment.firebase.apiKey,
         authDomain: environment.firebase.authDomain,
         messagingSenderId: environment.firebase.messagingSenderId,

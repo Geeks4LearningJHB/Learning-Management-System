@@ -6,9 +6,9 @@ export interface AppConfig {
   firebase: {
     projectId: string;
     appId: string;
-    databaseURL: string;
+    databaseURL?: string;
     storageBucket: string;
-    locationId: string;
+    locationId?: string;
     apiKey: string;
     authDomain: string;
     messagingSenderId: string;

@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "filleupload-d41e8"
+    "default": "learner-management-system"
   },
   "targets": {
-    "filleupload-d41e8": {
+    "learner-management-system": {
       "hosting": {
         "G4L.UserManagement.UI": [
-          "filleupload-d41e8"
+          "learner-management-system"
         ]
       }
     }
