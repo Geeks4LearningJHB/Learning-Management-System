@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApplicantSharedLayoutComponent } from '../applicant-shared-layout/applicant-shared-layout.component';
 import { journeyDashboardComponent } from '../journey-to-geek/journey-dashboard';
 import { ApplicantAttachmentsComponent } from '../applicant-attachments/applicant-attachments.component';
-// import{ApplicantProfileDashboard} from '../../user-management/applicant-profile-dashbord';
+import { ApplicantProfileDashboardComponent } from '../applicant-profile-dashboard/applicant-profile-dashboard.component';
+import { ApplicantSuccessComponent } from '../applicant-success/applicant-success.component';
 
 const routes: Routes = [ {
   path: '',
@@ -11,9 +12,9 @@ const routes: Routes = [ {
   children: [
     { path: '', redirectTo: 'journey-to-geek', pathMatch: 'full' },
      {path: 'journey-to-geek', component: journeyDashboardComponent },
-     {path: 'applicant-attachments', component:ApplicantAttachmentsComponent}
-    //  {path: 'applicant-profile-dashboard', component:ApplicantProfileDashboard}
-    //  {path: 'applicant-success', component:ApplicantSuccessComponet}
+     {path: 'applicant-attachments', component:ApplicantAttachmentsComponent},
+    {path: 'applicant-profile-dashboard', component:ApplicantProfileDashboardComponent},
+    {path: 'applicant-success', component:ApplicantSuccessComponent}
   ],
 },];
 

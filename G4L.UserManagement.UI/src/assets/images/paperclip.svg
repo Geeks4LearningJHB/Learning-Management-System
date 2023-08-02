@@ -1,0 +1,7 @@
+side-icon2 {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    left: 473px;
+    top: 430px;

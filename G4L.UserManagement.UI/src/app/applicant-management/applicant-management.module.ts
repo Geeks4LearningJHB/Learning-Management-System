@@ -11,6 +11,8 @@ import { RouterModule } from '@angular/router';
 import { ApplicantContentAreaComponent } from './applicant-content-area/applicant-content-area.component';
 import { ApplicantAttachmentsComponent } from './applicant-attachments/applicant-attachments.component';
 import { ApplicantSharedLayoutComponent } from './applicant-shared-layout/applicant-shared-layout.component';
+import { ApplicantProfileDashboardComponent } from './applicant-profile-dashboard/applicant-profile-dashboard.component';
+import { ApplicantSuccessComponent } from './applicant-success/applicant-success.component';
 
 
 
@@ -21,7 +23,8 @@ import { ApplicantSharedLayoutComponent } from './applicant-shared-layout/applic
     ApplicantContentAreaComponent,
     ApplicantAttachmentsComponent,
     ApplicantSharedLayoutComponent,
-    ApplicantSharedLayoutComponent
+    ApplicantProfileDashboardComponent,
+    ApplicantSuccessComponent
   ],
   imports: [
     CommonModule,

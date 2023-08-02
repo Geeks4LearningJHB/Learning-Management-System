@@ -13,6 +13,6 @@ export class journeyDashboardComponent implements OnInit {
   ngOnInit(): void {
   }
   openProfilePage() {
-    this.router.navigateByUrl('applicant-success');
+    this.router.navigateByUrl('applicant-profile-dashboard');
   }
 }
