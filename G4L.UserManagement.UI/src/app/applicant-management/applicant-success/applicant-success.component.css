@@ -1,13 +1,17 @@
 .application-success-message-container {
     position: relative;
-    /* height: 90vh; */
+    height: 70vh;
     display: flex;
-    margin-top: 16px;
     justify-content: center;
-    align-items: center;
-    place-items: center;
-    border-top: 3rem solid #3F51B5;
-    border-bottom: 3rem solid #3F51B5;
+    align-items: center; 
+    place-items: center; 
+    border-top: 1rem solid #3F51B5;
+    border-bottom: 1rem solid #3F51B5;
+    margin-top: 0;
+    border-radius: 5px; 
+
+   
+   
   }
   
   .application-success-message-container .app-success-wrapper {
@@ -24,6 +28,7 @@
   }
   
   .application-success-message-container .app-success-wrapper .success-done-btn button{
+    /* button */
     background-color: #3F51B5;
     padding: .5rem 2rem;
     margin-bottom: 20px;
@@ -34,17 +39,18 @@
   
   }
   
-  .application-success-message-container .app-success-wrapper .logo-container {
+    .application-success-message-container .app-success-wrapper .logo-container {
     text-align: center;
-    height: 16rem;
+    height: 14rem;
   }
   
   .application-success-message-container .app-success-wrapper .logo-container img {
+    /*Geeks4learning image */
     object-fit: cover; 
-    width: 395px;
-    height: 250px;
-    margin-top: 10px;
-  }
+    width: 320px;
+    height: 200px;
+    margin-top: 20px; 
+  }  
   
   .application-success-message-container .app-success-wrapper .success-message-content .success-symbol {
     display: block;
@@ -54,6 +60,7 @@
   .application-success-message-container .app-success-wrapper .success-message-content .success-symbol i {
     font-size: 50pt;
     color: #0BDF20;
+    height: 50px;
   }
   
   .application-success-message-container .app-success-wrapper .success-message-content .success-symbol .congratulations {
@@ -74,14 +81,14 @@
     margin-top: 1rem; 
     background-color: #DAF7A6;
     border: 2px solid #0BDF20;
-    border-radius: 1rem;
+    border-radius: .9rem;
     padding: 10px; 
-    margin-left: 24px;
+    margin-left: 10px; 
     top: 634px;
     left: 277px;
-  font-size: 16px;
-    width: 800px;
-    height: 128px
+    font-size: 16px;
+    width: 600px;
+    height: 128px;
   }
   
   .application-success-message-container .app-success-wrapper .success-message-content .congratulations-on-your-container p {
