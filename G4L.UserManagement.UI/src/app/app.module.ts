@@ -22,10 +22,12 @@ import { ApplicantManagementModule } from './applicant-management/applicant-mana
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LoaderComponent,
+
   ],
   imports: [
     BrowserModule,
