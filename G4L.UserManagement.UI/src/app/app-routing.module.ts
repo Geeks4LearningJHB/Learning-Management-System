@@ -4,11 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './user-management/login/guards/login.guard';
 import { SignupComponent } from './user-management/signup/signup.component';
 import { ApplicantRoutingRoutingModule } from './applicant-management/applicant-routing/applicant-routing-routing.module';
+import { ForgotPasswordComponent } from './user-management/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
   },
   { path: 'signup', component: SignupComponent },
   {
