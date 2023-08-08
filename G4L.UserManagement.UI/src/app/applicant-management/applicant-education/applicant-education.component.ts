@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 
 @Component({
   selector: 'app-applicant-education',
@@ -10,7 +12,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 export class ApplicantEducationComponent implements OnInit {
 
   educationForm!: FormGroup;
-  constructor(private route: Router, private formBuilder: FormBuilder) { }
+  constructor(private route: Router, private formBuilder: FormBuilder, 
+              public modalRef: MdbModalRef<any>) { }
 
   ngOnInit(): void {
     this.educationForm = new FormGroup({
@@ -33,7 +36,21 @@ export class ApplicantEducationComponent implements OnInit {
 
   }
 
+  onDoneClick():void{
+    this.modalRef.close();
+  }
+  onSaveAndCloseClick():void{
+    this.modalRef.close();
+  }
+
+  
 }
+
+
+
+
+
+
 
 /* VALIDATORS FOR PERSONAL PAGE
 

@@ -1,24 +1,91 @@
 .formcontrol {
-    margin-bottom: 1rem;
+    margin-bottom: 4rem;
     /*padding-right: 70pt;*/
     font-family: Arial, Helvetica, sans-serif;
-    
+    width: 300pt;
   }
   
+.d{
+  width: 200px;
+
+}
+
+
+.modal-content{
+  width: 600pt;
+
+}
+
+
+
+/* Add this CSS to style the buttons, icons, and space between them */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 500pt;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 0px;
+  margin-bottom: 30pt;
+  
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  height: 25pt;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.save-close-btn {
+  background-color: #344767;
+  color: #fff;
+  width: 119pt;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.done-btn {
+  background-color: #344767;
+  color: #fff;
+  width: 74pt;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-icon {
+  margin-right: 5px;
+}
+   
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+ 
+}
+
   #Disability{
-    height: 100pt;
+    height: 80pt;
     width: 365pt;
   }
   
   .form-container {
     /* background-color: aqua; */
-    padding: 6rem !important;
-    margin-left: 10pt;
+    padding: 1rem !important;
+    
     
   }
 
   .container{
     font-family: Inter;
+    width: 800pt;
+    height: 85vh;
+    border-radius: 20px;
+    /* background-color: aqua; */
+   
 
   }
   
@@ -26,13 +93,25 @@
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
     color: black;
-    font-size: 13pt;
-    
-    font-weight: 600;
-    word-wrap: break-word;
-    margin: 1rem auto;
+    font-size: 11pt;
+    width: 500pt;
+    font-weight: 350;
+    /* word-wrap: break-word; */
+    /* margin: 1rem auto; */
+    justify-content: center;
+    /* background-color: aqua; */
+    margin-left: 30px;
   }
   
+  .short-line {
+    width: 550px;
+    height: 2px; 
+    background-color: #000; 
+    border: none;
+    margin-bottom: 5px auto; 
+    margin-left: 13pt;
+  }
+
   .svg-container {
     width: 50px;
     height: 50px;
@@ -47,39 +126,32 @@
     border-radius: 5px;
   }
   
+.phone-label{
+  width: 100px;
+
+}
+
   .btn{
     padding-right: 7rem;
   }
   
-  .applicant-name {
-    position: absolute;
-    width: 150px;
-    top: 22px; /* Adjust the top position as needed */
-    right: 20px; /* Adjust the right position as needed */
-    background-color: #f9f9f9;
-    padding: 10px;
-    font-family: Arial, Helvetica, sans-serif;
+  
+.yes{
+  padding-right: 4px;
+  padding-bottom: 4px;
 
-  }
+}
+
+.no{
+  padding-right: 4px;
+
+}
   
-  .applicant-name-profile-icon{
-    position: absolute;
-    top: 25px; /* Adjust the top position as needed */
-    right: 160px; /* Adjust the right position as needed */
-    background-color: #f9f9f9;
-    padding: 10px;
-    background-color: transparent;
-  }
-  
-  .applicant-name-profile-outercircle-icon{
-    position: absolute;
-    top: 20px; /* Adjust the top position as needed */
-    right: 155px; /* Adjust the right position as needed */
-    background-color: #f9f9f9;
-    padding: 10px;
-    background-color: transparent;
-  }
-  
+.yes-radio{
+  margin-top: 45px;
+
+}
+
   .nb1-middle-icon{
     /* position: absolute;
      top: 20px; /* Adjust the top position as needed 
@@ -93,38 +165,17 @@
   }
   
   .personal-heading{
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    width: 400px;
+    top: -70px;
+    margin-left: 85pt;
     font-family: Arial, Helvetica, sans-serif;
     
   }
-  
-  .side-nav{
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 270px;
-      height: 100%;
-      color: beige;
-      background-color: transparent;
-  }
-  
-  .logo{
-    background-color: transparent;
-    position: fixed;
-  }
-  
-  .learnership-application{
-    position: fixed;
-    margin-left: -23pt;
-    margin-top: 112pt;
-    height: 48px;
-    width: 123px;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
   
   .col-disability{
     height: 80pt;
@@ -235,3 +286,24 @@
   
   }
   /*sidenave styling*/
+
+  .firstname_field{
+    /* background-color: aqua; */
+    flex-direction: row;
+
+  }
+
+  .validation {
+    border: 1px solid red;
+    /* position: absolute;
+    width: 98%;
+    top: 2rem;
+    right: 0;
+    background-color: aqua;
+    padding: .5rem;
+    z-index: 999; */
+  }
+
+  .success {
+    border: 1px solid rgb(37, 197, 37);
+  }

@@ -2,6 +2,7 @@
     margin-bottom: 1rem;
     /*padding-right: 70pt;*/
     height: 100vh;
+   
     
   }
   
@@ -11,12 +12,10 @@
   }
   
   .form-container {
-    /* background-color: aqua; */
-    /* padding: 6rem !important; */
-   
-    height: 80vh;
-   
-
+    height: 78vh;
+    margin-left: 20px;
+    font-size: 14px;
+    
   }
   
   .d-block{
@@ -30,12 +29,7 @@
     margin: 1rem auto;
   }
   
-  .svg-container {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    /*padding-top: 90pt;*/
-  }
+ 
   
   .dropdown_gender {
     width: 70pt;
@@ -46,23 +40,6 @@
   
   .btn{
     padding-right: 7rem;
-  }
-  
-  .applicant-name {
-    position: absolute;
-    top: 22px; /* Adjust the top position as needed */
-    right: 20px; /* Adjust the right position as needed */
-    background-color: #f9f9f9;
-    padding: 10px;
-  }
-  
-  .applicant-name-profile-icon{
-    position: absolute;
-    top: 25px; /* Adjust the top position as needed */
-    right: 160px; /* Adjust the right position as needed */
-    background-color: #f9f9f9;
-    padding: 10px;
-    background-color: transparent;
   }
   
   .applicant-name-profile-outercircle-icon{
@@ -78,35 +55,55 @@
     /* position: absolute;
      top: 20px; /* Adjust the top position as needed 
     margin-left: 150px; */
-    margin-top: 15pt;
-    margin-right: 80pt;
+    margin-top: 12pt;
+    margin-right: 105pt;
+    
   }
 
   .education-title-middle{
     margin-top: 23pt;
     height: 27pt;
     justify-content: center;
-    margin-left: -70pt;
+    margin-left: -100pt;
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
+  .short-line {
+    width: 550px;
+    height: 2px; 
+    background-color: #000; 
+    border: none;
+    margin-left: 8pt;
+    margin-top: 0px;
+    
+  }
+
+  .save-close-btn {
+    background-color: #344767;
+    color: #fff;
+    width: 119pt;
+    height: 20pt;
+    padding-bottom: 30px;
   }
   
-  .education-head-icon{
-    /* position: absolute;
-     top: 20px; /* Adjust the top position as needed 
-    margin-left: 150px; */
-    margin-bottom: 20px;
-    margin-right: -31pt;
-    margin-top: 1pt;
+  .done-btn {
+    background-color: #344767;
+    color: #fff;
+    width: 74pt;
+    height: 20pt;
+    padding-bottom: 30px;
   }
 
-  .education-body-icon{
-    position: relative;
-    margin-top: 9pt;
-    margin-bottom: 10px;
-    margin-right: 29px;
-    /* width:  */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 420pt;/*haha*/
+    /* margin-top: 25px; */
+    height: 20pt;
+    margin-top: 20pt;
   }
-
+  
   .pd-middle-icon{
   margin-bottom: 0pt;
   }
@@ -119,28 +116,7 @@
     
   }
   
-  .side-nav{
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 270px;
-      height: 100%;
-      color: beige;
-      background-color: transparent;
-  }
   
-  .logo{
-    background-color: transparent;
-  }
-  
-  .learnership-application{
-    position: fixed;
-    margin-left: pt;
-    margin-top: 17pt;
-    height: 40px;
-    width: 123px;
-    font-family: Inter;
-  }
 
   .personal-information-icon{
     position: fixed;
@@ -225,8 +201,6 @@
     width: 80px;
 }
 
-
-
 .attachments-nav-label{
   position: fixed;
   margin-left: 33pt;
@@ -249,18 +223,14 @@
 .button-row {
     display: flex; /* Use flexbox to display buttons in a row */
     justify-content: space-between; /* Distribute buttons equally in the row */
+    height: 30pt;
+    margin-top: 50px;
+    
 }
 
 .postMatricQualification{
   font-size: large;
   font-weight: 500;
-}
-
-/* Styles for the arrow buttons */
-.arrow-button {
-    padding: 10px 20px;
-    background-color: #f0f0f0;
-    border: none;
 }
 
 /* Styles for the Save and Close button with icon */
@@ -296,7 +266,7 @@
   }
   
   .radio-group-marks {
-    margin-right: 120px;
+    margin-right: 40px;
     /* justify-content: space-between; */
   }
 
@@ -304,7 +274,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 450px;
+    width: 350px;
   }
   
   .qualifications{
@@ -392,13 +362,13 @@
   
   
   .mathmarks{
-    width: 125pt;
+    width: 130pt;
     margin-left: 113px;
     margin-bottom: 10px;
   }
 
   .englishmarks{
-    width: 125pt;
+    width: 130pt;
     margin-left: 100px;
   }
 
