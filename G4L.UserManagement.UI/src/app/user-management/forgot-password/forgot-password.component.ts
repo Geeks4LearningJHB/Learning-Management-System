@@ -25,23 +25,11 @@ export class ForgotPasswordComponent implements OnInit {
     return this.forgotPasswordForm.controls[`${control}`];
   }
 
-  clearFormControlErrors(): void {
-    this.getFormControl('Email').setErrors(null);
-  }
   ngOnInit(): void {
     this.forgotPasswordForm = new FormGroup({
       Email: new FormControl(null, [Validators.required, Validators.email]),
     });
 
-    // Clearing errors when making username changes
-    this.getFormControl('Email').valueChanges.subscribe(() => {
-      this.clearFormControlErrors();
-    })
-
-    // Clearing errors when making password changes
-    this.getFormControl('Password').valueChanges.subscribe(() => {
-      this.clearFormControlErrors();
-    })
   }
 
   get isFormInvalid(): boolean {
