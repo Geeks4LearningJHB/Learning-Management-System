@@ -13,9 +13,10 @@ import { ApplicantAttachmentsComponent } from './applicant-attachments/applicant
 import { ApplicantSharedLayoutComponent } from './applicant-shared-layout/applicant-shared-layout.component';
 import { ApplicantProfileDashboardComponent } from './applicant-profile-dashboard/applicant-profile-dashboard.component';
 import { ApplicantSuccessComponent } from './applicant-success/applicant-success.component';
-import { ApplicantionProgressComponent } from './applicantion-progress/applicantion-progress.component';
+
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { ApplicantEducationComponent } from './applicant-education/applicant-education.component';
+import { ApplicationProgressComponent } from './application-progress/application-progress.component';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,9 @@ import { ApplicantEducationComponent } from './applicant-education/applicant-edu
     ApplicantSharedLayoutComponent,
     ApplicantProfileDashboardComponent,
     ApplicantSuccessComponent,
-    ApplicantionProgressComponent,
     PersonalInformationComponent,
     ApplicantEducationComponent,
-    
+    ApplicationProgressComponent
   ],
   imports: [
     CommonModule,

@@ -5,9 +5,9 @@ import { journeyDashboardComponent } from '../journey-to-geek/journey-dashboard'
 import { ApplicantAttachmentsComponent } from '../applicant-attachments/applicant-attachments.component';
 import { ApplicantProfileDashboardComponent } from '../applicant-profile-dashboard/applicant-profile-dashboard.component';
 import { ApplicantSuccessComponent } from '../applicant-success/applicant-success.component';
-import { ApplicantionProgressComponent } from '../applicantion-progress/applicantion-progress.component';
 import { PersonalInformationComponent } from '../personal-information/personal-information.component';
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
+import { ApplicationProgressComponent } from '../application-progress/application-progress.component';
 
 const routes: Routes = [ {
   path: '',
@@ -18,9 +18,9 @@ const routes: Routes = [ {
      {path: 'applicant-attachments', component:ApplicantAttachmentsComponent},
     {path: 'applicant-profile-dashboard', component:ApplicantProfileDashboardComponent},
     {path: 'applicant-success', component:ApplicantSuccessComponent},
-    {path: 'application-progress', component:ApplicantionProgressComponent},
+    {path: 'application-progress', component:ApplicationProgressComponent},
     {path: 'personal-details', component: PersonalInformationComponent},
-    {path: 'applicant-education', component:ApplicantEducationComponent}
+    {path: 'applicant-education', component:ApplicantEducationComponent},
   ],
 },];
 
