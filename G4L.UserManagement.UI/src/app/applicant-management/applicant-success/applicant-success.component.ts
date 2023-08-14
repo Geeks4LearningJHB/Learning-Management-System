@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+  import { Component, OnInit } from '@angular/core';
+  // import { Router } from '@angular/router';
+  import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 
-@Component({
-  selector: 'app-applicant-success',
-  templateUrl: './applicant-success.component.html',
-  styleUrls: ['./applicant-success.component.css']
-})
-export class ApplicantSuccessComponent implements OnInit {
+  @Component({
+    selector: 'app-applicant-success',
+    templateUrl: './applicant-success.component.html',
+    styleUrls: ['./applicant-success.component.css']
+  })
+  export class ApplicantSuccessComponent implements OnInit {
 
-  constructor( private router: Router) { }
+    constructor(public modalRef: MdbModalRef<any>) { }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
+    }
+
+
+    onDoneClick(): void {
+      // Close the modal when "Done" button is clicked
+      this.modalRef.close();
+    }
   }
-  onDoneClick() {
-    this.router.navigate(['/journey-to-a-geek']); // Replace '/attachment' with the actual route path for the AttachmentComponent
-  }
-}

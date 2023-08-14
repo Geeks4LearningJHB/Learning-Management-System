@@ -13,6 +13,8 @@ import { RegisterComponent } from './register/register.component';
 import { UserManagementComponent } from './user-management.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupModalComponent } from './signup-modal/signup-modal.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
 
 
 
@@ -26,6 +28,7 @@ import { SignupModalComponent } from './signup-modal/signup-modal.component';
     EnrolComponent,
     IconsComponent,
     FooterComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,
