@@ -1,136 +1,134 @@
-
 <div class="fluid-container">
-    <div class="row m-0">
-        <div class="col-3">
-        </div>
-
-        <div>
-           
-           
-        </div>
-        <div class="col form-container mt-0">
-            <div class="d-block text-center mt-0">
-                <div class="education-heading">
-                    <img class="nb2-middle-icon" src="../../../assets/images/Backlog count (2).svg" />
-
-
-                    <h3 class="education-title-middle">Education</h3>
-                </div>
-                <div>
-                    <hr class="short-line">
-                </div>
-               
+    <form action="#" [formGroup]="educationForm">
+        <div class="row m-0">
+            <div class="col-3">
             </div>
+            <div class="col form-container mt-0">
+                <div class="d-block text-center mt-0">
+                    <div class="education-heading">
+                        <img class="nb2-middle-icon" src="../../../assets/images/Backlog count (2).svg" />
 
-            <h5>Matric Grades</h5>
-            <!-- Radio buttons for Math subject -->
-            <div class="radio-group-marks">
-                <h6>Subject:</h6>
-                <div class="math-subjects">
-
+                        <h3 class="education-title-middle">Education</h3>
+                    </div>
                     <div>
-                        <input type="radio" id="mathLit" name="mathSubject" value="mathLit">
-                        <label for="mathLit">Math Lit</label>
+                        <hr class="short-line">
+                    </div>
+
+                </div>
+                <div class="content">
+                    <h5 class="matric-label">Matric Grades</h5>
+
+                    <div class="radio-group-marks">
+                        <div class="math-subjects">
+                            <span class="subject-label">Subject(Math) </span>
+                            <select class="math-subjects-box" name="mathSubjects" formControlName="MathSubject">
+                                <option disabled selected hidden>Select math subject</option>
+                                <option value="math-pure">Math Pure</option>
+                                <option value="math-lit">Math Lit</option>
+                            </select>
+                            
+                        </div>
+                        <div *ngIf="getFormControl('MathSubject').invalid && getFormControl('MathSubject').touched"
+                                class="val text-danger">
+                                Math subject is required.
+                            </div>
+                        
+                    </div>
+
+                    <div class="math-labels">Math Mark:
+                        <select class="mathmarks" name="mathmark" formControlName="MathMark">
+
+                            <option disabled selected hidden>Select mark range</option>
+                            <option value="30% - 39%">30% - 39%</option>
+                            <option value="40% - 49%">40% - 49%</option>
+                            <option value="50% - 59%">50% - 59%</option>
+                            <option value="60% - 69%">60% - 69%</option>
+                            <option value="70% - 79%">70% - 79%</option>
+                            <option value="80% - 89%">80% - 89%</option>
+                            <option value="90% - 99%">90% - 99%</option>
+                        </select>
+                        <div *ngIf="getFormControl('MathMark').invalid && getFormControl('MathMark').touched"
+                            class="val text-danger">
+                            Math mark is required.
+                        </div>
+                    </div>
+
+                    <div class="eng-labels">English Mark:
+                        <select class="englishmarks" name="englishMark" formControlName="EnglishMark">
+
+                            <option disabled selected hidden>Select mark range</option>
+                            <option value="30% - 39%">30% - 39%</option>
+                            <option value="40% - 49%">40% - 49%</option>
+                            <option value="50% - 59%">50% - 59%</option>
+                            <option value="60% - 69%">60% - 69%</option>
+                            <option value="70% - 79%">70% - 79%</option>
+                            <option value="80% - 89%">80% - 89%</option>
+                            <option value="90% - 99%">90% - 99%</option>
+                        </select>
+                        <div *ngIf="getFormControl('EnglishMark').invalid && getFormControl('EnglishMark').touched"
+                            class="val text-danger">
+                            English mark is required.
+                        </div>
                     </div>
 
                     <div>
-                        <input type="radio" class="math-pure" id="mathPure" name="mathSubject" value="mathPure">
-                        <label for="mathPure">Math Pure</label>
+                        <p>
+                            <label class="postMatricQualification" for="postMatricQualification">
+                                Post Matric Qualification(Highest)</label>
+                        </p>
+                        <div class="dropdown-container col-4">
+                            <!-- <label for="qualification">Select Qualification:</label> -->
+                            <select id="qualification" name="qualification" formControlName="Qualifications">
+                                <option disabled selected hidden>Select qualification</option>
+                                <option value="None">None</option>
+                                <option value="Higher-certificate">Higher certificate</option>
+                                <option value="Bachelor-degree">Bachelor degree</option>
+                                <option value="Diploma">Diploma</option>
+                                <option value="Post-graduate">Post graduate</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div *ngIf="getFormControl('Qualifications').invalid && getFormControl('Qualifications').touched"
+                                class="val text-danger">
+                                Qualifications is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="fieldStudy-label">Field of Study</h5>
+                    <label class="field-label" for="fieldOfStudy">Field of Study:</label>
+                    <select class="fieldOfStudy" id="fieldOfStudy" name="fieldOfStudy" formControlName="FieldOfStudy">
+                        <option disabled selected hidden>Select field of study</option>
+                        <option value="IT">I.T</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div *ngIf="getFormControl('FieldOfStudy').invalid && getFormControl('FieldOfStudy').touched"
+                        class="val text-danger">
+                        FieldOfStudy is required.
+                    </div>
+
+                    <h5 class="course-label">Course of Interest</h5>
+
+                    <label class="course-label" for="course-interest">Course of interest:</label>
+                    <select class="course-label-items" id="course-interest" name="CourseOfInterest"
+                        formControlName="CourseOfInterest">
+                        <option disabled selected hidden>Select Course of interest</option>
+                        <option value="software-testing">Software Testing(NQF 5)</option>
+                        <option value="software-development">Software Development(NQF 5)</option>
+                        <option value="business-analysis">Business Analysis(NQF 6)</option>
+                    </select>
+                    <div *ngIf="getFormControl('CourseOfInterest').invalid && getFormControl('CourseOfInterest').touched"
+                        class="val text-danger">
+                        Course Of Interest is required.
                     </div>
                 </div>
-                <br>
-                
-            </div>
-            <!-- Drop-downs for Math and English marks -->
-            <div>Math Mark:
-                <select class="mathmarks" name="mathMark">
-                    <!-- Replace the options with actual grading scale values -->
-                    <option disabled selected hidden>Select mark range</option>
-                    <option value="30% - 39%">30% - 39%</option>
-                    <option value="40% - 49%">40% - 49%</option>
-                    <option value="50% - 59%">50% - 59%</option>
-                    <option value="60% - 69%">60% - 69%</option>
-                    <option value="70% - 79%">70% - 79%</option>
-                    <option value="80% - 89%">80% - 89%</option>
-                    <option value="90% - 99%">90% - 99%</option>
-                </select>
-            </div>
-
-            <div>English Mark:
-                <select class="englishmarks" name="englishMark">
-                    <!-- Replace the options with actual grading scale values -->
-                    <option disabled selected hidden>Select mark range</option>
-                    <option value="30% - 39%">30% - 39%</option>
-                    <option value="40% - 49%">40% - 49%</option>
-                    <option value="50% - 59%">50% - 59%</option>
-                    <option value="60% - 69%">60% - 69%</option>
-                    <option value="70% - 79%">70% - 79%</option>
-                    <option value="80% - 89%">80% - 89%</option>
-                    <option value="90% - 99%">90% - 99%</option>
-                </select>
-            </div>
-           
-
-            <!-- Checkbox for "Post Matric Qualification" -->
-         <div>
-            <p>
-                <label class="postMatricQualification" for="postMatricQualification">
-                    Post Matric Qualification(Highest)</label>
-            </p>
-            <div class="dropdown-container col-4">
-                <label for="qualification">Select Qualification:</label>
-                <select id="qualification" name="qualification">
-                  <option disabled selected hidden>Select qualification</option>
-                  <option value="None">None</option>
-                  <option value="Higher-certificate">Higher certificate</option>
-                  <option value="Bachelor-degree">Bachelor degree</option>
-                  <option value="Diploma">Diploma</option>
-                  <option value="Post-graduate">Post graduate</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-        </div>
-            <br>
-            <h5>Field of Study</h5>
-
-            <!-- Dropdown box with label -->
-            <label for="fieldOfStudy">Field of Study:</label>
-            <select class="fieldOfStudy" id="fieldOfStudy" name="fieldOfStudy">
-                <option disabled selected hidden>Select field of study</option>
-                <option value="IT">I.T</option>
-                <option value="Other">Other</option>
-            </select>
-            <br>
-            
-            <h5>Course of Interest</h5>
-
-            <!-- Radio buttons with labels -->
-            <div>
-                <div class="testing-radio">
-                    <input type="radio" id="softwareTesting" name="course" value="Software Testing(NQF 5)">
-                    <label for="softwareTesting">Software Testing (NQF 5)</label>
+                <div class="button-row mt-0 col-11">
+                    <div class="button-container">
+                        <button (click)="onSaveAndCloseClick()" class="save-close-btn">
+                            Save and Close</button>
+                        <button (click)="isFormValid()" class="done-btn">Done </button>
+                    </div>
                 </div>
-
-                <div class="development-radio">
-                    <input type="radio" id="systemsDevelopment" name="course" value="Systems Development(NQF 5)">
-                    <label for="systemsDevelopment">Systems Development (NQF 5)</label>
-                </div>
-            </div>
-
-            <div>
-                <div class="business-radio">
-                    <input type="radio" id="businessAnalysis" name="course" value="Business Analysis(NQF 6)">
-                    <label for="businessAnalysis">Business Analysis (NQF 6)</label>
-                </div>
-            </div>
-            <div class="button-row mt-0 col-11">
-
-                <div class="button-container">
-                    <button (click)="onSaveAndCloseClick()" class="save-close-btn">
-                     Save and Close</button>
-                    <button (click)="onDoneClick()" class="done-btn">Done </button>
-                  </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>

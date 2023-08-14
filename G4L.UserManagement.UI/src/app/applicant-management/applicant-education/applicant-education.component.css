@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
 .formcontrol {
     margin-bottom: 1rem;
     /*padding-right: 70pt;*/
     height: 100vh;
-   
+    
     
   }
   
@@ -12,10 +15,11 @@
   }
   
   .form-container {
-    height: 78vh;
-    margin-left: 20px;
+    /* width: 80%; */
+    /* height: 78vh; */
+    /* margin-left: 20px; */
+    height: auto;
     font-size: 14px;
-    
   }
   
   .d-block{
@@ -23,10 +27,11 @@
     font-family: 'Inter';
     color: black;
     font-size: 9pt;
-    font-family: Inter;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     word-wrap: break-word;
     margin: 1rem auto;
+    
   }
   
  
@@ -41,15 +46,29 @@
   .btn{
     padding-right: 7rem;
   }
-  
-  .applicant-name-profile-outercircle-icon{
-    position: absolute;
-    top: 20px; /* Adjust the top position as needed */
-    right: 155px; /* Adjust the right position as needed */
-    background-color: #f9f9f9;
-    padding: 10px;
-    background-color: transparent;
+
+  .math-subjects{
+    width: 90pt;
+    font-family: 'Poppins', sans-serif;
+
   }
+
+.math-subjects-box{
+  margin-left: 10px;
+  width: 200px;
+
+}
+
+  
+.math-labels{
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.eng-labels{
+  font-family: 'Poppins', sans-serif;
+
+}
   
   .nb2-middle-icon{
     /* position: absolute;
@@ -65,8 +84,16 @@
     height: 27pt;
     justify-content: center;
     margin-left: -100pt;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Poppins', sans-serif;
+
   }
+
+.content{
+  margin-left: 80px;
+  justify-content: center;
+  /* background-color: aqua; */
+  width: 600px;
+}
 
   .short-line {
     width: 550px;
@@ -101,7 +128,8 @@
     width: 420pt;/*haha*/
     /* margin-top: 25px; */
     height: 20pt;
-    margin-top: 20pt;
+    /* margin-top: 20pt; */
+    margin-left: 60px;
   }
   
   .pd-middle-icon{
@@ -126,55 +154,8 @@
     width: 90px;
   }
 
-  .personal-information-label{
-    position: fixed;
-    margin-left: 5pt;
-    margin-top: 53pt;
-    height: 40px;
-    width: 160px;
-  }
 
-.nb1-icon{
-    position: fixed;
-    margin-left: -17pt;
-    padding-left: pt;
-    margin-top: 54pt;
-    height: 20px;
-    width: 30px;
-}
 
-.arrow-down{
-  position: fixed;
-    margin-left: 38pt;
-    margin-top: 92pt;
-    height: 40px;
-    width: 60px;
-}
-
-.education-head-nav-icon{
-  position: fixed;
-    margin-left: 44pt;
-    margin-top: 145pt;
-    height: 40px;
-    width:46px;
-    /* font-size: 60pt; */
-}
-
-.education-body-nav-icon{
-  position: fixed;
-    margin-left: 38pt;
-    margin-top: 155pt;
-    height: 40px;
-    width: 60px;
-}
-
-.education-nav-label{
-  position: fixed;
-    margin-left: 33pt;
-    margin-top: 203pt;
-    height: 40px;
-    width: 80px;
-}
 
 .nb2-icon{
   position: fixed;
@@ -185,13 +166,6 @@
     width: 30px;
 }
 
-.arrow-down2{
-  position: fixed;
-    margin-left: 38pt;
-    margin-top: 240pt;
-    height: 40px;
-    width: 60px;
-}
   
 .attachments-icon-nav{
   position: fixed;
@@ -201,25 +175,6 @@
     width: 80px;
 }
 
-.attachments-nav-label{
-  position: fixed;
-  margin-left: 33pt;
-  margin-top: 350pt;
-  height: 40px;
-  width: 80px;
-
-}
-
-.nb3-icon{
-  position: fixed;
-    margin-left: 8pt;
-    padding-left: pt;
-    margin-top: 352pt;
-    height: 20px;
-    width: 30px;
-
-}
- /* Styles for the buttons in the same row */
 .button-row {
     display: flex; /* Use flexbox to display buttons in a row */
     justify-content: space-between; /* Distribute buttons equally in the row */
@@ -231,6 +186,27 @@
 .postMatricQualification{
   font-size: large;
   font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dropdown-container{
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.fieldStudy-label{
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.field-label{
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.course-label{
+  font-family: 'Poppins', sans-serif;
+
 }
 
 /* Styles for the Save and Close button with icon */
@@ -252,6 +228,7 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+    
   }
   
   /* Styles for the heading */
@@ -262,19 +239,25 @@
   /* Styles for radio buttons with labels */
   .radio-group {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
   }
   
-  .radio-group-marks {
-    margin-right: 40px;
-    /* justify-content: space-between; */
+
+  .subject-label{
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+
   }
+.matric-label{
+  font-family: 'Poppins', sans-serif;
+
+}
 
   .math-subjects{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 350px;
+    width: 300px;
   }
   
   .qualifications{
@@ -282,6 +265,7 @@
     flex-direction: row;
     justify-content: space-between;
     width: 500px;
+    font-size: medium;
   }
 
   .postgrad-radio{
@@ -296,6 +280,9 @@
 
 }
 
+
+
+
   /* Styles for select dropdowns */
   select {
     width: 100%;
@@ -309,6 +296,7 @@
 
   #fieldOfStudy{
     align-content: center;
+    font-family: 'Poppins', sans-serif;
     
   }
   
@@ -360,33 +348,83 @@
     border-radius: 20px;
   }
   
-  
+  .math-lit-rad{
+    padding-right: 5px;
+
+  }
+
   .mathmarks{
     width: 130pt;
-    margin-left: 113px;
+    margin-left: 30px;
     margin-bottom: 10px;
+  }
+
+  .mathlit-label{
+    padding-left: 5px;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .mathPure-label{
+    padding-left: 5px;
+    font-family: 'Poppins', sans-serif;
   }
 
   .englishmarks{
     width: 130pt;
-    margin-left: 100px;
+    margin-left: 18px;
+    font-family: 'Poppins', sans-serif;
   }
 
   .fieldOfStudy{
     width: 140pt;
-    margin-left: 30pt;
+    margin-left: 10pt;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .course-label-items{
+    width:184pt;
+    margin-left: 18px;
+    font-family: 'Poppins', sans-serif;
+
   }
 
   .testing-radio{
-    margin-left: 30pt;
+    margin-left: 20pt;
+    font-family: 'Poppins', sans-serif;
   }
 
   .development-radio{
-    margin-left: 30pt;
+    margin-left: 20pt;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .business-radio{
+    margin-left: 20pt;
+    font-family: 'Poppins', sans-serif;
+  }
+
+
+  .systemsDevelopment-label{
+    padding-left: 5px;
+    
+  }
+
+  
+  .softwareTesting-label{
+    padding-left: 5px;
+
+  }
+
+  .businessAnalysis-label{
+   padding-left: 5px;
+    
   }
   
- .business-radio{
-    margin-left: 30pt;
+  .val{
+    font-family: 'Poppins', sans-serif;;
+
+
   }
+
 
   

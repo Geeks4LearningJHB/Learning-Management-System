@@ -1,309 +1,201 @@
-.formcontrol {
-    margin-bottom: 4rem;
-    /*padding-right: 70pt;*/
-    font-family: Arial, Helvetica, sans-serif;
-    width: 300pt;
-  }
-  
-.d{
-  width: 200px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+
+body {
+	height: 66vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	/* background: linear-gradient(135deg, #71b7e6, #9b59b6); */
+}
+
+.container {
+	/* max-width: 700px; */
+	width: 100%;
+	background-color: #fff;
+	padding: 25px 30px;
+	border-radius: 10px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nb1-middle-icon {
+
+	margin-bottom: 1px;
+	margin-right: 10px;
+}
+
+.container .title {
+	font-size: 25px;
+	font-weight: 500;
+	position: relative;
+	text-align: center;
+}
+
+.container .title::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 2px;
+	width: 550px;
+	border-radius: 5px;
+	background: #D3D3D3;
+
+	/* width: 550px;
+	height: 2px;
+	background-color: #000; */
+}
+
+.content form .user-details {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 20px 0 50px 0;
+}
+
+form .user-details .input-box {
+	margin-bottom: 15px;
+	width: calc(100% / 2 - 20px);
+}
+
+form .input-box span.details {
+	display: block;
+	font-weight: 500;
+	margin-bottom: 5px;
+}
+
+.user-details .input-box input {
+	height: 45px;
+	width: 100%;
+	outline: none;
+	font-size: 16px;
+	border-radius: 5px;
+	padding-left: 15px;
+	border: 1px solid #ccc;
+	border-bottom-width: 2px;
+	transition: all 0.3s ease;
+}
+
+.user-details .input-box input:focus,
+.user-details .input-box input:valid {
+	border-color: #344767;
+}
+
+form .gender-details .gender-title {
+	display: flex;
+	flex-direction: row;
+	font-size: 20px;
+	font-weight: 500;
 
 }
 
 
-.modal-content{
-  width: 600pt;
+
+.drop-boxes {
+	display: flex;
+	flex-direction: row;
+
 
 }
 
 
-
-/* Add this CSS to style the buttons, icons, and space between them */
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 500pt;
-  font-family: Arial, Helvetica, sans-serif;
-  padding-bottom: 0px;
-  margin-bottom: 30pt;
-  
+form .category {
+	display: flex;
+	width: 80%;
+	margin: 14px 0;
+	justify-content: space-between;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
-  height: 25pt;
-  font-family: Arial, Helvetica, sans-serif;
+form .category label {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
 }
 
-.save-close-btn {
-  background-color: #344767;
-  color: #fff;
-  width: 119pt;
-  font-family: Arial, Helvetica, sans-serif;
+form .category label .dot {
+	height: 18px;
+	width: 18px;
+	border-radius: 50%;
+	margin-right: 10px;
+	background: #d9d9d9;
+	border: 5px solid transparent;
+	transition: all 0.3s ease;
 }
 
-.done-btn {
-  background-color: #344767;
-  color: #fff;
-  width: 74pt;
-  font-family: Arial, Helvetica, sans-serif;
+#dot-1:checked~.category label .one,
+#dot-2:checked~.category label .two,
+#dot-3:checked~.category label .three {
+	background: #344767;
+	border-color: #d9d9d9;
 }
 
-.btn-icon {
-  margin-right: 5px;
-}
-   
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
- 
-}
-
-  #Disability{
-    height: 80pt;
-    width: 365pt;
-  }
-  
-  .form-container {
-    /* background-color: aqua; */
-    padding: 1rem !important;
-    
-    
-  }
-
-  .container{
-    font-family: Inter;
-    width: 800pt;
-    height: 85vh;
-    border-radius: 20px;
-    /* background-color: aqua; */
-   
-
-  }
-  
-  .d-block{
-    position: relative;
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
-    font-size: 11pt;
-    width: 500pt;
-    font-weight: 350;
-    /* word-wrap: break-word; */
-    /* margin: 1rem auto; */
-    justify-content: center;
-    /* background-color: aqua; */
-    margin-left: 30px;
-  }
-  
-  .short-line {
-    width: 550px;
-    height: 2px; 
-    background-color: #000; 
-    border: none;
-    margin-bottom: 5px auto; 
-    margin-left: 13pt;
-  }
-
-  .svg-container {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    /*padding-top: 90pt;*/
-  }
-  
-  .dropdown_gender {
-    width: 70pt;
-    padding: 1pt;
-    border: 1pt solid #ccc;
-    border-radius: 5px;
-  }
-  
-.phone-label{
-  width: 100px;
+form .button {
+	display: flex;
+	flex-direction: row;
+	/* margin: 0px 0; */
+	justify-content: space-between;
 
 }
 
-  .btn{
-    padding-right: 7rem;
-  }
-  
-  
-.yes{
-  padding-right: 4px;
-  padding-bottom: 4px;
-
+form .button button {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 25pt;
+	width: 23%;
+	border-radius: 5px;
+	border: none;
+	color: #fff;
+	font-family: Roboto, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	letter-spacing: 1px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	background: #344767;
 }
 
-.no{
-  padding-right: 4px;
 
+
+@media(max-width: 584px) {
+	.container {
+		max-width: 100%;
+	}
+
+	form .user-details .input-box {
+		margin-bottom: 15px;
+		width: 100%;
+	}
+
+	form .category {
+		width: 100%;
+	}
+
+	.content form .user-details {
+		max-height: 300px;
+		overflow-y: scroll;
+	}
+
+	.user-details::-webkit-scrollbar {
+		width: 5px;
+	}
 }
-  
-.yes-radio{
-  margin-top: 45px;
 
+@media(max-width: 459px) {
+	.container .content .category {
+		flex-direction: column;
+	}
+
+	.form-buttons {
+		font-family: Arial, Helvetica, sans-serif;
+
+	}
 }
-
-  .nb1-middle-icon{
-    /* position: absolute;
-     top: 20px; /* Adjust the top position as needed 
-    margin-left: 150px; */
-    margin-bottom: 10px;
-    margin-right: 15px;
-  }
-  
-  .pd-middle-icon{
-  margin-bottom: 0pt;
-  }
-  
-  .personal-heading{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 400px;
-    top: -70px;
-    margin-left: 85pt;
-    font-family: Arial, Helvetica, sans-serif;
-    
-  }
-  
-  .col-disability{
-    height: 80pt;
-    text-align: left; vertical-align: top;
-  }
-  
-  /*sidenave styling*/
-  .personal-information-icon{
-      position: fixed;
-      margin-left: 29pt;
-      margin-top: 8pt;
-      height: 55px;
-      width: 90px;
-    }
-  
-    .personal-information-label{
-      position: fixed;
-      margin-left: 5pt;
-      margin-top: 53pt;
-      height: 40px;
-      width: 160px;
-    }
-  
-    .nb1-icon{
-      position: fixed;
-      margin-left: -17pt;
-      padding-left: pt;
-      margin-top: 54pt;
-      height: 20px;
-      width: 30px;
-  }
-  
-  .arrow-down{
-    position: fixed;
-      margin-left: 38pt;
-      margin-top: 92pt;
-      height: 40px;
-      width: 60px;
-  }
-  
-  .education-head-nav-icon{
-    position: fixed;
-      margin-left: 44pt;
-      margin-top: 145pt;
-      height: 40px;
-      width:46px;
-      /* font-size: 60pt; */
-  }
-  
-  .education-body-nav-icon{
-    position: fixed;
-      margin-left: 38pt;
-      margin-top: 155pt;
-      height: 40px;
-      width: 60px;
-  }
-  
-  .education-nav-label{
-    position: fixed;
-      margin-left: 33pt;
-      margin-top: 203pt;
-      height: 40px;
-      width: 80px;
-  }
-  
-  .nb2-icon{
-    position: fixed;
-      margin-left: 8pt;
-      padding-left: pt;
-      margin-top: 205pt;
-      height: 20px;
-      width: 30px;
-  }
-  
-  .arrow-down2{
-    position: fixed;
-      margin-left: 38pt;
-      margin-top: 240pt;
-      height: 40px;
-      width: 60px;
-  }
-    
-  .attachments-icon-nav{
-    position: fixed;
-      margin-left: 30pt;
-      margin-top: 294pt;
-      height: 50px;
-      width: 80px;
-  }
-  
-  
-  .attachments-nav-label{
-    position: fixed;
-    margin-left: 33pt;
-    margin-top: 350pt;
-    height: 40px;
-    width: 80px;
-  
-  }
-  
-  .nb3-icon{
-    position: fixed;
-      margin-left: 8pt;
-      padding-left: pt;
-      margin-top: 352pt;
-      height: 20px;
-      width: 30px;
-  
-  }
-  /*sidenave styling*/
-
-  .firstname_field{
-    /* background-color: aqua; */
-    flex-direction: row;
-
-  }
-
-  .validation {
-    border: 1px solid red;
-    /* position: absolute;
-    width: 98%;
-    top: 2rem;
-    right: 0;
-    background-color: aqua;
-    padding: .5rem;
-    z-index: 999; */
-  }
-
-  .success {
-    border: 1px solid rgb(37, 197, 37);
-  }

@@ -6,6 +6,9 @@ import { GoalModalHandlerService } from 'src/app/goal-management/services/modals
 import { SignupModalComponent } from 'src/app/user-management/signup-modal/signup-modal.component';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
+import { isNil } from 'lodash';
+import { validateIdNumber } from 'src/app/shared/global/helper';
+
 @Component({
   selector: 'app-personal-information',
   templateUrl: './personal-information.component.html',
@@ -23,53 +26,45 @@ export class PersonalInformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.personalDetails = new FormGroup({
-      Firstname: new FormControl(null, [Validators.required]),
-      Surname: new FormControl(null, Validators.required),
-      ID: new FormControl(null, [Validators.required]),
-      Email: new FormControl(null, [Validators.required, Validators.email]),
+      Firstname: new FormControl(null, [Validators.required, CustomValidators.names]),
+      Surname: new FormControl(null, [Validators.required, CustomValidators.names]),
+      IdNumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{13}$'), CustomValidators.IdNumber]),
+      Email: new FormControl(null, [Validators.required, Validators.email, CustomValidators.email]),
       Gender: new FormControl(null, [Validators.required]),
       Race: new FormControl(null, Validators.required),
-      Disability: new FormControl('No', [Validators.required]),
+      Phone: new FormControl(null, [Validators.required, CustomValidators.phone]),
+
     });
+  }
+
+  isFormValid(): void {
+    if (this.personalDetails.valid) {
+      console.log('Form submitted. Data:', this.personalDetails.value);
+      this.modalRef.close();
+    } else {
+      // Show an alert when the form is not valid
+      alert('Form is not valid. Please fill in all required fields correctly.');
+    }
 
   }
 
-
-
-  routeToEducation() {
-    this.route.navigateByUrl('applicant-education')
-
-  }
-
-  routeToApplicantDashboard() {
-    this.route.navigateByUrl('applicant-profile-dashboard');
-  }
-
-  onDoneClick(): void {
-    this.modalRef.close();
-  }
   onSaveAndCloseClick(): void {
     this.modalRef.close();
   }
 
-  saveInformation(){
+  saveInformation() {
     //  e.preventDefault();
+    console.log(this.personalDetails)
 
-    if(!this.personalDetails.valid){
-      return;
-    }
+    // if (!this.personalDetails.valid) {
+    //   return;
+    // }
 
-    alert("Heyy;lo")
+    // alert("Heyy;lo")
   }
+
+
 }
 
-
-
-
-// function closeModal() {
-//   throw new Error('Function not implemented.');
-// }
-   // routeToProfile() {
-  //   this.route.navigate(["learnership-application", "Profile"])
 
 

@@ -1,292 +1,91 @@
 <div class="container">
-  <div class="row m-0">
-    <!--column 1-->
-    <div class="col-3">
-      <div>
-        <!-- G4L logo -->
-      </div>
-    </div>
-    <!--column2 -->
-    <div>
-      <!-- <h6 class="applicant-name">Applicant name</h6>
-        <img class="applicant-name-profile-icon" src="../../../../assets/images/Vector (1).svg" />
-        <img class="applicant-name-profile-outercircle-icon" src="../../../../assets/images/Vector (2).svg" /> -->
-    </div>
-    <!--column 3-->
-    <div class="personal-heading">
-      <img class="nb1-middle-icon" src="../../../../assets/images/Backlog count (1).svg" />
-      <h3>Personal Information</h3>
-    </div>
+	<div class="title">
+		<img class="nb1-middle-icon" src="../../../../assets/images/Backlog count (1).svg" />Personal Information
+	</div>
+	<div class="content">
+		<form action="#" [formGroup]="personalDetails" (ngSubmit)="saveInformation()">
+			<div class="user-details">
+				<div class="input-box"
+					[ngClass]="{validation: getFormControl('Firstname').invalid && getFormControl('Firstname').touched, success: getFormControl('Firstname').valid && getFormControl('Firstname').touched}">
+					<span class="details">First Name*</span>
+					<input type="text" placeholder="Enter your name" formControlName="Firstname">
+					<div *ngIf="getFormControl('Firstname').invalid && getFormControl('Firstname').touched"
+						class="text-danger">
+						First name is required.
+					</div>
+				</div>
+				<div class="input-box">
+					<!-- [ngClass]="{validation: getFormControl('Surname').invalid && getFormControl('Surname').touched, success: getFormControl('Surname').valid && getFormControl('Surname').touched}"> -->
+					<span class="details">Surname*</span>
+					<input type="text" placeholder="Enter your surname" formControlName="Surname">
+					<div *ngIf="getFormControl('Surname').invalid && getFormControl('Surname').touched"
+						class="text-danger">
+						Surname is required.
+					</div>
+				</div>
+				<div class="input-box">
+					<span class="details">Email*</span>
+					<input type="text" placeholder="Enter your email" formControlName="Email">
+					<div *ngIf="getFormControl('Email').invalid && getFormControl('Email').touched" class="text-danger">
+						Valid Email is required.
+					</div>
+				</div>
+				<div class="input-box">
+					<span class="details">Phone Number*</span>
+					<input type="text" placeholder="Enter your number" formControlName="Phone">
+					<div *ngIf="getFormControl('Phone').invalid && getFormControl('Phone').touched" class="text-danger">
+						Valid phone number is required.
+					</div>
+				</div>
+				<div class="input-box"
+					[ngClass]="{validation: getFormControl('IdNumber').invalid && getFormControl('IdNumber').touched}">
 
-    <div>
-      <hr class="short-line">
-    </div>
-    <div class="col form-container mt-0">
-      <div class="d-block text-center mb-0 mt-0">
-        <!-- <img class="pd-middle-icon" src="../../../../assets/images/carbon_user-profile.svg" /> -->
+					<span class="details">ID*</span>
+					<input type="text" placeholder="Enter your ID number" formControlName="IdNumber">
+					<div *ngIf="getFormControl('IdNumber').invalid && getFormControl('IdNumber').touched"
+						class="text-danger">
+						Valid ID number is required and must be of 13 digits.
+					</div>
+				</div>
+				<div class="input-box">
+					<span class="details">Enter Disability</span>
+					<input type="text" placeholder="(If yes, please specify)">
+				</div>
+				<div class="input-box">
+					<label for="gender">Gender*</label>
+					<select id="gender" name="gender" class="category" formControlName="Gender">
+						<option value="" disabled selected>Select your gender</option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+						<option value="other">Other</option>
+					</select>
+					<div *ngIf="getFormControl('Gender').invalid && getFormControl('Gender').touched"
+						class="text-danger">
+						Gender selection is required.
+					</div>
+				</div>
 
-      </div>
-
-      <form class="d-block" [formGroup]="personalDetails" (ngSubmit)="saveInformation()">
-
-        <div class="row mb-3 formcontrol">
-          <div class="col-3">
-            <label for="Firstname" class="firstname-label mt-2">First name</label>
-          </div>
-          <div class="col position-relative">
-            <div class="firstname_field d-flex rounded"
-              [ngClass]="{validation: getFormControl('Firstname').invalid && getFormControl('Firstname').touched, success: getFormControl('Firstname').valid && getFormControl('Firstname').touched}">
-              <input type="text" id="Firstname" formControlName="Firstname" class="form-control" />
-            </div>
-            <div *ngIf="getFormControl('Firstname').invalid && getFormControl('Firstname').touched"
-              class="text-danger">
-              First name is required.
-            </div>
-          </div>
-        </div>
-
-        <div class="row mb-3 formcontrol">
-          <div class="col-3">
-            <label for="Surname" class="surname-label mt-2">Surname</label>
-          </div>
-          <div class="col position-relative">
-            <div class="firstname_field d-flex rounded"
-              [ngClass]="{validation: getFormControl('Surname').invalid && getFormControl('Surname').touched, success: getFormControl('Surname').valid && getFormControl('Surname').touched}">
-              <input type="text" id="Surname" formControlName="Surname" class="form-control" />
-            </div>
-            <div *ngIf="getFormControl('Surname').invalid && getFormControl('Surname').touched"
-              class="text-danger">
-              Surname is required.
-            </div>
-          </div>
-        </div>
-
-        <div class="row mb-3 formcontrol">
-          <div class="col-3">
-            <label for="ID" class="id-label mt-2">ID number</label>
-          </div>
-          <div class="col-9 position-relative">
-            <input type="text" id="ID" formControlName="ID" class="form-control"
-              [ngClass]="{validation: getFormControl('ID').invalid && getFormControl('ID').touched}">
-            <div *ngIf="getFormControl('ID').invalid && getFormControl('ID').touched" class="text-danger">
-              ID number is required.
-            </div>
-          </div>
-        </div>
-
-        <div class="row mb-3 formcontrol">
-          <div class="col-3">
-            <label for="phone" class="phone-label mt-2">Phone number</label>
-          </div>
-          <div class="col-9 position-relative">
-            <input type="text" id="phone" formControlName="phone" class="form-control">
-            <div *ngIf="getFormControl('ID').invalid && getFormControl('ID').touched" class="text-danger">
-              Phone number is required.
-            </div>
-          </div>
-        </div>
-       
-
-
-        <!-- <form action="/action_page.php">
-  <label for="country_code">Country code:</label>
-  <input type="text" id="country_code" name="country_code"
-  pattern="[A-Za-z]{3}" title="Three letter country code"><br><br>
-  <input type="submit">
-</form> -->
-
-        <div class="row mb-3 formcontrol">
-          <div class="col-3">
-            <label for="email" class="email-label mt-2">Email</label>
-          </div>
-          <div class="col-9 position-relative">
-            <input type="email" id="email" formControlName="Email" class="form-control"
-              [ngClass]="{validation: getFormControl('email').invalid && getFormControl('email').touched}">
-            <div *ngIf="getFormControl('email').invalid && getFormControl('email').touched" class="text-danger">
-              Email is required and must be valid.
-            </div>
-          </div>
-
-
-
-        </div>
-        <div class="row mb-4 formcontrol">
-          <div class="col-3">
-            <label for="Gender" class="race-label mt-1">Gender</label>
-          </div>
-          <div class="col">
-            <div class="gender-dropdown">
-              <select id="gender" formControlName="Gender">
-                <option value="null">--Select--</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="row mb-4 mt-4 formcontrol">
-            <div class="col-3">
-              <label for="Race" class="race-label mt-1">Race</label>
-            </div>
-            <div class="col">
-              <div class="race-dropdown">
-                <select id="Race" formControlName="Race">
-                  <option value="Black">Black</option>
-                  <option value="White">White</option>
-                  <option value="Indian">Indian</option>
-                  <option value="Mixed">Mixed</option>
-                  <option value="Other">Other(not listed)</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4 formcontrol">
-            <div class="col-3">
-              <label for="Disability" class="disability-label">Disability :</label>
-            </div>
-            <div class="col mt-1">
-
-              <div class="d-flex gap-2 col-3">
-                <div>
-                  <label class="yes" for="yes-radio">Yes</label>
-                  <input class="yes-radio" type="radio" class="radio" id="yes-radio" formControlName="Disability"
-                    value="Yes" />
-                </div>
-                <div>
-                  <label class="no" for="no-radio">No</label>
-                  <input class="no-radio" type="radio" class="radio" id="no-radio" formControlName="Disability"
-                    value="No" />
-                </div>
-              </div>
-
-              <br>
-              <div class="disability">
-                <div class="col-3">
-                  <div class="col-disability">
-                    <textarea type="text" id="Disability" rows="2" placeholder="Enter disability here" name="Disability"
-                      class="form-control-dis"
-                      [attr.disabled]="getFormControl('Disability').value === 'No' ? true : null"></textarea>
-                    <div
-                      *ngIf="getFormControl('Disability').value === 'Yes' && getFormControl('Disability').invalid && getFormControl('Disability').touched"
-                      class="text-danger">
-                      Please enter a disability when selecting 'Yes'.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="button-container">
-            <button type="button" (click)="onSaveAndCloseClick()" class="save-close-btn">
-              Save and Close</button>
-            <button type="submit" (click)="onSaveAndCloseClick()" class="done-btn">Done </button>
-          </div>
-        </div>
-
-      </form>
-
-
-      <!-- <div class="row mb-4 formcontrol">
-    <div class="col-3">
-      <label for="gender" class="gender-label">Gender</label>
-    </div>
-    <div class="col">
-      <div class="gender-dropdown">
-      <select id="Gender-dropdown" formControlName="Gender" >
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-    </div>
-    </div> -->
-      <!-- <div *ngIf="getFormControl('Gender').invalid && getFormControl('Gender').touched" class="text-danger">
-      Gender is required.
-    </div> -->
-      <!-- </div>
-</div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!-- VALIDATION FOR DISABILITY INPUT BOX  
-  
-            <div>
-            <label for="disabilityYes">Yes</label>
-            <input type="radio" id="disabilityYes" formControlName="disability" value="Yes" (change)="onDisabilityChange()" />
-            
-            <label for="disabilityNo">No</label>
-            <input type="radio" id="disabilityNo" formControlName="disability" value="No" (change)="onDisabilityChange()" />         
-          </div -->
-
-
-      <!-- <div *ngIf="getFormControl('Gender').invalid && getFormControl('Gender').touched" class="text-danger">
-        Gender is required.
-
-      <div *ngIf="getFormControl('Race').invalid && getFormControl('Race').touched" class="text-danger">
-        Race is required.
-      </div>
-
-  <div class="row mb-4 formcontrol">
-    <div class="col-3">
-      <label for="Disability" class="disability-label">Disability :</label>
-    </div>
-    <div class="col">
-      <br>
-      <div class="d-flex gap-3 col-3">
-        <div>
-          <label class="yes" for="yes-radio">Yes</label>
-          <input class="yes-radio" type="radio" class="radio" id="yes-radio" formControlName="Disability" value="Yes" />
-        </div>
-        <div>
-          <label class="no" for="no-radio">No</label>
-          <input class="no-radio" type="radio" class="radio" id="no-radio" formControlName="Disability" value="No" />
-        </div>
-      </div>
-      <br>
-      <div class="row mb-4 formcontrol col-3">
-        <div class="col-4">
-          <div class="col-disability">
-            <input type="text" id="Disability" placeholder="Enter disability here" name="Disability"
-              class="form-control" [attr.disabled]="getFormControl('Disability').value === 'No' ? true : null" />
-          </div>
-          <div *ngIf="getFormControl('Disability').value === 'Yes' && getFormControl('Disability').invalid && getFormControl('Disability').touched" class="text-danger">
-            Please enter a disability when selecting 'Yes'.
-          </div> -->
-
-
-
-      <!-- <div class="row mb-4 formcontrol">
-  <div class="col-3">
-    <label for="gender" class="gender-label">Gender</label>
-  </div>
-  <div class="col-3 gender">
-    <label for="Gender"></label>
-    <select id="Gender" formControlName="Gender" class="form-control">
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-      <option value="Other">Other</option>
-    </select>
-
-  <div class="col">
-    <div *ngIf="getFormControl('Gender').invalid && getFormControl('Gender').touched" class="text-danger">
-      Gender is required.
-    </div>
-  </div>
-  </div>
-</div> -->
+				<div class="input-box">
+					<label for="gender">Race*</label>
+					<select id="gender" name="gender" class="category" formControlName="Race">
+						<option value="" disabled selected>Select your race</option>
+						<option value="Black">Black</option>
+						<option value="White">White</option>
+						<option value="Indian">Indian</option>
+						<option value="Mixed">Mixed</option>
+						<option value="Other">Other(not listed)</option>
+					</select>
+					<div *ngIf="getFormControl('Race').invalid && getFormControl('Race').touched" class="text-danger">
+						Race selection is required.
+					</div>
+				</div>
+			</div>
+			<footer class="form-buttons">
+				<div class="button">
+					<button class="button-save" type="submit" (click)="onSaveAndCloseClick()">Save and Close</button>
+					<button class="button" type="submit" (click)="isFormValid()">Done</button>
+				</div>
+			</footer>
+		</form>
+	</div>
+</div>
