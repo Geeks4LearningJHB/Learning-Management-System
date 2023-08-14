@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import {
   AbstractControl,
   FormBuilder,
@@ -6,58 +6,51 @@ import {
   FormGroup,
   ValidatorFn,
   Validators,
-} from '@angular/forms';
-import { UserService } from '../services/user.service';
-import { Router } from '@angular/router';
-import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
-import { LoginComponent } from '../login/login.component';
-import { SignupModalComponent } from '../signup-modal/signup-modal.component';
+} from "@angular/forms";
+
+import { UserService } from "../services/user.service";
+
+import { GoalModalHandlerService } from "src/app/goal-management/services/modals/goal-modal-handler.service";
+import { SignupModalComponent } from "../signup-modal/signup-modal.component";
+
+import { ToastrService } from "ngx-toastr";
+import { ServerErrorCodes } from "src/app/shared/global/server-error-codes";
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css'],
+  selector: "app-signup",
+  templateUrl: "./signup.component.html",
+  styleUrls: ["./signup.component.css"],
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
-  serverErrorMessage: any = '';
+
+  keys = Object.keys;
+
+  serverErrorMessage: any;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private toastr: ToastrService,
+    private modalHandler: GoalModalHandlerService<any>
+  ) {}
 
   getFormControl(control: String): AbstractControl {
     return this.signupForm.controls[`${control}`];
   }
-  constructor(
-    private formBuilder: FormBuilder,
-    private userService: UserService,
-    private router: Router,
-    private modalHandler: GoalModalHandlerService<any>
-  ) {}
-
-  
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-      Name: ['', [Validators.required, this.noSpecialCharacters]],
-      LastName: ['', [Validators.required, this.noSpecialCharacters]],
-      Email: ['', [Validators.required, Validators.email]],
-      confirmEmail: ['', [Validators.required, Validators.email]],
+      Name: ["", [Validators.required, this.noSpecialCharacters]],
+      Surname: ["", [Validators.required, this.noSpecialCharacters]],
+      Email: ["", [Validators.required, Validators.email]],
+      confirmEmail: ["", [Validators.required, Validators.email]],
       Password: [
-        '',
+        "",
         [Validators.required, Validators.minLength(8), this.passwordValidator],
       ],
-      confirmPassword: ['', Validators.required],
+      confirmPassword: ["", Validators.required],
     });
-  }
-  passwordValidator(control: { value: string }) {
-    const pattern = /^(?=.*[!@#$%^&*])(?=.*[A-Z])/;
-    return pattern.test(control.value) ? null : { passwordInvalid: true };
-  }
-  noSpecialCharacters(control: FormControl) {
-    const pattern = /^[a-zA-Z ]*$/;
-    if (pattern.test(control.value)) {
-      return null;
-    } else {
-      return { specialCharacters: true };
-    }
   }
 
   get isFormInvalid(): boolean {
@@ -71,34 +64,47 @@ export class SignupComponent implements OnInit {
   isTouched(controlName: string): boolean {
     return this.signupForm.controls[controlName].touched;
   }
-
-  arePasswordsMatching(): boolean {
-    const password = this.signupForm.get('Password')?.value;
-    const confirmPassword = this.signupForm.get('confirmPassword')?.value;
-    return password === confirmPassword;
+  noSpecialCharacters(
+    control: AbstractControl
+  ): { [key: string]: boolean } | null {
+    const pattern = /^[a-zA-Z ]*$/;
+    return pattern.test(control.value) ? null : { specialCharacters: true };
   }
-
   areEmailsMatching(): boolean {
-    const email = this.signupForm.get('Email')?.value;
-    const confirmEmail = this.signupForm.get('confirmEmail')?.value;
+    const email = this.signupForm.get("Email")?.value;
+    const confirmEmail = this.signupForm.get("confirmEmail")?.value;
     return email === confirmEmail;
   }
 
-  // ... (previous code)
+  passwordValidator(control: { value: string }) {
+    const pattern = /^(?=.*[!@#$%^&*])(?=.*[A-Z])/;
+    return pattern.test(control.value) ? null : { passwordInvalid: true };
+  }
+  arePasswordsMatching(): boolean {
+    const password = this.signupForm.get("Password")?.value;
+    const confirmPassword = this.signupForm.get("confirmPassword")?.value;
+    return password === confirmPassword;
+  }
 
-  signup(): void {
+  signupUser(): void {
     this.signupForm.markAllAsTouched();
 
-    if (!this.signupForm.valid) {
+    if (this.signupForm.invalid) {
       // If the form is invalid, return early and do not proceed with signup
       return;
     }
-
-    // Connection to backend
-    // Place the backend connection logic here
+    // backend logic here
+    this.userService.signupUser(this.signupForm.value).subscribe(
+      (response) => {
+        if (!this.serverErrorMessage) {
+          this.openSignUpModal();
+        }
+      },
+      (error) => {
+        this.serverErrorHandling(error);
+      }
+    );
   }
-
-  
 
   openSignUpModal(): void {
     if (
@@ -113,5 +119,15 @@ export class SignupComponent implements OnInit {
         width: 50,
       });
     }
+  }
+
+  serverErrorHandling(error: any) {
+    if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
+      this.signupForm.controls["Email"].setErrors({
+        duplicateEmailError: true,
+      });
+      this.serverErrorMessage = error.message;
+    }
+    this.signupForm.updateValueAndValidity();
   }
 }

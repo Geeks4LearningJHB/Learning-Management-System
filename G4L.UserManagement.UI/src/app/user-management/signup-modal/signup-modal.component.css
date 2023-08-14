@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 220px;
+    height: 310px;
   }
   
   .fa-circle-check {
@@ -18,7 +18,7 @@
   
 a {
     position: absolute;
-    background-color: #45dd0e;
+    background-color: #344767;
     text-align: center;
     bottom: 0;
     left: 50%;
@@ -27,5 +27,8 @@ a {
     height: 60px;
     padding: 20px;
     text-decoration: underline;
+  }
+  a{
+    color:white;
   }
   

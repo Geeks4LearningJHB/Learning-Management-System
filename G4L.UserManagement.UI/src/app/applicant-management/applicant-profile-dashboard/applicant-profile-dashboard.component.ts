@@ -7,21 +7,11 @@ import { Router } from '@angular/router';
 })
 export class ApplicantProfileDashboardComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-onSubmitApplication(){
-  this.router.navigateByUrl('applicant-success')
-}
-routeToPersonalDetails(){
-  this.router.navigateByUrl('personal-details')
-}
-routeToEducation(){
-  this.router.navigateByUrl('applicant-education')
-}
-routeToAttachments(){
-  this.router.navigateByUrl('applicant-attachments')
-}
+
+
 }

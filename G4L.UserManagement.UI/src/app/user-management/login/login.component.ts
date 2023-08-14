@@ -20,10 +20,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router) { }
 
-
- redirectToSignup() {
-    this.router.navigate(['/signup']);
-  }
   getFormControl(control: String): AbstractControl {
     return this.loginForm.controls[`${control}`];
   }

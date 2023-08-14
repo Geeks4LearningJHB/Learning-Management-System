@@ -4,6 +4,7 @@ using G4L.UserManagement.BL.Entities;
 using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models;
+using G4L.UserManagement.BL.Models.Request;
 using G4L.UserManagement.DA;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -61,13 +62,37 @@ namespace G4L.UserManagement.Infrustructure.Repositories
             await _databaseContext.SaveChangesAsync();
         }
 
+        public async Task AddUserAsync(AddUserRequest model)
+        { 
+            // validate
+            if (_databaseContext.Users.Any(x => x.Email == model.Email))
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.DuplicateEmail.ToString(),
+                    Message = "User with the same email already exist"
+                }));
+
+         
+            // map model to new user object
+            var user = _mapper.Map<User>(model);
+            // hash password
+
+            user.Role = Role.Applicant;
+            user.PasswordHash = BCryptNet.HashPassword(model.Password);
+            await _databaseContext.Users.AddAsync(user);
+            await _databaseContext.SaveChangesAsync();
+        }
+
+
         private async Task LinkSponsorAsync(UserRequest model, User user)
         {
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 switch (user.Role)
                 {
                     case Role.Trainer:
-                        model.Clients.ForEach(x => {
+                        model.Clients.ForEach(x =>
+                        {
                             _databaseContext.SponsoredUsers.Add(new SponsoredUser
                             {
                                 UserId = user.Id,
@@ -81,7 +106,7 @@ namespace G4L.UserManagement.Infrustructure.Repositories
                         _databaseContext.SponsoredUsers.Add(new SponsoredUser
                         {
                             UserId = user.Id,
-                            SponsorId = (Guid) model.SponsorId,
+                            SponsorId = (Guid)model.SponsorId,
                             User = user,
                             Sponsor = _databaseContext.Sponsors.Where(y => y.Id == model.SponsorId).FirstOrDefault(),
                         });

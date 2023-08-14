@@ -1,0 +1,33 @@
+.c-item {
+  margin-left: 60px;
+    height:74vh;
+    width: 90%;
+  }
+  h1{
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    padding: 8px 0;
+    width: 90%;
+    margin: 0 0 20px 60px;
+    border-radius: 10px;
+    background-color: #092f4f;
+  }
+  .c-img {
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    filter: brightness(0.8);
+  }
+  
+  
+  .custom-btn-color {
+    width: 240px;
+    background-color: #092f4f;
+    border-color: #092f4f; 
+    color: #ffffff; 
+  }
+  .custom-btn-color:hover{
+    transform: scale(1.07);
+    box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
+  }

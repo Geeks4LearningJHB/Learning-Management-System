@@ -363,12 +363,13 @@
   .vector-parent {
     position: absolute;
     top: 172px;
-    left: 347px;
+    left: 400px;
     backdrop-filter: blur(4px);
     width: 290px;
     height: 157px;
     text-align: left;
     color: var(--color-black);
+    
 
     fill: #FFF;
     box-shadow: 0px 4px 20px 0px rgba(5, 5, 5, 0.11);
@@ -434,12 +435,13 @@
   .vector-group {
     position: absolute;
     top: 172px;
-    left: 708px;
+    left: 740px;
     backdrop-filter: blur(4px);
     width: 290px;
     height: 157px;
     text-align: left;
     color: var(--color-black);
+    
 
     box-shadow: 0px 4px 20px 0px rgba(5, 5, 5, 0.11);
     border-radius: 16px;
@@ -524,7 +526,7 @@
   .vector-container {
     position: absolute;
     top: 187px;
-    left: 1069px;
+    left: 1050px;
     width: 296px;
     height: 157px;
     text-align: left;
@@ -548,6 +550,7 @@
     background-color: #ffb800;
     width: 24px;
     height: 22px;
+    margin-left: 50px;
   }
   .p4 {
     margin: 0;
@@ -560,6 +563,7 @@
     height: 19.06px;
     left: 366px;
     color: #FFF;
+    margin-left: 50px;
   }
   .desktop-4-inner {
     position: absolute;
@@ -669,7 +673,7 @@
   .frame-div {
     position: absolute;
     top: 517px;
-    left: 351px;
+    left: 400px;
     backdrop-filter: blur(4px);
     width: 471px;
     height: 228px;
@@ -679,6 +683,7 @@
 
     fill: #FFF;
     box-shadow: 0px 4px 20px 0px rgba(5, 5, 5, 0.11);
+    
 
   }
   .boot-camp-progress {
@@ -722,6 +727,7 @@
     color: #666464;
   }
   .vector-parent1 {
+
     position: absolute;
     top: 517px;
     left: 872px;
@@ -729,6 +735,7 @@
     height: 228px;
     box-shadow: 0px 4px 20px 0px rgba(5, 5, 5, 0.11);
     border-radius: 16px;
+  
   }
   .iconsaxlinearlock1,
   .iconsaxlinearlock11 {
@@ -851,15 +858,14 @@
   }
   .desktop-4 {
     /* position: absolute; */
-    background-color: var(--color-dimgray);
-    overflow: hidden;
     text-align: center;
     font-size: var(--font-size-mini);
     color: rgb(117, 116, 116);
     font-family: var(--font-inter);
 
-    width: 1000spx;
-    height: 780px;
+    width: 70rem;
+    right: 10px;
+    height: 750px;
     padding: 16px 377px 20px 355px;
     align-items: center;
     border-radius: 16px;

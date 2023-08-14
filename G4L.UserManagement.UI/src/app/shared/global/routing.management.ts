@@ -39,3 +39,14 @@ export const GoalManagement: IRouter = {
     route: '/goal-management',
     faIcon: 'fa-bullseye'
 }
+
+export const ApplicantProfile: IRouter = {
+    name: 'Learnership Application',
+    route: '/profile',
+    faIcon: 'fa-bullseye'
+}
+export const ApplicationProgress: IRouter ={
+    name : 'ApplicationProgress',
+    route:'/application-progress',
+    faIcon : 'fa-bars'
+}

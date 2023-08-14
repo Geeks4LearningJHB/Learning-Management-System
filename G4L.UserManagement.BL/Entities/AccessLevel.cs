@@ -4,7 +4,7 @@ namespace G4L.UserManagement.BL.Entities
 {
     public enum Access
     {
-        New_user, Student, Trainer, Admin
+        New_user, Student, Trainer, Admin, Applicant
     }
     public class AccessLevel : BaseEntity
     {

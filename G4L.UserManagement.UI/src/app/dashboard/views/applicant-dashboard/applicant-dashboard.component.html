@@ -1,0 +1,123 @@
+<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      data-bs-target="#hero-carousel"
+      data-bs-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#hero-carousel"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#hero-carousel"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+    <button
+    type="button"
+    data-bs-target="#hero-carousel"
+    data-bs-slide-to="3"
+    aria-label="Slide 4"
+  ></button>
+  </div>
+
+  <div class="carousel-inner">
+    <h1>Journey to a Geek</h1>
+    <div class="carousel-item active c-item">
+      <img
+        src="../../../assets/images/personal details geeks 1.png"
+        class="d-block w-100 c-img"
+        alt="Slide 1"
+      />
+      <div class="carousel-caption top-0 mt-4">
+        <p class="mt-5 fs-3 text-uppercase">Step 1 : Enter personal details</p>
+        <div class="d-flex flex-column justify-content-between">
+          <span class="fs-4 px-4 m-3 py-2">Personal information</span>
+          <i class="fa-solid fa-arrow-down fa-2xl"></i>
+          <span class="fs-4 px-4 m-3 py-2">Education</span>
+          <i class="fa-solid fa-arrow-down fa-2xl"></i>
+          <span class="fs-4 px-4 m-3 py-2">Attachments</span>
+        </div>
+
+        <button class="btn btn-primary custom-btn-color px-4 py-2 fs-5 mt-5" (click)="openLearneshipApplication()">
+          Click to apply
+        </button>
+      </div>
+    </div>
+    
+    <div class="carousel-item c-item">
+      <img
+        src="../../../../assets/images/geeks-ikm.png.jpg"
+        class="d-block w-100 c-img"
+        alt="Slide 2"
+      />
+      <div class="carousel-caption top-0 mt-4 my-4">
+        <p class="text-uppercase fs-3 mt-5">
+          Step 2: When approved, write an aptitude test that measures your
+          problem-solving skills
+        </p>
+
+        <button class="btn btn-primary custom-btn-color px-4 py-2 fs-5 mt-5" (click)="openLearneshipApplication()">
+          Click to apply
+        </button>
+      </div>
+    </div>
+    <div class="carousel-item c-item">
+      <img
+        src="../../../../assets/images/geeks4.png"
+        class="d-block w-100 c-img"
+        alt="Slide 2"
+      />
+      <div class="carousel-caption top-0 mt-4 my-4">
+        <p class="text-uppercase fs-3 mt-5">
+          Step 3 : Enter an IT boot camp that provides you with a foundation of
+          IT knowledge
+        </p>
+
+        <button class="btn btn-primary custom-btn-color px-4 py-2 fs-5 mt-5" (click)="openLearneshipApplication()">
+          Click to apply
+        </button>
+      </div>
+    </div>
+    <div class="carousel-item c-item">
+      <img
+        src="../../../../assets/images/graduation.jpg"
+        class="d-block w-100 c-img"
+        alt="Slide 4"
+      />
+      <div class="carousel-caption top-0 mt-4 my-4">
+        <p class="text-uppercase fs-3 mt-5">
+          Step 4: Become a Geek
+        </p>
+        <button class="btn btn-primary custom-btn-color px-4 py-2 fs-5 mt-5" (click)="openLearneshipApplication()">
+          Click to apply
+        </button>
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#hero-carousel"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#hero-carousel"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

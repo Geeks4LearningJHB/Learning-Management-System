@@ -1,8 +1,14 @@
-import { RemoveUnderscorePipe } from './remove-underscore.pipe';
+import { Pipe, PipeTransform } from '@angular/core';
 
-describe('RemoveUnderscorePipe', () => {
-  it('create an instance', () => {
-    const pipe = new RemoveUnderscorePipe();
-    expect(pipe).toBeTruthy();
-  });
-});
+@Pipe({
+  name: 'removeUnderscore'
+})
+export class RemoveUnderscorePipe implements PipeTransform {
+
+
+  transform(value: string, ...args: unknown[]): unknown {
+    return value?.replace(/_/gi, ' ');;
+  }
+
+}
+  

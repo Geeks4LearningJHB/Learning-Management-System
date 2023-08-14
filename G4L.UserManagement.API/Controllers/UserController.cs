@@ -1,9 +1,11 @@
 ﻿using G4L.UserManagement.API.Authorization;
+using G4L.UserManagement.BL.Custom_Exceptions;
 using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
 using G4L.UserManagement.DA;
+using G4L.UserManagement.Infrustructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -51,10 +53,11 @@ namespace G4L.UserManagement.API.Controllers
         public async Task<IActionResult> PostAsync([FromBody] UserRequest user)
         {
             await _userService.RegisterUserAsync(user);
+       
             return Ok();
         }
 
-        [Authorize(Role.Super_Admin, Role.Admin)]
+        [Authorize(Role.Super_Admin, Role.Admin )]
         [HttpPut]
         public async Task<IActionResult> PutAsync([FromBody] UpdateRequest user)
         {
@@ -87,6 +90,17 @@ namespace G4L.UserManagement.API.Controllers
             if (user == null)
                 return BadRequest("User Not Found");
             return Ok(user);
+      
         }
+        [AllowAnonymous]
+        [HttpPost("signup")]
+        public async Task<IActionResult> PostAsync([FromBody] AddUserRequest user)
+        {
+ 
+            await _userService.SignupUserAsync(user);
+
+            return Ok(new { Message = "User registered successfully." });
+        }
+
     }
 }
