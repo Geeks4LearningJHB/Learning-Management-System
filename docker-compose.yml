@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  g4l.usermanagement.api:
+    image: ${DOCKER_REGISTRY-}g4lusermanagementapi
+    build:
+      context: .
+      dockerfile: G4L.UserManagement.API/Dockerfile
