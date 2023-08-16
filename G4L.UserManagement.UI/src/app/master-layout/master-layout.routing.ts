@@ -18,6 +18,7 @@ import { ApplicantManagementModule } from '../applicant-management/applicant-man
 import { ApplicantProfileDashboardComponent } from '../applicant-management/applicant-profile-dashboard/applicant-profile-dashboard.component';
 import { ApplicantionProgressComponent } from '../applicant-management/applicantion-progress/applicantion-progress.component';
 import { ApplicantAttachmentsComponent } from '../applicant-management/applicant-attachments/applicant-attachments.component';
+import { PersonalInformationComponent } from '../applicant-management/personal-information/personal-information.component';
 
 const routes: Routes = [
   {
@@ -52,6 +53,7 @@ const routes: Routes = [
       {path: 'profile', component:ApplicantProfileDashboardComponent},
       {path: 'application-progress', component:ApplicantionProgressComponent},
       {path: 'applicant-attachments', component:ApplicantAttachmentsComponent},
+      {path: 'personal-details', component: PersonalInformationComponent},
     ],
   },
 ];

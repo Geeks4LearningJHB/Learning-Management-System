@@ -16,7 +16,7 @@ const routes: Routes = [ {
     {path: 'applicant-profile-dashboard', component:ApplicantProfileDashboardComponent},
     {path: 'applicant-success', component:ApplicantSuccessComponent},
     {path: 'application-progress', component:ApplicantionProgressComponent},
-    {path: 'personal-details', component: PersonalInformationComponent},
+  
     {path: 'applicant-education', component:ApplicantEducationComponent}
   ],
 },];
