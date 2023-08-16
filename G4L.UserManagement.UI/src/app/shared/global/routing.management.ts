@@ -46,7 +46,7 @@ export const ApplicantProfile: IRouter = {
     faIcon: 'fa-bullseye'
 }
 export const ApplicationProgress: IRouter ={
-    name : 'ApplicationProgress',
+    name : 'Application Progress',
     route:'/application-progress',
     faIcon : 'fa-bars'
 }
