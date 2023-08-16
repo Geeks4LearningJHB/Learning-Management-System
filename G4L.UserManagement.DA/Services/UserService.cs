@@ -39,6 +39,12 @@ namespace G4L.UserManagement.Infrustructure.Services
             await _userRepository.CreateUserAsync(model);
         }
 
+        public async Task SignupUserAsync(AddUserRequest model)
+        {
+
+            await _userRepository.AddUserAsync(model);
+
+        }
         public async Task<AuthenticateResponse> AuthenticateUserAsync(AuthenticateRequest model)
         {
             var user = await _userRepository.GetByUserByEmailAsync(model.Email);

@@ -1,23 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 //import { Chart } from 'chart.js';
-import { Chart, registerables } from 'chart.js';
-import { constants } from '../shared/global/global.constants';
-import { Roles } from '../shared/global/roles';
+import { Chart, registerables } from "chart.js";
+import { constants } from "../shared/global/global.constants";
+import { Roles } from "../shared/global/roles";
 Chart.register(...registerables);
 
-
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: "app-dashboard",
+  templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.css"],
 })
 export class DashboardComponent implements OnInit {
-
   isAdmin: boolean | undefined;
   isTrainer: boolean | undefined;
   isLearner: boolean | undefined;
+  isApplicant: boolean | undefined;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     const role = sessionStorage.getItem(constants.role);
@@ -36,7 +35,10 @@ export class DashboardComponent implements OnInit {
       case Roles.Learner:
         this.isLearner = true;
         break;
+
+      case Roles.Learner:
+        this.isApplicant = true;
+        break;
     }
   }
-
 }

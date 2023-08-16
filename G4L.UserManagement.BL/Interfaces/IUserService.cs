@@ -14,6 +14,7 @@ namespace G4L.UserManagement.BL.Interfaces
     {
         Task RegisterUserAsync(UserRequest user);
         Task<AuthenticateResponse> AuthenticateUserAsync(AuthenticateRequest model);
+        Task SignupUserAsync(AddUserRequest user);
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> GetUserByIdAsync(Guid id);
         Task UpdateUserAsync(UpdateRequest user);

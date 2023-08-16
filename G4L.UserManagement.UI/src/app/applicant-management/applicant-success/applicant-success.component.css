@@ -1,0 +1,92 @@
+.application-success-message-container {
+    position: relative;
+    /* height: 90vh; */
+    display: flex;
+    margin-top: 16px;
+    justify-content: center;
+    align-items: center;
+    place-items: center;
+    border-top: 3rem solid #3F51B5;
+    border-bottom: 3rem solid #3F51B5;
+  }
+  
+  .application-success-message-container .app-success-wrapper {
+    height: max-content;
+  }
+  
+  .application-success-message-container .app-success-wrapper .success-done-btn {
+    position: relative;
+    display: block;
+    text-align: right;
+    margin-top: 1rem;
+    font-family: var(--font-inter);
+   
+  }
+  
+  .application-success-message-container .app-success-wrapper .success-done-btn button{
+    background-color: #3F51B5;
+    padding: .5rem 2rem;
+    margin-bottom: 20px;
+    border: 0;
+    border-radius: .5rem;
+    color: #fff;
+    font-size: 12pt;
+  
+  }
+  
+  .application-success-message-container .app-success-wrapper .logo-container {
+    text-align: center;
+    height: 16rem;
+  }
+  
+  .application-success-message-container .app-success-wrapper .logo-container img {
+    object-fit: cover; 
+    width: 395px;
+    height: 250px;
+    margin-top: 10px;
+  }
+  
+  .application-success-message-container .app-success-wrapper .success-message-content .success-symbol {
+    display: block;
+    text-align: center;
+  }
+  
+  .application-success-message-container .app-success-wrapper .success-message-content .success-symbol i {
+    font-size: 50pt;
+    color: #0BDF20;
+  }
+  
+  .application-success-message-container .app-success-wrapper .success-message-content .success-symbol .congratulations {
+    position: relative;
+    font-size: 30pt;
+    font-family: var(--font-inter);
+    margin-top: .5rem;
+    color: #0BDF20;
+  }
+  
+  .application-success-message-container .app-success-wrapper .success-message-content .success-message-header {
+    text-align: center;
+    font-family: var(--font-inter-5);
+    font-size: 19pt;
+  }
+  
+  .application-success-message-container .app-success-wrapper .success-message-content .congratulations-on-your-container {
+    margin-top: 1rem; 
+    background-color: #DAF7A6;
+    border: 2px solid #0BDF20;
+    border-radius: 1rem;
+    padding: 10px; 
+    margin-left: 24px;
+    top: 634px;
+    left: 277px;
+  font-size: 16px;
+    width: 800px;
+    height: 128px
+  }
+  
+  .application-success-message-container .app-success-wrapper .success-message-content .congratulations-on-your-container p {
+    font-size: var(--font-size-5xl);
+    font-weight: 500;
+    font-family: var(--font-inter);
+    text-align: center;  
+  }

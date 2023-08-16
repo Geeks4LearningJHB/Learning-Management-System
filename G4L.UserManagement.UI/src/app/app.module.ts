@@ -8,7 +8,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MasterLayoutModule } from './master-layout/master-layout.module';
 import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from 'ngx-toastr';
@@ -18,20 +17,17 @@ import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { APP_SERVICE_CONFIG, APP_CONFIG } from './shared/app-config/app-config.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { ApplicantManagementModule } from './applicant-management/applicant-management.module';
 @NgModule({
   declarations: [
     AppComponent,
     LoaderComponent,
-  
-    //ApplicantDashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     UserManagementModule,
-    MasterLayoutModule,
+    ApplicantManagementModule ,
     BrowserAnimationsModule, // required animations module
     AttendanceRegisterModule,
     ToastrModule.forRoot({

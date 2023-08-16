@@ -4,18 +4,21 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { AttendanceService } from 'src/app/attendance-register/services/attendance.service';
 import { Roles } from 'src/app/shared/global/roles';
 import {
+  ApplicantProfile,
+  ApplicationProgress,
   AttendanceRegister,
   Dashboard,
   GoalManagement,
   IKMManagement,
   LeaveManagement,
   UserManagement,
-  Applicant
+ 
 } from 'src/app/shared/global/routing.management';
 import { EnrolComponent } from 'src/app/user-management/enrol/enrol.component';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 import { UserService } from 'src/app/user-management/services/user.service';
 import { NavItem } from '../models/nav-item';
+
 
 @Component({
   selector: 'app-side-nav',
@@ -90,7 +93,7 @@ export class SideNavComponent implements OnInit {
           GoalManagement,
         ];
         case Roles.Applicant:
-          return [Applicant]
+          return [Dashboard,ApplicantProfile, ApplicationProgress,IKMManagement,]
       default:
         return [];
     }

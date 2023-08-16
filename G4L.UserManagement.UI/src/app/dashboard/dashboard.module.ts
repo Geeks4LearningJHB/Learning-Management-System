@@ -6,6 +6,7 @@ import { MiniTableComponent } from './mini-table/mini-table.component';
 import { TrainerDashboardComponent } from './views/trainer-dashboard/trainer-dashboard.component';
 import { TraineeDashboardComponent } from './views/trainee-dashboard/trainee-dashboard.component';
 import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard.component';
+import { ApplicantDashboardComponent } from './views/applicant-dashboard/applicant-dashboard.component';
 
 
 
@@ -16,7 +17,8 @@ import { AdminDashboardComponent } from './views/admin-dashboard/admin-dashboard
     MiniTableComponent,
     TrainerDashboardComponent,
     TraineeDashboardComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+   ApplicantDashboardComponent
   ],
   imports: [
     CommonModule

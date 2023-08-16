@@ -14,7 +14,10 @@ import { AttendanceRegisterComponent } from '../attendance-register/attendance-r
 import { AttendanceRegisterModule } from '../attendance-register/attendance-register.module';
 import { GoalManagementComponent } from '../goal-management/goal-management.component';
 import { GoalManagementModule } from '../goal-management/goal-management.module';
-
+import { ApplicantManagementModule } from '../applicant-management/applicant-management.module';
+import { ApplicantProfileDashboardComponent } from '../applicant-management/applicant-profile-dashboard/applicant-profile-dashboard.component';
+import { ApplicantionProgressComponent } from '../applicant-management/applicantion-progress/applicantion-progress.component';
+import { ApplicantAttachmentsComponent } from '../applicant-management/applicant-attachments/applicant-attachments.component';
 
 const routes: Routes = [
   {
@@ -45,7 +48,10 @@ const routes: Routes = [
       {
         path: 'goal-management',
         component: GoalManagementComponent,
-      }
+      },
+      {path: 'profile', component:ApplicantProfileDashboardComponent},
+      {path: 'application-progress', component:ApplicantionProgressComponent},
+      {path: 'applicant-attachments', component:ApplicantAttachmentsComponent},
     ],
   },
 ];
@@ -61,7 +67,6 @@ const routes: Routes = [
     IkmManagementModule,
     AttendanceRegisterModule,
     GoalManagementModule,
-
   ],
 })
 export class MasterLayoutRoutingModule {

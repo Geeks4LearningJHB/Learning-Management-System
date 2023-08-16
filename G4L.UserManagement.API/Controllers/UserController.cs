@@ -88,5 +88,15 @@ namespace G4L.UserManagement.API.Controllers
                 return BadRequest("User Not Found");
             return Ok(user);
         }
+
+        [AllowAnonymous]
+        [HttpPost("signup")]
+        public async Task<IActionResult> PostAsync([FromBody] AddUserRequest user)
+        {
+
+            await _userService.SignupUserAsync(user);
+
+            return Ok(new { Message = "User registered successfully." });
+        }
     }
 }

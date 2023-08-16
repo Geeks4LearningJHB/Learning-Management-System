@@ -2,22 +2,22 @@ import { LoginComponent } from './user-management/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './user-management/login/guards/login.guard';
-
+import { SignupComponent } from './user-management/signup/signup.component';
+import { ApplicantRoutingRoutingModule } from './applicant-management/applicant-routing/applicant-routing-routing.module';
 
 const routes: Routes = [
-
   {
     path: 'login',
     component: LoginComponent,
   },
+  { path: 'signup', component: SignupComponent },
   {
-    path: 'learnership-application',
+    path: 'applicant-routing-',
     loadChildren: () =>
-      import('./user-management/learnership-application/learnership-application.module').then(
-        (m) => m.LearnershipApplicationModule
+      import('./applicant-management/applicant-routing/applicant-routing-routing.module').then(
+        (m) => m.ApplicantRoutingRoutingModule
       ),
   },
-
   {
     path: '',
     loadChildren: () =>
@@ -26,6 +26,7 @@ const routes: Routes = [
       ),
     canActivate: [LoginGuard],
   },
+  
   {
     path: '**',
     redirectTo: '',
@@ -37,4 +38,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
