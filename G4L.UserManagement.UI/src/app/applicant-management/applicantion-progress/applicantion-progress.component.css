@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 .progress-bar-inner {
-  width: 100%;
+  width: 90%;
   height: 50px;
-  margin-right: 100px;
   background-color: #092F4F;
   border-radius: 1rem;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   margin-top: 0;
+  text-align: center;
+  margin-left: 40px;
 }
 
 .progress-bar-text {
@@ -17,6 +18,7 @@
   margin-top: 10px;
   font-family: 'Poppins', sans-serif;
   text-transform: capitalize;
+  
 
 }
 
@@ -34,7 +36,7 @@ h3 {
   margin: 0px 0 20px;
   font-weight: 500;
   margin-top: 10px;
-  margin-left: 120px;
+  margin-left: 100px;
   font-family: 'Poppins', sans-serif;
   text-transform: capitalize;
   white-space: nowrap;
@@ -52,7 +54,7 @@ h3 {
   border-radius: 20px !important;
   box-shadow: none;
   border: 1px solid black;
-  margin-left: 120px;
+  margin-left: 100px;
   width: 600px;
 }
 
