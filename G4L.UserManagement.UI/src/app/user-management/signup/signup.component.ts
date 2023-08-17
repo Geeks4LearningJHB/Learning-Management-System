@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -6,20 +6,20 @@ import {
   FormGroup,
   ValidatorFn,
   Validators,
-} from "@angular/forms";
+} from '@angular/forms';
 
-import { UserService } from "../services/user.service";
+import { UserService } from '../services/user.service';
 
-import { GoalModalHandlerService } from "src/app/goal-management/services/modals/goal-modal-handler.service";
-import { SignupModalComponent } from "../signup-modal/signup-modal.component";
+import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
+import { SignupModalComponent } from '../signup-modal/signup-modal.component';
 
-import { ToastrService } from "ngx-toastr";
-import { ServerErrorCodes } from "src/app/shared/global/server-error-codes";
+import { ToastrService } from 'ngx-toastr';
+import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 
 @Component({
-  selector: "app-signup",
-  templateUrl: "./signup.component.html",
-  styleUrls: ["./signup.component.css"],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
@@ -31,7 +31,6 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private toastr: ToastrService,
     private modalHandler: GoalModalHandlerService<any>
   ) {}
 
@@ -41,15 +40,15 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = this.formBuilder.group({
-      Name: ["", [Validators.required, this.noSpecialCharacters]],
-      Surname: ["", [Validators.required, this.noSpecialCharacters]],
-      Email: ["", [Validators.required, Validators.email]],
-      confirmEmail: ["", [Validators.required, Validators.email]],
+      Name: ['', [Validators.required, this.noSpecialCharacters]],
+      Surname: ['', [Validators.required, this.noSpecialCharacters]],
+      Email: ['', [Validators.required, Validators.email]],
+      confirmEmail: ['', [Validators.required, Validators.email]],
       Password: [
-        "",
+        '',
         [Validators.required, Validators.minLength(8), this.passwordValidator],
       ],
-      confirmPassword: ["", Validators.required],
+      confirmPassword: ['', Validators.required],
     });
   }
 
@@ -64,15 +63,22 @@ export class SignupComponent implements OnInit {
   isTouched(controlName: string): boolean {
     return this.signupForm.controls[controlName].touched;
   }
+
+// Clear the server error message
+  clearServerError() {
+    this.serverErrorMessage = ''; 
+  }
+
   noSpecialCharacters(
     control: AbstractControl
   ): { [key: string]: boolean } | null {
     const pattern = /^[a-zA-Z ]*$/;
     return pattern.test(control.value) ? null : { specialCharacters: true };
   }
+
   areEmailsMatching(): boolean {
-    const email = this.signupForm.get("Email")?.value;
-    const confirmEmail = this.signupForm.get("confirmEmail")?.value;
+    const email = this.signupForm.get('Email')?.value;
+    const confirmEmail = this.signupForm.get('confirmEmail')?.value;
     return email === confirmEmail;
   }
 
@@ -80,10 +86,21 @@ export class SignupComponent implements OnInit {
     const pattern = /^(?=.*[!@#$%^&*])(?=.*[A-Z])/;
     return pattern.test(control.value) ? null : { passwordInvalid: true };
   }
+  
   arePasswordsMatching(): boolean {
-    const password = this.signupForm.get("Password")?.value;
-    const confirmPassword = this.signupForm.get("confirmPassword")?.value;
+    const password = this.signupForm.get('Password')?.value;
+    const confirmPassword = this.signupForm.get('confirmPassword')?.value;
     return password === confirmPassword;
+  }
+
+  serverErrorHandling(error: any) {
+    if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
+      this.signupForm.controls['Email'].setErrors({
+        duplicateEmailError: true,
+      });
+      this.serverErrorMessage = error.message;
+    }
+    this.signupForm.updateValueAndValidity();
   }
 
   signupUser(): void {
@@ -119,15 +136,5 @@ export class SignupComponent implements OnInit {
         width: 50,
       });
     }
-  }
-
-  serverErrorHandling(error: any) {
-    if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
-      this.signupForm.controls["Email"].setErrors({
-        duplicateEmailError: true,
-      });
-      this.serverErrorMessage = error.message;
-    }
-    this.signupForm.updateValueAndValidity();
   }
 }

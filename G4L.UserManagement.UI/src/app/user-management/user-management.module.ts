@@ -13,6 +13,8 @@ import { RegisterComponent } from './register/register.component';
 import { UserManagementComponent } from './user-management.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupModalComponent } from './signup-modal/signup-modal.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ForgotPasswordModalComponent } from './forgot-password-modal/forgot-password-modal.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { SignupModalComponent } from './signup-modal/signup-modal.component';
     IconsComponent,
     FooterComponent,
     SignupComponent,
-    SignupModalComponent
+    SignupModalComponent,
+    ForgotPasswordComponent,
+    ForgotPasswordModalComponent,
   
     
   

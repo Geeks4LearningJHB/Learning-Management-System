@@ -89,7 +89,7 @@
           formControlName="Email"
           [ngClass]="{
             'red-border': isTouched('Email') && !isValid('Email')
-          }"
+          }" (input)="clearServerError()"
         />
         <div
           class="validation-error-text"
