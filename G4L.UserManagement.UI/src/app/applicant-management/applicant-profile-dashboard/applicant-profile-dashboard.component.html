@@ -4,7 +4,7 @@
     <div class="content-container">
       <span>1</span>
       <div class="menu-btn-icons">
-        <button>
+        <button (click)="openPersonalInformationModal()">
           <i class="fa-regular fa-circle-user fa-xl"></i>
           <h4>PERSONAL INFORMATION</h4>
         </button>
@@ -16,7 +16,7 @@
     <div class="content-container">
       <span class="span-two">2</span>
       <div class="menu-btn-icons">
-        <button>
+        <button (click)="openEducationModal()">
           <i class="fa-solid fa-user-graduate fa-xl" ></i>
   
           <h4>EDUCATION</h4>
@@ -29,14 +29,13 @@
     <div class="content-container">
       <span class="span-three">3</span>
       <div class="menu-btn-icons">
-        <button>
+        <button (click)="openAttachmentsModal()">
           <i class="fa-solid fa-paperclip fa-xl"></i>
           <h4>ATTACHMENTS</h4>
-        </button>
+        </button >
         <div class="menu-btn-icons">
           <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
         </div>
-        
       </div>
       <button class="submit" (click)=" openSubmitModal()">Submit application</button>
     </div>

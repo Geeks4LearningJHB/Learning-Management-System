@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
+import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 
 @Component({
   selector: 'app-applicant-education',
@@ -10,30 +12,49 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 export class ApplicantEducationComponent implements OnInit {
 
   educationForm!: FormGroup;
-  constructor(private route: Router, private formBuilder: FormBuilder) { }
+  constructor(private route: Router, private formBuilder: FormBuilder, 
+              public modalRef: MdbModalRef<any>) { }
+
+              getFormControl(control: String): AbstractControl {
+                return this.educationForm.controls[`${control}`];
+              }
+
 
   ngOnInit(): void {
     this.educationForm = new FormGroup({
-      Firstname: new FormControl(null, [Validators.required, Validators.required]),
-      Surname: new FormControl(null, [Validators.required]),
-      IdNumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{13}$')]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      gender: new FormControl('', [Validators.required]),
-      race: new FormControl('', [Validators.required])
+      MathSubject: new FormControl('',[Validators.required]),
+      MathMark: new FormControl('',[Validators.required]),
+      EnglishMark: new FormControl('',[Validators.required]),
+      Qualifications: new FormControl('',[Validators.required]),
+      FieldOfStudy: new FormControl('', [Validators.required]),
+      CourseOfInterest: new FormControl('',[Validators.required]),
     })
-
-
-
-  }
-  routeToPersonalInformation(){
-    this.route.navigateByUrl('personal-details')
-  }
-  routeToAttachments() {
-    this.route.navigateByUrl('applicant-attachments')
-
   }
 
+
+  isFormValid(): void {
+    if (this.educationForm.valid) {
+      console.log('Form submitted. Data:', this.educationForm.value);
+      this.modalRef.close();
+    } else {
+      // Show an alert when the form is not valid
+      alert('Form is not valid. Please fill in all required fields correctly.');
+    }
+
+  }
+
+  onSaveAndCloseClick():void{
+    this.modalRef.close();
+  }
+
+  
 }
+
+
+
+
+
+
 
 /* VALIDATORS FOR PERSONAL PAGE
 

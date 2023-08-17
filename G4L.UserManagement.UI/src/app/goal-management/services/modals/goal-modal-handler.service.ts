@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MdbModalConfig, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { MdbModalParameterSettings } from '../interfaces/mdb-modal.interface';
+import { auto } from '@popperjs/core';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class GoalModalHandlerService<T> {
   private getMdbModalConfig(
     modalData: any,
     ignoreBackdropClick: boolean,
-    modalWidth: number = 50
+    modalWidth: number = 75
   ): MdbModalConfig {
     return {
       animation: true,

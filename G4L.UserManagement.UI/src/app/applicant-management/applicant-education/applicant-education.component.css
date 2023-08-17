@@ -1,422 +1,427 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
 .formcontrol {
-    margin-bottom: 1rem;
-    /*padding-right: 70pt;*/
-    height: 100vh;
-    
-  }
-  
-  #Disability{
-    height: 100pt;
-    width: 365pt;
-  }
-  
-  .form-container {
-    /* background-color: aqua; */
-    /* padding: 6rem !important; */
-   
-    height: 80vh;
-   
+  margin-bottom: 1rem;
+  /*padding-right: 70pt;*/
+  height: 100vh;
 
-  }
+
+}
+
+#Disability {
+  height: 100pt;
+  width: 365pt;
+}
+
+.form-container {
+  /* width: 80%; */
+  /* height: 78vh; */
+  /* margin-left: 20px; */
+  height: auto;
+  font-size: 14px;
+}
+
+.d-block {
+  position: relative;
+  font-family: 'Inter';
+  color: black;
+  font-size: 9pt;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  word-wrap: break-word;
+  margin: 1rem auto;
+
+}
+
+
+
+.dropdown_gender {
+  width: 70pt;
+  padding: 1pt;
+  border: 1pt solid #ccc;
+  border-radius: 5px;
   
-  .d-block{
-    position: relative;
-    font-family: 'Inter';
-    color: black;
-    font-size: 9pt;
-    font-family: Inter;
-    font-weight: 600;
-    word-wrap: break-word;
-    margin: 1rem auto;
-  }
+}
+
+.btn {
+  padding-right: 7rem;
+}
+
+.math-subjects {
+  width: 90pt;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.math-subjects-box {
+  margin-left: 10px;
+  width: 200px;
   
-  .svg-container {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    /*padding-top: 90pt;*/
-  }
-  
-  .dropdown_gender {
-    width: 70pt;
-    padding: 1pt;
-    border: 1pt solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .btn{
-    padding-right: 7rem;
-  }
-  
-  .applicant-name {
-    position: absolute;
-    top: 22px; /* Adjust the top position as needed */
-    right: 20px; /* Adjust the right position as needed */
-    background-color: #f9f9f9;
-    padding: 10px;
-  }
-  
-  .applicant-name-profile-icon{
-    position: absolute;
-    top: 25px; /* Adjust the top position as needed */
-    right: 160px; /* Adjust the right position as needed */
-    background-color: #f9f9f9;
-    padding: 10px;
-    background-color: transparent;
-  }
-  
-  .applicant-name-profile-outercircle-icon{
-    position: absolute;
-    top: 20px; /* Adjust the top position as needed */
-    right: 155px; /* Adjust the right position as needed */
-    background-color: #f9f9f9;
-    padding: 10px;
-    background-color: transparent;
-  }
-  
-  .nb2-middle-icon{
-    /* position: absolute;
+
+}
+
+
+.math-labels {
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.eng-labels {
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.nb2-middle-icon {
+  /* position: absolute;
      top: 20px; /* Adjust the top position as needed 
     margin-left: 150px; */
-    margin-top: 15pt;
-    margin-right: 80pt;
-  }
+  margin-top: 12pt;
+  margin-right: 105pt;
 
-  .education-title-middle{
-    margin-top: 23pt;
-    height: 27pt;
-    justify-content: center;
-    margin-left: -70pt;
+}
 
-  }
-  
-  .education-head-icon{
-    /* position: absolute;
-     top: 20px; /* Adjust the top position as needed 
-    margin-left: 150px; */
-    margin-bottom: 20px;
-    margin-right: -31pt;
-    margin-top: 1pt;
-  }
+.education-title-middle {
+  margin-top: 23pt;
+  height: 27pt;
+  justify-content: center;
+  margin-left: -100pt;
+  font-family: 'Poppins', sans-serif;
 
-  .education-body-icon{
-    position: relative;
-    margin-top: 9pt;
-    margin-bottom: 10px;
-    margin-right: 29px;
-    /* width:  */
-  }
+}
 
-  .pd-middle-icon{
+.content {
+  margin-left: 80px;
+  justify-content: center;
+  /* background-color: aqua; */
+  width: 600px;
+}
+
+.short-line {
+  width: 550px;
+  height: 2px;
+  background-color: #000;
+  border: none;
+  margin-left: 8pt;
+  margin-top: 0px;
+
+}
+
+.save-close-btn {
+  background-color: #344767;
+  color: #fff;
+  width: 119pt;
+  height: 20pt;
+  padding-bottom: 30px;
+}
+
+.done-btn {
+  background-color: #344767;
+  color: #fff;
+  width: 74pt;
+  height: 20pt;
+  padding-bottom: 30px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 420pt;
+  /*haha*/
+  /* margin-top: 25px; */
+  height: 20pt;
+  /* margin-top: 20pt; */
+  margin-left: 60px;
+}
+
+.pd-middle-icon {
   margin-bottom: 0pt;
-  }
-  
-  .education-heading{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    
-  }
-  
-  .side-nav{
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 270px;
-      height: 100%;
-      color: beige;
-      background-color: transparent;
-  }
-  
-  .logo{
-    background-color: transparent;
-  }
-  
-  .learnership-application{
-    position: fixed;
-    margin-left: pt;
-    margin-top: 17pt;
-    height: 40px;
-    width: 123px;
-    font-family: Inter;
-  }
-
-  .personal-information-icon{
-    position: fixed;
-    margin-left: 29pt;
-    margin-top: 8pt;
-    height: 55px;
-    width: 90px;
-  }
-
-  .personal-information-label{
-    position: fixed;
-    margin-left: 5pt;
-    margin-top: 53pt;
-    height: 40px;
-    width: 160px;
-  }
-
-.nb1-icon{
-    position: fixed;
-    margin-left: -17pt;
-    padding-left: pt;
-    margin-top: 54pt;
-    height: 20px;
-    width: 30px;
 }
 
-.arrow-down{
-  position: fixed;
-    margin-left: 38pt;
-    margin-top: 92pt;
-    height: 40px;
-    width: 60px;
-}
+.education-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
-.education-head-nav-icon{
-  position: fixed;
-    margin-left: 44pt;
-    margin-top: 145pt;
-    height: 40px;
-    width:46px;
-    /* font-size: 60pt; */
-}
-
-.education-body-nav-icon{
-  position: fixed;
-    margin-left: 38pt;
-    margin-top: 155pt;
-    height: 40px;
-    width: 60px;
-}
-
-.education-nav-label{
-  position: fixed;
-    margin-left: 33pt;
-    margin-top: 203pt;
-    height: 40px;
-    width: 80px;
-}
-
-.nb2-icon{
-  position: fixed;
-    margin-left: 8pt;
-    padding-left: pt;
-    margin-top: 205pt;
-    height: 20px;
-    width: 30px;
-}
-
-.arrow-down2{
-  position: fixed;
-    margin-left: 38pt;
-    margin-top: 240pt;
-    height: 40px;
-    width: 60px;
-}
-  
-.attachments-icon-nav{
-  position: fixed;
-    margin-left: 30pt;
-    margin-top: 294pt;
-    height: 50px;
-    width: 80px;
 }
 
 
 
-.attachments-nav-label{
+
+.nb2-icon {
   position: fixed;
-  margin-left: 33pt;
-  margin-top: 350pt;
-  height: 40px;
+  margin-left: 8pt;
+  padding-left: pt;
+  margin-top: 205pt;
+  height: 20px;
+  width: 30px;
+}
+
+
+.attachments-icon-nav {
+  position: fixed;
+  margin-left: 30pt;
+  margin-top: 294pt;
+  height: 50px;
   width: 80px;
-
 }
 
-.nb3-icon{
-  position: fixed;
-    margin-left: 8pt;
-    padding-left: pt;
-    margin-top: 352pt;
-    height: 20px;
-    width: 30px;
-
-}
- /* Styles for the buttons in the same row */
 .button-row {
-    display: flex; /* Use flexbox to display buttons in a row */
-    justify-content: space-between; /* Distribute buttons equally in the row */
+  display: flex;
+  /* Use flexbox to display buttons in a row */
+  justify-content: space-between;
+  /* Distribute buttons equally in the row */
+  height: 30pt;
+  padding-top: 10px;
+  margin-bottom: 10px;
+
 }
 
-.postMatricQualification{
+.postMatricQualification {
   font-size: large;
   font-weight: 500;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Styles for the arrow buttons */
-.arrow-button {
-    padding: 10px 20px;
-    background-color: #f0f0f0;
-    border: none;
+.dropdown-container {
+  font-family: 'Poppins', sans-serif;
+  
+}
+
+.fieldStudy-label {
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.field-label {
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.course-label {
+  font-family: 'Poppins', sans-serif;
+
 }
 
 /* Styles for the Save and Close button with icon */
 .save-close-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    display: flex;
-    align-items: center;
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
 }
 
 .save-close-button {
-    margin-left: 5px; /* Add space between the text and the icon */
+  margin-left: 5px;
+  /* Add space between the text and the icon */
 }
 
 /* Styles for the main container */
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* Styles for the heading */
-  h3, h4 {
-    margin: 10px 0;
-  }
-  
-  /* Styles for radio buttons with labels */
-  .radio-group {
-    display: flex;
-    align-items: center;
-  }
-  
-  .radio-group-marks {
-    margin-right: 120px;
-    /* justify-content: space-between; */
-  }
-
-  .math-subjects{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 450px;
-  }
-  
-  .qualifications{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 500px;
-  }
-
-  .postgrad-radio{
-    margin-right: 17px;
-
-  }
-
-.radio-grp{
-  display: flex;
-  flex-direction: row;
-    justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
 
 }
 
-  /* Styles for select dropdowns */
-  select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    height: 30pt;
-    
-  }
+/* Styles for the heading */
+h3,
+h4 {
+  margin: 10px 0;
+}
 
-  #fieldOfStudy{
-    align-content: center;
-    
-  }
-  
-  /* Styles for checkboxes */
-  input[type="checkbox"] {
-    margin-right: 5px;
-  }
-  
-  /* Styles for buttons in the same row */
-  .button-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-  }
-  
-  /* Styles for individual buttons */
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .fa-solid fa-floppy-disk {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  /* Optional: Add spacing between the icon and text */
-  .fa-solid fa-floppy-disk {
-    margin-right: 5px;
-  }
+/* Styles for radio buttons with labels */
+.radio-group {
+  display: flex;
+  /* align-items: center; */
+}
 
-  
-  .save-close-button {
-    display: flex;
-    align-items: center;
-  }
-  
-  .save-close-button .icon {
-    margin-left: 5px;
-    border-radius: 20px;
-  }
-  
-  
-  .mathmarks{
-    width: 125pt;
-    margin-left: 113px;
-    margin-bottom: 10px;
-  }
 
-  .englishmarks{
-    width: 125pt;
-    margin-left: 100px;
-  }
+.subject-label {
+  margin-top: 10px;
+  font-family: 'Poppins', sans-serif;
 
-  .fieldOfStudy{
-    width: 140pt;
-    margin-left: 30pt;
-  }
+}
 
-  .testing-radio{
-    margin-left: 30pt;
-  }
+.matric-label {
+  font-family: 'Poppins', sans-serif;
 
-  .development-radio{
-    margin-left: 30pt;
-  }
-  
- .business-radio{
-    margin-left: 30pt;
-  }
+}
 
-  
+.math-subjects {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.qualifications {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 500px;
+  font-size: medium;
+}
+
+.postgrad-radio {
+  margin-right: 17px;
+
+}
+
+.radio-grp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+
+
+
+/* Styles for select dropdowns */
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  height: 30pt;
+
+}
+
+#fieldOfStudy {
+  align-content: center;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+/* Styles for checkboxes */
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Styles for buttons in the same row */
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+/* Styles for individual buttons */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.fa-solid fa-floppy-disk {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Optional: Add spacing between the icon and text */
+.fa-solid fa-floppy-disk {
+  margin-right: 5px;
+}
+
+
+.save-close-button {
+  display: flex;
+  align-items: center;
+}
+
+.save-close-button .icon {
+  margin-left: 5px;
+  border-radius: 20px;
+}
+
+.math-lit-rad {
+  padding-right: 5px;
+
+}
+
+.mathmarks {
+  width: 130pt;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
+.mathlit-label {
+  padding-left: 5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.mathPure-label {
+  padding-left: 5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.englishmarks {
+  width: 130pt;
+  margin-left: 18px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.fieldOfStudy {
+  width: 140pt;
+  margin-left: 10pt;
+  font-family: 'Poppins', sans-serif;
+}
+
+.course-label-items {
+  width: 189pt;
+  margin-left: 18px;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.testing-radio {
+  margin-left: 20pt;
+  font-family: 'Poppins', sans-serif;
+}
+
+.development-radio {
+  margin-left: 20pt;
+  font-family: 'Poppins', sans-serif;
+}
+
+.business-radio {
+  margin-left: 20pt;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.systemsDevelopment-label {
+  padding-left: 5px;
+
+}
+
+
+.softwareTesting-label {
+  padding-left: 5px;
+
+}
+
+.businessAnalysis-label {
+  padding-left: 5px;
+
+}
+
+.val {
+  font-family: 'Poppins', sans-serif;
+  ;
+
+
+}
