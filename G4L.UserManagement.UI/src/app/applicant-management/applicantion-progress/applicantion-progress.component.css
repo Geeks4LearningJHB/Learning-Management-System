@@ -1,14 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
+.card{
+  margin-left: 60px;
+  width: 72vw;
+}
+.card-body{
+  margin: 0;
+  padding: 0;
+  border-radius: 20px;
+}
 .progress-bar-inner {
-  width: 90%;
+  width: 87%;
+
   height: 50px;
   background-color: #092F4F;
   border-radius: 1rem;
   margin-bottom: 40px;
   margin-top: 0;
   text-align: center;
-  margin-left: 40px;
+  margin-left: 79px;
 }
 
 .progress-bar-text {
@@ -22,20 +32,23 @@
 
 }
 
-body {
-  margin: 50px 0 !important;
-}
 
 h3 {
   margin: 0;
 }
-
+.container{
+  padding-top: 10px;
+  height: 72vh;
+  width: 71vw;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
 .progress-title {
   font-size: 16px;
   color: #011627;
   margin: 0px 0 20px;
   font-weight: 500;
-  margin-top: 10px;
+  /* margin-top: 5px; */
   margin-left: 100px;
   font-family: 'Poppins', sans-serif;
   text-transform: capitalize;
@@ -48,9 +61,9 @@ h3 {
 .progress {
   position: relative;
   background-color: #fff;
-  height: 25px;
+  height: 20px;
   overflow: visible !important;
-  margin-bottom: 39px;
+  margin-bottom: 30px;
   border-radius: 20px !important;
   box-shadow: none;
   border: 1px solid black;
