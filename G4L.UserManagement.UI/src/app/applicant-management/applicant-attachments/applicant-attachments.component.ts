@@ -40,12 +40,14 @@ export class ApplicantAttachmentsComponent {
     this.sizeError = undefined;
     this.formatError = undefined;
   }
+  
 
   uploadFiles() {
     if (this.selectedFiles.length === 0) {
       this.message = 'Please select one or more files to upload.';
       return;
     }
+  
 
     const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
     for (const file of this.selectedFiles) {
@@ -68,6 +70,7 @@ export class ApplicantAttachmentsComponent {
 
     this.message = 'Files uploaded successfully.';
   }
+  
 
   getFileSize(size: number): string {
     const fileSizeInKB = Math.round(size / 1024);

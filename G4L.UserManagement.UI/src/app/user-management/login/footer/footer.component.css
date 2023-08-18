@@ -3,9 +3,11 @@ footer {
   display: flex;
   align-items: center;
   position: absolute;
+  height: 60px;
   color: rgb(255, 255, 255);
   text-align: center;
   bottom: 0;
+  font-size: 14px;
   width: 100%;
 }
 
