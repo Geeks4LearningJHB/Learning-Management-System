@@ -1,12 +1,11 @@
 .application-success-message-container {
   position: relative;
-  /* height: 80vh; */
   display: flex;
   justify-content: center;
   align-items: center; 
   place-items: center; 
-  border-top: 1rem solid #3F51B5;
-  border-bottom: 1rem solid #3F51B5;
+  border-top: 1rem solid #092f4f;
+  border-bottom: 1rem solid #092f4f;
   margin-top: 0;
   border-radius: 5px; 
 }
@@ -27,7 +26,7 @@
 
 .application-success-message-container .app-success-wrapper .success-done-btn button{
   /* button */
-  background-color: #3F51B5;
+  background-color: #092f4f;
   padding: .5rem 2rem;
   margin-bottom: 20px;
   border: 0;
@@ -66,7 +65,7 @@
   font-size: 30pt;
   font-family: var(--font-inter);
   margin-top: .5rem;
-  color: #0BDF20;
+  color: #4b6172;
 }
 
 .application-success-message-container .app-success-wrapper .success-message-content .success-message-header {
@@ -77,8 +76,8 @@
 
 .application-success-message-container .app-success-wrapper .success-message-content .congratulations-on-your-container {
   margin-top: 1rem; 
-  background-color: #DAF7A6;
-  border: 2px solid #0BDF20;
+  background-color: rgba(164, 205, 213, 0.347);
+  border: 1px solid rgb(222, 216, 216);
   border-radius: .9rem;
   padding: 10px; 
   margin-left: 10px; 
