@@ -6,13 +6,40 @@
   justify-content: center;
   align-items: center;
 }
-.horizontal-line {
-  color: black;
-  background-color: black;
-  height: 2px;
-  width: 80%;
-  margin-left: 10%;
+
+.nb3-middle-icon{
+  margin-bottom: 10px;
+  margin-right: 8px;
 }
+
+.attachments-heading{
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.horizontal-line {
+  border-radius: 5px;
+	background: #D3D3D3;
+  height: 2px;
+  width: 85%;
+  margin-left: 7%;
+
+/* height: 2px;
+  background-color: #000;
+  border: none; */
+
+
+  /* content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 2px;
+	width: 550px;
+	border-radius: 5px;
+	background: #D3D3D3; */
+
+}
+
 .main{
   /* display: flex; */
   /* align-items: center; */
@@ -36,9 +63,9 @@ justify-content: space-around;
   background-color: #f9f9f9;
   text-align: center;
   border: 2.5px dashed #0a0a0a;
-  width: 368px;
+  width: 350px;
   height: 200px;
-  margin-left: 10%;
+  margin-left: 8%;
 }
 
 
@@ -49,9 +76,9 @@ justify-content: space-around;
   background-color: #f9f9f9;
   text-align: center;
   border: 2.5px dashed #0a0a0a;
-  width: 368px;
+  width: 350px;
   height: 200px;
-  margin-left: 10%;
+  margin-left: 8%;
 }
 
 .file-upload3 {
@@ -61,9 +88,9 @@ justify-content: space-around;
   background-color: #f9f9f9;
   text-align: center;
   border: 2.5px dashed #0a0a0a;
-  width: 368px;
+  width: 350px;
   height: 200px;
-  margin-left: 10%;
+  margin-left: 8%;
 }
 
 .file-upload4 {
@@ -73,9 +100,9 @@ justify-content: space-around;
   background-color: #f9f9f9;
   text-align: center;
   border: 2.5px dashed #0a0a0a;
-  width: 368px;
+  width: 350px;
   height: 200px;
-  margin-left: 10%;
+  margin-left: 8%;
 }
 
 
@@ -212,7 +239,7 @@ i {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  background-color: #092F4F;
+  background-color: #344767;
   border-radius: 5px;
   color: #fff;
   font-family: 'Poppins', sans-serif;
@@ -252,13 +279,32 @@ flex-direction: row;
 align-items: center;
 }
 
+
+/* display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 25pt;
+	width: 23%;
+	border-radius: 5px;
+	border: none;
+	color: #fff;
+	font-family: Roboto, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	background: #344767; */
+
+
 .save-button {
   border-radius: 5px;
-  font-size: large;
+  font-size: medium;
   margin: 0 0 20px 106px ;
   color: #fff;
   font-family: 'Poppins', sans-serif;
-  background-color: #092F4F;
+  background-color: #344767;
   width: 210px;
   text-align: center;
   cursor: pointer;
@@ -266,12 +312,12 @@ align-items: center;
 
 .done-button {
   border-radius: 5px;
-  font-size: large;
+  font-size: medium;
   margin: 0 106px 20px 0;
   width: 120px;
   color: #fff;
   font-family: 'Poppins', sans-serif;
-  background-color: #092F4F;
+  background-color: #344767;
   text-align: center;
   cursor: pointer;
 }
