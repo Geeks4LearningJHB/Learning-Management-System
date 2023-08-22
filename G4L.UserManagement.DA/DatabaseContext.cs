@@ -18,6 +18,7 @@ namespace G4L.UserManagement.DA
 
         // SQL Tables/Entity
         public DbSet<User> Users { get; set; }
+        public DbSet <Education> Educations { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<Approver> Approvers { get; set; }
