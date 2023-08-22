@@ -167,7 +167,7 @@
           </div>
           <div *ngIf="getFormControl('Password').hasError('minlength')">
             <i class="fa-solid fa-exclamation-circle"></i> Password must be at
-            least 6 characters long.
+            least 8 to 128 characters long.
           </div>
           <div *ngIf="getFormControl('Password').hasError('passwordInvalid')">
             <i class="fa-solid fa-exclamation-circle"></i> Password must contain

@@ -54,7 +54,8 @@ namespace G4L.UserManagement.API.Controllers
             return Ok();
         }
 
-        [Authorize(Role.Super_Admin, Role.Admin)]
+        
+        [Authorize(Role.Super_Admin, Role.Admin, Role.Applicant)]
         [HttpPut]
         public async Task<IActionResult> PutAsync([FromBody] UpdateRequest user)
         {

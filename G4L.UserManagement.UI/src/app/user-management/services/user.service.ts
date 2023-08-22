@@ -23,13 +23,17 @@ export class UserService {
   getUserById(id: any): Observable<any>  {
     return this.http.get(`${this.config.apiUrl}/user/${id}`);
   }
+  addUser(body: any): Observable<any>  {
+    return this.http.post(`${this.config.apiUrl}/user`, body);
+  }
   signupUser(value: any): Observable<any>  {
     return this.http.post(`${this.config.apiUrl}/user/signup`, value);
   }
 
-  addUser(body: any): Observable<any>  {
-    return this.http.post(`${this.config.apiUrl}/user`, body);
+  onPersonalDetailsSubmit(body: any): Observable<any> {
+    return this.http.put(`${this.config.apiUrl}/user`, body);
   }
+ 
   updateUser( body: any) {
     return this.http.put(`${this.config.apiUrl}/user`, body);
   }
@@ -45,5 +49,5 @@ export class UserService {
   getUsersByRole(role: Roles) {
     return this.http.get(`${this.config.apiUrl}/user/role/${role}`);
   }
-
+ 
 }
