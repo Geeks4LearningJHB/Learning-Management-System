@@ -75,6 +75,8 @@ namespace G4L.UserManagement.API
             services.AddScoped<IGoogleCalendarAPI, GoogleCalendarAPI>();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<IEducationRepository, EducationRepository>();
             services.AddScoped<ILeaveService, LeaveService>();
             services.AddScoped<ISponsorService, SponsorService>();
             services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();

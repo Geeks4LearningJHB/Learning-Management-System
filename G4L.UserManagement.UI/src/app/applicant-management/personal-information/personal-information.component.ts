@@ -8,6 +8,8 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 import { isNil } from 'lodash';
 import { validateIdNumber } from 'src/app/shared/global/helper';
+import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
+import { UserService } from 'src/app/user-management/services/user.service';
 
 @Component({
   selector: 'app-personal-information',
@@ -17,8 +19,11 @@ import { validateIdNumber } from 'src/app/shared/global/helper';
 export class PersonalInformationComponent implements OnInit {
 
   personalDetails!: FormGroup;
+  keys = Object.keys;
 
-  constructor(private route: Router, private formBuilder: FormBuilder, public modalRef: MdbModalRef<any>) { }
+  serverErrorMessage: any;
+
+  constructor(private route: Router, private formBuilder: FormBuilder, private userService: UserService, public modalRef: MdbModalRef<any>) { }
 
   getFormControl(control: String): AbstractControl {
     return this.personalDetails.controls[`${control}`];
@@ -37,15 +42,40 @@ export class PersonalInformationComponent implements OnInit {
     });
   }
 
-  isFormValid(): void {
-    if (this.personalDetails.valid) {
-      console.log('Form submitted. Data:', this.personalDetails.value);
-      this.modalRef.close();
-    } else {
-      // Show an alert when the form is not valid
-      alert('Form is not valid. Please fill in all required fields correctly.');
+  serverErrorHandling(error: any) {
+    if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
+      this.personalDetails.controls['Email'].setErrors({
+        duplicateEmailError: true,
+      });
+      this.serverErrorMessage = error.message;
     }
+    this.personalDetails.updateValueAndValidity();
+  }
 
+  clearServerError() {
+    this.serverErrorMessage = ''; 
+  } 
+
+  onPersonalDetailsSubmit(): void {
+    if (this.personalDetails.valid) {
+    //   console.log('Form submitted. Data:', this.personalDetails.value);
+    //   this.modalRef.close();
+    // } else {
+    //   // Show an alert when the form is not valid
+    //   
+    // }
+    this.userService.onPersonalDetailsSubmit(this.personalDetails.value).subscribe(
+      (response) => {
+        if (!this.serverErrorMessage) {
+          this.modalRef.close();
+        }
+      },
+     (error) => {
+        console.log(error)
+        this.serverErrorHandling(error);
+        alert('Form is not valid. Please fill in all required fields correctly.');
+      }
+    );}
   }
 
   onSaveAndCloseClick(): void {
