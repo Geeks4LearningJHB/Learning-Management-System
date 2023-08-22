@@ -70,7 +70,7 @@ export class ApplicantAttachmentsComponent implements OnInit {
 
     if (allFilesUploadedSuccessfully) {
       // Implement the upload logic for each file based on the section
-      this.message = 'Files uploaded successfully.';
+      this.message = 'File uploaded successfully.';
     }
   }
 
