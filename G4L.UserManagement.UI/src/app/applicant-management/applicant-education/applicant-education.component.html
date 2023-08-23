@@ -111,10 +111,11 @@
                     <select class="course-label-items" id="course-interest" name="CourseOfInterest"
                         formControlName="CourseOfInterest">
                         <option disabled selected hidden>Select Course of interest</option>
-                        <option value="software-testing">Software Testing(NQF 5)</option>
-                        <option value="software-development">Systems Development(NQF 5)</option>
-                        <option value="system-support">System Support(NQF 5)</option>
-                        <option value="business-analysis">Business Analysis(NQF 6)</option>
+                        <option value="Software-testing">Software Testing(NQF 5)</option>
+                        <option value="System-support">System Support(NQF 5)</option>
+                        <option value="Java Fullstack">Java Full Stack Developer(NQF 5)</option>                      
+                        <option value="C#-Fullstack">C# Full Stack Developer(NQF 5)</option>
+                        <option value="Business-analysis">Business Analysis(NQF 6)</option>
                     </select>
                     <div *ngIf="getFormControl('CourseOfInterest').invalid && getFormControl('CourseOfInterest').touched"
                         class="val text-danger">
