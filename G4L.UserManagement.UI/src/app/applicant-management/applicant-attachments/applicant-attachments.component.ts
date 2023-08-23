@@ -9,11 +9,12 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
   styleUrls: ['./applicant-attachments.component.css']
 })
 export class ApplicantAttachmentsComponent implements OnInit {
-  sections: string[] = ['section1', 'section2', 'section3']; // Add section names here
-  selectedFiles: { [section: string]: File[] } = {}; // Use an object to store files per section
-  messages: { [section: string]: string | undefined } = {}; // Error messages per section
-  sizeErrors: { [section: string]: string | undefined } = {}; // Size error messages per section
-  formatErrors: { [section: string]: string | undefined } = {}; // Format error messages per section
+  sections: string[] = ['cv', 'id', 'vaccination', 'qualifications'];
+  selectedFiles: { [section: string]: File[] } = {};
+  selectFilesMessages: { [section: string]: string | undefined } = {};
+  uploadMessages: { [section: string]: string | undefined } = {};
+  sizeErrors: { [section: string]: string | undefined } = {};
+  formatErrors: { [section: string]: string | undefined } = {};
 
   constructor(private route: Router, private formBuilder: FormBuilder, public modalRef: MdbModalRef<any>) { }
 
@@ -31,25 +32,31 @@ export class ApplicantAttachmentsComponent implements OnInit {
     const inputElement = event.target as HTMLInputElement;
     const newFiles: FileList | null = inputElement.files;
     if (newFiles) {
-      this.selectedFiles[section] = []; // Initialize the array for the section
+      this.selectedFiles[section] = [];
       for (let i = 0; i < newFiles.length; i++) {
-        this.selectedFiles[section].push(newFiles[i]); // Add files to the section's array
+        this.selectedFiles[section].push(newFiles[i]);
       }
     }
-    this.messages[section] = undefined; // Clear messages for the section
-    this.sizeErrors[section] = undefined; // Clear size errors for the section
-    this.formatErrors[section] = undefined; // Clear format errors for the section
+    this.selectFilesMessages[section] = undefined;
+    this.uploadMessages[section] = undefined;
+    this.sizeErrors[section] = undefined;
+    this.formatErrors[section] = undefined;
   }
 
   uploadFiles(section: string) {
     const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
     let allFilesUploadedSuccessfully = true;
 
-    for (const file of this.selectedFiles[section] || []) {
+    if (!this.selectedFiles[section] || this.selectedFiles[section].length === 0) {
+      this.selectFilesMessages[section] = 'Please select one or more files to upload.';
+      return;
+    }
+
+    for (const file of this.selectedFiles[section]) {
       if (file.size > maxSize) {
         this.sizeErrors[section] = 'File size exceeds the limit of 5 MB.';
         allFilesUploadedSuccessfully = false;
-        break; // Exit loop on error
+        break;
       }
 
       const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
@@ -57,15 +64,15 @@ export class ApplicantAttachmentsComponent implements OnInit {
       if (!allowedExtensions.includes(fileExtension || '')) {
         this.formatErrors[section] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
         allFilesUploadedSuccessfully = false;
-        break; // Exit loop on error
+        break;
       }
     }
 
-    if (!allFilesUploadedSuccessfully) {
-      this.messages[section] = undefined; // Clear the general message
-    } else {
+    if (allFilesUploadedSuccessfully) {
       // Implement the upload logic for each file based on the section
-      this.messages[section] = 'File uploaded successfully.';
+      this.uploadMessages[section] = 'File uploaded successfully.';
+    } else {
+      this.uploadMessages[section] = undefined;
     }
   }
 
