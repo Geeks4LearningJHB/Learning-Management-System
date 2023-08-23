@@ -5,9 +5,11 @@ using G4L.UserManagement.BL.Models.Request;
 using G4L.UserManagement.Infrustructure.Repositories;
 using Google;
 using Microsoft.EntityFrameworkCore;
+using Nest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,10 +28,11 @@ namespace G4L.UserManagement.DA.Repositories
         }
 
 
-        public async Task CreateUserAsync(EducationRequest model)
+        public async Task PostQualifcationsAsync(EducationRequest model)
         {
-
+           
             var education = _mapper.Map<Education>(model);
+        
             _databaseContext.Educations.AddAsync(education);
             await _databaseContext.SaveChangesAsync();
       

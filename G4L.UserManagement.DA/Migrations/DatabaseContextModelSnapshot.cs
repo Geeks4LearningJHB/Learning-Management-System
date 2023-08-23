@@ -130,10 +130,10 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<string>("FieldOfStudy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Grades")
+                    b.Property<string>("MathMarks")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MathMarks")
+                    b.Property<string>("MathSubjects")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -141,9 +141,6 @@ namespace G4L.UserManagement.DA.Migrations
 
                     b.Property<string>("PostMatricQualification")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

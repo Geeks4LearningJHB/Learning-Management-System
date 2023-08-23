@@ -34,7 +34,7 @@ namespace G4L.UserManagement.DA.Services
         }
         public async Task CreateEducationAsync(EducationRequest model)
         {
-            await _educationRepository.CreateUserAsync(model);
+            await _educationRepository.PostQualifcationsAsync(model);
         }
     }
 

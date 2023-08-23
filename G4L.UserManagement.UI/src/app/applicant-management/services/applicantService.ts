@@ -17,7 +17,7 @@ export class ApplicantService {
  
   onSubmit(value: any): Observable<any> {
     console.log("Request Payload:", value);
-    return this.http.post(`${this.config.apiUrl}/applicant`, value);
+    return this.http.post(`${this.config.apiUrl}/education`, value);
   }
   
 }
