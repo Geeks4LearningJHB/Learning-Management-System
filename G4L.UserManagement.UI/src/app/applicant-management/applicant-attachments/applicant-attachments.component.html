@@ -20,14 +20,17 @@
         </label>
         <!-- Error and message divs for CV section -->
         <div class="messages">
-          <div *ngIf="message && messageSection === 'cv'" class="message">{{ message }}</div>
+          <!-- <div *ngIf="message && messageSection === 'cv'" class="message">{{ message }}</div> -->
+          <div *ngIf="messages['cv']" class="message">{{ messages['cv'] }}</div>
           
         </div>
         <div class="sizeError">
-          <div *ngIf="sizeError && errorSection === 'cv'" class="error-message">{{ sizeError }}</div>
+          <!-- <div *ngIf="sizeError && errorSection === 'cv'" class="error-message">{{ sizeError }}</div> -->
+          <div *ngIf="sizeErrors['cv']" class="error-message">{{ sizeErrors['cv'] }}</div>
         </div>
         <div class="formatError">
-          <div *ngIf="formatError && errorSection === 'cv'" class="error-message">{{ formatError }}</div>
+          <!-- <div *ngIf="formatError && errorSection === 'cv'" class="error-message">{{ formatError }}</div> -->
+          <div *ngIf="formatErrors['cv']" class="error-message">{{ formatErrors['cv'] }}</div>
         </div>
       </div>
     <!-- ID Copy Upload Section -->
@@ -42,13 +45,16 @@
       </label>
       <!-- Error and message divs for ID copy section -->
       <div class="id-messages">
-        <div *ngIf="message && messageSection === 'id'" class="message">{{ message }}</div>
+        <!-- <div *ngIf="message && messageSection === 'id'" class="message">{{ message }}</div> -->
+        <div *ngIf="messages['id']" class="message">{{ messages['id'] }}</div>
       </div>
       <div class="id-sizeError">
-        <div *ngIf="sizeError && errorSection === 'id'" class="error-message">{{ sizeError }}</div>
+        <!-- <div *ngIf="sizeError && errorSection === 'id'" class="error-message">{{ sizeError }}</div> -->
+        <div *ngIf="sizeErrors['id']" class="error-message">{{ sizeErrors['id'] }}</div>
       </div>
       <div class="id-formatError">
-        <div *ngIf="formatError && errorSection === 'id'" class="error-message">{{ formatError }}</div>
+        <!-- <div *ngIf="formatError && errorSection === 'id'" class="error-message">{{ formatError }}</div> -->
+        <div *ngIf="formatErrors['id']" class="error-message">{{ formatErrors['id'] }}</div>
       </div>
     </div>
   
@@ -64,13 +70,16 @@
       </label>
       <!-- Error and message divs for vaccination card section -->
       <div class="vc-messages">
-        <div *ngIf="message && messageSection === 'vaccination'" class="message">{{ message }}</div>
+        <!-- <div *ngIf="message && messageSection === 'vaccination'" class="message">{{ message }}</div> -->
+        <div *ngIf="messages['vaccination']" class="message">{{ messages['vaccination'] }}</div>
       </div>
       <div class="vc-sizeError">
-        <div *ngIf="sizeError && errorSection === 'vaccination'" class="error-message">{{ sizeError }}</div>
+        <!-- <div *ngIf="sizeError && errorSection === 'vaccination'" class="error-message">{{ sizeError }}</div> -->
+        <div *ngIf="sizeErrors['vaccination']" class="error-message">{{ sizeErrors['vaccination'] }}</div>
       </div>
       <div class="vc-formatError">
-        <div *ngIf="formatError && errorSection === 'vaccination'" class="error-message">{{ formatError }}</div>
+        <!-- <div *ngIf="formatError && errorSection === 'vaccination'" class="error-message">{{ formatError }}</div> -->
+        <div *ngIf="formatErrors['vaccination']" class="error-message">{{ formatErrors['vaccination'] }}</div>
       </div>
     </div>
   
@@ -86,13 +95,16 @@
       </label>
       <!-- Error and message divs for qualifications section -->
       <div class="qualifications-messages">
-        <div *ngIf="message && messageSection === 'qualifications'" class="message">{{ message }}</div>
+        <!-- <div *ngIf="message && messageSection === 'qualifications'" class="message">{{ message }}</div> -->
+        <div *ngIf="messages['qualifications']" class="message">{{ messages['qualifications'] }}</div>
       </div>
       <div class="qualifications-sizeError">
-        <div *ngIf="sizeError && errorSection === 'qualifications'" class="error-message">{{ sizeError }}</div>
+        <div *ngIf="sizeErrors['qualifications']" class="error-message">{{ sizeErrors['qualifications'] }}</div>
+        <!-- <div *ngIf="sizeError && errorSection === 'qualifications'" class="error-message">{{ sizeError }}</div> -->
       </div>
       <div class="qualifications-formatError">
-        <div *ngIf="formatError && errorSection === 'qualifications'" class="error-message">{{ formatError }}</div>
+        <div *ngIf="formatErrors['qualifications']" class="error-message">{{ formatErrors['qualification'] }}</div>
+        <!-- <div *ngIf="formatError && errorSection === 'qualifications'" class="error-message">{{ formatError }}</div> -->
       </div>
     </div>
   </div>

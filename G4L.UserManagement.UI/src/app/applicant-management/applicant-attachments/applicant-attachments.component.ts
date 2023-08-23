@@ -9,14 +9,11 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
   styleUrls: ['./applicant-attachments.component.css']
 })
 export class ApplicantAttachmentsComponent implements OnInit {
-  selectedFiles: File[] = [];
-  message: string | undefined;
-  sizeError: string | undefined;
-  formatError: string | undefined;
-
-  // Variables to track the current error section
-  messageSection: string | undefined;
-  errorSection: string | undefined;
+  sections: string[] = ['section1', 'section2', 'section3']; // Add section names here
+  selectedFiles: { [section: string]: File[] } = {}; // Use an object to store files per section
+  messages: { [section: string]: string | undefined } = {}; // Error messages per section
+  sizeErrors: { [section: string]: string | undefined } = {}; // Size error messages per section
+  formatErrors: { [section: string]: string | undefined } = {}; // Format error messages per section
 
   constructor(private route: Router, private formBuilder: FormBuilder, public modalRef: MdbModalRef<any>) { }
 
@@ -34,43 +31,41 @@ export class ApplicantAttachmentsComponent implements OnInit {
     const inputElement = event.target as HTMLInputElement;
     const newFiles: FileList | null = inputElement.files;
     if (newFiles) {
+      this.selectedFiles[section] = []; // Initialize the array for the section
       for (let i = 0; i < newFiles.length; i++) {
-        this.selectedFiles.push(newFiles[i]);
+        this.selectedFiles[section].push(newFiles[i]); // Add files to the section's array
       }
     }
-    this.messageSection = section; // Set the current section for error messages
-    this.errorSection = section; // Set the current section for error divs
-    this.clearErrorMessages();
+    this.messages[section] = undefined; // Clear messages for the section
+    this.sizeErrors[section] = undefined; // Clear size errors for the section
+    this.formatErrors[section] = undefined; // Clear format errors for the section
   }
 
   uploadFiles(section: string) {
-    if (this.selectedFiles.length === 0) {
-      this.message = 'Please select one or more files to upload.';
-      return;
-    }
-
     const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
     let allFilesUploadedSuccessfully = true;
 
-    for (const file of this.selectedFiles) {
+    for (const file of this.selectedFiles[section] || []) {
       if (file.size > maxSize) {
-        this.sizeError = 'File size exceeds the limit of 5 MB.';
+        this.sizeErrors[section] = 'File size exceeds the limit of 5 MB.';
         allFilesUploadedSuccessfully = false;
-        return;
+        break; // Exit loop on error
       }
 
       const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
       const fileExtension = file.name.split('.').pop()?.toLowerCase();
       if (!allowedExtensions.includes(fileExtension || '')) {
-        this.formatError = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
+        this.formatErrors[section] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
         allFilesUploadedSuccessfully = false;
-        return;
+        break; // Exit loop on error
       }
     }
 
-    if (allFilesUploadedSuccessfully) {
+    if (!allFilesUploadedSuccessfully) {
+      this.messages[section] = undefined; // Clear the general message
+    } else {
       // Implement the upload logic for each file based on the section
-      this.message = 'File uploaded successfully.';
+      this.messages[section] = 'File uploaded successfully.';
     }
   }
 
@@ -82,11 +77,5 @@ export class ApplicantAttachmentsComponent implements OnInit {
       const fileSizeInMB = (fileSizeInKB / 1024).toFixed(2);
       return fileSizeInMB + ' MB';
     }
-  }
-
-  clearErrorMessages() {
-    this.message = undefined;
-    this.sizeError = undefined;
-    this.formatError = undefined;
   }
 }
