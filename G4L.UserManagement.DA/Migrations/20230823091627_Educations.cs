@@ -13,9 +13,9 @@ namespace G4L.UserManagement.DA.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MathSubjects = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MathMarks = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EnglishMarks = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MathSubject = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MathMark = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EnglishMark = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostMatricQualification = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FieldOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CourseOfInterest = table.Column<string>(type: "nvarchar(max)", nullable: false),

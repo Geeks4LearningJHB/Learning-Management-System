@@ -19,7 +19,7 @@ import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 })
 export class ApplicantEducationComponent implements OnInit {
   educationForm!: FormGroup;
-
+  userId :any;
   keys = Object.keys;
 
   serverErrorMessage: any;
@@ -65,9 +65,12 @@ export class ApplicantEducationComponent implements OnInit {
       // If the form is invalid, return early and do not proceed with education information
       return;
     }
-  
+    const formData = {
+      userId: this.userId,
+      ...this.educationForm.value
+    };
 
-      this.applicantService.onSubmit(this.educationForm.value).subscribe(
+      this.applicantService.onSubmit(formData).subscribe(
         (response) => {
           console.log("POST request successful:", response);
           if (!this.serverErrorMessage) {
