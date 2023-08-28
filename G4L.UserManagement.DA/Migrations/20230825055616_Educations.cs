@@ -7,18 +7,17 @@ namespace G4L.UserManagement.DA.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-        
             migrationBuilder.CreateTable(
                 name: "Educations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MathSubjects = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MathMarks = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EnglishMarks = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostMatricQualification = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FieldOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CourseOfInterest = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MathMarks = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EnglishMarks = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostMatricQualification = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FieldOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CourseOfInterest = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -30,7 +29,8 @@ namespace G4L.UserManagement.DA.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            
+            migrationBuilder.DropTable(
+                name: "Educations");
         }
     }
 }

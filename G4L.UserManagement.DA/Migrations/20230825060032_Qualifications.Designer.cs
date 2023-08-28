@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace G4L.UserManagement.DA.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230823091627_Educations")]
-    partial class Educations
+    [Migration("20230825060032_Qualifications")]
+    partial class Qualifications
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -126,22 +126,22 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EnglishMarks")
+                    b.Property<string>("EnglishMark")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FieldOfStudy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MathMarks")
+                    b.Property<string>("MathMark")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MathSubjects")
+                    b.Property<string>("MathSubject")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PostMatricQualification")
+                    b.Property<string>("Qualifications")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

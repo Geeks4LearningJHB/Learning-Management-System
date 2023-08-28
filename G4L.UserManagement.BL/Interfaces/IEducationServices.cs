@@ -11,6 +11,6 @@ namespace G4L.UserManagement.BL.Interfaces
 {
     public interface IEducationService
     {
-        Task CreateEducationAsync(EducationRequest model);
+        Task RegisterUserAsync(EducationRequest education);
     }
 }

@@ -4,20 +4,66 @@ using G4L.UserManagement.DA;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace G4L.UserManagement.DA.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230817065730_ApplicantMigration")]
+    partial class ApplicantMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.Applicant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CourseOfInterest")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Disability")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EnglishMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FieldOfStudy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HighestPostMatricQualification")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MathMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Race")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Applicants");
+                });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Approver", b =>
                 {
@@ -110,41 +156,6 @@ namespace G4L.UserManagement.DA.Migrations
                     b.HasIndex("LeaveId");
 
                     b.ToTable("Documents");
-                });
-
-            modelBuilder.Entity("G4L.UserManagement.BL.Entities.Education", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CourseOfInterest")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EnglishMark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FieldOfStudy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MathMark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MathSubject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Qualifications")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Educations");
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Goal", b =>
@@ -389,13 +400,7 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Disability")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdNumber")
@@ -414,9 +419,6 @@ namespace G4L.UserManagement.DA.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Race")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Role")

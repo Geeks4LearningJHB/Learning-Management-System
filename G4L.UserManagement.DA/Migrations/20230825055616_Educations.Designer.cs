@@ -4,14 +4,16 @@ using G4L.UserManagement.DA;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace G4L.UserManagement.DA.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230825055616_Educations")]
+    partial class Educations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,22 +126,22 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EnglishMark")
+                    b.Property<string>("EnglishMarks")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FieldOfStudy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MathMark")
+                    b.Property<string>("MathMarks")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MathSubject")
+                    b.Property<string>("MathSubjects")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Qualifications")
+                    b.Property<string>("PostMatricQualification")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
