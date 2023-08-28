@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
+using G4L.UserManagement.BL.Custom_Exceptions;
 using G4L.UserManagement.BL.Entities;
+using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
+using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
 using G4L.UserManagement.Infrustructure.Repositories;
 using Google;
 using Microsoft.EntityFrameworkCore;
 using Nest;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +34,14 @@ namespace G4L.UserManagement.DA.Repositories
 
         public async Task PostQualifcationsAsync(EducationRequest model)
         {
-           
+
+            if (_databaseContext.Educations.Any(x => x.UserId == model.UserId))
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
+                    Message = "Form has already been submitted"
+                }));
+
             var education = _mapper.Map<Education>(model);
         
             _databaseContext.Educations.AddAsync(education);

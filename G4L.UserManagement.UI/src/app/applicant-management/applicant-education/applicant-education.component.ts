@@ -11,6 +11,7 @@ import {
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
+import { TokenService } from 'src/app/user-management/login/services/token.service';
 
 @Component({
   selector: 'app-applicant-education',
@@ -28,37 +29,44 @@ export class ApplicantEducationComponent implements OnInit {
     private route: Router,
     private formBuilder: FormBuilder,
     private applicantService: ApplicantService,
+    private tokenService: TokenService,
     public modalRef: MdbModalRef<any>
   ) {}
 
   getFormControl(control: String): AbstractControl {
     return this.educationForm.controls[`${control}`];
   }
-
   ngOnInit(): void {
-    this.educationForm = new FormGroup({
-      MathSubject: new FormControl('', [Validators.required]),
-      MathMark: new FormControl('', [Validators.required]),
-      EnglishMark: new FormControl('', [Validators.required]),
-      Qualifications: new FormControl('', [Validators.required]),
-      FieldOfStudy: new FormControl('', [Validators.required]),
-      CourseOfInterest: new FormControl('', [Validators.required]),
+    let user: any = this.tokenService.getDecodeToken();
+    this.userId = user.id;
+    this.buildForm();
+  }
+  buildForm() {
+    this.educationForm = this.formBuilder.group({
+      userId: [this.userId],
+      MathSubject: ['', [Validators.required]],
+      MathMark: ['', [Validators.required]],
+      EnglishMark: ['', [Validators.required]],
+      Qualifications: ['', [Validators.required]],
+      FieldOfStudy: ['', [Validators.required]],
+      CourseOfInterest: ['', [Validators.required]],
     });
+  }
+  
+
+  clearServerError() {
+    this.serverErrorMessage = ''; 
   }
 
   serverErrorHandling(error: any) {
-    if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
-      this.educationForm.controls['Email'].setErrors({
-        duplicateEmailError: true,
+    if (error && error.errorCode === ServerErrorCodes.DuplicateIdNumber) {
+      this.educationForm.controls['userId'].setErrors({
+        DuplicateIdNumber: true,
       });
       this.serverErrorMessage = error.message;
     }
     this.educationForm.updateValueAndValidity();
   }
-
-  clearServerError() {
-    this.serverErrorMessage = ''; 
-  } 
   onSubmit(): void {
     if (this.educationForm.invalid) {
       alert('Form is not valid. Please fill in all required fields correctly.');
@@ -80,7 +88,7 @@ export class ApplicantEducationComponent implements OnInit {
         (error) => {
           console.log("POST request error:", error);
           this.serverErrorHandling(error);
-    
+          alert('Form has already been submitted');
         }
       );
  

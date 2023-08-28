@@ -33,6 +33,7 @@ export class AttendanceRegisterComponent implements OnInit {
   isAdmin: boolean | undefined;
   isTrainer: boolean | undefined;
   isLearner: boolean | undefined;
+  isApplicant: boolean | undefined;
 
 
   ngOnInit(): void {
@@ -51,6 +52,7 @@ export class AttendanceRegisterComponent implements OnInit {
       case Roles.Learner:
         this.isLearner = true;
         break;
+    
     }
 
 
