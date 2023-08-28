@@ -31,11 +31,17 @@ namespace G4L.UserManagement.API.Controllers
         }
 
         [HttpPost]
+   
         public async Task<IActionResult> CreateEducationAsync([FromBody] EducationRequest educationRequest)
         {
             try
             {
+
                 await _educationService.RegisterUserAsync(educationRequest);
+
+
+                //await _educationService.CreateEducationAsync(educationRequest);
+
                 return Ok(new { Message = "Education created successfully." });
             }
             catch (Exception ex)
@@ -44,6 +50,7 @@ namespace G4L.UserManagement.API.Controllers
                 return StatusCode(500, new { Message = "An error occurred while creating education." });
             }
         }
+
     }
 }
 

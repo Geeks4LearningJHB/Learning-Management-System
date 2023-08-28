@@ -11,6 +11,9 @@ namespace G4L.UserManagement.BL.Entities
     public class Education : BaseEntity
     {
         public Guid Id { get; set; }
+
+        public Guid UserId { get; set; }
+
         public string MathSubject { get; set; }
         public string MathMark { get; set; }
         public string EnglishMark { get; set; }

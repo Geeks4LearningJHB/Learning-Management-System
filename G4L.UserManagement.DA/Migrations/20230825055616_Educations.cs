@@ -12,12 +12,14 @@ namespace G4L.UserManagement.DA.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MathSubjects = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MathMarks = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EnglishMarks = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostMatricQualification = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FieldOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CourseOfInterest = table.Column<string>(type: "nvarchar(max)", nullable: true),
+
+                    MathSubject = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MathMark = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EnglishMark = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostMatricQualification = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FieldOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CourseOfInterest = table.Column<string>(type: "nvarchar(max)", nullable: false),
+//>>>>>>> a7bdc507d1a2a032d9767306acdf7ac54e081979:G4L.UserManagement.DA/Migrations/20230823091627_Educations.cs
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

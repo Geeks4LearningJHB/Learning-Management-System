@@ -11,7 +11,7 @@ export class ApplicantService {
 
   constructor(
     private http: HttpClient,
-    @Inject(APP_SERVICE_CONFIG) private config: AppConfig
+    @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
   ) { }
 
  
