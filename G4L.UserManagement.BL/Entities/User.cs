@@ -16,7 +16,6 @@ namespace G4L.UserManagement.BL.Entities
             Leaves = new List<Leave>();
             SponsoredUser = new List<SponsoredUser>();
         }
-
         public string Name { get; set; }
         public string Surname { get; set; }
         public string IdNumber { get; set; }
@@ -24,6 +23,7 @@ namespace G4L.UserManagement.BL.Entities
         public string Disability { get; set; }
         public string Race { get; set; }
         public string Phone { get; set; }
+       
         public string Email { get; set; }
         public Career Career { get; set; }
         public Role Role { get; set; }

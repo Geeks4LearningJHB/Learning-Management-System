@@ -76,6 +76,7 @@ namespace G4L.UserManagement.API
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEducationService, EducationService>();
+            services.AddScoped<IApplicationsService, ApplicationsService>();
             services.AddScoped<IEducationRepository, EducationRepository>();
             services.AddScoped<ILeaveService, LeaveService>();
             services.AddScoped<ISponsorService, SponsorService>();
@@ -84,6 +85,7 @@ namespace G4L.UserManagement.API
             services.AddScoped<IGoalService, GoalsService>();
 
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            services.AddScoped<IApplicationsRepository, ApplicationsRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILeaveRepository, LeaveRepository>();
             services.AddScoped<ISponsorRepository, SponsorRepository>();
