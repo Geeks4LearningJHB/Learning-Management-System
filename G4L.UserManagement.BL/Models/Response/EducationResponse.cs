@@ -15,7 +15,7 @@ public class EducationResponse
         public string MathSubjects { get; set; }
         public string MathMarks { get; set; }
         public string EnglishMarks { get; set; }
-        public string PostMatricQualification { get; set; }
+        public string Qualifications { get; set; }
         public string FieldOfStudy { get; set; }
         public string CourseOfInterest { get; set; }
     }

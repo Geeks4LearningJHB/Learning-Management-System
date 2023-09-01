@@ -36,8 +36,12 @@ namespace G4L.UserManagement.API.Controllers
         {
             try
             {
-         
-                await _educationService.CreateEducationAsync(educationRequest);
+
+                await _educationService.RegisterUserAsync(educationRequest);
+
+
+                //await _educationService.CreateEducationAsync(educationRequest);
+
                 return Ok(new { Message = "Education created successfully." });
             }
             catch (Exception ex)
