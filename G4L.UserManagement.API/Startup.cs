@@ -75,8 +75,10 @@ namespace G4L.UserManagement.API
             services.AddScoped<IGoogleCalendarAPI, GoogleCalendarAPI>();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IApplicantDocumentsService, ApplicantDocumentsService>();
+
             services.AddScoped<IEducationService, EducationService>();
-            services.AddScoped<IEducationRepository, EducationRepository>();
+          
             services.AddScoped<ILeaveService, LeaveService>();
             services.AddScoped<ISponsorService, SponsorService>();
             services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();
@@ -84,6 +86,8 @@ namespace G4L.UserManagement.API
             services.AddScoped<IGoalService, GoalsService>();
 
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+            services.AddScoped<IEducationRepository, EducationRepository>();
+            services.AddScoped<IApplicantDocumentsRepository, ApplicantDocumentsRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILeaveRepository, LeaveRepository>();
             services.AddScoped<ISponsorRepository, SponsorRepository>();

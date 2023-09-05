@@ -3,6 +3,7 @@ export class FileUpload {
     name: string | undefined;
     url: string | undefined;
     file: File | null;
+  uploadProgress: number | undefined;
   
     constructor(file: File | null) {
       this.file = file;

@@ -23,6 +23,7 @@ namespace G4L.UserManagement.API.Mappers
             CreateMap<LeaveRequest, Leave>().ReverseMap();
             CreateMap<EducationRequest, Education>().ReverseMap();
             CreateMap<ApproverRequest, Approver>().ReverseMap();
+            CreateMap<ApplicantAttachementRequest, ApplicantAttachments>().ReverseMap();
             CreateMap<DocumentRequest, Document>().ReverseMap();
             CreateMap<LeaveScheduleRequest, LeaveSchedule>().ReverseMap();
 
