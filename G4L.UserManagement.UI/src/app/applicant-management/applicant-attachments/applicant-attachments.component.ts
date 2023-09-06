@@ -3,10 +3,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { UploadService } from 'src/app/shared/service/fileupload.service';
+import { FileUpload } from 'src/app/leave-management/models/file-upload'; // Import the FileUpload model
 
 @Component({
   selector: 'app-applicant-attachments',
-  // templateUrl: './applicant-attachments.component.html',
   templateUrl: './applicant-attachments.component.html',
   styleUrls: ['./applicant-attachments.component.css']
 })
@@ -22,7 +22,7 @@ export class ApplicantAttachmentsComponent implements OnInit {
     private route: Router,
     private formBuilder: FormBuilder,
     public modalRef: MdbModalRef<any>,
-    private upload_svc: UploadService
+    private uploadService: UploadService
   ) {}
 
   ngOnInit(): void {}
@@ -51,11 +51,10 @@ export class ApplicantAttachmentsComponent implements OnInit {
     this.formatErrors[section] = undefined;
   }
 
-  uploadFiles(section: string) {
+  async uploadFiles(section: string) {
     const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
     let allFilesUploadedSuccessfully = true;
-
-    // Check if files have been selected for the current section
+  
     if (!this.selectedFiles[section] || this.selectedFiles[section].length === 0) {
       this.selectFilesMessages[section] = 'Please select one or more files to upload.';
       allFilesUploadedSuccessfully = false;
@@ -64,37 +63,47 @@ export class ApplicantAttachmentsComponent implements OnInit {
         if (file.size > maxSize) {
           this.sizeErrors[section] = 'File size exceeds the limit of 5 MB.';
           allFilesUploadedSuccessfully = false;
-          break; // Stop checking files for this section if size limit is exceeded.
+          break;
         }
-
+  
         const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
         const fileExtension = file.name.split('.').pop()?.toLowerCase();
         if (!allowedExtensions.includes(fileExtension || '')) {
           this.formatErrors[section] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
           allFilesUploadedSuccessfully = false;
-          break; // Stop checking files for this section if format is invalid.
+          break;
+        }
+  
+        // Create a FileUpload object
+        const fileUpload: FileUpload = {
+          file: file,
+          url: '',
+          key: undefined,
+          name: undefined,
+          uploadProgress: undefined
+        };
+  
+        try {
+          await this.uploadService.genericUploadToStorage(fileUpload, section);
+          // File uploaded successfully, so set the success message
+          this.uploadMessages[section] = 'File uploaded successfully.';
+        } catch (error) {
+          console.error('Error uploading file:', error);
+          // Set the error message here, but do not break the loop
+          this.uploadMessages[section] = 'An error occurred while uploading the file: ' + error;
+          allFilesUploadedSuccessfully = false;
         }
       }
     }
-
+  
     if (allFilesUploadedSuccessfully) {
-      // Implement the upload logic for each file based on the section
-      this.uploadMessages[section] = 'File uploaded successfully.';
-      // You can call the upload service here for each section if needed.
-      // For example:
-      // this.uploadSectionFiles(section);
+      // Display a success message if all files uploaded successfully
+      this.uploadMessages[section] = 'All files uploaded successfully.';
     } else {
-      this.uploadMessages[section] = undefined;
+      // Clear the message if there are errors
+      // this.uploadMessages[section] = undefined;
     }
   }
-
-  getFileSize(size: number): string {
-    const fileSizeInKB = Math.round(size / 1024);
-    if (fileSizeInKB < 1024) {
-      return fileSizeInKB + ' KB';
-    } else {
-      const fileSizeInMB = (fileSizeInKB / 1024).toFixed(2);
-      return fileSizeInMB + ' MB';
-    }
-  }
-}
+  
+  
+}  

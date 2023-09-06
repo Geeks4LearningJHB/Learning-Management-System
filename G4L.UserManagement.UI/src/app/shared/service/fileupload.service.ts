@@ -1,78 +1,51 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { setTimeout } from 'timers';
-// import { FileUpload } from '../models/file-upload';
-import { AppConfig } from 'src/app/shared/app-config/app-config.interface';
-import { APP_SERVICE_CONFIG } from 'src/app/shared/app-config/app-config.service';
 import { FileUpload } from 'src/app/leave-management/models/file-upload';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class UploadService {
 
-  uploadProgress: Observable<number> | undefined;
-
   private basePath = '/uploads';
 
-  app = initializeApp(this.config.firebase);
+  app = initializeApp({
+    apiKey: "AIzaSyB-BseEKZTt8lwxLwwyT8QcIEtuDo-Ft_M",
+    authDomain: "learner-management-system.firebaseapp.com",
+    databaseURL: "https://learner-management-system-default-rtdb.firebaseio.com",
+    projectId: "learner-management-system",
+    storageBucket: "learner-management-system.appspot.com",
+    messagingSenderId: "153948337848",
+    appId: "1:153948337848:web:f6fc12e8e622c4a06e264d",
+    measurementId: "G-QYL4SBB7XP"
+  });
 
   private storage = getStorage(this.app);
 
-  constructor(@Inject(APP_SERVICE_CONFIG) private config : AppConfig,private toastr: ToastrService) {
-  }
+  constructor(private toastr: ToastrService) {}
 
-  getStorage() {
-    console.log(this.storage);
-  }
-
-//   uploadToStorage(fileUpload: FileUpload) {
-//     const filePath = `${this.basePath}/${fileUpload?.file?.name}`;
-//     const storageRef = ref(this.storage, filePath);
-
-//     if (!fileUpload.file) return null;
-
-//     return uploadBytes(storageRef, fileUpload.file)
-//       .then((snapshot: any) => {
-//         const progress = (snapshot?.bytesTransferred / snapshot?.totalBytes) * 100;
-//         console.log('Upload is ' + progress + '% done');
-//         return getDownloadURL(ref(this.storage, filePath))
-//           .then((url) => {
-//             fileUpload.url = url;
-//             return fileUpload;
-//           })
-//           .catch((error) => {
-//             throw error;
-//           });
-//       });
-
-//   }
-
-  genericUploadToStorage(fileUpload: FileUpload, fileType: string) {
-  
+  async genericUploadToStorage(fileUpload: FileUpload, fileType: string) {
     const filePath = `${this.basePath}/${fileType}/${fileUpload?.file?.name}`;
     const storageRef = ref(this.storage, filePath);
-    console.log(storageRef)
 
     if (!fileUpload.file) return null;
 
-    return uploadBytes(storageRef, fileUpload.file)
-      .then((snapshot: any) => {
-        const progress = (snapshot?.bytesTransferred / snapshot?.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
-        return getDownloadURL(ref(this.storage, filePath))
-          .then((url) => {
-            fileUpload.url = url;
-            return fileUpload;
-          })
-          .catch((error) => {
-            throw error;
-          });
-      });
+    try {
+      // Upload the file
+      const snapshot = await uploadBytes(storageRef, fileUpload.file);
 
+      // Get the download URL for the uploaded file
+      const downloadURL = await getDownloadURL(snapshot.ref);
+
+      fileUpload.url = downloadURL;
+      this.toastr.success('File uploaded successfully', 'Success');
+      return fileUpload;
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      this.toastr.error('Failed to upload file', 'Error');
+      throw error;
+    }
   }
 }

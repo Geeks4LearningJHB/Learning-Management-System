@@ -9,6 +9,9 @@ import { Roles } from 'src/app/shared/global/roles';
   providedIn: 'root'
 })
 export class UserService {
+  sendApplication() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(@Inject(APP_SERVICE_CONFIG) private config:AppConfig,private http: HttpClient) { }
 

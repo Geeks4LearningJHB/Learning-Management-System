@@ -49,6 +49,13 @@ namespace G4L.UserManagement.DA.Repositories
       
         }
 
+        public async Task<List<string>> GetCoursesOfInterestAsync(Guid userId)
+        {
+            return await _databaseContext.Educations
+                .Where(education => education.UserId == userId)
+                .Select(e => e.CourseOfInterest)
+                .ToListAsync();
+        }
 
         public Task<bool> UpdateAsync(EducationRequest education)
         {

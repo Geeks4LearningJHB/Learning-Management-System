@@ -4,14 +4,16 @@ using G4L.UserManagement.DA;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace G4L.UserManagement.DA.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230830112529_Applicant")]
+    partial class Applicant
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,11 +21,7 @@ namespace G4L.UserManagement.DA.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-<<<<<<< HEAD
-            modelBuilder.Entity("G4L.UserManagement.BL.Entities.ApplicantAttachments", b =>
-=======
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Applications", b =>
->>>>>>> 7e34fdbad0006237bbc7cdb09d87bd9c0e0ca54b
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,12 +30,6 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-<<<<<<< HEAD
-                    b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FilePath")
-=======
                     b.Property<string>("Disability")
                         .HasColumnType("nvarchar(max)");
 
@@ -48,14 +40,11 @@ namespace G4L.UserManagement.DA.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdNumber")
->>>>>>> 7e34fdbad0006237bbc7cdb09d87bd9c0e0ca54b
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-<<<<<<< HEAD
-=======
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -68,17 +57,12 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
->>>>>>> 7e34fdbad0006237bbc7cdb09d87bd9c0e0ca54b
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-<<<<<<< HEAD
-                    b.ToTable("ApplicantsAttachements");
-=======
                     b.ToTable("Applications");
->>>>>>> 7e34fdbad0006237bbc7cdb09d87bd9c0e0ca54b
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Approver", b =>
@@ -454,7 +438,13 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Disability")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdNumber")
@@ -473,6 +463,9 @@ namespace G4L.UserManagement.DA.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Race")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Role")
