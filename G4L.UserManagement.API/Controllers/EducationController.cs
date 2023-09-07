@@ -51,6 +51,12 @@ namespace G4L.UserManagement.API.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> getEducation()
+        {
+            return Ok(await _educationService.GetEducationsWithMatchingApplications());
+        }
+
     }
 }
 

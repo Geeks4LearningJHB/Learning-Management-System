@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace G4L.UserManagement.DA.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230830112529_Applicant")]
-    partial class Applicant
+    [Migration("20230904123950_ApplicantionsResponse")]
+    partial class ApplicantionsResponse
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,6 +136,9 @@ namespace G4L.UserManagement.DA.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ApplicationsId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -153,6 +156,8 @@ namespace G4L.UserManagement.DA.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationsId");
+
                     b.HasIndex("LeaveId");
 
                     b.ToTable("Documents");
@@ -162,6 +167,9 @@ namespace G4L.UserManagement.DA.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ApplicationsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CourseOfInterest")
@@ -192,6 +200,8 @@ namespace G4L.UserManagement.DA.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationsId");
 
                     b.ToTable("Educations");
                 });
@@ -504,9 +514,20 @@ namespace G4L.UserManagement.DA.Migrations
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Document", b =>
                 {
+                    b.HasOne("G4L.UserManagement.BL.Entities.Applications", null)
+                        .WithMany("Documents")
+                        .HasForeignKey("ApplicationsId");
+
                     b.HasOne("G4L.UserManagement.BL.Entities.Leave", null)
                         .WithMany("Documents")
                         .HasForeignKey("LeaveId");
+                });
+
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.Education", b =>
+                {
+                    b.HasOne("G4L.UserManagement.BL.Entities.Applications", null)
+                        .WithMany("Educations")
+                        .HasForeignKey("ApplicationsId");
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Goal", b =>
@@ -570,6 +591,13 @@ namespace G4L.UserManagement.DA.Migrations
                     b.HasOne("G4L.UserManagement.BL.Entities.Sponsor", null)
                         .WithMany("Approvers")
                         .HasForeignKey("SponsorId");
+                });
+
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.Applications", b =>
+                {
+                    b.Navigation("Documents");
+
+                    b.Navigation("Educations");
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Attendance", b =>

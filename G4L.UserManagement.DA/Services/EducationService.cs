@@ -7,6 +7,7 @@ using G4L.UserManagement.DA.Repositories;
 using G4L.UserManagement.DA.Services;
 using G4L.UserManagement.Infrustructure.Repositories;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,10 +35,16 @@ namespace G4L.UserManagement.DA.Services
 
             await _educationRepository.PostQualifcationsAsync(education);
         }
+        public async Task<IEnumerable<Education>> GetEducationsWithMatchingApplications()
+        {
+            var matchingEducations = await _educationRepository.GetEducationsWithMatchingApplicationsAsync();
+            return matchingEducations;
+        }
 
-      
     }
+
 }
+
 
 
 //private readonly IApplicantRepository _applicantRepository;

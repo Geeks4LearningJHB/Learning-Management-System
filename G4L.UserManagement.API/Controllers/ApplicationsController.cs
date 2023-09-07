@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System;
 using G4L.UserManagement.DA.Services;
 using G4L.UserManagement.BL.Entities;
+using G4L.UserManagement.BL.Enum;
+using G4L.UserManagement.Infrustructure.Services;
+using G4L.UserManagement.API.Authorization;
 
 namespace G4L.UserManagement.API.Controllers
 {
@@ -36,11 +39,11 @@ namespace G4L.UserManagement.API.Controllers
             }
         }
 
-        [HttpGet("{idNumber}")]
-        public async Task<IActionResult> GetApplicantByIdNumberAsync(string idNumber)
+        [Authorize(Role.Super_Admin, Role.Admin)]
+        [HttpGet]
+        public async Task<IActionResult> GetApplicationsList()
         {
-            return Ok(await _applicationsService.GetApplicantByIdNumberAsync(idNumber));
+            return Ok(await _applicationsService.ListAsync());
         }
-
     }
 }

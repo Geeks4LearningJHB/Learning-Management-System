@@ -66,5 +66,14 @@ namespace G4L.UserManagement.DA.Repositories
         {
             throw new NotImplementedException();
         }
+        public async Task<List<Education>> GetEducationsWithMatchingApplicationsAsync()
+        {
+            var query = from education in _databaseContext.Set<Education>()
+                        join application in _databaseContext.Set<Applications>()
+                        on education.UserId equals application.UserId
+                        select education;
+
+            return await query.ToListAsync();
+        }
     }
 }

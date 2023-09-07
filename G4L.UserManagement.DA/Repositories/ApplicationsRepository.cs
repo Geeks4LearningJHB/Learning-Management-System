@@ -83,5 +83,11 @@ namespace G4L.UserManagement.DA.Repositories
                 .Where(x => x.Email == email)
                 .FirstOrDefaultAsync();
         }
+        public async Task<IEnumerable<Applications>> ListAsync()
+        {
+            return await _databaseContext.Set<Applications>().ToListAsync();
+        }
+
+
     }
 }

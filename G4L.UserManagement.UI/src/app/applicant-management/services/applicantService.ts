@@ -23,5 +23,32 @@ export class ApplicantService {
   applyForLearnership(userId: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiUrl}/applications`, { userId });
   }
+  // getAllApplicantions(): Observable<any>  {
+  //   return this.http.get(`${this.config.apiUrl}/applications`);
+  // }
+  getAllApplicantions(): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/applications`);
+  }
+  getApplicantEducation(): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/education`);
+  }
+
   
+}
+export interface Applicant {
+  userId: "";
+  name: string;
+  surname:string;
+  email:string;
+  phone:number;
+  idNumber: number;
+  race:string;
+  gender:string;
+  disability:string | null
+
+  // Add other properties as needed
+}
+export interface Education{
+  userId: string;
+  mathSubject: string;
 }

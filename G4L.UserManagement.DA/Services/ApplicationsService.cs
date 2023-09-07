@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using G4L.UserManagement.BL.Entities;
+using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models.Request;
 using G4L.UserManagement.DA.Repositories;
@@ -34,6 +35,10 @@ namespace G4L.UserManagement.DA.Services
             return await _applicationsRepository.GetApplicantsByIdNumberAsync(idNumber);
         }
 
+        public async Task<IEnumerable<Applications>> ListAsync()
+        {
+            return await _applicationsRepository.ListAsync();
+        }
 
     }
 }

@@ -6,7 +6,7 @@ import { PersonalInformationComponent } from '../personal-information/personal-i
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
 import { ApplicantAttachmentsComponent } from '../applicant-attachments/applicant-attachments.component';
 import { UserService } from 'src/app/user-management/services/user.service';
-import { ApplicantService } from '../services/applicantService';
+import { ApplicantService, Education } from '../services/applicantService';
 import { any } from 'ramda';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 import { error } from 'console';
@@ -18,10 +18,8 @@ import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 })
 export class ApplicantProfileDashboardComponent implements OnInit {
   userId: any;
-
   serverErrorMessage: any;
-  errorEvent = new EventEmitter<string>();
-
+  
   constructor(
     private userService: UserService,
     private applicantService: ApplicantService,
@@ -32,6 +30,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   ngOnInit(): void {
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
+    
   }
   sendApplication(userId: string): void {
     this.applicantService.applyForLearnership(this.userId).subscribe(

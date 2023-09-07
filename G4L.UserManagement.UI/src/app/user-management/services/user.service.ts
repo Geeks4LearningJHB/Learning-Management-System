@@ -38,6 +38,7 @@ export class UserService {
   }
  
   updateUser( body: any) {
+    console.log(body);
     return this.http.put(`${this.config.apiUrl}/user`, body);
   }
 

@@ -2,7 +2,7 @@
 
 namespace G4L.UserManagement.DA.Migrations
 {
-    public partial class Qualifications : Migration
+    public partial class Applications : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
