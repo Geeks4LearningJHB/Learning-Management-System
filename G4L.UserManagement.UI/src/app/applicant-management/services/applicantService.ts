@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Console, error } from 'console';
 import { Observable } from 'rxjs';
 import { AppConfig } from 'src/app/shared/app-config/app-config.interface';
 import { APP_SERVICE_CONFIG } from 'src/app/shared/app-config/app-config.service';
@@ -11,7 +12,7 @@ export class ApplicantService {
 
   constructor(
     private http: HttpClient,
-    @Inject(APP_SERVICE_CONFIG) private config: AppConfig
+    @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
   ) { }
 
  
@@ -19,5 +20,35 @@ export class ApplicantService {
     console.log("Request Payload:", value);
     return this.http.post(`${this.config.apiUrl}/education`, value);
   }
+  applyForLearnership(userId: string): Observable<any> {
+    return this.http.post<any>(`${this.config.apiUrl}/applications`, { userId });
+  }
+  // getAllApplicantions(): Observable<any>  {
+  //   return this.http.get(`${this.config.apiUrl}/applications`);
+  // }
+  getAllApplicantions(): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/applications`);
+  }
+  getApplicantEducation(): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/education`);
+  }
+
   
+}
+export interface Applicant {
+  userId: "";
+  name: string;
+  surname:string;
+  email:string;
+  phone:number;
+  idNumber: number;
+  race:string;
+  gender:string;
+  disability:string | null
+
+  // Add other properties as needed
+}
+export interface Education{
+  userId: string;
+  mathSubject: string;
 }

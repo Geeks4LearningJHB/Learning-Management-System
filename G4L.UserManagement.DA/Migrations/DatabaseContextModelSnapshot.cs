@@ -19,6 +19,68 @@ namespace G4L.UserManagement.DA.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+<<<<<<< HEAD
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.ApplicantAttachments", b =>
+=======
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.Applications", b =>
+>>>>>>> 7e34fdbad0006237bbc7cdb09d87bd9c0e0ca54b
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+<<<<<<< HEAD
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+=======
+                    b.Property<string>("Disability")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdNumber")
+>>>>>>> 7e34fdbad0006237bbc7cdb09d87bd9c0e0ca54b
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+<<<<<<< HEAD
+=======
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Race")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("nvarchar(max)");
+
+>>>>>>> 7e34fdbad0006237bbc7cdb09d87bd9c0e0ca54b
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+<<<<<<< HEAD
+                    b.ToTable("ApplicantsAttachements");
+=======
+                    b.ToTable("Applications");
+>>>>>>> 7e34fdbad0006237bbc7cdb09d87bd9c0e0ca54b
+                });
+
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Approver", b =>
                 {
                     b.Property<Guid>("Id")
@@ -90,6 +152,9 @@ namespace G4L.UserManagement.DA.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ApplicationsId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -107,6 +172,8 @@ namespace G4L.UserManagement.DA.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ApplicationsId");
+
                     b.HasIndex("LeaveId");
 
                     b.ToTable("Documents");
@@ -118,34 +185,39 @@ namespace G4L.UserManagement.DA.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ApplicationsId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("CourseOfInterest")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EnglishMarks")
+                    b.Property<string>("EnglishMark")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FieldOfStudy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Grades")
+                    b.Property<string>("MathMark")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MathMarks")
+                    b.Property<string>("MathSubject")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PostMatricQualification")
+                    b.Property<string>("Qualifications")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationsId");
 
                     b.ToTable("Educations");
                 });
@@ -392,13 +464,7 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Disability")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdNumber")
@@ -417,9 +483,6 @@ namespace G4L.UserManagement.DA.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Race")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Role")
@@ -458,9 +521,20 @@ namespace G4L.UserManagement.DA.Migrations
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Document", b =>
                 {
+                    b.HasOne("G4L.UserManagement.BL.Entities.Applications", null)
+                        .WithMany("Documents")
+                        .HasForeignKey("ApplicationsId");
+
                     b.HasOne("G4L.UserManagement.BL.Entities.Leave", null)
                         .WithMany("Documents")
                         .HasForeignKey("LeaveId");
+                });
+
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.Education", b =>
+                {
+                    b.HasOne("G4L.UserManagement.BL.Entities.Applications", null)
+                        .WithMany("Educations")
+                        .HasForeignKey("ApplicationsId");
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Goal", b =>
@@ -524,6 +598,13 @@ namespace G4L.UserManagement.DA.Migrations
                     b.HasOne("G4L.UserManagement.BL.Entities.Sponsor", null)
                         .WithMany("Approvers")
                         .HasForeignKey("SponsorId");
+                });
+
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.Applications", b =>
+                {
+                    b.Navigation("Documents");
+
+                    b.Navigation("Educations");
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Attendance", b =>

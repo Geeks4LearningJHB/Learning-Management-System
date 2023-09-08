@@ -8,6 +8,7 @@ namespace G4L.UserManagement.BL.Models
 {
     public class UserRequest
     {
+    
         [Required]
         public string Name { get; set; }
         [Required]
@@ -17,6 +18,7 @@ namespace G4L.UserManagement.BL.Models
         [Required]
         public string ClockInTime { get; set; }
         public string Phone { get; set; }
+     
         [Required]
         public string Email { get; set; }
         public Guid? SponsorId { get; set; }

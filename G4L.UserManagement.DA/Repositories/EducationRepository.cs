@@ -1,13 +1,19 @@
 ﻿using AutoMapper;
+using G4L.UserManagement.BL.Custom_Exceptions;
 using G4L.UserManagement.BL.Entities;
+using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
+using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
 using G4L.UserManagement.Infrustructure.Repositories;
 using Google;
 using Microsoft.EntityFrameworkCore;
+using Nest;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,15 +32,30 @@ namespace G4L.UserManagement.DA.Repositories
         }
 
 
-        public async Task CreateUserAsync(EducationRequest model)
+        public async Task PostQualifcationsAsync(EducationRequest model)
         {
 
+            if (_databaseContext.Educations.Any(x => x.UserId == model.UserId))
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
+                    Message = "Form has already been submitted"
+                }));
+
             var education = _mapper.Map<Education>(model);
+        
             _databaseContext.Educations.AddAsync(education);
             await _databaseContext.SaveChangesAsync();
       
         }
 
+        public async Task<List<string>> GetCoursesOfInterestAsync(Guid userId)
+        {
+            return await _databaseContext.Educations
+                .Where(education => education.UserId == userId)
+                .Select(e => e.CourseOfInterest)
+                .ToListAsync();
+        }
 
         public Task<bool> UpdateAsync(EducationRequest education)
         {
@@ -44,6 +65,15 @@ namespace G4L.UserManagement.DA.Repositories
         Task<bool> IEducationRepository.UpdateAsync(Education education)
         {
             throw new NotImplementedException();
+        }
+        public async Task<List<Education>> GetEducationsWithMatchingApplicationsAsync()
+        {
+            var query = from education in _databaseContext.Set<Education>()
+                        join application in _databaseContext.Set<Applications>()
+                        on education.UserId equals application.UserId
+                        select education;
+
+            return await query.ToListAsync();
         }
     }
 }

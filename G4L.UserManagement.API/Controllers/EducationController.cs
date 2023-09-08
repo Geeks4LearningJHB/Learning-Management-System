@@ -12,6 +12,7 @@ using G4L.UserManagement.DA.Services;
 using G4L.UserManagement.API.Authorization;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.Infrustructure.Services;
+using System.Security.Claims;
 
 namespace G4L.UserManagement.API.Controllers
 {
@@ -30,11 +31,32 @@ namespace G4L.UserManagement.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] EducationRequest education)
+   
+        public async Task<IActionResult> CreateEducationAsync([FromBody] EducationRequest educationRequest)
         {
-            await _educationService.CreateEducationAsync(education);
-            return Ok();
+            try
+            {
+
+                await _educationService.RegisterUserAsync(educationRequest);
+
+
+                //await _educationService.CreateEducationAsync(educationRequest);
+
+                return Ok(new { Message = "Education created successfully." });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, new { Message = "An error occurred while creating education." });
+            }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> getEducation()
+        {
+            return Ok(await _educationService.GetEducationsWithMatchingApplications());
+        }
+
     }
 }
 

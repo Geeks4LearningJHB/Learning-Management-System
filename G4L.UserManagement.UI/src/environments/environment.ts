@@ -8,15 +8,15 @@ export const environment = {
   defaultPassword: 'P@ssword1',
   googleApiKey: '',
   firebase: {
-    databaseURL: 'https://geeks4learning-1ef1e-default-rtdb.firebaseio.com/',
-    locationId: 'us-central',
-    apiKey: 'AIzaSyCmnSa1MP3SS3MLCwfMd9VUBYnFVUjhpEI',
-    authDomain: 'geeks4learning-1ef1e.firebaseapp.com',
-    projectId: 'geeks4learning-1ef1e',
-    storageBucket: 'geeks4learning-1ef1e.appspot.com',
-    messagingSenderId: '927244532147',
-    appId: '1:927244532147:web:d8525c929e24ce264ab3c6',
-    measurementId: 'G-6YRRYK2SKQ',
+  apiKey: "AIzaSyB-BseEKZTt8lwxLwwyT8QcIEtuDo-Ft_M",
+  authDomain: "learner-management-system.firebaseapp.com",
+  databaseURL: "https://learner-management-system-default-rtdb.firebaseio.com",
+  projectId: "learner-management-system",
+  locationId: 'us-central',
+  storageBucket: "learner-management-system.appspot.com",
+  messagingSenderId: "153948337848",
+  appId: "1:153948337848:web:f6fc12e8e622c4a06e264d",
+  measurementId: "G-QYL4SBB7XP"
   },
 };
 

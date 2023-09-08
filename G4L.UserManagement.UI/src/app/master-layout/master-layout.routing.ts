@@ -19,7 +19,7 @@ import { ApplicantProfileDashboardComponent } from '../applicant-management/appl
 import { ApplicantionProgressComponent } from '../applicant-management/applicantion-progress/applicantion-progress.component';
 import { ApplicantAttachmentsComponent } from '../applicant-management/applicant-attachments/applicant-attachments.component';
 import { PersonalInformationComponent } from '../applicant-management/personal-information/personal-information.component';
-
+import { LearnershipApplicationsComponent } from '../applicant-management/learnership-applications/learnership-applications.component';
 const routes: Routes = [
   {
     path: '',
@@ -46,6 +46,8 @@ const routes: Routes = [
         path: 'attendance-register',
         component: AttendanceRegisterComponent,
       },
+      { path: 'learnership-applications',
+          component: LearnershipApplicationsComponent},
       {
         path: 'goal-management',
         component: GoalManagementComponent,
