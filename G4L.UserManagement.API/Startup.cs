@@ -55,7 +55,7 @@ namespace G4L.UserManagement.API
                 options.EnableSensitiveDataLogging();
 
 
-
+                services.AddScoped<IMailService, MailService>();
                 services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
                 services.AddTransient<IMailService, DA.Services.MailService>();
 

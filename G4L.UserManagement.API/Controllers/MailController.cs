@@ -18,10 +18,10 @@ namespace G4L.UserManagement.API.Controllers
         //private readonly ILogger<MailController> _logger;
         //private readonly IMailService _mailService;
 
-        private readonly IMailService mailService;
+        private readonly IMailService _mailService;
         public MailController(IMailService mailService)
         {
-            this.mailService = mailService;
+            _mailService = mailService;
         }
 
         [HttpPost("Send")]
@@ -29,7 +29,7 @@ namespace G4L.UserManagement.API.Controllers
         {
             try
             {
-                await mailService.SendMailAsync(request);
+                await _mailService.SendMailAsync(request);
                 return Ok();
             }
 
