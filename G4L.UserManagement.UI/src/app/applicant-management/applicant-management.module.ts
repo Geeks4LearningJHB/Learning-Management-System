@@ -13,6 +13,7 @@ import { ApplicantSuccessComponent } from './applicant-success/applicant-success
 import { ApplicantionProgressComponent } from './applicantion-progress/applicantion-progress.component';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { ApplicantEducationComponent } from './applicant-education/applicant-education.component';
+import { MailServiceComponent } from './mail-service/mail-service.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ApplicantEducationComponent } from './applicant-education/applicant-edu
     ApplicantionProgressComponent,
     PersonalInformationComponent,
     ApplicantEducationComponent,
+   MailServiceComponent,
     
   ],
   imports: [
