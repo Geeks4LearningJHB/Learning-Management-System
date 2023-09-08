@@ -56,6 +56,7 @@ namespace G4L.UserManagement.DA.Repositories
                 Race = user.Race,
                 Disability = user.Disability,
                 Gender = user.Gender,
+                
                 // Assign other properties from the model or wherever needed
             };
 
@@ -86,6 +87,14 @@ namespace G4L.UserManagement.DA.Repositories
         public async Task<IEnumerable<Applications>> ListAsync()
         {
             return await _databaseContext.Set<Applications>().ToListAsync();
+        }
+        public async Task<Applications> GetApplicationByUserIdAsync(Guid userId)
+        {
+            return await Task.Run(() =>
+            {
+                return _databaseContext.Set<Applications>()
+                    .FirstOrDefault(x => x.UserId == userId);
+            });
         }
 
 

@@ -62,6 +62,8 @@ namespace G4L.UserManagement.Infrustructure.Repositories
             await _databaseContext.SaveChangesAsync();
         }
 
+       
+
         public async Task AddUserAsync(AddUserRequest model)
         {
             // validate
@@ -142,6 +144,7 @@ namespace G4L.UserManagement.Infrustructure.Repositories
                     .AsEnumerable();
             });
         }
+      
 
 
     }

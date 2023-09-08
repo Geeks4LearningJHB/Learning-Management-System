@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using G4L.UserManagement.BL.Entities;
+using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
@@ -35,10 +36,11 @@ namespace G4L.UserManagement.DA.Services
 
             await _educationRepository.PostQualifcationsAsync(education);
         }
-        public async Task<IEnumerable<Education>> GetEducationsWithMatchingApplications()
+
+     
+        public async Task<Education> GetEducationByUserIdAsync(Guid userId)
         {
-            var matchingEducations = await _educationRepository.GetEducationsWithMatchingApplicationsAsync();
-            return matchingEducations;
+            return await _educationRepository.GetEducationByUserIdAsync(userId);
         }
 
     }
@@ -46,13 +48,3 @@ namespace G4L.UserManagement.DA.Services
 }
 
 
-
-//private readonly IApplicantRepository _applicantRepository;
-
-
-
-
-//public async Task RegisterUserAsync(ApplicantRequest model)
-//{
-//    await _applicantRepository.CreateUserAsync(model);
-//}

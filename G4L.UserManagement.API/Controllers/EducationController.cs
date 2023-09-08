@@ -13,6 +13,8 @@ using G4L.UserManagement.API.Authorization;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.Infrustructure.Services;
 using System.Security.Claims;
+using G4L.UserManagement.DA.Migrations;
+using Nest;
 
 namespace G4L.UserManagement.API.Controllers
 {
@@ -50,13 +52,25 @@ namespace G4L.UserManagement.API.Controllers
                 return StatusCode(500, new { Message = "An error occurred while creating education." });
             }
         }
+        //[HttpGet("{userId}")]
 
-        [HttpGet]
-        public async Task<IActionResult> getEducation()
+        //public async Task<IActionResult> Get(Guid userId)
+        //{
+        //    return Ok(await _educationService.GetEducationByUserIdAsync(userId));
+        //}
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> Get(Guid userId)
         {
-            return Ok(await _educationService.GetEducationsWithMatchingApplications());
+            var education = await _educationService.GetEducationByUserIdAsync(userId);
+            if (education == null)
+                return BadRequest("User Not Found");
+            return Ok(education);
         }
-
     }
+
+
+
+
 }
+
 

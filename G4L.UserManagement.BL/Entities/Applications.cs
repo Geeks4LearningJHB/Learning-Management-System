@@ -11,11 +11,6 @@ namespace G4L.UserManagement.BL.Entities
     public class Applications : BaseEntity
     {
 
-        public Applications()
-        {
-            Educations = new List<Education>();
-            Documents = new List<Document>();
-        }
         public string Name { get; set; }
         public string Surname { get; set; }
         public Guid UserId { get; set; }
@@ -25,8 +20,7 @@ namespace G4L.UserManagement.BL.Entities
         public string Race { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public List<Education> Educations { get; set; }
-        public List<Document> Documents { get; set; }
+   
 
     }
 }

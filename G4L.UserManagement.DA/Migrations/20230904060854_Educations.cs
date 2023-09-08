@@ -23,10 +23,8 @@ namespace G4L.UserManagement.DA.Migrations
                     Qualifications = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FieldOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseOfInterest = table.Column<string>(type: "nvarchar(max)", nullable: true),
-<<<<<<<< HEAD:G4L.UserManagement.DA/Migrations/20230904060854_Educations.cs
                     ApplicationsId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-========
->>>>>>>> 1b5c5467752c741b800ef8936307d7e079278b4a:G4L.UserManagement.DA/Migrations/20230829082552_Educations.cs
+
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

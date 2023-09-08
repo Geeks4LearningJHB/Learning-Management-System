@@ -5,6 +5,7 @@ using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
+using G4L.UserManagement.DA.Migrations;
 using G4L.UserManagement.Infrustructure.Repositories;
 using Google;
 using Microsoft.EntityFrameworkCore;
@@ -62,18 +63,17 @@ namespace G4L.UserManagement.DA.Repositories
             throw new NotImplementedException();
         }
 
-        Task<bool> IEducationRepository.UpdateAsync(Education education)
+        //Task<bool> IEducationRepository.UpdateAsync(Education education)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        public async Task<Education> GetEducationByUserIdAsync(Guid userId)
         {
-            throw new NotImplementedException();
-        }
-        public async Task<List<Education>> GetEducationsWithMatchingApplicationsAsync()
-        {
-            var query = from education in _databaseContext.Set<Education>()
-                        join application in _databaseContext.Set<Applications>()
-                        on education.UserId equals application.UserId
-                        select education;
-
-            return await query.ToListAsync();
+            return await Task.Run(() =>
+            {
+                return _databaseContext.Set<Education>()
+                    .FirstOrDefault(x => x.UserId == userId);
+            });
         }
     }
 }

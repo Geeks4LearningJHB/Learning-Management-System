@@ -27,10 +27,10 @@ export class ApplicantService {
   //   return this.http.get(`${this.config.apiUrl}/applications`);
   // }
   getAllApplicantions(): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/applications`);
+    return this.http.get(`${this.config.apiUrl}/applications/applications`);
   }
   getApplicantEducation(): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/education`);
+    return this.http.get(`${this.config.apiUrl}/education/`);
   }
 
   
@@ -44,7 +44,14 @@ export interface Applicant {
   idNumber: number;
   race:string;
   gender:string;
-  disability:string | null
+  disability:string | null;
+  englishMark:string;
+  mathSubject:string;
+  mathMark:string;
+  courseOfInterest:string;
+  fieldOfStudy:string;
+  qualifications:string;
+
 
   // Add other properties as needed
 }

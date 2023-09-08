@@ -39,6 +39,9 @@ namespace G4L.UserManagement.DA.Services
         {
             return await _applicationsRepository.ListAsync();
         }
-
+        public async Task<Applications> GetApplicationByUserIdAsync(Guid userId)
+        {
+            return await _applicationsRepository.GetApplicationByUserIdAsync(userId);
+        }
     }
 }

@@ -13,6 +13,6 @@ namespace G4L.UserManagement.BL.Interfaces
     public interface IEducationService
     {
         Task RegisterUserAsync(EducationRequest education);
-        Task<IEnumerable<Education>> GetEducationsWithMatchingApplications();
+        Task<Education> GetEducationByUserIdAsync(Guid userId);
     }
 }

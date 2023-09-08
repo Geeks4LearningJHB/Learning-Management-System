@@ -21,7 +21,10 @@ namespace G4L.UserManagement.BL.Entities
         public string IdNumber { get; set; }
   
         public string Phone { get; set; }
-       
+        public string Gender { get; set; }
+        public string Race { get; set; }
+        public string Disability { get; set; }
+
         public string Email { get; set; }
         public Career Career { get; set; }
         public Role Role { get; set; }
