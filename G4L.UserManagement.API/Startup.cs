@@ -20,6 +20,16 @@ using System;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
+
+
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Linq;
+using System.Threading.Tasks;
+using G4L.UserManagement.BL.Entities;
+
+
 namespace G4L.UserManagement.API
 {
     public class Startup
@@ -43,6 +53,15 @@ namespace G4L.UserManagement.API
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 //Debuging purpose
                 options.EnableSensitiveDataLogging();
+
+
+                services.AddScoped<IMailService, MailService>();
+                services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+                services.AddTransient<IMailService, DA.Services.MailService>();
+
+               
+             
+
             }
             );
 

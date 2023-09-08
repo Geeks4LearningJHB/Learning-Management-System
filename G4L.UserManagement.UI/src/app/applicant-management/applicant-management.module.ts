@@ -13,8 +13,12 @@ import { ApplicantSuccessComponent } from './applicant-success/applicant-success
 import { ApplicantionProgressComponent } from './applicantion-progress/applicantion-progress.component';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { ApplicantEducationComponent } from './applicant-education/applicant-education.component';
+<<<<<<< HEAD
+import { MailServiceComponent } from './mail-service/mail-service.component';
+=======
 import { LearnershipApplicationsComponent } from './learnership-applications/learnership-applications.component';
 import { LearneshipApplicationModalComponent } from './learnership-applications/learneship-application-modal/learneship-application-modal.component';
+>>>>>>> 79474a1a3558fd63df8b193d2442b33f9d65e148
 
 @NgModule({
   declarations: [
@@ -26,8 +30,12 @@ import { LearneshipApplicationModalComponent } from './learnership-applications/
     ApplicantionProgressComponent,
     PersonalInformationComponent,
     ApplicantEducationComponent,
+<<<<<<< HEAD
+   MailServiceComponent,
+=======
     LearnershipApplicationsComponent,
     LearneshipApplicationModalComponent,
+>>>>>>> 79474a1a3558fd63df8b193d2442b33f9d65e148
     
   ],
   imports: [
