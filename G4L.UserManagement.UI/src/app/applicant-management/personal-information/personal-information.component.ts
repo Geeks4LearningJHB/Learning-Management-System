@@ -10,6 +10,8 @@ import { isNil } from 'lodash';
 import { validateIdNumber } from 'src/app/shared/global/helper';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 import { UserService } from 'src/app/user-management/services/user.service';
+import { TokenService } from 'src/app/user-management/login/services/token.service';
+import { personalInformation } from '../services/applicantService';
 
 @Component({
   selector: 'app-personal-information',
@@ -18,81 +20,90 @@ import { UserService } from 'src/app/user-management/services/user.service';
 })
 export class PersonalInformationComponent implements OnInit {
 
-  personalDetails!: FormGroup;
-  keys = Object.keys;
+  personalInformationData: personalInformation[] = [];
 
+  personalDetails!: FormGroup;
+
+  userId: any;
+  keys = Object.keys;
   serverErrorMessage: any;
 
-  constructor(private route: Router, private formBuilder: FormBuilder, private userService: UserService, public modalRef: MdbModalRef<any>) { }
+  constructor(private route: Router, private formBuilder: FormBuilder, private userService: UserService, private tokenService: TokenService, public modalRef: MdbModalRef<any>) { }
 
   getFormControl(control: String): AbstractControl {
     return this.personalDetails.controls[`${control}`];
   }
 
+
   ngOnInit(): void {
-    this.personalDetails = new FormGroup({
-      Firstname: new FormControl(null, [Validators.required, CustomValidators.names]),
-      Surname: new FormControl(null, [Validators.required, CustomValidators.names]),
-      IdNumber: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{13}$'), CustomValidators.IdNumber]),
-      Email: new FormControl(null, [Validators.required, Validators.email, CustomValidators.email]),
-      Gender: new FormControl(null, [Validators.required]),
-      Race: new FormControl(null, Validators.required),
-      Phone: new FormControl(null, [Validators.required, CustomValidators.phone]),
+    let user = this.tokenService.getDecodeToken();
+    this.userId = user.id;
+    this.buildForm();
 
-    });
   }
 
-  serverErrorHandling(error: any) {
-    if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
-      this.personalDetails.controls['Email'].setErrors({
-        duplicateEmailError: true,
-      });
-      this.serverErrorMessage = error.message;
-    }
-    this.personalDetails.updateValueAndValidity();
+  buildForm() {
+    this.personalDetails = this.formBuilder.group({
+      userId: [this.userId],
+      Firstname: ['', [Validators.required, CustomValidators.names]],
+      Surname: ['', [Validators.required, CustomValidators.names]],
+      IdNumber: ['', [Validators.required, Validators.pattern('^[0-9]{13}$'), CustomValidators.IdNumber]],
+      Email: ['', [Validators.email, CustomValidators.email]],
+      Gender: ['', [Validators.required]],
+      Race: ['', Validators.required],
+      Phone: ['', [Validators.required, CustomValidators.phone]],
+    })
   }
+
+  // serverErrorHandling(error: any) {
+  //   if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
+  //     this.personalDetails.controls['Email'].setErrors({
+  //       duplicateEmailError: true,
+  //     });
+  //     this.serverErrorMessage = error.message;
+  //   }
+  //   this.personalDetails.updateValueAndValidity();
+  // }
 
   clearServerError() {
-    this.serverErrorMessage = ''; 
-  } 
+    this.serverErrorMessage = '';
+  }
 
   onPersonalDetailsSubmit(): void {
     if (this.personalDetails.valid) {
-    //   console.log('Form submitted. Data:', this.personalDetails.value);
-    //   this.modalRef.close();
-    // } else {
-    //   // Show an alert when the form is not valid
-    //   
-    // }
-    this.userService.onPersonalDetailsSubmit(this.personalDetails.value).subscribe(
-      (response) => {
-        if (!this.serverErrorMessage) {
-          this.modalRef.close();
+      console.log(this.personalDetails.value)
+      this.userService.onPersonalDetailsSubmit(this.personalDetails.value).subscribe(
+        (response: any) => {
+          console.log("POST request successful:", response);
+          if (!this.serverErrorMessage) {
+            this.modalRef.close();
+          }
+        },
+        (error: any) => {
+          console.log(error)
+          // this.serverErrorHandling(error);
+          alert('Form is not valid. Please fill in all required fields correctly.');
+          return;
         }
-      },
-     (error) => {
-        console.log(error)
-        this.serverErrorHandling(error);
-        alert('Form is not valid. Please fill in all required fields correctly.');
-      }
-    );}
+      );
+    }
   }
 
   onSaveAndCloseClick(): void {
+    console.log(this.personalDetails)
     this.modalRef.close();
+   
   }
 
   saveInformation() {
-    //  e.preventDefault();
     console.log(this.personalDetails)
-
-    // if (!this.personalDetails.valid) {
-    //   return;
-    // }
-
-    // alert("Heyy;lo")
   }
 
+  // getAllUsers() {
+  //   this.userService.getPersonalById().subscribe((response: any) => {
+
+  //   });
+  // }
 
 }
 

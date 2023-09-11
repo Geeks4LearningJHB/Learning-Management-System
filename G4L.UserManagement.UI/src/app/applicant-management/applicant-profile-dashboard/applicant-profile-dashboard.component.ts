@@ -5,6 +5,8 @@ import { GoalModalHandlerService } from 'src/app/goal-management/services/modals
 import { PersonalInformationComponent } from '../personal-information/personal-information.component';
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
 import { ApplicantAttachmentsComponent } from '../applicant-attachments/applicant-attachments.component';
+import { ApplicantService,  } from '../services/applicantService';
+import { result } from 'lodash';
 @Component({
   selector: 'app-applicant-profile-dashboard',
   templateUrl: './applicant-profile-dashboard.component.html',
@@ -12,11 +14,14 @@ import { ApplicantAttachmentsComponent } from '../applicant-attachments/applican
 })
 export class ApplicantProfileDashboardComponent implements OnInit {
 
-  constructor(private modalHandler: GoalModalHandlerService<any>) { }
+  userId: any;
+  
+  constructor(private modalHandler: GoalModalHandlerService<any>,
+    private applicantService: ApplicantService) { }
 
   ngOnInit(): void {
   }
-
+  
   openPersonalInformationModal(): void {
     this.modalHandler.openMdbModal<PersonalInformationComponent>({
       component: PersonalInformationComponent,
@@ -26,12 +31,28 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     });
   }
   
+  getEducationByUserId(userId: number) {
+    console.log(userId); // Check the value in the console
+this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
+  console.log(response); // Check the response if it arrives
+  this.openEducationModal();
+});
+
+    this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
+      // this.filterUserByRole(response);
+      console.log(userId)
+      this.openEducationModal()
+    });
+  }
+  
+
   openEducationModal(): void {
     this.modalHandler.openMdbModal<ApplicantEducationComponent>({
       component: ApplicantEducationComponent,
       data: null,
       ignoreBackdropClick: true,
       width: 50,
+
     });
   }
 
