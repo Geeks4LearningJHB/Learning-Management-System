@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace G4L.UserManagement.DA.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230904060854_Educations")]
-    partial class Educations
+    [Migration("20230911073412_Applications")]
+    partial class Applications
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,32 @@ namespace G4L.UserManagement.DA.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.ApplicantAttachments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicantsAttachements");
+                });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Applications", b =>
                 {
@@ -136,9 +162,6 @@ namespace G4L.UserManagement.DA.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ApplicationsId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -156,8 +179,6 @@ namespace G4L.UserManagement.DA.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationsId");
-
                     b.HasIndex("LeaveId");
 
                     b.ToTable("Documents");
@@ -167,9 +188,6 @@ namespace G4L.UserManagement.DA.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ApplicationsId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CourseOfInterest")
@@ -200,8 +218,6 @@ namespace G4L.UserManagement.DA.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationsId");
 
                     b.ToTable("Educations");
                 });
@@ -514,20 +530,9 @@ namespace G4L.UserManagement.DA.Migrations
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Document", b =>
                 {
-                    b.HasOne("G4L.UserManagement.BL.Entities.Applications", null)
-                        .WithMany("Documents")
-                        .HasForeignKey("ApplicationsId");
-
                     b.HasOne("G4L.UserManagement.BL.Entities.Leave", null)
                         .WithMany("Documents")
                         .HasForeignKey("LeaveId");
-                });
-
-            modelBuilder.Entity("G4L.UserManagement.BL.Entities.Education", b =>
-                {
-                    b.HasOne("G4L.UserManagement.BL.Entities.Applications", null)
-                        .WithMany("Educations")
-                        .HasForeignKey("ApplicationsId");
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Goal", b =>
@@ -591,13 +596,6 @@ namespace G4L.UserManagement.DA.Migrations
                     b.HasOne("G4L.UserManagement.BL.Entities.Sponsor", null)
                         .WithMany("Approvers")
                         .HasForeignKey("SponsorId");
-                });
-
-            modelBuilder.Entity("G4L.UserManagement.BL.Entities.Applications", b =>
-                {
-                    b.Navigation("Documents");
-
-                    b.Navigation("Educations");
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Attendance", b =>
