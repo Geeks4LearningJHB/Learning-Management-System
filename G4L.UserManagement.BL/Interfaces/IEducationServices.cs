@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace G4L.UserManagement.BL.Interfaces
 {
+
     public interface IEducationService
-    {
+    { 
         Task RegisterUserAsync(EducationRequest education);
+        Task<IEnumerable<Education>> ListEducationAsync(Guid id);
     }
 }

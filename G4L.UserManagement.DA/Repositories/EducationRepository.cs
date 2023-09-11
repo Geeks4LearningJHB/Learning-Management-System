@@ -35,29 +35,42 @@ namespace G4L.UserManagement.DA.Repositories
         public async Task PostQualifcationsAsync(EducationRequest model)
         {
 
-            if (_databaseContext.Educations.Any(x => x.UserId == model.UserId))
-                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
-                {
-                    ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
-                    Message = "Form has already been submitted"
-                }));
+            //if (_databaseContext.Educations.Any(x => x.UserId == model.UserId))
+            //    throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+            //    {
+            //        ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
+            //        Message = "Form has already been submitted"
+            //    }));
 
             var education = _mapper.Map<Education>(model);
         
             _databaseContext.Educations.AddAsync(education);
             await _databaseContext.SaveChangesAsync();
-      
         }
+
+       
+
+
+        //public async Task<List<Education>> GetAllAsync()
+        //{
+        //    return await _databaseContext.Set<Education>().ToListAsync();
+        //}
+
 
 
         public Task<bool> UpdateAsync(EducationRequest education)
         {
             throw new NotImplementedException();
         }
-
-        Task<bool> IEducationRepository.UpdateAsync(Education education)
+        public async Task<IEnumerable<Education>> ListEducationAsync(Guid userId)
         {
-            throw new NotImplementedException();
+            return await _databaseContext.Set<Education>()
+                .Where(x => x.UserId == userId)
+                .ToListAsync();
         }
+
+
+
+
     }
 }

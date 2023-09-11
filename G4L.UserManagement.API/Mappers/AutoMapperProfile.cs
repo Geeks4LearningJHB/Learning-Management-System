@@ -17,11 +17,16 @@ namespace G4L.UserManagement.API.Mappers
             CreateMap<User, UserResponse>().ReverseMap();
             CreateMap<User, TraineeResponse>().ReverseMap();
             CreateMap<User, TrainerResponse>().ReverseMap();
+            CreateMap<Education, EducationResponse>().ReverseMap();
+            CreateMap<User, PersonalInformationResponse>().ReverseMap();
+
 
             CreateMap<UserRequest, User>().ReverseMap();
             CreateMap<AddUserRequest, User>().ReverseMap();
             CreateMap<LeaveRequest, Leave>().ReverseMap();
             CreateMap<EducationRequest, Education>().ReverseMap();
+            CreateMap<PersonalInformationRequest, User>().ReverseMap();
+
             CreateMap<ApproverRequest, Approver>().ReverseMap();
             CreateMap<DocumentRequest, Document>().ReverseMap();
             CreateMap<LeaveScheduleRequest, LeaveSchedule>().ReverseMap();

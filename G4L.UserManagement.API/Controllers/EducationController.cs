@@ -13,6 +13,7 @@ using G4L.UserManagement.API.Authorization;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.Infrustructure.Services;
 using System.Security.Claims;
+using System.Collections.Generic;
 
 namespace G4L.UserManagement.API.Controllers
 {
@@ -51,6 +52,17 @@ namespace G4L.UserManagement.API.Controllers
             }
         }
 
+     
+
+
+
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> ListEducationAsync(Guid userId)
+        {
+            var educationList = await _educationService.ListEducationAsync(userId);
+            return Ok(educationList);
+        }
+
     }
-}
+} /*return Ok(new { Message = "User by ID found successfully." });*/
 

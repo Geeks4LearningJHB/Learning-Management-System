@@ -19,6 +19,9 @@ namespace G4L.UserManagement.BL.Models
         public string Phone { get; set; }
         [Required]
         public string Email { get; set; }
+        public string Gender { get; set; }
+        public string Disability { get; set; }
+        public string Race { get; set; }
         public Guid? SponsorId { get; set; }
         public List<Guid> Clients { get; set; }
         public Career? Career { get; set; }

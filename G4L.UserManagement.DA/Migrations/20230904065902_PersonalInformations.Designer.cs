@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace G4L.UserManagement.DA.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230825055616_Educations")]
-    partial class Educations
+    [Migration("20230904065902_PersonalInformations")]
+    partial class PersonalInformations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -126,23 +126,26 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EnglishMarks")
+                    b.Property<string>("EnglishMark")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FieldOfStudy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MathMarks")
+                    b.Property<string>("MathMark")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MathSubjects")
+                    b.Property<string>("MathSubject")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PostMatricQualification")
+                    b.Property<string>("Qualifications")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -391,13 +394,7 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Disability")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdNumber")
@@ -416,9 +413,6 @@ namespace G4L.UserManagement.DA.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Race")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Role")

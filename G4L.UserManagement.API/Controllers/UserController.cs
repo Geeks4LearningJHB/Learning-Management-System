@@ -3,6 +3,7 @@ using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
+using G4L.UserManagement.BL.Models.Response;
 using G4L.UserManagement.DA;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,7 +24,7 @@ namespace G4L.UserManagement.API.Controllers
         {
             _logger = logger;
             _userService = userService;
-        } 
+        }
 
         [Authorize(Role.Super_Admin, Role.Admin, Role.Trainer)]
         [HttpGet]
@@ -46,7 +47,7 @@ namespace G4L.UserManagement.API.Controllers
             return Ok(await _userService.GetUsersByRoleAsync(role));
         }
 
-        [Authorize(Role.Super_Admin,Role.Admin)]
+        [Authorize(Role.Super_Admin, Role.Admin)]
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] UserRequest user)
         {
@@ -54,7 +55,7 @@ namespace G4L.UserManagement.API.Controllers
             return Ok();
         }
 
-        
+
         [Authorize(Role.Super_Admin, Role.Admin, Role.Applicant)]
         [HttpPut]
         public async Task<IActionResult> PutAsync([FromBody] UpdateRequest user)
@@ -99,5 +100,19 @@ namespace G4L.UserManagement.API.Controllers
 
             return Ok(new { Message = "User registered successfully." });
         }
+
+        [HttpPost("personal")]
+        public async Task<IActionResult> PostAsync([FromBody] PersonalInformationRequest model, Guid id)
+        {
+            await _userService.AddPersonalAsync(model, id);
+            return Ok(new { Message = "Personal post successfully." });
+        }
+
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetPersonal(Guid id)
+        //{
+        //    await _userService.GetPersonalAsync(id);
+        //    return Ok(new { Message = "Personal get successfully." });
+        //}
     }
 }

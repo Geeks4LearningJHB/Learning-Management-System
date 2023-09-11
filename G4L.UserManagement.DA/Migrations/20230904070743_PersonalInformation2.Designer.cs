@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace G4L.UserManagement.DA.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230823075600_Applicants")]
-    partial class Applicants
+    [Migration("20230904070743_PersonalInformation2")]
+    partial class PersonalInformation2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,50 +20,6 @@ namespace G4L.UserManagement.DA.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("G4L.UserManagement.BL.Entities.Applicant", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("CourseOfInterest")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Disability")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EnglishMark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FieldOfStudy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HighestPostMatricQualification")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MathMark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Race")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Applicants");
-                });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Approver", b =>
                 {
@@ -185,8 +141,11 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("PostMatricQualification")
+                    b.Property<string>("Qualifications")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 

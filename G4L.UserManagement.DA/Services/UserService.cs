@@ -5,6 +5,8 @@ using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
+using G4L.UserManagement.BL.Models.Response;
+using G4L.UserManagement.DA.Repositories;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,16 @@ namespace G4L.UserManagement.Infrustructure.Services
         public async Task RegisterUserAsync(UserRequest model)
         {
             await _userRepository.CreateUserAsync(model);
+        }
+
+        public async Task AddPersonalAsync(PersonalInformationRequest model, Guid id)
+        {
+            await _userRepository.AddPersonalAsync(model, id);
+        }
+
+        public async Task GetPersonalAsync(Guid id)
+        {
+            await _userRepository.GetByIdAsync(id);
         }
 
         public async Task SignupUserAsync(AddUserRequest model)
@@ -79,6 +91,11 @@ namespace G4L.UserManagement.Infrustructure.Services
             return await _userRepository.GetByUserByEmailAsync(email);
         }
 
+        //public async Task AddingPersonalFields(PersonalInformationRequest model)
+        //{
+        //    await _userRepository.AddPersonalInformationFields(model);
+        //}
+
 
         public async Task<User> GetUserByIdAsync(Guid id)
         {
@@ -119,6 +136,27 @@ namespace G4L.UserManagement.Infrustructure.Services
             user.LearnershipStartDate = model.LearnershipStartDate;
             user.Phone = model.Phone;
             user.Role = (Role)model.Role;
+
+            await _userRepository.UpdateAsync(user);
+        }
+
+
+
+        public async Task UpdatePersonalInformationAsync(PersonalInformationRequest model)
+        {
+            var user = await _userRepository.GetByIdAsync(model.Id);
+
+          
+
+            // Update the following;
+            user.Name = model.Name;
+            user.Surname = model.Surname;  
+            user.Email = model.Email;
+            user.IdNumber = model.IdNumber;
+            user.Disability = model.Disability;
+            user.Gender = model.Email;
+            user.Race = model.Phone;
+            
 
             await _userRepository.UpdateAsync(user);
         }
