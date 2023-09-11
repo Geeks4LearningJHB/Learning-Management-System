@@ -51,18 +51,9 @@ namespace G4L.UserManagement.API.Controllers
                 return StatusCode(500, new { Message = "An error occurred while creating education." });
             }
         }
-
-     
-
-
-
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> ListEducationAsync(Guid userId)
-        {
-            var educationList = await _educationService.ListEducationAsync(userId);
-            return Ok(educationList);
-        }
+        
 
     }
-} /*return Ok(new { Message = "User by ID found successfully." });*/
+}
+
 

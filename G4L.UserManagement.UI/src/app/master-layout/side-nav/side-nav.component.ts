@@ -10,6 +10,7 @@ import {
   Dashboard,
   GoalManagement,
   IKMManagement,
+  LearnershipApplications,
   LeaveManagement,
   UserManagement,
 } from 'src/app/shared/global/routing.management';
@@ -76,9 +77,11 @@ export class SideNavComponent implements OnInit {
         return [
           Dashboard,
           UserManagement,
+          LearnershipApplications,
           AttendanceRegister,
           LeaveManagement,
           IKMManagement,
+
         ];
       case Roles.Trainer:
         return [Dashboard, AttendanceRegister, LeaveManagement, IKMManagement];

@@ -5,6 +5,7 @@ using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
+using G4L.UserManagement.DA.Migrations;
 using G4L.UserManagement.Infrustructure.Repositories;
 using Google;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Education = G4L.UserManagement.BL.Entities.Education;
 
 namespace G4L.UserManagement.DA.Repositories
 {
@@ -43,13 +45,10 @@ namespace G4L.UserManagement.DA.Repositories
             //    }));
 
             var education = _mapper.Map<Education>(model);
-        
+
             _databaseContext.Educations.AddAsync(education);
             await _databaseContext.SaveChangesAsync();
         }
-
-       
-
 
         //public async Task<List<Education>> GetAllAsync()
         //{
@@ -57,20 +56,39 @@ namespace G4L.UserManagement.DA.Repositories
         //}
 
 
+        public async Task<List<string>> GetCoursesOfInterestAsync(Guid userId)
+        {
+            return await _databaseContext.Educations
+                .Where(education => education.UserId == userId)
+                .Select(e => e.CourseOfInterest)
+                .ToListAsync();
+        }
+
 
         public Task<bool> UpdateAsync(EducationRequest education)
         {
             throw new NotImplementedException();
         }
+
         public async Task<IEnumerable<Education>> ListEducationAsync(Guid userId)
         {
             return await _databaseContext.Set<Education>()
                 .Where(x => x.UserId == userId)
                 .ToListAsync();
+
+            //Task<bool> IEducationRepository.UpdateAsync(Education education)
+            //{
+            //    throw new NotImplementedException();
+            //}
         }
+        public async Task<Education> GetEducationByUserIdAsync(Guid userId)
+        {
+            return await Task.Run(() =>
+            {
+                return _databaseContext.Set<Education>()
+                    .FirstOrDefault(x => x.UserId == userId);
+            });
 
-
-
-
+        }
     }
 }

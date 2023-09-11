@@ -10,6 +10,7 @@ using G4L.UserManagement.DA.Services;
 using G4L.UserManagement.Infrustructure.Repositories;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,10 +49,10 @@ namespace G4L.UserManagement.DA.Services
 
 
 
-        public async Task GetEducationByUserIdAsync(Guid userId)
-        {
-             await _educationRepository.GetByIdAsync(userId);
-        }
+        //public async Task GetEducationByUserIdAsync(Guid userId)
+        //{
+        //     await _educationRepository.GetByIdAsync(userId);
+        //}
 
         public async Task RegisterUserAsync(EducationRequest education)
         {
@@ -60,22 +61,19 @@ namespace G4L.UserManagement.DA.Services
             await _educationRepository.PostQualifcationsAsync(education);
         }
 
-      
         public async Task<IEnumerable<Education>> ListEducationAsync(Guid userId)
         {
             return await _educationRepository.ListEducationAsync(userId);
         }
 
+
+
+        public async Task<Education> GetEducationByUserIdAsync(Guid userId)
+        {
+            return await _educationRepository.GetEducationByUserIdAsync(userId);
+
+        }
     }
 }
 
 
-//private readonly IApplicantRepository _applicantRepository;
-
-
-
-
-//public async Task RegisterUserAsync(ApplicantRequest model)
-//{
-//    await _applicantRepository.CreateUserAsync(model);
-//}

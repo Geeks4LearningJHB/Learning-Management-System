@@ -62,6 +62,8 @@ namespace G4L.UserManagement.Infrustructure.Repositories
             await _databaseContext.SaveChangesAsync();
         }
 
+       
+
         public async Task AddUserAsync(AddUserRequest model)
         {
             // validate
@@ -102,11 +104,13 @@ namespace G4L.UserManagement.Infrustructure.Repositories
 
         private async Task LinkSponsorAsync(UserRequest model, User user)
         {
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 switch (user.Role)
                 {
                     case Role.Trainer:
-                        model.Clients.ForEach(x => {
+                        model.Clients.ForEach(x =>
+                        {
                             _databaseContext.SponsoredUsers.Add(new SponsoredUser
                             {
                                 UserId = user.Id,
@@ -120,7 +124,7 @@ namespace G4L.UserManagement.Infrustructure.Repositories
                         _databaseContext.SponsoredUsers.Add(new SponsoredUser
                         {
                             UserId = user.Id,
-                            SponsorId = (Guid) model.SponsorId,
+                            SponsorId = (Guid)model.SponsorId,
                             User = user,
                             Sponsor = _databaseContext.Sponsors.Where(y => y.Id == model.SponsorId).FirstOrDefault(),
                         });
@@ -167,5 +171,8 @@ namespace G4L.UserManagement.Infrustructure.Repositories
                     .AsEnumerable();
             });
         }
+      
+
+
     }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { UploadService } from 'src/app/shared/service/fileupload.service';
+import { FileUpload } from 'src/app/leave-management/models/file-upload'; // Import the FileUpload model
 
 @Component({
   selector: 'app-applicant-attachments',
@@ -16,7 +18,12 @@ export class ApplicantAttachmentsComponent implements OnInit {
   sizeErrors: { [section: string]: string | undefined } = {};
   formatErrors: { [section: string]: string | undefined } = {};
 
-  constructor(private route: Router, private formBuilder: FormBuilder, public modalRef: MdbModalRef<any>) { }
+  constructor(
+    private route: Router,
+    private formBuilder: FormBuilder,
+    public modalRef: MdbModalRef<any>,
+    private uploadService: UploadService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -31,58 +38,72 @@ export class ApplicantAttachmentsComponent implements OnInit {
   handleFileInput(event: Event, section: string) {
     const inputElement = event.target as HTMLInputElement;
     const newFiles: FileList | null = inputElement.files;
-    if (newFiles) {
+
+    if (newFiles && newFiles.length > 0) {
+      this.selectedFiles[section] = Array.from(newFiles);
+    } else {
       this.selectedFiles[section] = [];
-      for (let i = 0; i < newFiles.length; i++) {
-        this.selectedFiles[section].push(newFiles[i]);
-      }
     }
+
     this.selectFilesMessages[section] = undefined;
     this.uploadMessages[section] = undefined;
     this.sizeErrors[section] = undefined;
     this.formatErrors[section] = undefined;
   }
 
-  uploadFiles(section: string) {
+  async uploadFiles(section: string) {
     const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
     let allFilesUploadedSuccessfully = true;
-
+  
     if (!this.selectedFiles[section] || this.selectedFiles[section].length === 0) {
       this.selectFilesMessages[section] = 'Please select one or more files to upload.';
-      return;
-    }
-
-    for (const file of this.selectedFiles[section]) {
-      if (file.size > maxSize) {
-        this.sizeErrors[section] = 'File size exceeds the limit of 5 MB.';
-        allFilesUploadedSuccessfully = false;
-        break;
+      allFilesUploadedSuccessfully = false;
+    } else {
+      for (const file of this.selectedFiles[section]) {
+        if (file.size > maxSize) {
+          this.sizeErrors[section] = 'File size exceeds the limit of 5 MB.';
+          allFilesUploadedSuccessfully = false;
+          break;
+        }
+  
+        const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
+        const fileExtension = file.name.split('.').pop()?.toLowerCase();
+        if (!allowedExtensions.includes(fileExtension || '')) {
+          this.formatErrors[section] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
+          allFilesUploadedSuccessfully = false;
+          break;
+        }
+  
+        // Create a FileUpload object
+        const fileUpload: FileUpload = {
+          file: file,
+          url: '',
+          key: undefined,
+          name: undefined,
+          uploadProgress: undefined
+        };
+  
+        try {
+          await this.uploadService.genericUploadToStorage(fileUpload, section);
+          // File uploaded successfully, so set the success message
+          this.uploadMessages[section] = 'File uploaded successfully.';
+        } catch (error) {
+          console.error('Error uploading file:', error);
+          // Set the error message here, but do not break the loop
+          this.uploadMessages[section] = 'An error occurred while uploading the file: ' + error;
+          allFilesUploadedSuccessfully = false;
+        }
       }
-
-      const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
-      const fileExtension = file.name.split('.').pop()?.toLowerCase();
-      if (!allowedExtensions.includes(fileExtension || '')) {
-        this.formatErrors[section] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
-        allFilesUploadedSuccessfully = false;
-        break;
-      }
     }
-
+  
     if (allFilesUploadedSuccessfully) {
-      // Implement the upload logic for each file based on the section
-      this.uploadMessages[section] = 'File uploaded successfully.';
+      // Display a success message if all files uploaded successfully
+      this.uploadMessages[section] = 'All files uploaded successfully.';
     } else {
-      this.uploadMessages[section] = undefined;
+      // Clear the message if there are errors
+      // this.uploadMessages[section] = undefined;
     }
   }
-
-  getFileSize(size: number): string {
-    const fileSizeInKB = Math.round(size / 1024);
-    if (fileSizeInKB < 1024) {
-      return fileSizeInKB + ' KB';
-    } else {
-      const fileSizeInMB = (fileSizeInKB / 1024).toFixed(2);
-      return fileSizeInMB + ' MB';
-    }
-  }
-}
+  
+  
+}  

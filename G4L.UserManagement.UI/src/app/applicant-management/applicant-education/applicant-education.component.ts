@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApplicantService } from '../services/applicantService';
+import { ApplicantService, Education } from '../services/applicantService';
 import {
   AbstractControl,
   FormBuilder,
@@ -22,7 +22,7 @@ export class ApplicantEducationComponent implements OnInit {
   educationForm!: FormGroup;
   userId :any;
   keys = Object.keys;
-
+ 
   serverErrorMessage: any;
 
   constructor(
@@ -40,6 +40,7 @@ export class ApplicantEducationComponent implements OnInit {
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
     this.buildForm();
+
   }
   buildForm() {
     this.educationForm = this.formBuilder.group({

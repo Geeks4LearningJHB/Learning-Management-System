@@ -57,6 +57,7 @@ namespace G4L.UserManagement.API.Controllers
 
 
         [Authorize(Role.Super_Admin, Role.Admin, Role.Applicant)]
+
         [HttpPut]
         public async Task<IActionResult> PutAsync([FromBody] UpdateRequest user)
         {
@@ -112,7 +113,15 @@ namespace G4L.UserManagement.API.Controllers
         //public async Task<IActionResult> GetPersonal(Guid id)
         //{
         //    await _userService.GetPersonalAsync(id);
-        //    return Ok(new { Message = "Personal get successfully." });
+        //    return Ok(new { Message = "Personal information GET successful." });
         //}
+
+        [HttpGet("personal{id}")]
+        public async Task<IActionResult> GetPersonal(Guid id)
+        {
+            await _userService.GetPersonalAsync(id);
+            
+                return Ok(new { Message = "Personal information GET successful." }); ;
+        }
     }
 }

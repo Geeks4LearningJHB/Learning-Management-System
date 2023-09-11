@@ -30,12 +30,6 @@ namespace G4L.UserManagement.Infrustructure.Services
             _tokenService = tokenService;
             _mapper = mapper;
         }
-
-        /// <summary>
-        /// Allows the registeration of a user
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
         public async Task RegisterUserAsync(UserRequest model)
         {
             await _userRepository.CreateUserAsync(model);
@@ -170,5 +164,7 @@ namespace G4L.UserManagement.Infrustructure.Services
         {
             return await _userRepository.GetUsersByRoleAsync(role);
         }
+
+        
     }
 }

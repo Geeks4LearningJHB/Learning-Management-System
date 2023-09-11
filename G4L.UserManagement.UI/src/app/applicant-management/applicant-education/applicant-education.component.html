@@ -1,5 +1,5 @@
 <div class="fluid-container">
-  <form action="#" [formGroup]="educationForm">
+  <form action="#" [formGroup]="educationForm"ngFor="let education of educations">
     <div class="row m-0">
       <div class="col-3"></div>
       <div class="col form-container mt-0">
@@ -192,6 +192,9 @@
             </button>
             <button (click)="onSubmit()" class="done-btn">Done</button>
           </div>
+          <ul>
+            
+          </ul>
         </div>
       </div>
     </div>
