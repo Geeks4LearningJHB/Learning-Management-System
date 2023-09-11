@@ -21,8 +21,10 @@ namespace G4L.UserManagement.API.Controllers
         public IActionResult SendEmail(EmailDto request)
         {
             
-            request.Subject = "New Subject Here";
+            request.Subject = "Learnership Application Confirmation";
+            request.Body = $"Hello {request.To},\n\nThis is your email body with your name!";
             _emailService.SendEmail(request);
+
             return Ok();
         }
     }
