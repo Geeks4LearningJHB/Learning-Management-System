@@ -87,5 +87,11 @@
 				</div>
 			</footer>
 		</form>
+		<div *ngIf="user">
+			<p>User ID: {{ user.id }}</p>
+			<p>Name: {{ user.name }}</p>
+			<!-- Add more properties as needed -->
+		  </div>
+		  
 	</div>
 </div>

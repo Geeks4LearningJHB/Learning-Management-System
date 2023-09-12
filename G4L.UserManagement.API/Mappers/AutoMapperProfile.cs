@@ -50,7 +50,6 @@ namespace G4L.UserManagement.API.Mappers
             CreateMap<GoalTask, GoalTaskResponse>().ReverseMap();
             CreateMap<GoalTask, GoalTaskRequest>().ReverseMap();
 
-
             CreateMap<GoalComment, GoalCommentRequest>().ReverseMap();
             CreateMap<GoalComment, GoalCommentResponse>().ReverseMap();
         }

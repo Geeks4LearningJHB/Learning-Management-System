@@ -23,9 +23,9 @@ namespace G4L.UserManagement.API.Controllers
         {
             _logger = logger;
             _userService = userService;
-        } 
-
-        [Authorize(Role.Super_Admin, Role.Admin, Role.Trainer)]
+        }
+        [AllowAnonymous]
+        [Authorize(Role.Super_Admin, Role.Admin, Role.Trainer, Role.Applicant)]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -70,7 +70,7 @@ namespace G4L.UserManagement.API.Controllers
             await _userService.DeleteUserAsync(id);
             return Ok();
         }
-
+        [Authorize(Role.Super_Admin, Role.Admin, Role.Applicant)]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {

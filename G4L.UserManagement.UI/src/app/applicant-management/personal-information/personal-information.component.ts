@@ -19,6 +19,7 @@ import { UserService } from 'src/app/user-management/services/user.service';
 export class PersonalInformationComponent implements OnInit {
 
   personalDetails!: FormGroup;
+  user: any; 
   keys = Object.keys;
 
   serverErrorMessage: any;
@@ -56,6 +57,9 @@ export class PersonalInformationComponent implements OnInit {
     this.serverErrorMessage = ''; 
   } 
 
+  
+  
+
   onPersonalDetailsSubmit(): void {
     if (this.personalDetails.valid) {
     //   console.log('Form submitted. Data:', this.personalDetails.value);
@@ -91,6 +95,12 @@ export class PersonalInformationComponent implements OnInit {
     // }
 
     // alert("Heyy;lo")
+  }
+  getUserDetails(userId: string | null) {
+    this.userService.getUserById(userId).subscribe((response: any) => {
+      this.user = response;
+      console.log(response)
+    });
   }
 
 

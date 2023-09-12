@@ -3,7 +3,7 @@ import { Applicant, ApplicantService } from '../services/applicantService';
 import { constants } from 'src/app/shared/global/global.constants';
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
-import { LearneshipApplicationModalComponent } from './learneship-application-modal/learneship-application-modal.component';
+
 
 @Component({
   selector: 'app-learnership-applications',
@@ -47,14 +47,7 @@ export class LearnershipApplicationsComponent implements OnInit {
   }
 
 
-  openEducationApplication(): void {
-    this.modalHandler.openMdbModal<LearneshipApplicationModalComponent>({
-      component: LearneshipApplicationModalComponent,
-      data: null,
-      ignoreBackdropClick: true,
-      width: 50,
-    });
-  }
+
   openEducationModal(): void {
     this.modalHandler.openMdbModal<ApplicantEducationComponent>({
       component: ApplicantEducationComponent,
