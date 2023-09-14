@@ -1,156 +1,23 @@
-<div class="card-body">
-  <div class="card-header pb-0">
-    <div class="progress-bar" id="progress-bar">
-      <div class="progress-bar-inner">
-        <div class="progress-bar-text">Your application progress</div>
-      </div>
+<!-- progress-tracker.component.html -->
+<div class="progress-tracker">
+  <div class="progress-bar">
+    <div class="progress-label">Profile</div>
+    <div class="progress">
+      <div class="progress-bar-fill" [style.width]="profileProgress + '%'"></div>
     </div>
-
-    <div class="container">
-      <div class="tracking">Track your progress</div>
-      <div class="row">
-        
-          <div class="accordion accordion-flush" id="accordionFlushExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingOne">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseOne"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseOne"
-                >
-                  Step 1: Personal Details
-                </button>
-              </h2>
-              <div
-                id="flush-collapseOne"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-headingOne"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  <h3
-                    onClick="location.href='personal-details'"
-                    class="progress-title"
-                  >
-                    Personal Information - 100%
-                  </h3>
-                  <div class="progress yellow">
-                    <div
-                      onClick="location.href='personal-details'"
-                      class="progress-bar"
-                      style="width: 100%; background-color: #ffb800"
-                    ></div>
-                  </div>
-      
-                  <h3 class="progress-title">Education - 50%</h3>
-                  <div
-                    onClick="location.href = 'applicant-education'"
-                    class="progress blue"
-                  >
-                    <div
-                      onClick="location.href = 'applicant-education'"
-                      class="progress-bar"
-                      style="width: 50%; background-color: #58d4fb"
-                    ></div>
-                  </div>
-      
-                  <h3 class="progress-title">Attachments - 65%</h3>
-                  <div
-                    onClick="location.href = 'applicant-attachments'"
-                    class="progress green"
-                  >
-                    <div
-                      onClick="location.href = 'applicant-attachments'"
-                      class="progress-bar"
-                      style="width: 65%; background-color: #06c819"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingTwo">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseTwo"
-                >
-                  Step 2: Aptitude Test (IKM)
-                </button>
-              </h2>
-              <div
-                id="flush-collapseTwo"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-headingTwo"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  <h3 class="progress-title">
-                    Aptitute Test (IKM) <i class="fa-solid fa-lock"></i>
-                  </h3>
-        
-                  <h1 class="progress-title">
-                    (Personal details need to be approved to unlock this stage)
-                  </h1>
-                  <div class="progress grey">
-                    <div
-                      class="progress-bar"
-                      style="width: 0%; background-color: #d9d9d9"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingThree">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseThree"
-                  aria-expanded="false"
-                  aria-controls="flush-collapseThree"
-                >
-                  Stage 3: Bootcamp
-                </button>
-              </h2>
-              <div
-                id="flush-collapseThree"
-                class="accordion-collapse collapse"
-                aria-labelledby="flush-headingThree"
-                data-bs-parent="#accordionFlushExample"
-              >
-                <div class="accordion-body">
-                  <h3 class="progress-title">
-                    Bootcamp Progress <i class="fa-solid fa-lock"></i>
-                  </h3>
-                  <h1 class="progress-title">
-                    (Aptitude test results need to be approved to unlock this stage)
-                  </h1>
-                  <div class="progress grey">
-                    <div
-                      class="progress-bar"
-                      style="width: 0%; background-color: #d9d9d9"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-        
-      </div>
-    </div>
-   
-
   </div>
-  <div class="p-2" style="border-radius: 6px">
-    <div class="card rounded-1 shadow-sm notification-card"></div>
+
+  <div class="progress-bar">
+    <div class="progress-label">Education</div>
+    <div class="progress">
+      <div class="progress-bar-fill" [style.width]="educationProgress + '%'"></div>
+    </div>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-label">Attachments</div>
+    <div class="progress">
+      <div class="progress-bar-fill" [style.width]="attachmentsProgress + '%'"></div>
+    </div>
   </div>
 </div>

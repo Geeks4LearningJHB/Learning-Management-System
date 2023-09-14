@@ -416,3 +416,11 @@ align-items: center;
   color: red;
   
 }
+.uploaded {
+  color: gray;
+  font-size: large;
+  /* margin-left: 40%; */
+text-align: center;
+
+  
+}
