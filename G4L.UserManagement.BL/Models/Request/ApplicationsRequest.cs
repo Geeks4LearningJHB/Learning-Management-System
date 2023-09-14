@@ -18,6 +18,13 @@ namespace G4L.UserManagement.BL.Models.Request
         public string Gender { get; set; }
         public string Disability { get; set; }
         public string Race { get; set; }
-     
+        public string MathSubject { get; set; }
+        public string MathMark { get; set; }
+        public string EnglishMark { get; set; }
+        public string Qualifications { get; set; }
+        public string FieldOfStudy { get; set; }
+        public string CourseOfInterest { get; set; }
     }
+
 }
+

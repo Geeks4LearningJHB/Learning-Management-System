@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace G4L.UserManagement.DA.Migrations
 {
-    public partial class Applicant_Attachments : Migration
+    public partial class Applications : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-         
+            
 
             migrationBuilder.CreateTable(
                 name: "ApplicantsAttachements",
@@ -24,6 +24,10 @@ namespace G4L.UserManagement.DA.Migrations
                 {
                     table.PrimaryKey("PK_ApplicantsAttachements", x => x.Id);
                 });
+
+         
+
+           
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -31,23 +35,23 @@ namespace G4L.UserManagement.DA.Migrations
             migrationBuilder.DropTable(
                 name: "ApplicantsAttachements");
 
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.DropTable(
+                name: "Applications");
+
+            migrationBuilder.DropTable(
+                name: "Educations");
+
+            migrationBuilder.DropColumn(
                 name: "Disability",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true);
+                table: "Users");
 
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.DropColumn(
                 name: "Gender",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true);
+                table: "Users");
 
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.DropColumn(
                 name: "Race",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true);
+                table: "Users");
         }
     }
 }

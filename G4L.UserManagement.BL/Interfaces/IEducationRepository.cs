@@ -13,7 +13,6 @@ namespace G4L.UserManagement.BL.Interfaces
         Task PostQualifcationsAsync(EducationRequest model);
         Task<List<string>> GetCoursesOfInterestAsync(Guid userId);
         Task<Education> GetEducationByUserIdAsync(Guid userId);
-        //Task<bool> UpdateAsync(Education education);
-        Task<bool> UpdateAsync(EducationRequest education);
     }
+  
 }

@@ -1,5 +1,4 @@
-﻿using G4L.UserManagement.BL.Entities;
-using G4L.UserManagement.BL.Interfaces;
+﻿using G4L.UserManagement.BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace G4L.UserManagement.BL.Interfaces
 {
-    public interface IMailRepository 
+    public interface IEmailService
     {
-
+        Task SendEmail(EmailDto request);
     }
 }

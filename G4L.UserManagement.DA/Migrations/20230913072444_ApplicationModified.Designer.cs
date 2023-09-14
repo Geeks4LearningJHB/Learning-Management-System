@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace G4L.UserManagement.DA.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230831113302_RemovedUserId")]
-    partial class RemovedUserId
+    [Migration("20230913072444_ApplicationModified")]
+    partial class ApplicationModified
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,11 +21,40 @@ namespace G4L.UserManagement.DA.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.ApplicantAttachments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicantsAttachements");
+                });
+
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Applications", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CourseOfInterest")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -36,10 +65,22 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("EnglishMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FieldOfStudy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MathMark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MathSubject")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ModifiedDate")
@@ -49,6 +90,9 @@ namespace G4L.UserManagement.DA.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Qualifications")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Race")

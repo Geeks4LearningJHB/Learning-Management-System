@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApplicantService, Education } from '../services/applicantService';
+import { ApplicantService} from '../services/applicantService';
 import {
   AbstractControl,
   FormBuilder,

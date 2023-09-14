@@ -58,15 +58,8 @@ namespace G4L.UserManagement.DA.Repositories
                 .ToListAsync();
         }
 
-        public Task<bool> UpdateAsync(EducationRequest education)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Task<bool> IEducationRepository.UpdateAsync(Education education)
-        //{
-        //    throw new NotImplementedException();
-        //}
+   
+    
         public async Task<Education> GetEducationByUserIdAsync(Guid userId)
         {
             return await Task.Run(() =>

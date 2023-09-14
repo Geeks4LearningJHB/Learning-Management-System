@@ -1,10 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { Applicant, ApplicantService } from '../services/applicantService';
+import { ApplicantService } from '../services/applicantService';
 import { constants } from 'src/app/shared/global/global.constants';
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { EnrolComponent } from 'src/app/user-management/enrol/enrol.component';
+import { LearnershipApplicationModalComponent } from './learnership-application-modal/learnership-application-modal.component';
 
-
+export interface Applicant {
+  userId: "";
+  name: string;
+  surname:string;
+  email:string;
+  phone:number;
+  idNumber: number;
+  race:string;
+  gender:string;
+  disability:string | null;
+  englishMark:string;
+  mathSubject:string;
+  mathMark:string;
+  courseOfInterest:string;
+  fieldOfStudy:string;
+  qualifications:string;
+}
 @Component({
   selector: 'app-learnership-applications',
   templateUrl: './learnership-applications.component.html',
@@ -15,19 +34,19 @@ export class LearnershipApplicationsComponent implements OnInit {
   showPersonalDetails = true;
   showEducationDetails = false;
   activeButton: string = 'personal';
+  modalDialog: MdbModalRef<LearnershipApplicationModalComponent> | null = null;
   // applicantions: any;
   // userRole: any;
 
   constructor(
-    private applicantService: ApplicantService, private modalHandler: GoalModalHandlerService<any>
+    private applicantService: ApplicantService,    private modalService: MdbModalService, private modalHandler: GoalModalHandlerService<any>
   ) {}
 
   ngOnInit(): void {
     this.applicantService.getAllApplicantions().subscribe(
       (result) => {
-        // Bind Data to the View
         this.applicants = result;
-        console.log(this.applicants)
+    
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -54,6 +73,21 @@ export class LearnershipApplicationsComponent implements OnInit {
       data: null,
       ignoreBackdropClick: true,
       width: 50,
+    });
+  }
+  openDialog(user?: any) {
+    this.modalDialog = this.modalService.open(LearnershipApplicationModalComponent, {
+      animation: true,
+      backdrop: true,
+      containerClass: 'modal top fade modal-backdrop',
+      data: { user: user, editCrucialInfo: true },
+      ignoreBackdropClick: false,
+      keyboard: true,
+      modalClass: 'modal-xl modal-dialog-centered',
+    });
+
+    this.modalDialog.onClose.subscribe((isUpdated: boolean) => {
+    
     });
   }
   

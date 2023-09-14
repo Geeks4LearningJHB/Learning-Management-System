@@ -6,7 +6,7 @@ import { PersonalInformationComponent } from '../personal-information/personal-i
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
 import { ApplicantAttachmentsComponent } from '../applicant-attachments/applicant-attachments.component';
 import { UserService } from 'src/app/user-management/services/user.service';
-import { ApplicantService, Education } from '../services/applicantService';
+import { ApplicantService} from '../services/applicantService';
 import { any } from 'ramda';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 import { error } from 'console';
