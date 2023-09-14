@@ -2,6 +2,7 @@
 using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
+using G4L.UserManagement.BL.Models.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,9 @@ namespace G4L.UserManagement.BL.Interfaces
         Task<User> GetUserAsync(string email);
         Task<IEnumerable<User>> GetPagedUsersAsync(int skip, int take);
         Task<IEnumerable<User>> GetUsersByRoleAsync(Role role);
+        Task UpdatePersonalInformationAsync(PersonalInformationRequest model);
+        Task AddPersonalAsync(PersonalInformationRequest model, Guid id);
+        Task GetPersonalAsync(Guid id);
+       
     }
 }

@@ -32,7 +32,7 @@ namespace G4L.UserManagement.API.Controllers
 
             request.Subject = "Learnership Application Confirmation";
             request.Body = $"Hello {user.Name},\n\n" + $"{ user.Surname}" +
-            $"This is your email body with your name: {user.Name}";
+            $"This is your email body with your name";
 
 
 

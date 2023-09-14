@@ -178,6 +178,8 @@ namespace G4L.UserManagement.DA.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                b.Property<DateTime>("CreatedDate")
+                    .HasColumnType("datetime2");
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -195,6 +197,7 @@ namespace G4L.UserManagement.DA.Migrations
 
                     b.HasKey("Id");
 
+                b.HasIndex("LeaveId");
                     b.HasIndex("LeaveId");
 
                     b.ToTable("Documents");
@@ -545,11 +548,12 @@ namespace G4L.UserManagement.DA.Migrations
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Document", b =>
-                {
-                    b.HasOne("G4L.UserManagement.BL.Entities.Leave", null)
-                        .WithMany("Documents")
-                        .HasForeignKey("LeaveId");
-                });
+            {
+                b.HasOne("G4L.UserManagement.BL.Entities.Leave", null)
+                    .WithMany("Documents")
+                    .HasForeignKey("LeaveId");
+            });
+               
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Goal", b =>
                 {
@@ -654,3 +658,4 @@ namespace G4L.UserManagement.DA.Migrations
         }
     }
 }
+

@@ -18,6 +18,7 @@ using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Education = G4L.UserManagement.BL.Entities.Education;
 
 namespace G4L.UserManagement.DA.Repositories
 {
@@ -37,18 +38,19 @@ namespace G4L.UserManagement.DA.Repositories
         {
 
             if (_databaseContext.Educations.Any(x => x.UserId == model.UserId))
-                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
-                {
-                    ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
+               throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+               {
+                  ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
                     Message = "Form has already been submitted"
                 }));
 
             var education = _mapper.Map<Education>(model);
-        
+
             _databaseContext.Educations.AddAsync(education);
             await _databaseContext.SaveChangesAsync();
-      
         }
+
+
 
         public async Task<List<string>> GetCoursesOfInterestAsync(Guid userId)
         {
@@ -58,8 +60,13 @@ namespace G4L.UserManagement.DA.Repositories
                 .ToListAsync();
         }
 
-   
-    
+
+        public async Task<IEnumerable<Education>> ListEducationAsync(Guid userId)
+        {
+            return await _databaseContext.Set<Education>()
+                .Where(x => x.UserId == userId)
+                .ToListAsync();
+        }
         public async Task<Education> GetEducationByUserIdAsync(Guid userId)
         {
             return await Task.Run(() =>
@@ -67,6 +74,7 @@ namespace G4L.UserManagement.DA.Repositories
                 return _databaseContext.Set<Education>()
                     .FirstOrDefault(x => x.UserId == userId);
             });
+
         }
     }
 }

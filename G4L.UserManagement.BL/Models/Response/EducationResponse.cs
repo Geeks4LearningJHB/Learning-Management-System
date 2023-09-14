@@ -11,7 +11,6 @@ public class EducationResponse
     {
 
         public Guid Id { get; set; }
-      
         public string MathSubjects { get; set; }
         public string MathMarks { get; set; }
         public string EnglishMarks { get; set; }
