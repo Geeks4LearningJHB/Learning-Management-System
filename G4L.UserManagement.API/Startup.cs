@@ -20,6 +20,16 @@ using System;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
+
+
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Linq;
+using System.Threading.Tasks;
+using G4L.UserManagement.BL.Entities;
+
+
 namespace G4L.UserManagement.API
 {
     public class Startup
@@ -43,6 +53,15 @@ namespace G4L.UserManagement.API
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 //Debuging purpose
                 options.EnableSensitiveDataLogging();
+
+
+                services.AddScoped<IMailService, MailService>();
+                services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+                services.AddTransient<IMailService, DA.Services.MailService>();
+
+               
+             
+
             }
             );
 
@@ -75,8 +94,13 @@ namespace G4L.UserManagement.API
             services.AddScoped<IGoogleCalendarAPI, GoogleCalendarAPI>();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IApplicantDocumentsService, ApplicantDocumentsService>();
+
             services.AddScoped<IEducationService, EducationService>();
+
+            services.AddScoped<IApplicationsService, ApplicationsService>();
             services.AddScoped<IEducationRepository, EducationRepository>();
+
             services.AddScoped<ILeaveService, LeaveService>();
             services.AddScoped<ISponsorService, SponsorService>();
             services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();
@@ -84,6 +108,11 @@ namespace G4L.UserManagement.API
             services.AddScoped<IGoalService, GoalsService>();
 
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+
+            services.AddScoped<IApplicantDocumentsRepository, ApplicantDocumentsRepository>();
+
+            services.AddScoped<IApplicationsRepository, ApplicationsRepository>();
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILeaveRepository, LeaveRepository>();
             services.AddScoped<ISponsorRepository, SponsorRepository>();

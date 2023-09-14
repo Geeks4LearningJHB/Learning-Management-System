@@ -19,6 +19,8 @@ namespace G4L.UserManagement.API.Authorization
             _roles = roles ?? new Role[] { };
         }
 
+        public string AuthenticationSchemes { get; set; }
+
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             // skip authorization if action is decorated with [AllowAnonymous] attribute

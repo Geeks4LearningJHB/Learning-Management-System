@@ -8,15 +8,20 @@ namespace G4L.UserManagement.BL.Models
 {
     public class UserRequest
     {
+    
         [Required]
         public string Name { get; set; }
         [Required]
         public string Surname { get; set; }
         [Required]
         public string IdNumber { get; set; }
+        public string Gender { get; set; }
+        public string Race { get; set; }
+        public string Disability { get; set; }
         [Required]
         public string ClockInTime { get; set; }
         public string Phone { get; set; }
+     
         [Required]
         public string Email { get; set; }
         public Guid? SponsorId { get; set; }

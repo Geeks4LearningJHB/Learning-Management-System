@@ -11,8 +11,9 @@ namespace G4L.UserManagement.BL.Interfaces
     public interface IEducationRepository : IRepository<Education>
     {
         Task PostQualifcationsAsync(EducationRequest model);
-        Task<Education> GetByIdAsync(Guid id);
-        Task<bool> UpdateAsync(Education education);
+        Task<List<string>> GetCoursesOfInterestAsync(Guid userId);
+        Task<Education> GetEducationByUserIdAsync(Guid userId);
+        //Task<bool> UpdateAsync(Education education);
         Task<bool> UpdateAsync(EducationRequest education);
     }
 }

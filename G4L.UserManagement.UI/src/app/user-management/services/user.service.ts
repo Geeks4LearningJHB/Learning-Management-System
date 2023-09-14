@@ -9,6 +9,9 @@ import { Roles } from 'src/app/shared/global/roles';
   providedIn: 'root'
 })
 export class UserService {
+  sendApplication() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(@Inject(APP_SERVICE_CONFIG) private config:AppConfig,private http: HttpClient) { }
 
@@ -35,6 +38,7 @@ export class UserService {
   }
  
   updateUser( body: any) {
+    console.log(body);
     return this.http.put(`${this.config.apiUrl}/user`, body);
   }
 

@@ -20,6 +20,9 @@ namespace G4L.UserManagement.DA
         public DbSet<User> Users { get; set; }
         public DbSet <Education> Educations { get; set; }
         public DbSet<Document> Documents { get; set; }
+        public DbSet<ApplicantAttachments> ApplicantsAttachements { get; set; }
+
+        public DbSet<Applications> Applications { get; set; }
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<Approver> Approvers { get; set; }
         public DbSet<LeaveSchedule> LeaveSchedules { get; set; }

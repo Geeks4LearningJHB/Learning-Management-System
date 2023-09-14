@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApplicantSuccessComponent } from '../applicant-success/applicant-success.component';
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
@@ -7,19 +7,42 @@ import { ApplicantEducationComponent } from '../applicant-education/applicant-ed
 import { ApplicantAttachmentsComponent } from '../applicant-attachments/applicant-attachments.component';
 import { ApplicantService,  } from '../services/applicantService';
 import { result } from 'lodash';
+import { UserService } from 'src/app/user-management/services/user.service';
+import { any } from 'ramda';
+import { TokenService } from 'src/app/user-management/login/services/token.service';
+import { error } from 'console';
+import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
+
 @Component({
   selector: 'app-applicant-profile-dashboard',
   templateUrl: './applicant-profile-dashboard.component.html',
-  styleUrls: ['./applicant-profile-dashboard.component.css']
+  styleUrls: ['./applicant-profile-dashboard.component.css'],
 })
 export class ApplicantProfileDashboardComponent implements OnInit {
-
   userId: any;
+  serverErrorMessage: any;
   
-  constructor(private modalHandler: GoalModalHandlerService<any>,
-    private applicantService: ApplicantService) { }
+  constructor(
+    private userService: UserService,
+    private applicantService: ApplicantService,
+    private tokenService: TokenService,
+    private modalHandler: GoalModalHandlerService<any>
+  ) {}
 
   ngOnInit(): void {
+    let user: any = this.tokenService.getDecodeToken();
+    this.userId = user.id;
+    
+  }
+  sendApplication(userId: string): void {
+    this.applicantService.applyForLearnership(this.userId).subscribe(
+      (response) => {
+        this.openSubmitModal();
+      },
+      (error) => {
+        alert('You have already applied for learnership');
+      }
+    );
   }
   
   openPersonalInformationModal(): void {
@@ -45,7 +68,6 @@ this.applicantService.getEducationByUserId(userId).subscribe((response: any) => 
     });
   }
   
-
   openEducationModal(): void {
     this.modalHandler.openMdbModal<ApplicantEducationComponent>({
       component: ApplicantEducationComponent,
