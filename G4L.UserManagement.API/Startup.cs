@@ -55,12 +55,9 @@ namespace G4L.UserManagement.API
                 options.EnableSensitiveDataLogging();
 
 
-                services.AddScoped<IMailService, MailService>();
-                services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
-                services.AddTransient<IMailService, DA.Services.MailService>();
+   
 
-               
-             
+        
 
             }
             );
@@ -106,7 +103,7 @@ namespace G4L.UserManagement.API
             services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();
             services.AddScoped<IAttendanceService, AttendanceService>();
             services.AddScoped<IGoalService, GoalsService>();
-
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
 
             services.AddScoped<IApplicantDocumentsRepository, ApplicantDocumentsRepository>();

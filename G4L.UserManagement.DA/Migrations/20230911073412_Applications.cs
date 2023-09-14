@@ -7,23 +7,7 @@ namespace G4L.UserManagement.DA.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Disability",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Gender",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Race",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: true);
+            
 
             migrationBuilder.CreateTable(
                 name: "ApplicantsAttachements",
