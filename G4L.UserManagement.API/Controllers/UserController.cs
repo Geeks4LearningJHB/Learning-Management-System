@@ -115,13 +115,18 @@ namespace G4L.UserManagement.API.Controllers
         //    await _userService.GetPersonalAsync(id);
         //    return Ok(new { Message = "Personal information GET successful." });
         //}
-
+        [AllowAnonymous]
         [HttpGet("personal{id}")]
         public async Task<IActionResult> GetPersonal(Guid id)
         {
-            await _userService.GetPersonalAsync(id);
-            
-                return Ok(new { Message = "Personal information GET successful." }); ;
+
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null)
+                return BadRequest("User Not Found");
+            return Ok(user);
+            //await _userService.GetPersonalAsync(id);
+
+            //    return Ok(new { Message = "Personal information GET successful." }); 
         }
     }
 }

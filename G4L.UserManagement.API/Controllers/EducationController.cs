@@ -32,7 +32,6 @@ namespace G4L.UserManagement.API.Controllers
         }
 
         [HttpPost]
-   
         public async Task<IActionResult> CreateEducationAsync([FromBody] EducationRequest educationRequest)
         {
             try
@@ -51,8 +50,17 @@ namespace G4L.UserManagement.API.Controllers
                 return StatusCode(500, new { Message = "An error occurred while creating education." });
             }
         }
-        
 
+        [AllowAnonymous]
+        [HttpGet("education{userId}")]
+        public async Task<IActionResult> GetPersonal(Guid userId)
+        {
+
+            var user = await _educationService.GetEducationByUserIdAsync(userId);
+            if (user == null)
+                return BadRequest("User Not Found");
+            return Ok(user); 
+        }
     }
 }
 

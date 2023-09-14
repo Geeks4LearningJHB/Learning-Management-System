@@ -164,7 +164,5 @@ namespace G4L.UserManagement.Infrustructure.Services
         {
             return await _userRepository.GetUsersByRoleAsync(role);
         }
-
-        
-    }
+    } 
 }
