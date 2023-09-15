@@ -20,6 +20,16 @@ using System;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
+
+
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Linq;
+using System.Threading.Tasks;
+using G4L.UserManagement.BL.Entities;
+
+
 namespace G4L.UserManagement.API
 {
     public class Startup
@@ -43,6 +53,12 @@ namespace G4L.UserManagement.API
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 //Debuging purpose
                 options.EnableSensitiveDataLogging();
+
+
+   
+
+        
+
             }
             );
 
@@ -78,25 +94,22 @@ namespace G4L.UserManagement.API
             services.AddScoped<IApplicantDocumentsService, ApplicantDocumentsService>();
 
             services.AddScoped<IEducationService, EducationService>();
-<<<<<<< HEAD
-          
-=======
+
             services.AddScoped<IApplicationsService, ApplicationsService>();
             services.AddScoped<IEducationRepository, EducationRepository>();
->>>>>>> 7e34fdbad0006237bbc7cdb09d87bd9c0e0ca54b
+
             services.AddScoped<ILeaveService, LeaveService>();
             services.AddScoped<ISponsorService, SponsorService>();
             services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();
             services.AddScoped<IAttendanceService, AttendanceService>();
             services.AddScoped<IGoalService, GoalsService>();
-
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
-<<<<<<< HEAD
-            services.AddScoped<IEducationRepository, EducationRepository>();
+
             services.AddScoped<IApplicantDocumentsRepository, ApplicantDocumentsRepository>();
-=======
+
             services.AddScoped<IApplicationsRepository, ApplicationsRepository>();
->>>>>>> 7e34fdbad0006237bbc7cdb09d87bd9c0e0ca54b
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILeaveRepository, LeaveRepository>();
             services.AddScoped<ISponsorRepository, SponsorRepository>();

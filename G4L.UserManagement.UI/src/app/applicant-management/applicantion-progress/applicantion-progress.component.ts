@@ -1,8 +1,7 @@
 // progress-tracker.component.ts
 import { Component, OnInit } from '@angular/core';
-import { CompletionService } from './Complete.Service';
 import { HttpClient } from '@angular/common/http';
-
+import { CompletionService } from './Complete.Service';
 
 @Component({
   selector: 'app-progress',
@@ -26,7 +25,7 @@ export class ApplicantionProgressComponent implements OnInit {
 
   calculateProfileProgress() {
     // Make an HTTP GET request to fetch user profile data from your Node.js server
-    this.http.get('/api/User/personal{id}').subscribe((data: any) => {
+    this.http.get('/api/User/personal{any}').subscribe((data: any) => {
       // Assuming data is an object representing the user's profile
       if (data && data.firstName && data.lastName && data.email && data.phonenumber && data.IdNumber && data.Gender && data.Race) {
         // All fields are filled
@@ -51,7 +50,7 @@ export class ApplicantionProgressComponent implements OnInit {
 
   calculateEducationProgress() {
     // Make an HTTP GET request to fetch user education data from your Node.js server
-    this.http.get('/api/education').subscribe((data: any) => {
+    this.http.get('/api/Education/education{userId}').subscribe((data: any) => {
       // Assuming data is an object representing education information
       if (data && data.mathSubject && data.mathMark && data.englishMark && data.postMatricQualification && data.FieldOfStudy && data.CourseOfInterest) {
         // All fields are filled

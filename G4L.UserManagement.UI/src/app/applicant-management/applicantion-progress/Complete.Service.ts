@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CompletionService {
-    private apiUrl = 'https://localhost:44326/api/User/personal3FA85F64-5717-4562-B3FC-2C963F66AFA6';
+  private apiUrl = 'https://localhost:44326/api/User/personal3FA85F64-5717-4562-B3FC-2C963F66AFA6';
   private profileCompleted = new BehaviorSubject<boolean>(false);
   private educationCompleted = new BehaviorSubject<boolean>(false);
   private attachmentsCompleted = new BehaviorSubject<boolean>(false);

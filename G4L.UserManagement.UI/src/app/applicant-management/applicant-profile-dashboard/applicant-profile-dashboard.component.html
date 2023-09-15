@@ -1,12 +1,12 @@
 <div class="container">
-  <h3>Learnership Application</h3>
-  <p>Please enter your personal details</p>
+  <h3 class="learnership">Learnership Application</h3>
+  <p class="please-enter">Please enter your personal details</p>
   <div class="content-container">
     <span>1</span>
     <div class="menu-btn-icons">
       <button (click)="openPersonalInformationModal()">
-        <i class="fa-regular fa-circle-user fa-xl"></i>
-        <h4>PERSONAL INFORMATION</h4>
+        <i class="fa-regular fa-circle-user fa-l"></i>
+        <h4>Personal Information</h4>
       </button>
       <div class="menu-btn-icons">
         <i
@@ -15,39 +15,34 @@
         ></i>
       </div>
     </div>
-  </div>
-  <div class="content-container">
-    <span class="span-two">2</span>
-    <div class="menu-btn-icons">
-      <button (click)="openEducationModal()">
-        <i class="fa-solid fa-user-graduate fa-xl"></i>
 
-        <h4>EDUCATION</h4>
-      </button>
+    <div class="content-container">
+      <span class="span-two">2</span>
       <div class="menu-btn-icons">
-        <i
-          class="fa-regular fa-circle-check fa-xl ml-2 mb-3"
-          style="color: #2be350"
-        ></i>
+        <button (click)="openEducationModal()">
+          <i class="fa-solid fa-user-graduate fa-xl" ></i>
+  
+          <h4>Education</h4>
+        </button>
+        <div class="menu-btn-icons">
+          <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="content-container">
-    <span class="span-three">3</span>
-    <div class="menu-btn-icons">
-      <button (click)="openAttachmentsModal()">
-        <i class="fa-solid fa-paperclip fa-xl"></i>
-        <h4>ATTACHMENTS</h4>
-      </button>
+    <div class="content-container">
+      <span class="span-three">3</span>
       <div class="menu-btn-icons">
-        <i
-          class="fa-regular fa-circle-check fa-xl ml-2 mb-3"
-          style="color: #2be350"
-        ></i>
+        <button (click)="openAttachmentsModal()">
+          <i class="fa-solid fa-paperclip fa-xl"></i>
+          <h4>Attachments</h4>
+        </button >
+        <div class="menu-btn-icons">
+          <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
+        </div>
       </div>
+      <button class="submit" (click)="sendApplication(userId)">Submit application</button>
     </div>
-    <button class="submit" (click)="sendApplication(userId)">
-      Submit application
-    </button>
+
   </div>
+
 </div>

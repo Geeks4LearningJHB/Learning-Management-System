@@ -62,6 +62,8 @@ namespace G4L.UserManagement.Infrustructure.Repositories
             await _databaseContext.SaveChangesAsync();
         }
 
+       
+
         public async Task AddUserAsync(AddUserRequest model)
         {
             // validate
@@ -82,6 +84,24 @@ namespace G4L.UserManagement.Infrustructure.Repositories
             await _databaseContext.Users.AddAsync(user);
             await _databaseContext.SaveChangesAsync();
         }
+
+        public async Task AddPersonalAsync( PersonalInformationRequest model, Guid id)
+        {
+            if (_databaseContext.Users.Any(x => x.Id == model.userId))
+            {
+                // Throw a custom exception or use a more specific one
+                throw new DbUpdateException("User with the same userId already exists");
+            }
+
+
+            // map model to new user object
+            var user = _mapper.Map<User>(model);
+            await _databaseContext.Users.AddAsync(user);
+            await _databaseContext.SaveChangesAsync();
+        }
+
+        
+
         private async Task LinkSponsorAsync(UserRequest model, User user)
         {
             await Task.Run(() =>
@@ -133,6 +153,15 @@ namespace G4L.UserManagement.Infrustructure.Repositories
             });
         }
 
+
+
+        //public async Task AddPersonalInformationFields(PersonalInformationRequest model)
+        //{
+        //    var user = _mapper.Map<User>(model);
+        //    await _databaseContext.Users.AddAsync(user);
+        //    await _databaseContext.SaveChangesAsync();
+        //}
+
         public async Task<IEnumerable<User>> GetUsersByRoleAsync(Role role)
         {
             return await Task.Run(() =>
@@ -142,6 +171,7 @@ namespace G4L.UserManagement.Infrustructure.Repositories
                     .AsEnumerable();
             });
         }
+      
 
 
     }

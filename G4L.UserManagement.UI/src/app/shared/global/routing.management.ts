@@ -18,7 +18,7 @@ export const UserManagement: IRouter = {
 export const LearnershipApplications: IRouter ={
     name : 'Learnership Applications',
     route:'/learnership-applications',
-    faIcon : 'fa-bars'
+    faIcon : 'fa-bullseye'
 }
 export const AttendanceRegister: IRouter = {
     name: 'Attendance Register',

@@ -13,6 +13,7 @@ using G4L.UserManagement.API.Authorization;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.Infrustructure.Services;
 using System.Security.Claims;
+using System.Collections.Generic;
 
 namespace G4L.UserManagement.API.Controllers
 {
@@ -31,7 +32,6 @@ namespace G4L.UserManagement.API.Controllers
         }
 
         [HttpPost]
-   
         public async Task<IActionResult> CreateEducationAsync([FromBody] EducationRequest educationRequest)
         {
             try
@@ -51,12 +51,17 @@ namespace G4L.UserManagement.API.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<IActionResult> getEducation()
+        [AllowAnonymous]
+        [HttpGet("education{userId}")]
+        public async Task<IActionResult> GetPersonal(Guid userId)
         {
-            return Ok(await _educationService.GetEducationsWithMatchingApplications());
-        }
 
+            var user = await _educationService.GetEducationByUserIdAsync(userId);
+            if (user == null)
+                return BadRequest("User Not Found");
+            return Ok(user); 
+        }
     }
 }
+
 

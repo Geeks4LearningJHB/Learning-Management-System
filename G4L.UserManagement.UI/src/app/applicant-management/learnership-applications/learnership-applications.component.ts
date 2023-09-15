@@ -12,6 +12,9 @@ import { LearneshipApplicationModalComponent } from './learneship-application-mo
 })
 export class LearnershipApplicationsComponent implements OnInit {
   applicants: Applicant[] = [];
+  showPersonalDetails = true;
+  showEducationDetails = false;
+  activeButton: string = 'personal';
   // applicantions: any;
   // userRole: any;
 
@@ -31,6 +34,19 @@ export class LearnershipApplicationsComponent implements OnInit {
       }
     );
   }
+  showPersonal() {
+    this.showPersonalDetails = true;
+    this.showEducationDetails = false;
+    this.activeButton = 'personal';
+  }
+
+  showEducation() {
+    this.showPersonalDetails = false;
+    this.showEducationDetails = true;
+    this.activeButton = 'education';
+  }
+
+
   openEducationApplication(): void {
     this.modalHandler.openMdbModal<LearneshipApplicationModalComponent>({
       component: LearneshipApplicationModalComponent,

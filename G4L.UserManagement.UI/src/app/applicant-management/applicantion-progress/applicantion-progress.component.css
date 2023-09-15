@@ -1,43 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-
 /* progress-tracker.component.css */
 
+/* Style the progress tracker container */
 .progress-tracker {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
 }
 
+/* Style each progress bar container */
 .progress-bar {
-  width: 100%;
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* Adjust spacing between progress bars */
 }
 
+/* Style the progress label */
 .progress-label {
+  font-size: 16px;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
+/* Style the progress bar itself */
 .progress {
-  height: 20px;
-  background-color: #f0f0f0;
+  width: 250px;
+  background-color: #a03e3e;
+  height: 20px; /* Adjust the height of the progress bar */
   border-radius: 5px;
 }
 
+/* Style the progress bar fill based on the width percentage */
 .progress-bar-fill {
   height: 100%;
   border-radius: 5px;
-  transition: width 0.3s ease;
-  background-color: #007bff;
-  width: 0; /* Initial width is 0% */
-}
-
-/* Adjust progress bar colors based on progress percentage */
-.progress-bar-fill.progress-bar-warning {
-  background-color: #ffc107; /* Adjust color for warning state */
-}
-
-.progress-bar-fill.progress-bar-danger {
-  background-color: #dc3545; /* Adjust color for danger state */
+  background-color: #007bff; /* Change the fill color as needed */
+  transition: width 0.3s ease; /* Add a smooth transition effect */
 }

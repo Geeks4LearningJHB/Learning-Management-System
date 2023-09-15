@@ -1,3 +1,5 @@
+// applicantService.ts
+
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Console, error } from 'console';
@@ -15,11 +17,15 @@ export class ApplicantService {
     @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
   ) { }
 
- 
   onSubmit(value: any): Observable<any> {
-    console.log("Request Payload:", value);
+    console.log("Post Payload:", value);
     return this.http.post(`${this.config.apiUrl}/education`, value);
   }
+
+  getEducationByUserId(userId: any): Observable<any> {
+    return this.http.get(`${this.config.apiUrl}/education/${userId}`);
+  }
+  
   applyForLearnership(userId: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiUrl}/applications`, { userId });
   }
@@ -27,14 +33,29 @@ export class ApplicantService {
   //   return this.http.get(`${this.config.apiUrl}/applications`);
   // }
   getAllApplicantions(): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/applications`);
+    return this.http.get(`${this.config.apiUrl}/applications/applications`);
   }
   getApplicantEducation(): Observable<any>  {
     return this.http.get(`${this.config.apiUrl}/education`);
   }
 
+  getApplicantEducationByUserId(userId : any): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/education/education${userId}`);
+  }
+
+  onPersonalDetailsSubmit(id : any): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/user/${id}`);
+  }
+
+
+  // onPersonalDetailsSubmit(body: personalInformation) {
+  //   console.log("Request Payload:", body);
+  //   return this.http.put(`${this.config.apiUrl}/user/personal-information`, body);
+  // }
+
   
 }
+
 export interface Applicant {
   userId: "";
   name: string;
@@ -44,11 +65,21 @@ export interface Applicant {
   idNumber: number;
   race:string;
   gender:string;
-  disability:string | null
-
-  // Add other properties as needed
+  disability:string | null;
+  englishMark:string;
+  mathSubject:string;
+  mathMark:string;
+  courseOfInterest:string;
+  fieldOfStudy:string;
+  qualifications:string;
 }
+
 export interface Education{
   userId: string;
   mathSubject: string;
+  mathMark:string;
+  englishMark:string;
+  fieldOfStudy:string;
+  qualifications:string;
+  courseOfInterest:string;
 }
