@@ -22,5 +22,9 @@ namespace G4L.UserManagement.BL.Interfaces
         Task<User> GetUserAsync(string email);
         Task<IEnumerable<User>> GetPagedUsersAsync(int skip, int take);
         Task<IEnumerable<User>> GetUsersByRoleAsync(Role role);
+        Task GetUserByEmailAsync(string to);
+
+
+   
     }
 }
