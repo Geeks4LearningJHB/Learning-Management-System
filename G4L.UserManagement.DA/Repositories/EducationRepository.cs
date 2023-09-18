@@ -38,9 +38,11 @@ namespace G4L.UserManagement.DA.Repositories
         {
 
             if (_databaseContext.Educations.Any(x => x.UserId == model.UserId))
+
                 throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
                 {
                     ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
+
                     Message = "Form has already been submitted"
                 }));
 
@@ -50,10 +52,6 @@ namespace G4L.UserManagement.DA.Repositories
             await _databaseContext.SaveChangesAsync();
         }
 
-        //public async Task<List<Education>> GetAllAsync()
-        //{
-        //    return await _databaseContext.Set<Education>().ToListAsync();
-        //}
 
 
         public async Task<List<string>> GetCoursesOfInterestAsync(Guid userId)
@@ -64,11 +62,6 @@ namespace G4L.UserManagement.DA.Repositories
                 .ToListAsync();
         }
 
-
-        public Task<bool> UpdateAsync(EducationRequest education)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<IEnumerable<Education>> ListEducationAsync(Guid userId)
         {

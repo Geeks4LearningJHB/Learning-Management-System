@@ -14,8 +14,7 @@ namespace G4L.UserManagement.BL.Interfaces
 
         Task<List<string>> GetCoursesOfInterestAsync(Guid userId);
         Task<Education> GetEducationByUserIdAsync(Guid userId);
-   
-        Task<bool> UpdateAsync(EducationRequest education);
-        Task<IEnumerable<Education>> ListEducationAsync(Guid id);
+        Task<IEnumerable<Education>> ListEducationAsync(Guid userId);
     }
+  
 }

@@ -9,6 +9,6 @@ namespace G4L.UserManagement.BL.Interfaces
 {
     public interface IEmailService
     {
-        void SendEmail(EmailDto request);
+        Task SendEmail(EmailDto request);
     }
 }

@@ -1,9 +1,15 @@
 // applicant-profile-dashboard.component.ts
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ApplicantService } from '../services/applicantService';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router'
+import { ApplicantService} from '../services/applicantService';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
@@ -109,8 +115,6 @@ export class ApplicantEducationComponent implements OnInit {
       alert('Form is not valid. Please fill in all required fields correctly.');
       return;
     }
-
-
     this.applicantService.onSubmit(this.educationForm.value).subscribe(
       (response) => {
         console.log("POST request successful:", response);

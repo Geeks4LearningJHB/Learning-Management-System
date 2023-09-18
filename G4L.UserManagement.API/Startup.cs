@@ -54,11 +54,6 @@ namespace G4L.UserManagement.API
                 //Debuging purpose
                 options.EnableSensitiveDataLogging();
 
-
-   
-
-        
-
             }
             );
 
