@@ -101,20 +101,15 @@ namespace G4L.UserManagement.API.Controllers
 
             return Ok(new { Message = "User registered successfully." });
         }
-
-        [HttpPost("personal")]
-        public async Task<IActionResult> PostAsync([FromBody] PersonalInformationRequest model, Guid id)
+        [Authorize(Role.Super_Admin, Role.Admin, Role.Applicant)]
+        [HttpPut("personal")]
+        public async Task<IActionResult> PostAsync([FromBody] PersonalInformationRequest model)
         {
-            await _userService.AddPersonalAsync(model, id);
-            return Ok(new { Message = "Personal post successfully." });
+            await _userService.UpdatePersonalInformationAsync(model);
+            return Ok(new { Message = "Personal put successfully." });
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetPersonal(Guid id)
-        //{
-        //    await _userService.GetPersonalAsync(id);
-        //    return Ok(new { Message = "Personal information GET successful." });
-        //}
+     
         [AllowAnonymous]
         [HttpGet("personal{id}")]
         public async Task<IActionResult> GetPersonal(Guid id)

@@ -37,12 +37,12 @@ namespace G4L.UserManagement.DA.Repositories
         public async Task PostQualifcationsAsync(EducationRequest model)
         {
 
-            //if (_databaseContext.Educations.Any(x => x.UserId == model.UserId))
-            //    throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
-            //    {
-            //        ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
-            //        Message = "Form has already been submitted"
-            //    }));
+            if (_databaseContext.Educations.Any(x => x.UserId == model.UserId))
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
+                    Message = "Form has already been submitted"
+                }));
 
             var education = _mapper.Map<Education>(model);
 
@@ -76,10 +76,6 @@ namespace G4L.UserManagement.DA.Repositories
                 .Where(x => x.UserId == userId)
                 .ToListAsync();
 
-            //Task<bool> IEducationRepository.UpdateAsync(Education education)
-            //{
-            //    throw new NotImplementedException();
-            //}
         }
         public async Task<Education> GetEducationByUserIdAsync(Guid userId)
         {

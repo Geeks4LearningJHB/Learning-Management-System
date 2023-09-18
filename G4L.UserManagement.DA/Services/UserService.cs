@@ -35,11 +35,6 @@ namespace G4L.UserManagement.Infrustructure.Services
             await _userRepository.CreateUserAsync(model);
         }
 
-        public async Task AddPersonalAsync(PersonalInformationRequest model, Guid id)
-        {
-            await _userRepository.AddPersonalAsync(model, id);
-        }
-
         public async Task GetPersonalAsync(Guid id)
         {
             await _userRepository.GetByIdAsync(id);
@@ -85,11 +80,7 @@ namespace G4L.UserManagement.Infrustructure.Services
             return await _userRepository.GetByUserByEmailAsync(email);
         }
 
-        //public async Task AddingPersonalFields(PersonalInformationRequest model)
-        //{
-        //    await _userRepository.AddPersonalInformationFields(model);
-        //}
-
+       
 
         public async Task<User> GetUserByIdAsync(Guid id)
         {
@@ -138,22 +129,42 @@ namespace G4L.UserManagement.Infrustructure.Services
 
         public async Task UpdatePersonalInformationAsync(PersonalInformationRequest model)
         {
-            var user = await _userRepository.GetByIdAsync(model.Id);
+            var user = await _userRepository.GetByIdAsync(model.userId);
+            if (user == null)
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.UserNotFound.ToString(),
+                    Message = "User information was not found"
+                }));
 
-          
+            // Update the following if the fields in the model are not null or empty
+            if (!string.IsNullOrWhiteSpace(model.Name))
+                user.Name = model.Name;
 
-            // Update the following;
-            user.Name = model.Name;
-            user.Surname = model.Surname;  
-            user.Email = model.Email;
-            user.IdNumber = model.IdNumber;
-            user.Disability = model.Disability;
-            user.Gender = model.Email;
-            user.Race = model.Phone;
-            
+            if (!string.IsNullOrWhiteSpace(model.Surname))
+                user.Surname = model.Surname;
+
+            if (!string.IsNullOrWhiteSpace(model.Email))
+                user.Email = model.Email;
+
+            if (!string.IsNullOrWhiteSpace(model.IdNumber))
+                user.IdNumber = model.IdNumber;
+
+            if (!string.IsNullOrWhiteSpace(model.Phone))
+                user.Phone = model.Phone;
+
+            if (!string.IsNullOrWhiteSpace(model.Disability))
+                user.Disability = model.Disability;
+
+            if (!string.IsNullOrWhiteSpace(model.Gender))
+                user.Gender = model.Gender;
+
+            if (!string.IsNullOrWhiteSpace(model.Race))
+                user.Race = model.Race;
 
             await _userRepository.UpdateAsync(user);
         }
+
 
         public async Task<IEnumerable<User>> GetPagedUsersAsync(int skip, int take)
         {

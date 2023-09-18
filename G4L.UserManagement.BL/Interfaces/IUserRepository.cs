@@ -16,6 +16,6 @@ namespace G4L.UserManagement.BL.Interfaces
         Task CreateUserAsync(UserRequest user);
         Task AddUserAsync(AddUserRequest user);
         Task<IEnumerable<User>> GetUsersByRoleAsync(Role role);
-        Task AddPersonalAsync(PersonalInformationRequest model, Guid id);
+  
     }
 }
