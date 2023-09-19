@@ -1,6 +1,8 @@
+// applicant-profile-dashboard.component.ts
+
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ApplicantService } from '../services/applicantService';
+import { Router } from '@angular/router'
+import { ApplicantService} from '../services/applicantService';
 import {
   AbstractControl,
   FormBuilder,
@@ -11,6 +13,17 @@ import {
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
+import { TokenService } from '../Learning-Management-System/G4L.UserManagement.UI/src/app/user-management/login/services/token.service';
+
+export interface Education{
+  userId: string;
+  mathSubject: string;
+  mathMark:string;
+  englishMark:string;
+  fieldOfStudy:string;
+  qualifications:string;
+  courseOfInterest:string;
+}
 
 @Component({
   selector: 'app-applicant-education',
@@ -18,32 +31,72 @@ import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
   styleUrls: ['./applicant-education.component.css'],
 })
 export class ApplicantEducationComponent implements OnInit {
-  educationForm!: FormGroup;
+  
+  educations : Education= {
+    userId: '',
+    mathSubject: '',
+    mathMark:'',
+    englishMark:'',
+    fieldOfStudy:'',
+    qualifications:'',
+    courseOfInterest:'',
+  }
 
+  educationForm!: FormGroup;
+  
   keys = Object.keys;
 
+  userId : any
   serverErrorMessage: any;
 
   constructor(
     private route: Router,
     private formBuilder: FormBuilder,
     private applicantService: ApplicantService,
-    public modalRef: MdbModalRef<any>
-  ) {}
+    public modalRef: MdbModalRef<any>,
+    private tokenService: TokenService
+  ) { }
 
   getFormControl(control: String): AbstractControl {
     return this.educationForm.controls[`${control}`];
   }
 
   ngOnInit(): void {
-    this.educationForm = new FormGroup({
-      MathSubject: new FormControl('', [Validators.required]),
-      MathMark: new FormControl('', [Validators.required]),
-      EnglishMark: new FormControl('', [Validators.required]),
-      Qualifications: new FormControl('', [Validators.required]),
-      FieldOfStudy: new FormControl('', [Validators.required]),
-      CourseOfInterest: new FormControl('', [Validators.required]),
-    });
+    let user = this.tokenService.getDecodeToken();
+    this.userId = user.id;
+    this.buildForm();
+    this.applicantService.getEducationByUserId(this.userId).subscribe((result) =>{
+      this.educations  = result;
+      console.log(this.educations)
+    })
+    }
+
+    buildForm() {
+      this.educationForm = this.formBuilder.group({
+        userId: [this.userId],
+        MathSubject: ['', [Validators.required]],
+        MathMark: ['', [Validators.required]],
+        EnglishMark: ['', [Validators.required]],
+        Qualifications: ['', [Validators.required]],
+        FieldOfStudy: ['', [Validators.required]],
+        CourseOfInterest: ['', Validators.required],
+      })
+
+    this.applicantService.getEducationByUserId(this.userId).subscribe(
+      (result) => {
+        
+        this.educations = result;
+        console.log(this.educations)
+        this.educationForm.get('MathMark')?.setValue(this.educations.mathMark);
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
+
+  clearServerError() {
+    this.serverErrorMessage = '';
   }
 
   serverErrorHandling(error: any) {
@@ -56,50 +109,27 @@ export class ApplicantEducationComponent implements OnInit {
     this.educationForm.updateValueAndValidity();
   }
 
-  clearServerError() {
-    this.serverErrorMessage = ''; 
-  } 
+
   onSubmit(): void {
     if (this.educationForm.invalid) {
-      // If the form is invalid, return early and do not proceed with signup
+      alert('Form is not valid. Please fill in all required fields correctly.');
       return;
     }
-    // if (this.educationForm.valid) {
-    //   console.log("Form is valid. Submitting...");
-  
-      this.applicantService.onSubmit(this.educationForm.value).subscribe(
-        (response) => {
-          console.log("POST request successful:", response);
-          if (!this.serverErrorMessage) {
-            this.modalRef.close();
-          }
-        },
-        (error) => {
-          console.log("POST request error:", error);
-          this.serverErrorHandling(error);
-           alert('Form is not valid. Please fill in all required fields correctly.');
+    this.applicantService.onSubmit(this.educationForm.value).subscribe(
+      (response) => {
+        console.log("POST request successful:", response);
+        if (!this.serverErrorMessage) {
+          this.modalRef.close();
         }
-      );
-    // } else {
-    //   console.log("Form is not valid.");
-    // }
+      },
+      (error) => {
+        console.log("POST request error:", error);
+        this.serverErrorHandling(error);
+
+      }
+    );
+
   }
-  
-
-    //   this.applicantService.onSubmit(formData).subscribe(
-    //     (response) => {
-    //       console.log('Form submitted successfully. Response:', response);
-    //       this.modalRef.close();
-    //     },
-    //     (error) => {
-    //       console.error('Error submitting the form:', error);
-    //       // Handle the error, such as showing an error message
-    //     }
-    //   );
-    // } else {
-    //   // Show an alert when the form is not valid
-    //   alert('Form is not valid. Please fill in all required fields correctly.');
-
 
   onSaveAndCloseClick(): void {
     this.modalRef.close();

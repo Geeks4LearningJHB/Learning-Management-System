@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using G4L.UserManagement.BL.Custom_Exceptions;
 using G4L.UserManagement.BL.Entities;
 using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
@@ -7,6 +8,7 @@ using G4L.UserManagement.BL.Models.Request;
 using G4L.UserManagement.DA.Repositories;
 using G4L.UserManagement.DA.Services;
 using G4L.UserManagement.Infrustructure.Repositories;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,21 +32,42 @@ namespace G4L.UserManagement.DA.Services
             _mapper = mapper;
         }
 
+        public async Task UpdateUserAsync(EducationRequest model)
+        {
+            var user = await _educationRepository.GetByIdAsync(model.Id);
+
+            // User can update the following
+            user.MathSubject = model.MathSubject;
+            user.MathMark = model.MathMark;
+            user.EnglishMark = model.EnglishMark;
+            user.Qualifications = model.Qualifications;
+            user.FieldOfStudy = model.FieldOfStudy;
+            user.CourseOfInterest = model.CourseOfInterest;
+
+            await _educationRepository.UpdateAsync(user);
+        }
+
+
         public async Task RegisterUserAsync(EducationRequest education)
         {
-            //var education = _mapper.Map<Education>(model);
+       
 
             await _educationRepository.PostQualifcationsAsync(education);
         }
 
-     
+        public async Task<IEnumerable<Education>> ListEducationAsync(Guid userId)
+        {
+            return await _educationRepository.ListEducationAsync(userId);
+        }
+
+
+
         public async Task<Education> GetEducationByUserIdAsync(Guid userId)
         {
             return await _educationRepository.GetEducationByUserIdAsync(userId);
+
         }
-
     }
-
 }
 
 

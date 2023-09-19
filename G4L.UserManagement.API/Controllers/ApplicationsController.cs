@@ -48,36 +48,14 @@ namespace G4L.UserManagement.API.Controllers
             }
         }
 
-        //[Authorize(Role.Super_Admin, Role.Admin)]
-        //[HttpGet]
-        //public async Task<IActionResult> GetApplicationsList()
-        //{
-        //    return Ok(await _applicationsService.ListAsync());
-        //}
-
-        // Controller Action
-        //[HttpGet("userdetails/{userId}")]
-        //public ApplicantDTO GetApplicantDetails(int userId)
-        //{
-        //    var user = __applicationsService.ListAsync();
-        //    //var address = _addressRepository.GetAddressByUserId(userId);
-        //    //var order = _orderRepository.GetOrderByUserId(userId);
-
-        //    return new ApplicantDTO
-        //    {
-        //        UserName = user.UserName,
-        //        Email = user.Email,
-        //        //StreetAddress = address.StreetAddress,
-        //        //City = address.City,
-        //        //OrderDescription = order.Description
-        //    };
-        //}
-        //[Authorize(Role.Super_Admin, Role.Admin)]
+        [Authorize(Role.Super_Admin, Role.Admin)]
         [HttpGet]
         public async Task<IActionResult> GetApplicationsList()
         {
             return Ok(await _applicationsService.ListAsync());
         }
+
+
 
         [HttpGet("{userId}")]
         public async Task<IActionResult> Get(Guid userId)
@@ -87,47 +65,5 @@ namespace G4L.UserManagement.API.Controllers
                 return BadRequest("User Not Found");
             return Ok(application);
         }
-    
-   
-        //[Authorize(Role.Super_Admin, Role.Admin)]
-        [HttpGet("applications")]
-        public async Task<IActionResult> GetAllApplicationDetails()
-        {
-          
-            var allApplications = await _applicationsService.ListAsync();
-
-            var applicationDetailsList = new List<ApplicationsDTO>();
-
-            foreach (var application in allApplications)
-            {
-                var education = await _educationService.GetEducationByUserIdAsync(application.UserId);
-
-                var applicationsDTO = new ApplicationsDTO
-                {
-                    Name = application.Name,
-                    Surname = application.Name,
-                    Email = application.Email,
-                    IdNumber = application.IdNumber,
-                    Phone = application.Phone,
-                    Gender = application.Gender,
-                    Race = application.Race,
-                    Disability = application.Gender,
-                    EnglishMark = education.EnglishMark,
-                    MathSubject = education.MathSubject,
-                    MathMark = education.MathMark,
-                    Qualifications = education.Qualifications,
-                    FieldOfStudy = education.FieldOfStudy,
-                    CourseOfInterest = education.CourseOfInterest,
-
-                };
-
-                applicationDetailsList.Add(applicationsDTO);
-            }
-
-            return Ok(applicationDetailsList);
-        }
-
-
-
     }
 }

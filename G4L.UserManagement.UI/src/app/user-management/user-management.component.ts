@@ -6,6 +6,7 @@ import { Roles } from '../shared/global/roles';
 import { EnrolComponent } from './enrol/enrol.component';
 import { UserService } from './services/user.service';
 
+
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
@@ -19,6 +20,7 @@ export class UserManagementComponent implements OnInit {
   constructor(
     private userService: UserService,
     private modalService: MdbModalService,
+   
     private toastr: ToastrService
   ) {}
 
@@ -37,6 +39,7 @@ export class UserManagementComponent implements OnInit {
   getAllUsers() {
     this.userService.getAllUsers().subscribe((response: any) => {
       this.filterUserByRole(response);
+      console.log(response)
     });
   }
 

@@ -17,12 +17,17 @@ namespace G4L.UserManagement.API.Mappers
             CreateMap<User, UserResponse>().ReverseMap();
             CreateMap<User, TraineeResponse>().ReverseMap();
             CreateMap<User, TrainerResponse>().ReverseMap();
+            CreateMap<Education, EducationResponse>().ReverseMap();
+            CreateMap<User, PersonalInformationResponse>().ReverseMap();
+
 
             CreateMap<UserRequest, User>().ReverseMap();
             CreateMap<AddUserRequest, User>().ReverseMap();
             CreateMap<ApplicationsRequest, Applications>();
             CreateMap<LeaveRequest, Leave>().ReverseMap();
             CreateMap<EducationRequest, Education>().ReverseMap();
+            CreateMap<PersonalInformationRequest, User>().ReverseMap();
+
             CreateMap<ApproverRequest, Approver>().ReverseMap();
             CreateMap<ApplicantAttachementRequest, ApplicantAttachments>().ReverseMap();
             CreateMap<DocumentRequest, Document>().ReverseMap();
@@ -49,7 +54,6 @@ namespace G4L.UserManagement.API.Mappers
 
             CreateMap<GoalTask, GoalTaskResponse>().ReverseMap();
             CreateMap<GoalTask, GoalTaskRequest>().ReverseMap();
-
 
             CreateMap<GoalComment, GoalCommentRequest>().ReverseMap();
             CreateMap<GoalComment, GoalCommentResponse>().ReverseMap();

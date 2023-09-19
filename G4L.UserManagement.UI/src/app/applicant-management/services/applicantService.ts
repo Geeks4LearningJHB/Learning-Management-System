@@ -1,3 +1,5 @@
+// applicantService.ts
+
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Console, error } from 'console';
@@ -12,50 +14,40 @@ export class ApplicantService {
 
   constructor(
     private http: HttpClient,
+    
     @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
   ) { }
 
- 
   onSubmit(value: any): Observable<any> {
-    console.log("Request Payload:", value);
+    console.log("Post Payload:", value);
     return this.http.post(`${this.config.apiUrl}/education`, value);
   }
+
+  getEducationByUserId(userId: any): Observable<any> {
+    return this.http.get(`${this.config.apiUrl}/education/${userId}`);
+  }
+  
   applyForLearnership(userId: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiUrl}/applications`, { userId });
   }
-  // getAllApplicantions(): Observable<any>  {
-  //   return this.http.get(`${this.config.apiUrl}/applications`);
-  // }
+  
+  sendEmail(userId: string): Observable<any> {
+    return this.http.post<any>(`${this.config.apiUrl}/email`, { userId });
+  }
+  
   getAllApplicantions(): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/applications/applications`);
+    return this.http.get(`${this.config.apiUrl}/applications`);
   }
   getApplicantEducation(): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/education/`);
+    return this.http.get(`${this.config.apiUrl}/education`);
+  }
+
+  getApplicantEducationByUserId(userId: any): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/education/education${userId}`);
+  }
+  onPersonalDetailsSubmit(id : any): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/user/${id}`);
   }
 
   
-}
-export interface Applicant {
-  userId: "";
-  name: string;
-  surname:string;
-  email:string;
-  phone:number;
-  idNumber: number;
-  race:string;
-  gender:string;
-  disability:string | null;
-  englishMark:string;
-  mathSubject:string;
-  mathMark:string;
-  courseOfInterest:string;
-  fieldOfStudy:string;
-  qualifications:string;
-
-
-  // Add other properties as needed
-}
-export interface Education{
-  userId: string;
-  mathSubject: string;
 }

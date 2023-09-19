@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
 h3 {
     background-color: #092f4f;
     color: #ffffff;
@@ -10,7 +13,13 @@ h3 {
   p {
     text-align: center;
     font-size: 20px;
+    font-family: 'Poppins', sans-serif;
   }
+
+  h4{
+    font-family: 'Poppins', sans-serif;
+
+  }  
   
   .content-container {
     display: flex;
@@ -25,6 +34,12 @@ h3 {
   
   }
   
+  .learnership{
+    text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  }
+
   span {
     display: flex;  
     align-items: center;
@@ -96,5 +111,6 @@ h3 {
     width: 320px;
     color: white;
     background-color: #092f4f;
+    font-family: 'Poppins', sans-serif;
   }
   
