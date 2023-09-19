@@ -30,7 +30,7 @@ namespace G4L.UserManagement.BL.Interfaces
    
 
         Task UpdatePersonalInformationAsync(PersonalInformationRequest model);
-        Task AddPersonalAsync(PersonalInformationRequest model, Guid id);
+    
         Task GetPersonalAsync(Guid id);
        
 

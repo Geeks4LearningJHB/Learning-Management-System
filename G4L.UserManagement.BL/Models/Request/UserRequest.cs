@@ -21,10 +21,8 @@ namespace G4L.UserManagement.BL.Models
         [Required]
         public string ClockInTime { get; set; }
         public string Phone { get; set; }
-     
         [Required]
         public string Email { get; set; }
-       
         public Guid? SponsorId { get; set; }
         public List<Guid> Clients { get; set; }
         public Career? Career { get; set; }
