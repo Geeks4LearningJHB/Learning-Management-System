@@ -130,6 +130,7 @@ export class ApplicantEducationComponent implements OnInit {
     );
 
   }
+  
 
   onSaveAndCloseClick(): void {
     this.modalRef.close();

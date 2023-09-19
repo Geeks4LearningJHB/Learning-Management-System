@@ -6,6 +6,7 @@ import { GoalModalHandlerService } from 'src/app/goal-management/services/modals
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { EnrolComponent } from 'src/app/user-management/enrol/enrol.component';
 import { LearnershipApplicationModalComponent } from './learnership-application-modal/learnership-application-modal.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 export interface Applicant {
   userId: "";
@@ -29,43 +30,51 @@ export interface Applicant {
   templateUrl: './learnership-applications.component.html',
   styleUrls: ['./learnership-applications.component.css']
 })
+
+
 export class LearnershipApplicationsComponent implements OnInit {
   applicants: Applicant[] = [];
-  showPersonalDetails = true;
-  showEducationDetails = false;
+
+  filteredApplicants: Applicant[] = []; // New array to store filtered applicants
+
+
+  courseFilterForm!: FormGroup; 
   activeButton: string = 'personal';
+  hasApplied: boolean = false;
   modalDialog: MdbModalRef<LearnershipApplicationModalComponent> | null = null;
-  // applicantions: any;
-  // userRole: any;
+
+ 
 
   constructor(
-    private applicantService: ApplicantService,    private modalService: MdbModalService, private modalHandler: GoalModalHandlerService<any>
-  ) {}
+    private applicantService: ApplicantService,   private formBuilder: FormBuilder ,   private modalService: MdbModalService, private modalHandler: GoalModalHandlerService<any>
+  ) {  this.courseFilterForm = this.formBuilder.group({
+    courseOfInterest: ['all'] // Initialize the form control with a default value
+  });
+
+  this.courseFilterForm.get('courseOfInterest')?.valueChanges.subscribe((value) => {
+    this.filterByStream(value);
+  });}
 
   ngOnInit(): void {
     this.applicantService.getAllApplicantions().subscribe(
       (result) => {
         this.applicants = result;
+        this.filterByStream('all');
     
       },
       (error) => {
         console.error('Error fetching data:', error);
       }
     );
+  
   }
-  showPersonal() {
-    this.showPersonalDetails = true;
-    this.showEducationDetails = false;
-    this.activeButton = 'personal';
+  filterByStream(stream: string) {
+    if (stream === 'all') {
+      this.filteredApplicants = [...this.applicants];
+    } else {
+      this.filteredApplicants = this.applicants.filter(applicant => applicant.courseOfInterest === stream);
+    }
   }
-
-  showEducation() {
-    this.showPersonalDetails = false;
-    this.showEducationDetails = true;
-    this.activeButton = 'education';
-  }
-
-
 
   openEducationModal(): void {
     this.modalHandler.openMdbModal<ApplicantEducationComponent>({

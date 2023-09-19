@@ -154,14 +154,6 @@ namespace G4L.UserManagement.Infrustructure.Repositories
         }
 
 
-
-        //public async Task AddPersonalInformationFields(PersonalInformationRequest model)
-        //{
-        //    var user = _mapper.Map<User>(model);
-        //    await _databaseContext.Users.AddAsync(user);
-        //    await _databaseContext.SaveChangesAsync();
-        //}
-
         public async Task<IEnumerable<User>> GetUsersByRoleAsync(Role role)
         {
             return await Task.Run(() =>

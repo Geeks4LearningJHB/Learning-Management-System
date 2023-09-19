@@ -85,10 +85,6 @@ namespace G4L.UserManagement.Infrustructure.Services
             return await _userRepository.GetByUserByEmailAsync(email);
         }
 
-        //public async Task AddingPersonalFields(PersonalInformationRequest model)
-        //{
-        //    await _userRepository.AddPersonalInformationFields(model);
-        //}
 
 
         public async Task<User> GetUserByIdAsync(Guid id)

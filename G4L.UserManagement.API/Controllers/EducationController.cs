@@ -52,7 +52,7 @@ namespace G4L.UserManagement.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("education{userId}")]
+        [HttpGet("{userId}")]
         public async Task<IActionResult> GetPersonal(Guid userId)
         {
 

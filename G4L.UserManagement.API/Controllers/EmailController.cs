@@ -1,9 +1,12 @@
-﻿using G4L.UserManagement.BL.Interfaces;
+﻿using G4L.UserManagement.BL.Entities;
+using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.DA;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Nest;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace G4L.UserManagement.API.Controllers
@@ -29,6 +32,7 @@ namespace G4L.UserManagement.API.Controllers
 
             var user = await _databaseContext.Users
     .FirstOrDefaultAsync(e => e.Email == request.To);
+
 
             request.Subject = "Learnership Application Confirmation";
             request.Body = $"Hello {user.Name},\n\n" + $"{ user.Surname}" +

@@ -55,8 +55,7 @@ namespace G4L.UserManagement.API.Controllers
             return Ok(await _applicationsService.ListAsync());
         }
 
-
-
+      
         [HttpGet("{userId}")]
         public async Task<IActionResult> Get(Guid userId)
         {
