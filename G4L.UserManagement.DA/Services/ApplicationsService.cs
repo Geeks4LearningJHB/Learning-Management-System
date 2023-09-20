@@ -35,6 +35,11 @@ namespace G4L.UserManagement.DA.Services
             return await _applicationsRepository.GetApplicantsByIdNumberAsync(idNumber);
         }
 
+        public async Task DeleteApplicationUserAsync(Guid id)
+        {
+            await _applicationsRepository.DeleteAsync(id);
+        }
+
         public async Task<IEnumerable<Applications>> ListAsync()
         {
             return await _applicationsRepository.ListAsync();

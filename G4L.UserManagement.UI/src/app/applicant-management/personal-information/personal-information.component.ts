@@ -44,9 +44,8 @@ export class PersonalInformationComponent implements OnInit {
     disability:'',
   }
   personalDetails!: FormGroup;
-
+  
   userId: any;
-
   keys = Object.keys;
   serverErrorMessage: any;
 
@@ -86,6 +85,38 @@ export class PersonalInformationComponent implements OnInit {
   clearServerError() {
     this.serverErrorMessage = '';
   }
+
+  // onPersonalDetailsSubmit(): void {
+  //   if (this.personalDetails.valid) {
+  //     console.log(this.personalDetails.value)
+  //     console.log(Response)
+  //     this.userService.onPersonalDetailsSubmit(this.personalDetails.value).subscribe(
+  //       (response: any) => {
+  //         console.log("POST request successful:", response);
+  //         if (!this.serverErrorMessage) {
+  //           this.modalRef.close();
+  //         }
+  //       },
+  //       (error: any) => {
+  //         console.log(error)
+  //         // this.serverErrorHandling(error);
+  //         alert('Form is not valid. Please fill in all required fields correctly.');
+  //         return;
+  //       }
+  //     );
+  //   }
+  //}
+  serverErrorHandling(error: any) {
+    if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
+      this.personalDetails.controls['Email'].setErrors({
+        duplicateEmailError: true,
+      });
+      this.serverErrorMessage = error.message;
+    }
+    this.personalDetails.updateValueAndValidity();
+  }
+
+
   onDoneClick(): void {
     if (this.personalDetails.invalid) {
       alert('Form is not valid. Please fill in all required fields correctly.');
@@ -101,7 +132,7 @@ export class PersonalInformationComponent implements OnInit {
       },
       (error) => {
         console.log("POST request error:", error);
-        // this.serverErrorHandling(error);
+        this.serverErrorHandling(error);
 
       }
     );
@@ -115,10 +146,6 @@ export class PersonalInformationComponent implements OnInit {
 
   saveInformation() {
     console.log(this.personalDetails)
- }
-  
+  }
 
 }
-  
-
-  

@@ -1,5 +1,3 @@
-// applicantService.ts
-
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Console, error } from 'console';
@@ -13,8 +11,10 @@ import { APP_SERVICE_CONFIG } from 'src/app/shared/app-config/app-config.service
 export class ApplicantService {
   constructor(
     private http: HttpClient,
-    @Inject(APP_SERVICE_CONFIG) private config: AppConfig
-  ) {}
+
+    @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
+  ) { }
+
 
   onSubmit(value: any): Observable<any> {
     console.log('Post Payload:', value);
@@ -31,17 +31,29 @@ export class ApplicantService {
     });
   }
 
-  getAllApplicantions(): Observable<any> {
+  sendEmail(userId: string): Observable<any> {
+    return this.http.post<any>(`${this.config.apiUrl}/email`, { userId });
+  }
+  
+  getAllApplicantions(): Observable<any>  {
+
     return this.http.get(`${this.config.apiUrl}/applications`);
   }
   getApplicantEducation(): Observable<any> {
     return this.http.get(`${this.config.apiUrl}/education`);
   }
 
-  getApplicantEducationByUserId(userId: any): Observable<any> {
-    return this.http.get(`${this.config.apiUrl}/education/${userId}`);
+
+  getApplicantEducationByUserId(userId: any): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/education/education${userId}`);
+
   }
   onPersonalDetailsSubmit(id: any): Observable<any> {
     return this.http.get(`${this.config.apiUrl}/user/${id}`);
   }
+
+
+  
 }
+
+

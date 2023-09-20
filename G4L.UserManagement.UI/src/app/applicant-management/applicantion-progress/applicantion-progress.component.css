@@ -33,8 +33,6 @@
 }
 
 
-
-
 h3 {
   margin: 0;
 }
@@ -69,6 +67,8 @@ h3 {
   border-radius: 20px !important;
   box-shadow: none;
   border: 1px solid black;
+  margin-left: 100px;
+  width: 600px;
 }
 
 .progress .progress-bar {
@@ -87,7 +87,7 @@ h3 {
   right: 0;
   background-color: #FF918E;
   height: 100px;
-
+  width: 50px;
   border-radius: 50%;
   border: 1px solid black;
 }
@@ -111,7 +111,7 @@ h3 {
   right: 0px;
   background-color: #FFB800;
   height: 15px;
-
+  width: 15px;
   border-radius: 50%;
   border: 1px solid black;
 

@@ -1,88 +1,86 @@
 <div class="container">
-	<div class="title">
-	  <img class="nb1-middle-icon" src="../../../../assets/images/Backlog count (1).svg" />Personal Information
-	</div>
-	<div class="content">
-	  <form [formGroup]="personalDetails" (ngSubmit)="saveInformation()">
-		<div class="user-details">
-			<div [ngClass]="{ validation: getFormControl('Firstname').invalid && getFormControl('Firstname').touched, success: getFormControl('Firstname').valid && getFormControl('Firstname').touched }" class="input-box">
-				<span class="details">First Name*</span>
-				<input type="text" placeholder="Enter your name" [value]="personalInformations.name" formControlName="Firstname">
-				<div *ngIf="getFormControl('Firstname').invalid && getFormControl('Firstname').touched" class="text-danger">
-				  First name is required.
-				</div>
-			  </div>
-			  
-		  <div class="input-box">
-			<!-- [ngClass]="{ validation: getFormControl('Surname').invalid && getFormControl('Surname').touched, success: getFormControl('Surname').valid && getFormControl('Surname').touched }" -->
-			<span class="details">Surname*</span>
-			<input type="text" placeholder="Enter your surname" [value]="personalInformations.surname" formControlName="Surname">
-			<div *ngIf="getFormControl('Surname').invalid && getFormControl('Surname').touched" class="text-danger">
-			  Surname is required.
-			</div>
-		  </div>
-		  <div class="input-box">
-			<span class="details">Email*</span>
-			<input type="text" placeholder="Enter your email" [value]="personalInformations.email" formControlName="Email">
-			<div *ngIf="getFormControl('Email').invalid && getFormControl('Email').touched" class="text-danger">
-			  Valid Email is required.
-			</div>
-		  </div>
-		  
-		  <div class="input-box">
-			<span class="details">Phone Number*</span>
-			<input type="text" placeholder="Enter your phone number" [value]="personalInformations.phone" formControlName="Phone">
-			<div *ngIf="getFormControl('Phone').invalid && getFormControl('Phone').touched" class="text-danger">
-			  Valid phone number is required.
-			</div>
-			
-		  </div>
-		  <div [ngClass]="{ validation: getFormControl('IdNumber').invalid && getFormControl('IdNumber').touched }" class="input-box">
-			<span class="details">ID*</span>
-			<input type="text" placeholder="Enter your ID number" [value]="personalInformations.idNumber" formControlName="IdNumber">
-			<div *ngIf="getFormControl('IdNumber').invalid && getFormControl('IdNumber').touched" class="text-danger">
-			  Valid ID number is required and must be of 13 digits.
-			</div>
-		  </div>
-		  <div class="input-box">
-			<span class="details">Enter Disability</span>
-			<input type="text" placeholder="Optional to specify" [value]="personalInformations.disability" maxlength="40">
-		  </div>
-		  <div class="input-box">
-			<label class="gender-label" for="gender">Gender*</label>
-			<select id="gender" name="gender" class="category" formControlName="Gender">
-			  <option value="" disabled selected>Select your gender</option>
-			  <option value="male">Male</option>
-			  <option value="female">Female</option>
-			  <option value="other">Other</option>
-			</select>
-			<div *ngIf="getFormControl('Gender').invalid && getFormControl('Gender').touched" class="text-danger">
-			  Gender selection is required.
-			</div>
-		  </div>
-		  <div class="input-box">
-			<label class="race-label" for="race">Race*</label>
-			<select id="race" name="race" class="category" formControlName="Race">
-			  <option value="" disabled selected>Select your race</option>
-			  <option value="Black">Black</option>
-			  <option value="White">White</option>
-			  <option value="Indian">Indian</option>
-			  <option value="Mixed">Mixed</option>
-			  <option value="Other">Other(not listed)</option>
-			</select>
-			<div *ngIf="getFormControl('Race').invalid && getFormControl('Race').touched" class="text-danger">
-			  Race selection is required.
-			</div>
-		  </div>
-		</div>
-		<footer class="form-buttons">
-		  <div class="button">
-			<button class="button-save" type="submit" (click)="onSaveAndCloseClick()">Save and Close</button>
-			<button class="button" type="submit" (click)="onDoneClick()">Done</button>
-		  </div>
-		</footer>
-	  </form>
-
-	</div>
+    <div class="title">
+      <img class="nb1-middle-icon" src="../../../../assets/images/Backlog count (1).svg" />Personal Information
+    </div>
+    <div class="content">
+      <form [formGroup]="personalDetails" (ngSubmit)="saveInformation()">
+        <div class="user-details">
+            <div [ngClass]="{ validation: getFormControl('Firstname').invalid && getFormControl('Firstname').touched, success: getFormControl('Firstname').valid && getFormControl('Firstname').touched }" class="input-box">
+                <span class="details">First Name*</span>
+                <input type="text" placeholder="Enter your name" [value]="personalInformations.name" formControlName="Firstname">
+                <div *ngIf="getFormControl('Firstname').invalid && getFormControl('Firstname').touched" class="text-danger">
+                  First name is required.
+                </div>
+              </div>
+              
+          <div class="input-box">
+            <!-- [ngClass]="{ validation: getFormControl('Surname').invalid && getFormControl('Surname').touched, success: getFormControl('Surname').valid && getFormControl('Surname').touched }" -->
+            <span class="details">Surname*</span>
+            <input type="text" placeholder="Enter your surname" [value]="personalInformations.surname" formControlName="Surname">
+            <div *ngIf="getFormControl('Surname').invalid && getFormControl('Surname').touched" class="text-danger">
+              Surname is required.
+            </div>
+          </div>
+          <div class="input-box">
+            <span class="details">Email*</span>
+            <input type="text" placeholder="Enter your email" [value]="personalInformations.email" formControlName="Email">
+            <div *ngIf="getFormControl('Email').invalid && getFormControl('Email').touched" class="text-danger">
+              Valid Email is required.
+            </div>
+          </div>
+          
+          <div class="input-box">
+            <span class="details">Phone Number*</span>
+            <input type="text" placeholder="Enter your phone number" [value]="personalInformations.phone" formControlName="Phone">
+            <div *ngIf="getFormControl('Phone').invalid && getFormControl('Phone').touched" class="text-danger">
+              Valid phone number is required.
+            </div>
+            
+          </div>
+          <div [ngClass]="{ validation: getFormControl('IdNumber').invalid && getFormControl('IdNumber').touched }" class="input-box">
+            <span class="details">ID*</span>
+            <input type="text" placeholder="Enter your ID number" [value]="personalInformations.idNumber" formControlName="IdNumber">
+            <div *ngIf="getFormControl('IdNumber').invalid && getFormControl('IdNumber').touched" class="text-danger">
+              Valid ID number is required and must be of 13 digits.
+            </div>
+          </div>
+          <div class="input-box">
+            <span class="details">Enter Disability</span>
+            <input type="text" placeholder="Optional to specify" [value]="personalInformations.disability" maxlength="40">
+          </div>
+          <div class="input-box">
+            <label class="gender-label" for="gender">Gender*</label>
+            <select id="gender" name="gender" class="category" formControlName="Gender">
+              <option value="" disabled selected>Select your gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <div *ngIf="getFormControl('Gender').invalid && getFormControl('Gender').touched" class="text-danger">
+              Gender selection is required.
+            </div>
+          </div>
+          <div class="input-box">
+            <label class="race-label" for="race">Race*</label>
+            <select id="race" name="race" class="category" formControlName="Race">
+              <option value="" disabled selected>Select your race</option>
+              <option value="Black">Black</option>
+              <option value="White">White</option>
+              <option value="Indian">Indian</option>
+              <option value="Mixed">Mixed</option>
+              <option value="Other">Other(not listed)</option>
+            </select>
+            <div *ngIf="getFormControl('Race').invalid && getFormControl('Race').touched" class="text-danger">
+              Race selection is required.
+            </div>
+          </div>
+        </div>
+        <footer class="form-buttons">
+          <div class="button">
+            <button class="button-save" type="submit" (click)="onSaveAndCloseClick()">Save and Close</button>
+            <button class="button" type="submit" (click)="onDoneClick()">Done</button>
+          </div>
+        </footer>
+      </form>
+    </div>
   </div>
-  
