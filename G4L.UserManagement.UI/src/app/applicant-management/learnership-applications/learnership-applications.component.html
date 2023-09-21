@@ -14,11 +14,11 @@
       <div class="card mb-4">
         <div class="card-header pb-0">
           <h6>Learnership Applications</h6> 
-          <div class="d-flex justify-content-end">
+          <!-- <div class="d-flex justify-content-end">
             <button [ngClass]="{'active-button': activeButton === 'personal'}" class="btn btn-sm bg-2 gradient-primary mb-0 btn-dark me-2 increase-font-size" (click)="showPersonal()">View Personal Details</button>
           
             <button [ngClass]="{'active-button': activeButton === 'education'}" class="btn btn-sm bg-2 gradient-primary mb-0 btn-dark increase-font-size" (click)="showEducation()">View Education</button>
-          </div>
+          </div> -->
           
           
           
@@ -82,8 +82,45 @@
                     </p>
                   </td>
                   <!-- Add more table columns for additional data -->
-                  
+                  <td class="align-middle dropdown">
+                    <button
+                      class="btn btn-link text-secondary mb-0 dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <i
+                        aria-hidden="true"
+                        class="fa fa-ellipsis-v text-xs"
+                      ></i>
+                    </button>
+
+                    <ul
+                      class="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton1"
+                    >
+                    <li>
+                      <a class="dropdown-item" (click)="openDialog(applicant)">
+                        <i class="fa-solid fa-user-pen text-xs"></i
+                        >&nbsp;&nbsp;Edit User</a
+                      >
+                    </li>
+                      <li>
+                        <a class="dropdown-item">
+                          <i class="fa-solid fa-user-pen text-xs"></i
+                          >&nbsp;&nbsp;Delete User</a
+                        >
+                      </li>
+                      <!-- <li>
+                        <a class="dropdown-item" href="#"
+                          ><i class="fa-solid fa-user-xmark"></i>&nbsp;&nbsp;Remove User</a
+                        >
+                      </li> -->
+                    </ul>
+                  </td>
                 </tr>
+                
                 <!-- Add more rows for additional applicants -->
               </tbody>
             </table>

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { UploadService } from 'src/app/shared/service/fileupload.service';
 import { FileUpload } from 'src/app/leave-management/models/file-upload'; // Import the FileUpload model
+import { UserService } from 'src/app/user-management/services/user.service';
+import { LoginGuard } from 'src/app/user-management/login/guards/login.guard';
 
 @Component({
   selector: 'app-applicant-attachments',
@@ -17,15 +19,22 @@ export class ApplicantAttachmentsComponent implements OnInit {
   uploadMessages: { [section: string]: string | undefined } = {};
   sizeErrors: { [section: string]: string | undefined } = {};
   formatErrors: { [section: string]: string | undefined } = {};
+  logggedInUser:any;
+  @Input() modalData: any;
 
   constructor(
     private route: Router,
     private formBuilder: FormBuilder,
     public modalRef: MdbModalRef<any>,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+
+    private user_svc: UserService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.logggedInUser.id = this.modalData.userId;
+
+  }
 
   onDoneClick(): void {
     this.modalRef.close();
@@ -79,12 +88,20 @@ export class ApplicantAttachmentsComponent implements OnInit {
           file: file,
           url: '',
           key: undefined,
-          name: undefined,
+          name: "",
           uploadProgress: undefined
         };
+
   
         try {
-          await this.uploadService.genericUploadToStorage(fileUpload, section);
+          this.uploadService.genericUploadToStorage(fileUpload, section).
+          then(data =>{
+            console.log("data return by file ", data); 
+            this.logggedInUser.id_url = data?.url;
+            this.user_svc.updateUser(this.logggedInUser)
+
+            //update user
+          })
           // File uploaded successfully, so set the success message
           this.uploadMessages[section] = 'File uploaded successfully.';
         } catch (error) {

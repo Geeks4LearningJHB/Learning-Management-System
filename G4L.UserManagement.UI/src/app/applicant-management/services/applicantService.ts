@@ -11,6 +11,15 @@ import { APP_SERVICE_CONFIG } from 'src/app/shared/app-config/app-config.service
   providedIn: 'root'
 })
 export class ApplicantService {
+  setProfileCompleted(arg0: boolean) {
+    throw new Error('Method not implemented.');
+  }
+  setEducationCompleted(arg0: boolean) {
+    throw new Error('Method not implemented.');
+  }
+  getProfileByUserId(userId: any) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(
     private http: HttpClient,
@@ -29,11 +38,9 @@ export class ApplicantService {
   applyForLearnership(userId: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiUrl}/applications`, { userId });
   }
-  // getAllApplicantions(): Observable<any>  {
-  //   return this.http.get(`${this.config.apiUrl}/applications`);
-  // }
+  
   getAllApplicantions(): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/applications/applications`);
+    return this.http.get(`${this.config.apiUrl}/applications`);
   }
   getApplicantEducation(): Observable<any>  {
     return this.http.get(`${this.config.apiUrl}/education`);
@@ -41,45 +48,26 @@ export class ApplicantService {
 
   getApplicantEducationByUserId(userId : any): Observable<any>  {
     return this.http.get(`${this.config.apiUrl}/education/education${userId}`);
-  }
 
+  }
   onPersonalDetailsSubmit(id : any): Observable<any>  {
     return this.http.get(`${this.config.apiUrl}/user/${id}`);
+  } 
+  documentUpload(body: any): Observable<any> {
+    return this.http.post<any>(`${this.config.apiUrl}/applicantAttachments`, body);
   }
+}
 
 
-  // onPersonalDetailsSubmit(body: personalInformation) {
-  //   console.log("Request Payload:", body);
-  //   return this.http.put(`${this.config.apiUrl}/user/personal-information`, body);
-  // }
+
+
 
   
-}
 
-export interface Applicant {
-  userId: "";
-  name: string;
-  surname:string;
-  email:string;
-  phone:number;
-  idNumber: number;
-  race:string;
-  gender:string;
-  disability:string | null;
-  englishMark:string;
-  mathSubject:string;
-  mathMark:string;
-  courseOfInterest:string;
-  fieldOfStudy:string;
-  qualifications:string;
-}
+ 
 
-export interface Education{
-  userId: string;
-  mathSubject: string;
-  mathMark:string;
-  englishMark:string;
-  fieldOfStudy:string;
-  qualifications:string;
-  courseOfInterest:string;
-}
+
+
+
+  
+

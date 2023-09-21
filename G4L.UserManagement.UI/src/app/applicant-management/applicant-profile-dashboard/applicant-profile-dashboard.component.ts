@@ -1,17 +1,15 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ApplicantSuccessComponent } from '../applicant-success/applicant-success.component';
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
 import { PersonalInformationComponent } from '../personal-information/personal-information.component';
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
 import { ApplicantAttachmentsComponent } from '../applicant-attachments/applicant-attachments.component';
 import { ApplicantService,  } from '../services/applicantService';
-import { result } from 'lodash';
+
 import { UserService } from 'src/app/user-management/services/user.service';
-import { any } from 'ramda';
+
 import { TokenService } from 'src/app/user-management/login/services/token.service';
-import { error } from 'console';
-import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
+
 
 @Component({
   selector: 'app-applicant-profile-dashboard',
@@ -81,7 +79,7 @@ this.applicantService.getEducationByUserId(userId).subscribe((response: any) => 
   openAttachmentsModal(): void {
     this.modalHandler.openMdbModal<ApplicantAttachmentsComponent>({
       component: ApplicantAttachmentsComponent,
-      data: null,
+      data: {userId: this.userId},
       ignoreBackdropClick: true,
       width: 75,
     });

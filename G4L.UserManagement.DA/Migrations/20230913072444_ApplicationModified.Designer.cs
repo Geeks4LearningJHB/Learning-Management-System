@@ -4,14 +4,16 @@ using G4L.UserManagement.DA;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace G4L.UserManagement.DA.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230913072444_ApplicationModified")]
+    partial class ApplicationModified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,8 +180,6 @@ namespace G4L.UserManagement.DA.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                b.Property<DateTime>("CreatedDate")
-                    .HasColumnType("datetime2");
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -197,7 +197,6 @@ namespace G4L.UserManagement.DA.Migrations
 
                     b.HasKey("Id");
 
-                b.HasIndex("LeaveId");
                     b.HasIndex("LeaveId");
 
                     b.ToTable("Documents");
@@ -548,12 +547,11 @@ namespace G4L.UserManagement.DA.Migrations
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Document", b =>
-            {
-                b.HasOne("G4L.UserManagement.BL.Entities.Leave", null)
-                    .WithMany("Documents")
-                    .HasForeignKey("LeaveId");
-            });
-               
+                {
+                    b.HasOne("G4L.UserManagement.BL.Entities.Leave", null)
+                        .WithMany("Documents")
+                        .HasForeignKey("LeaveId");
+                });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Goal", b =>
                 {
@@ -658,4 +656,3 @@ namespace G4L.UserManagement.DA.Migrations
         }
     }
 }
-

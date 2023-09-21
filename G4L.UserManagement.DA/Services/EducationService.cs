@@ -48,15 +48,9 @@ namespace G4L.UserManagement.DA.Services
         }
 
 
-
-        //public async Task GetEducationByUserIdAsync(Guid userId)
-        //{
-        //     await _educationRepository.GetByIdAsync(userId);
-        //}
-
         public async Task RegisterUserAsync(EducationRequest education)
         {
-            //var education = _mapper.Map<Education>(model);
+       
 
             await _educationRepository.PostQualifcationsAsync(education);
         }
