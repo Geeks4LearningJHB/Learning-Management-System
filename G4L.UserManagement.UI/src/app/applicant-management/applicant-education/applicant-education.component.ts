@@ -13,7 +13,8 @@ import {
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
-import { TokenService } from '../Learning-Management-System/G4L.UserManagement.UI/src/app/user-management/login/services/token.service';
+import { TokenService } from 'src/app/user-management/login/services/token.service';
+
 
 export interface Education{
   userId: string;

@@ -5,15 +5,14 @@ import { GoalModalHandlerService } from 'src/app/goal-management/services/modals
 import { PersonalInformationComponent } from '../personal-information/personal-information.component';
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
 import { ApplicantAttachmentsComponent } from '../applicant-attachments/applicant-attachments.component';
-import { ApplicantService, } from '../services/applicantService';
-import { result } from 'lodash';
+import { ApplicantService } from '../services/applicantService';
 import { UserService } from 'src/app/user-management/services/user.service';
-import { any } from 'ramda';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 import { error } from 'console';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 import { response } from 'express';
 import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-applicant-profile-dashboard',
@@ -32,18 +31,17 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     private applicantService: ApplicantService,
     private tokenService: TokenService,
     private modalHandler: GoalModalHandlerService<any>
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
-
   }
 
   sendApplication(userId: string): void {
     this.applicantService.applyForLearnership(userId).subscribe(
       (response) => {
-        this.sendEmail(userId); // Pass the userId to sendEmail
+        this.sendEmail(userId);
         this.openSubmitModal();
       },
       (error) => {
@@ -52,7 +50,8 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     );
   }
 
-  sendEmail(userId: string) { // Change the parameter type to string
+
+  sendEmail(userId: string): void {
     this.applicantService.sendEmail(userId).subscribe(
       (response) => {
         console.log('Email sent successfully:', response);
@@ -62,7 +61,6 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       }
     );
   }
-
   openPersonalInformationModal(): void {
     this.modalHandler.openMdbModal<PersonalInformationComponent>({
       component: PersonalInformationComponent,
@@ -87,6 +85,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   }
 
 
+
   openEducationModal(): void {
     this.modalHandler.openMdbModal<ApplicantEducationComponent>({
       component: ApplicantEducationComponent,
@@ -94,10 +93,9 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       ignoreBackdropClick: true,
       width: 50,
 
+
     });
   }
-
-
 
   openAttachmentsModal(): void {
     this.modalHandler.openMdbModal<ApplicantAttachmentsComponent>({
