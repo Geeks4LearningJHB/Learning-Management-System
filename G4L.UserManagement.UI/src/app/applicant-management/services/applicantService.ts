@@ -67,6 +67,7 @@ export class ApplicantService {
     return this.http.get(`${this.config.apiUrl}/user/${id}`);
   }
 
+
   documentUpload(body: any): Observable<any> {
     return this.http.post<any>(`${this.config.apiUrl}/applicantAttachments`, body);
   }
@@ -83,3 +84,4 @@ export class ApplicantService {
     // Implement this method as needed
   }
 }
+

@@ -8,6 +8,11 @@ import { ApplicantAttachmentsComponent } from '../applicant-attachments/applican
 import { ApplicantService } from '../services/applicantService';
 import { UserService } from 'src/app/user-management/services/user.service';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
+import { error } from 'console';
+import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
+import { response } from 'express';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-applicant-profile-dashboard',
@@ -17,6 +22,9 @@ import { TokenService } from 'src/app/user-management/login/services/token.servi
 export class ApplicantProfileDashboardComponent implements OnInit {
   userId: any;
   serverErrorMessage: any;
+  showMessage!: boolean;
+  application: any[] = [];
+  message: any;
 
   constructor(
     private userService: UserService,
@@ -42,6 +50,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     );
   }
 
+
   sendEmail(userId: string): void {
     this.applicantService.sendEmail(userId).subscribe(
       (response) => {
@@ -52,24 +61,30 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       }
     );
   }
-
-  openPersonalInformationModal(): void{
+  openPersonalInformationModal(): void {
     this.modalHandler.openMdbModal<PersonalInformationComponent>({
-      component : PersonalInformationComponent,
-      data : null,
-      ignoreBackdropClick : true,
+      component: PersonalInformationComponent,
+      data: null,
+      ignoreBackdropClick: true,
       width: 50,
-    })
-  }
-
-
-  getEducationByUserId(userId: number) {
-    console.log(userId);
-    this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
-      console.log(response);
-      this.openEducationModal();
     });
   }
+
+  getEducationByUserId(userId: number) {
+    console.log(userId); // Check the value in the console
+    this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
+      console.log(response); // Check the response if it arrives
+      this.openEducationModal();
+    });
+
+    this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
+      // this.filterUserByRole(response);
+      console.log(userId)
+      this.openEducationModal()
+    });
+  }
+
+
 
   openEducationModal(): void {
     this.modalHandler.openMdbModal<ApplicantEducationComponent>({
@@ -77,6 +92,8 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       data: null,
       ignoreBackdropClick: true,
       width: 50,
+
+
     });
   }
 
