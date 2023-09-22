@@ -13,6 +13,7 @@ import { TokenService } from 'src/app/user-management/login/services/token.servi
 import { error } from 'console';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 import { response } from 'express';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-applicant-profile-dashboard',
@@ -22,6 +23,9 @@ import { response } from 'express';
 export class ApplicantProfileDashboardComponent implements OnInit {
   userId: any;
   serverErrorMessage: any;
+  showMessage!: boolean;
+  application: any[] = [];
+  message: any;
 
   constructor(
     private userService: UserService,
@@ -35,6 +39,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     this.userId = user.id;
 
   }
+
   sendApplication(userId: string): void {
     this.applicantService.applyForLearnership(userId).subscribe(
       (response) => {
@@ -46,7 +51,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       }
     );
   }
-  
+
   sendEmail(userId: string) { // Change the parameter type to string
     this.applicantService.sendEmail(userId).subscribe(
       (response) => {
@@ -57,57 +62,58 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       }
     );
   }
-  
 
-openPersonalInformationModal(): void {
-  this.modalHandler.openMdbModal<PersonalInformationComponent>({
-    component: PersonalInformationComponent,
-    data: null,
-    ignoreBackdropClick: true,
-    width: 50,
-  });
-}
+  openPersonalInformationModal(): void {
+    this.modalHandler.openMdbModal<PersonalInformationComponent>({
+      component: PersonalInformationComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 50,
+    });
+  }
 
-getEducationByUserId(userId: number) {
-  console.log(userId); // Check the value in the console
-  this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
-    console.log(response); // Check the response if it arrives
-    this.openEducationModal();
-  });
+  getEducationByUserId(userId: number) {
+    console.log(userId); // Check the value in the console
+    this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
+      console.log(response); // Check the response if it arrives
+      this.openEducationModal();
+    });
 
-  this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
-    // this.filterUserByRole(response);
-    console.log(userId)
-    this.openEducationModal()
-  });
-}
+    this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
+      // this.filterUserByRole(response);
+      console.log(userId)
+      this.openEducationModal()
+    });
+  }
 
 
-openEducationModal(): void {
-  this.modalHandler.openMdbModal<ApplicantEducationComponent>({
-    component: ApplicantEducationComponent,
-    data: null,
-    ignoreBackdropClick: true,
-    width: 50,
+  openEducationModal(): void {
+    this.modalHandler.openMdbModal<ApplicantEducationComponent>({
+      component: ApplicantEducationComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 50,
 
-  });
-}
+    });
+  }
 
-openAttachmentsModal(): void {
-  this.modalHandler.openMdbModal<ApplicantAttachmentsComponent>({
-    component: ApplicantAttachmentsComponent,
-    data: null,
-    ignoreBackdropClick: true,
-    width: 75,
-  });
-}
 
-openSubmitModal(): void {
-  this.modalHandler.openMdbModal<ApplicantSuccessComponent>({
-    component: ApplicantSuccessComponent,
-    data: null,
-    ignoreBackdropClick: true,
-    width: 50,
-  });
-}
+
+  openAttachmentsModal(): void {
+    this.modalHandler.openMdbModal<ApplicantAttachmentsComponent>({
+      component: ApplicantAttachmentsComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 75,
+    });
+  }
+
+  openSubmitModal(): void {
+    this.modalHandler.openMdbModal<ApplicantSuccessComponent>({
+      component: ApplicantSuccessComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 50,
+    });
+  }
 }
