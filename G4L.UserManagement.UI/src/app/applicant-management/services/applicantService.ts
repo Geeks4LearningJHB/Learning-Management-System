@@ -3,6 +3,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Console, error } from 'console';
+import { any } from 'ramda';
 import { Observable } from 'rxjs';
 import { AppConfig } from 'src/app/shared/app-config/app-config.interface';
 import { APP_SERVICE_CONFIG } from 'src/app/shared/app-config/app-config.service';
@@ -17,6 +18,25 @@ export class ApplicantService {
     @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
   ) { }
 
+  onPersonalDetailsSubmit(id : any): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/user/${id}`);
+  }
+
+  onPersonalDetailsUpdate( body: any) {
+    console.log(body);
+    return this.http.put(`${this.config.apiUrl}/user/personal`, body);
+  }
+
+  onSaveAndClose( body: any) {
+    console.log(body);
+    return this.http.put(`${this.config.apiUrl}/user/personal`, body);
+  }
+
+  onEducationUpdate( body: any) {
+    console.log(body);
+    return this.http.put(`${this.config.apiUrl}/education`, body);
+  }
+
   onSubmit(value: any): Observable<any> {
     console.log("Post Payload:", value);
     return this.http.post(`${this.config.apiUrl}/education`, value);
@@ -29,9 +49,12 @@ export class ApplicantService {
   applyForLearnership(userId: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiUrl}/applications`, { userId });
   }
+
+
   // getAllApplicantions(): Observable<any>  {
   //   return this.http.get(`${this.config.apiUrl}/applications`);
   // }
+
   getAllApplicantions(): Observable<any>  {
     return this.http.get(`${this.config.apiUrl}/applications/applications`);
   }
@@ -43,16 +66,10 @@ export class ApplicantService {
     return this.http.get(`${this.config.apiUrl}/education/${userId}`);
   }
 
-  onPersonalDetailsSubmit(id : any): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/user/${id}`);
-  }
-
-
   // onPersonalDetailsSubmit(body: personalInformation) {
   //   console.log("Request Payload:", body);
   //   return this.http.put(`${this.config.apiUrl}/user/personal-information`, body);
   // }
-
   
 }
 
