@@ -99,7 +99,7 @@ onPersonalDetailsSubmit(userId: any) {
 
   //education progress
   getApplicantEducation(userId: any) {
-    this.applicantService.getApplicantEducationByUserId(userId).subscribe(
+    this.applicantService.getEducationByUserId(userId).subscribe(
       (data: any) => {
         const totalFieldCount = 6;
       
