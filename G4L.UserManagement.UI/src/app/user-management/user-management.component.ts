@@ -39,6 +39,7 @@ export class UserManagementComponent implements OnInit {
   getAllUsers() {
     this.userService.getAllUsers().subscribe((response: any) => {
       this.filterUserByRole(response);
+      console.log(response)
     });
   }
 

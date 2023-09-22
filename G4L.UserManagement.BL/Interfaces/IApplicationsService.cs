@@ -12,7 +12,13 @@ namespace G4L.UserManagement.BL.Interfaces
     {
         Task CreateApplicationAsync(ApplicationsRequest model);
         Task<Applications> GetApplicantByIdNumberAsync(string idNumber);
+
+
+        //Task<Applications> GetEmailByIdNumberAsync(string idNumber);
+
+
         Task<Applications> GetApplicationByUserIdAsync(Guid userId);
         Task<IEnumerable<Applications>> ListAsync();
+     
     }
 }

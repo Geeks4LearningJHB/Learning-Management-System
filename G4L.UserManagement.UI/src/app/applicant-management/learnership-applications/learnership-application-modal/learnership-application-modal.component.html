@@ -1,0 +1,540 @@
+<div class="container-fluid">
+  <div class="card-header mt-2 mx-2">
+    <div class="row align-items-center justify-content-end">
+      <div class="col-4 text-end">
+        <a (click)="close()" class="cursor-pointer"> <i class="fa-solid fa-xmark"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center"> 
+    <p class="fs-5">{{user.name}} {{user.surname}}</p> 
+</div>
+  <div>
+    <h3 class="fs-4">Education</h3>
+    <div class="row g-3 mb-3">
+      <div class="col">
+        <label class="form-control-label" for="math-subject"
+          >Mathematics Subject</label
+        >
+        <input
+          type="text"
+          id="math-subject"
+          class="form-control"
+          [value]="user.mathSubject"
+          disabled
+          readonly
+        />
+      </div>
+      <div class="col">
+        <label class="form-control-label" for="mathematics-marks"
+          >Mathematics Marks</label
+        >
+        <input
+          id="mathematics-marks"
+          type="text"
+          class="form-control"
+          [value]="user.mathMark"
+          disabled
+          readonly
+        />
+      </div>
+    </div>
+    <div class="row g-3 mb-3">
+      <div class="col">
+        <label class="form-control-label" for="english-mark"
+          >English Marks</label
+        >
+        <input
+          id="english-mark"
+          type="text"
+          class="form-control"
+          [value]="user.englishMark"
+          disabled
+          readonly
+        />
+      </div>
+      <div class="col">
+        <label class="form-control-label" for="qualifications"
+          >English Marks</label
+        >
+        <input
+          id="qualifications"
+          type="text"
+          class="form-control"
+          [value]="user.qualifications"
+          disabled
+          readonly
+        />
+      </div>
+    </div>
+    <div class="row g-3 mb-3">
+      <div class="col">
+        <label class="form-control-label" for="field-of-study"
+          >Field of Study</label
+        >
+        <input
+          id="field-of-study"
+          type="text"
+          class="form-control"
+          [value]="user.fieldOfStudy"
+          disabled
+          readonly
+        />
+      </div>
+      <div class="col">
+        <label class="form-control-label" for="course-of-interst"
+          >Course applied For</label
+        >
+        <input
+          id="course-of-interst"
+          type="text"
+          class="form-control"
+          [value]="user.courseOfInterest"
+          disabled
+          readonly
+        />
+      </div>
+    </div>
+  </div>
+  <hr class="horizontal dark my-4" />
+  <h3>Attachments</h3>
+  <div class="row g-3 mb-3">
+    <div class="col">
+      <label class="form-control-label" for="cv-attachment">CV</label>
+      <input
+        type="text"
+        id="cv-attachment"
+        class="form-control"
+        [value]="user.mathSubject"
+        disabled
+        readonly
+      />
+    </div>
+    <div class="col">
+      <label class="form-control-label" for="matric">Matric Certificate</label>
+      <input
+        id="matric"
+        type="text"
+        class="form-control"
+        [value]="user.mathMark"
+        disabled
+        readonly
+      />
+    </div>
+  </div>
+  <div class="row g-3 mb-3">
+    <div class="col">
+      <label class="form-control-label" for="id-copy">Copy of Id</label>
+      <input
+        id="id-copy"
+        type="text"
+        class="form-control"
+        [value]="user.englishMark"
+        readonly
+        disabled
+      />
+    </div>
+    <div class="col">
+      <label class="form-control-label" for="highest-qualifications"
+        >Highest Qaulifcation</label
+      >
+      <input
+        id="highest-qualifications"
+        type="text"
+        class="form-control"
+        [value]="user.qualifications"
+        disabled
+        readonly
+      />
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container-fluid m-0 p-0">
+  <div class="card m-0 p-0">
+    <div class="card-header">
+      <div class="row align-items-center">
+        <div class="col-4 text-end">
+          <a (click)="close()"  class="cursor-pointer"> <i class="fa-solid fa-xmark"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="formModel" autocomplete="off">
+        <h6 class="heading-small text-muted mb-4">Education information</h6>
+      
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group"    autofocus="false">
+              <label class="form-control-label" for="math-subject"
+                >Mathematics Subject</label
+              >
+              <input   class="form-control mb-3" [value]="user.mathSubject" autofocus="off">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="mathematics-marks"
+                >Mathematics Marks</label
+              >
+              <input
+                type="text"
+                id="mathematics-marks"
+                class="form-control"
+               
+             
+              
+              /> -->
+<!-- </div>
+          </div>
+        
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="english-mark"
+                >English Marks
+              </label>
+              <input
+                id="english-mark"
+                class="form-control"
+                [value]="user. englishMark"
+                formControlName="EnglishMark"
+              />
+              <div></div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="course-of-interst"
+                >Course Of Interest
+              </label>
+              <input
+                type="text"
+                id="course-of-interst"
+                class="form-control"
+                placeholder=""
+                
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="qualifications"
+                >Qualifications</label
+              >
+              <input
+                type="text"
+                id="qualifications"
+                class="form-control"
+                placeholder=""
+                formControlName="qualifications"
+              />
+            </div>
+          </div>
+          
+      
+         
+        </div>
+
+        <hr class="horizontal dark my-4" />
+        Contact information
+        <h6 class="heading-small text-muted mb-4">Contact information</h6>
+        <div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group">
+                 <label class="form-control-label" for="input-last-name"
+                  >Mathematics Subject<span class="red-text">*</span></label
+                >
+                <input
+                  type="text"
+                  id="input-last-name"
+                  class="form-control mb-3"
+                  placeholder="Last name"
+                  formControlName="Surname"
+                /> -->
+<!-- <div>Mathematics</div>
+                {{user.mathSubject}}
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="input-last-name"
+                  >Mathematics Marks<span class="red-text">*</span></label
+                >
+                <input
+                  type="text"
+                  id="input-last-name"
+                  class="form-control"
+                  placeholder="Last name"
+                  formControlName="Surname"
+                />
+              </div>
+            </div> -->
+
+<!-- <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="input-phone"
+                  >English Marks<span class="red-text">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="input-phone"
+                  class="form-control"
+                  placeholder="+27 00000000"
+                  formControlName="Phone"
+                />
+                <div></div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="input-email"
+                  >Course Of Interest<span class="red-text">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="input-email"
+                  class="form-control"
+                  placeholder="email@domain.com"
+                  formControlName="Email"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="input-last-name"
+                  >Qualifications</label
+                >
+                <input
+                  type="text"
+                  id="input-last-name"
+                  class="form-control"
+                  placeholder="Last name"
+                  formControlName="Surname"
+                />
+              </div>
+            </div>
+            
+        
+           
+          </div>
+        </div>
+       
+        <hr class="horizontal dark my-4" /> -->
+<!-- Trainers focus -->
+
+<!-- Learnership details -->
+<!-- <div *ngIf="isLearner()">
+            <h6 class="heading-small text-muted mb-4">Learnership information</h6>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label
+                    class="form-control-label"
+                    for="input-career"
+                    [ngClass]="{
+                      'red-text':
+                        formModel.controls['Career'].invalid &&
+                        formModel.controls['Career'].touched
+                    }"
+                    >Stream/Career<span class="red-text">*</span></label
+                  >
+                  <select
+                    id="input-career"
+                    class="form-select"
+                    formControlName="Career"
+                    [ngClass]="{
+                      'red-border':
+                        formModel.controls['Career'].invalid &&
+                        formModel.controls['Career'].touched
+                    }"
+                  >
+                    <option
+                      *ngFor="let stream of keys(streams)"
+                      [ngValue]="stream"
+                      [disabled]="isDefault(stream)"
+                    >
+                      {{ stream | removeUnderscore }}
+                    </option>
+                  </select>
+                  <div
+                    class="red-text"
+                    *ngIf="
+                      formModel.controls['Career'].invalid &&
+                      formModel.controls['Career'].touched
+                    "
+                  >
+                    <div *ngIf="formModel.controls['Career'].errors.required">
+                      Please select your prefered career.
+                    </div>
+                    <div
+                      *ngIf="formModel.controls['Career'].errors.invalidStream"
+                    >
+                      Please select a valid career/stream.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label
+                    class="form-control-label"
+                    for="input-sponsor"
+                    [ngClass]="{
+                      'red-text':
+                        formModel.controls['SponsorId'].invalid &&
+                        formModel.controls['SponsorId'].touched
+                    }"
+                    >Sponsor<span class="red-text">*</span></label
+                  >
+                  <select
+                    id="input-sponsor"
+                    class="form-select"
+                    formControlName="SponsorId"
+                    [ngClass]="{
+                      'red-border':
+                        formModel.controls['SponsorId'].invalid &&
+                        formModel.controls['SponsorId'].touched
+                    }"
+                  >
+                    <option
+                      *ngFor="let sponsor of sponsors"
+                      [ngValue]="sponsor?.id"
+                      class="dropdown-item"
+                    >
+                      {{ sponsor?.registeredName }}
+                    </option>
+                  </select>
+                  <div
+                    class="red-text"
+                    *ngIf="
+                      formModel.controls['SponsorId'].invalid &&
+                      formModel.controls['SponsorId'].touched
+                    "
+                  >
+                    <div *ngIf="formModel.controls['SponsorId'].errors.required">
+                      Please select your preferred sponsor.
+                    </div>
+                    <div
+                      *ngIf="formModel.controls['SponsorId'].errors.invalidStream"
+                    >
+                      Please select a valid sponsor.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label
+                    class="form-control-label"
+                    for="input-learnershipStartDate"
+                    [ngClass]="{
+                      'red-text':
+                        formModel.controls['LearnershipStartDate'].invalid &&
+                        formModel.controls['LearnershipStartDate'].touched
+                    }"
+                    >Learnership Start Date<span class="red-text">*</span></label
+                  >
+                  <input
+                    type="date"
+                    id="input-learnershipStartDate"
+                    class="form-control"
+                    [placeholder]="user?.learnershipStartDate"
+                    formControlName="LearnershipStartDate"
+                    [ngClass]="{
+                      'red-border':
+                        formModel.controls['LearnershipStartDate'].invalid &&
+                        formModel.controls['LearnershipStartDate'].touched
+                    }"
+                  />
+                  <div
+                    class="red-text"
+                    *ngIf="
+                      formModel.controls['LearnershipStartDate'].invalid &&
+                      formModel.controls['LearnershipStartDate'].touched
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        formModel.controls['LearnershipStartDate'].errors.required
+                      "
+                    >
+                      Please enter the Learnership Start Date.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="horizontal dark my-4" />
+          <div *ngIf="isLearner()">
+            <h6 class="heading-small text-muted mb-4">Clock in information</h6>
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label
+                    class="form-control-label"
+                    for="input-clockintime"
+                    [ngClass]="{
+                      'red-text':
+                        formModel.controls['ClockInTime'].invalid &&
+                        formModel.controls['ClockInTime'].touched
+                    }"
+                    >Clock in time<span class="red-text">*</span></label
+                  >
+                  <select
+                    id="input-clockintime"
+                    class="form-select"
+                    formControlName="ClockInTime"
+                    [ngClass]="{
+                      'red-border':
+                        formModel.controls['ClockInTime'].invalid &&
+                        formModel.controls['ClockInTime'].touched
+                    }"
+                  >
+                  <option *ngFor="let clockintimeKey of keys(clockInTime)" [ngValue]="clockintimeKey">
+                    {{ clockintimeKey| removeUnderscore }}
+                  </option>
+                  
+                  </select>
+                  <div
+                    
+                  >
+                    <div
+                      
+                    >
+                      Please select prefered clock in time.
+                    </div>
+                    <div
+                     
+                    >
+                      Please select a valid clock in time.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+<!-- Action buttons -->
+<!-- <div class="row mt-3">
+          <div class="col-8"></div>
+          <div class="col-4 text-end">
+            <div>
+              <a class="btn btn-sm bg-2 gradient-primary mb-0 btn-dark">
+                <i class="fa-solid fa-user-pen"></i>&nbsp;&nbsp;UPDATE USER</a
+              >
+            </div>
+
+            <ng-template #addNewUser>
+              <a class="btn btn-sm bg-2 gradient-primary mb-0 btn-dark">
+                <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;ADD
+                NEW USER</a
+              >
+            </ng-template>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->

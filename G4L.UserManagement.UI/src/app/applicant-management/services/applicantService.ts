@@ -1,9 +1,6 @@
-// applicantService.ts
-
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Console, error } from 'console';
-import { any } from 'ramda';
 import { Observable } from 'rxjs';
 import { AppConfig } from 'src/app/shared/app-config/app-config.interface';
 import { APP_SERVICE_CONFIG } from 'src/app/shared/app-config/app-config.service';
@@ -12,15 +9,15 @@ import { APP_SERVICE_CONFIG } from 'src/app/shared/app-config/app-config.service
   providedIn: 'root'
 })
 export class ApplicantService {
-
+  deleteApplication(email: any) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     private http: HttpClient,
     @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
   ) { }
 
-  onPersonalDetailsSubmit(id : any): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/user/${id}`);
-  }
+  
 
   onPersonalDetailsUpdate( body: any) {
     console.log(body);
@@ -45,58 +42,44 @@ export class ApplicantService {
   getEducationByUserId(userId: any): Observable<any> {
     return this.http.get(`${this.config.apiUrl}/education/${userId}`);
   }
-  
+
   applyForLearnership(userId: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiUrl}/applications`, { userId });
   }
 
-
-  // getAllApplicantions(): Observable<any>  {
-  //   return this.http.get(`${this.config.apiUrl}/applications`);
-  // }
-
-  getAllApplicantions(): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/applications/applications`);
+  sendEmail(userId: string): Observable<any> {
+    return this.http.post<any>(`${this.config.apiUrl}/email`, { userId });
   }
-  getApplicantEducation(): Observable<any>  {
+
+  getAllApplications(): Observable<any> {
+    return this.http.get(`${this.config.apiUrl}/applications`);
+  }
+
+  getApplicantEducation(): Observable<any> {
     return this.http.get(`${this.config.apiUrl}/education`);
   }
 
-  getApplicantEducationByUserId(userId : any): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/education/${userId}`);
+  getApplicantEducationByUserId(userId: any): Observable<any> {
+    return this.http.get(`${this.config.apiUrl}/education/education/${userId}`);
   }
 
-  // onPersonalDetailsSubmit(body: personalInformation) {
-  //   console.log("Request Payload:", body);
-  //   return this.http.put(`${this.config.apiUrl}/user/personal-information`, body);
-  // }
-  
-}
+  onPersonalDetailsSubmit(id: any): Observable<any> {
+    return this.http.get(`${this.config.apiUrl}/user/${id}`);
+  }
 
-export interface Applicant {
-  userId: "";
-  name: string;
-  surname:string;
-  email:string;
-  phone:number;
-  idNumber: number;
-  race:string;
-  gender:string;
-  disability:string | null;
-  englishMark:string;
-  mathSubject:string;
-  mathMark:string;
-  courseOfInterest:string;
-  fieldOfStudy:string;
-  qualifications:string;
-}
+  documentUpload(body: any): Observable<any> {
+    return this.http.post<any>(`${this.config.apiUrl}/applicantAttachments`, body);
+  }
 
-export interface Education{
-  userId: string;
-  mathSubject: string;
-  mathMark:string;
-  englishMark:string;
-  fieldOfStudy:string;
-  qualifications:string;
-  courseOfInterest:string;
+  setProfileCompleted(arg0: boolean) {
+    // Implement this method as needed
+  }
+
+  setEducationCompleted(arg0: boolean) {
+    // Implement this method as needed
+  }
+
+  getProfileByUserId(userId: any) {
+    // Implement this method as needed
+  }
 }

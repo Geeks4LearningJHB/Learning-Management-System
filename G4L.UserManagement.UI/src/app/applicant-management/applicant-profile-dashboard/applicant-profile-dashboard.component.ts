@@ -5,13 +5,9 @@ import { GoalModalHandlerService } from 'src/app/goal-management/services/modals
 import { PersonalInformationComponent } from '../personal-information/personal-information.component';
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
 import { ApplicantAttachmentsComponent } from '../applicant-attachments/applicant-attachments.component';
-import { ApplicantService,  } from '../services/applicantService';
-import { result } from 'lodash';
+import { ApplicantService } from '../services/applicantService';
 import { UserService } from 'src/app/user-management/services/user.service';
-import { any } from 'ramda';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
-import { error } from 'console';
-import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 
 @Component({
   selector: 'app-applicant-profile-dashboard',
@@ -21,7 +17,7 @@ import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 export class ApplicantProfileDashboardComponent implements OnInit {
   userId: any;
   serverErrorMessage: any;
-  
+
   constructor(
     private userService: UserService,
     private applicantService: ApplicantService,
@@ -32,49 +28,55 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   ngOnInit(): void {
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
-    
   }
+
   sendApplication(userId: string): void {
-    this.applicantService.applyForLearnership(this.userId).subscribe(
+    this.applicantService.applyForLearnership(userId).subscribe(
       (response) => {
+        this.sendEmail(userId);
         this.openSubmitModal();
       },
       (error) => {
-        alert('You have already applied for learnership');
+        alert('You have already applied for the learnership');
       }
     );
   }
-  
-  openPersonalInformationModal(): void {
-    this.modalHandler.openMdbModal<PersonalInformationComponent>({
-      component: PersonalInformationComponent,
-      data: null,
-      ignoreBackdropClick: true,
-      width: 50,
-    });
-  }
-  
-  getEducationByUserId(userId: number) {
-    console.log(userId); // Check the value in the console
-this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
-  console.log(response); // Check the response if it arrives
-  this.openEducationModal();
-});
 
+  sendEmail(userId: string): void {
+    this.applicantService.sendEmail(userId).subscribe(
+      (response) => {
+        console.log('Email sent successfully:', response);
+      },
+      (error) => {
+        console.error('Error sending email:', error);
+      }
+    );
+  }
+
+  openPersonalInformationModal(): void{
+    this.modalHandler.openMdbModal<PersonalInformationComponent>({
+      component : PersonalInformationComponent,
+      data : null,
+      ignoreBackdropClick : true,
+      width: 50,
+    })
+  }
+
+
+  getEducationByUserId(userId: number) {
+    console.log(userId);
     this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
-      // this.filterUserByRole(response);
-      console.log(userId)
-      this.openEducationModal()
+      console.log(response);
+      this.openEducationModal();
     });
   }
-  
+
   openEducationModal(): void {
     this.modalHandler.openMdbModal<ApplicantEducationComponent>({
       component: ApplicantEducationComponent,
       data: null,
       ignoreBackdropClick: true,
       width: 50,
-
     });
   }
 

@@ -171,6 +171,3 @@ export class PersonalInformationComponent implements OnInit {
   }
 
 }
-
-
-

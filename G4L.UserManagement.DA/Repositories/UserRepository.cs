@@ -84,6 +84,9 @@ namespace G4L.UserManagement.Infrustructure.Repositories
             await _databaseContext.Users.AddAsync(user);
             await _databaseContext.SaveChangesAsync();
         }
+
+    
+ 
         private async Task LinkSponsorAsync(UserRequest model, User user)
         {
             await Task.Run(() =>
@@ -134,6 +137,8 @@ namespace G4L.UserManagement.Infrustructure.Repositories
                     .AsEnumerable();
             });
         }
+
+
 
         public async Task<IEnumerable<User>> GetUsersByRoleAsync(Role role)
         {

@@ -1,13 +1,20 @@
 // applicant-profile-dashboard.component.ts
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ApplicantService } from '../services/applicantService';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router'
+import { ApplicantService} from '../services/applicantService';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
+
 
 export interface Education{
   userId: string;
@@ -117,7 +124,6 @@ export class ApplicantEducationComponent implements OnInit {
     }
     this.educationForm.updateValueAndValidity();
   }
-  
         
 
   private hasFormValues(formValue: any): boolean {
@@ -128,9 +134,6 @@ export class ApplicantEducationComponent implements OnInit {
     }
     return false;
   }
-
-
-
 
   onEducationBtnClick(): void {
     console.log(this.done);
@@ -165,24 +168,26 @@ export class ApplicantEducationComponent implements OnInit {
       }
     );
   }
-  
-
 
   onUpdate(): void {
-      // Form has data, indicating an update
-      this.applicantService.onEducationUpdate(this.educationForm.value).subscribe(
-        (response: any) => {
-          console.log("PUT request successful:", response);
-          if (!this.serverErrorMessage) {
-            this.modalRef.close();
-            
-          }
-        },
-        (error: any) => {
-          console.log(error);
-          // this.serverErrorHandling(error);
-          alert('Cannot update education form information if it was initially empty.');
+    // Form has data, indicating an update
+    this.applicantService.onEducationUpdate(this.educationForm.value).subscribe(
+      (response: any) => {
+        console.log("PUT request successful:", response);
+        if (!this.serverErrorMessage) {
+          this.modalRef.close();
+          
         }
-      );
+      },
+      (error: any) => {
+        console.log(error);
+        // this.serverErrorHandling(error);
+        alert('Cannot update education form information if it was initially empty.');
+      }
+    );
+}
+
+  onSaveAndCloseClick(): void {
+    this.modalRef.close();
   }
 }

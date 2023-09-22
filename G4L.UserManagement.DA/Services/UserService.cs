@@ -5,6 +5,8 @@ using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
+using G4L.UserManagement.BL.Models.Response;
+using G4L.UserManagement.DA.Repositories;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,7 @@ using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace G4L.UserManagement.Infrustructure.Services
 {
-    public class UserService : IUserService 
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         private ITokenService _tokenService;
@@ -28,15 +30,14 @@ namespace G4L.UserManagement.Infrustructure.Services
             _tokenService = tokenService;
             _mapper = mapper;
         }
-
-        /// <summary>
-        /// Allows the registeration of a user
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
         public async Task RegisterUserAsync(UserRequest model)
         {
             await _userRepository.CreateUserAsync(model);
+        }
+
+        public async Task GetPersonalAsync(Guid id)
+        {
+            await _userRepository.GetByIdAsync(id);
         }
 
         public async Task SignupUserAsync(AddUserRequest model)
@@ -79,6 +80,7 @@ namespace G4L.UserManagement.Infrustructure.Services
             return await _userRepository.GetByUserByEmailAsync(email);
         }
 
+       
 
         public async Task<User> GetUserByIdAsync(Guid id)
         {
@@ -123,6 +125,47 @@ namespace G4L.UserManagement.Infrustructure.Services
             await _userRepository.UpdateAsync(user);
         }
 
+
+
+        public async Task UpdatePersonalInformationAsync(PersonalInformationRequest model)
+        {
+            var user = await _userRepository.GetByIdAsync(model.userId);
+            if (user == null)
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.UserNotFound.ToString(),
+                    Message = "User information was not found"
+                }));
+
+            // Update the following if the fields in the model are not null or empty
+            if (!string.IsNullOrWhiteSpace(model.Name))
+                user.Name = model.Name;
+
+            if (!string.IsNullOrWhiteSpace(model.Surname))
+                user.Surname = model.Surname;
+
+            if (!string.IsNullOrWhiteSpace(model.Email))
+                user.Email = model.Email;
+
+            if (!string.IsNullOrWhiteSpace(model.IdNumber))
+                user.IdNumber = model.IdNumber;
+
+            if (!string.IsNullOrWhiteSpace(model.Phone))
+                user.Phone = model.Phone;
+
+            if (!string.IsNullOrWhiteSpace(model.Disability))
+                user.Disability = model.Disability;
+
+            if (!string.IsNullOrWhiteSpace(model.Gender))
+                user.Gender = model.Gender;
+
+            if (!string.IsNullOrWhiteSpace(model.Race))
+                user.Race = model.Race;
+
+            await _userRepository.UpdateAsync(user);
+        }
+
+
         public async Task<IEnumerable<User>> GetPagedUsersAsync(int skip, int take)
         {
             return await _userRepository.GetPagedListAsync(skip, take);
@@ -133,6 +176,9 @@ namespace G4L.UserManagement.Infrustructure.Services
             return await _userRepository.GetUsersByRoleAsync(role);
         }
 
-        
-    }
+        public Task GetUserByEmailAsync(string to)
+        {
+            throw new NotImplementedException();
+        }
+    } 
 }

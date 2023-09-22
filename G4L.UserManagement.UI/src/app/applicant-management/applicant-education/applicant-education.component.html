@@ -43,7 +43,7 @@
             </select>
             <div *ngIf="getFormControl('MathMark').invalid && getFormControl('MathMark').touched"
               class="val text-danger">
-              Mathematics mark is required.
+              Math mark is required.
             </div>
           </div>
           
@@ -116,7 +116,7 @@
             <button (click)="onUpdate()" class="save-close-btn">
               Update and Close
             </button>
-             <!-- onSaveAndCloseClick() --> 
+           
             <!-- <button (click)="onSubmit()" class="done-btn">Done</button> -->
             <button *ngIf="!done"
           (click)="onEducationBtnClick()"

@@ -14,6 +14,7 @@ using G4L.UserManagement.BL.Custom_Exceptions;
 using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Models;
 using Newtonsoft.Json;
+using G4L.UserManagement.DA.Services;
 
 namespace G4L.UserManagement.DA.Repositories
 {
@@ -44,6 +45,11 @@ namespace G4L.UserManagement.DA.Repositories
                 }));
             }
 
+
+            var dataFromEducation = await _databaseContext.Educations
+      .FirstOrDefaultAsync(e => e.UserId == model.UserId);
+
+
             // Create an Applications object using the retrieved user data
             var application = new Applications
             {
@@ -56,10 +62,14 @@ namespace G4L.UserManagement.DA.Repositories
                 Race = user.Race,
                 Disability = user.Disability,
                 Gender = user.Gender,
-                
-                // Assign other properties from the model or wherever needed
-            };
-
+                MathSubject = dataFromEducation.MathSubject,
+                MathMark = dataFromEducation.MathMark,
+                EnglishMark = dataFromEducation.EnglishMark,
+                Qualifications =dataFromEducation.Qualifications,
+                FieldOfStudy  = dataFromEducation.FieldOfStudy,
+                CourseOfInterest = dataFromEducation.CourseOfInterest,
+    };
+            
             // Map the application to the desired type if needed
             var mappedApplication = _mapper.Map<Applications>(application);
 
@@ -86,8 +96,11 @@ namespace G4L.UserManagement.DA.Repositories
         }
         public async Task<IEnumerable<Applications>> ListAsync()
         {
-            return await _databaseContext.Set<Applications>().ToListAsync();
+            return await _databaseContext.Set<Applications>()
+                                         .OrderByDescending(app => app.CreatedDate)
+                                         .ToListAsync();
         }
+
         public async Task<Applications> GetApplicationByUserIdAsync(Guid userId)
         {
             return await Task.Run(() =>

@@ -25,12 +25,5 @@ namespace G4L.UserManagement.API
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-
-
-      
-
-        
-     
-
     }
 }
