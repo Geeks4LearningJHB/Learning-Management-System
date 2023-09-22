@@ -10,10 +10,14 @@ namespace G4L.UserManagement.BL.Interfaces
 {
     public interface IApplicationsRepository : IRepository<Applications>
     {
-    
+
+       
+
+
         Task<Applications> GetApplicantsByIdNumberAsync(string idNumber);
         Task PostApplicationAsync(Guid id, ApplicationsRequest model);
         Task<Applications> GetApplicationByUserIdAsync(Guid userId);
+        Task DeleApplicationByUserIdAsync(string email);
         Task<IEnumerable<Applications>> ListAsync();
     }
 }

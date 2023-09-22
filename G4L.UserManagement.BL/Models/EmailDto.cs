@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace G4L.UserManagement.BL.Models
 {
@@ -12,8 +14,6 @@ namespace G4L.UserManagement.BL.Models
         public string To { get; set; } = string.Empty;
         public string Subject { get; set; } = string.Empty;
         public string Body { get; set; } = string.Empty;
-    
+        public Guid UserId { get; set; }
     }
-    
-
 }

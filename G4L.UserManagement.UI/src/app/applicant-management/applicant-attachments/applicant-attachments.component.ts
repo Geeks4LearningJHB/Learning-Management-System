@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { UploadService } from 'src/app/shared/service/fileupload.service';
 import { FileUpload } from 'src/app/leave-management/models/file-upload'; // Import the FileUpload model
+import { ApplicantService } from '../services/applicantService';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-applicant-attachments',
@@ -17,15 +19,22 @@ export class ApplicantAttachmentsComponent implements OnInit {
   uploadMessages: { [section: string]: string | undefined } = {};
   sizeErrors: { [section: string]: string | undefined } = {};
   formatErrors: { [section: string]: string | undefined } = {};
+  logggedInUser: any;
+  @Input() modalData: any;
 
   constructor(
     private route: Router,
     private formBuilder: FormBuilder,
     public modalRef: MdbModalRef<any>,
-    private uploadService: UploadService
+    private applicantService: ApplicantService,
+    private uploadService: UploadService,
+    private http: HttpClient
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.logggedInUser = {}; // Initialize the loggedInUser object
+    this.logggedInUser.id = this.modalData.userId;
+  }
 
   onDoneClick(): void {
     this.modalRef.close();
@@ -79,20 +88,37 @@ export class ApplicantAttachmentsComponent implements OnInit {
           file: file,
           url: '',
           key: undefined,
-          name: undefined,
+          name: '',
           uploadProgress: undefined
         };
   
+        console.log(fileUpload);
+  
         try {
-          await this.uploadService.genericUploadToStorage(fileUpload, section);
-          // File uploaded successfully, so set the success message
-          this.uploadMessages[section] = 'File uploaded successfully.';
+          const data = await this.uploadService.genericUploadToStorage(fileUpload, section);
+          const fileUrl = data?.url;
+          console.log('Data returned by file upload:', data);
+  
+          // Send the file URL to your backend service using HttpClient
+          const userId = this.logggedInUser.id; // Replace with your actual user identifier
+          this.http.post('/storeFileUrl', { userId, fileUrl }).subscribe(
+            (userUpdateResponse: any) => {
+              console.log('User updated:', userUpdateResponse);
+              this.logggedInUser.id_url = fileUrl;
+              // Other code to update the user or perform additional actions
+            },
+            (error: any) => {
+              console.error('Error storing file URL in the database', error);
+              // Handle errors as needed
+            }
+          );
         } catch (error) {
-          console.error('Error uploading file:', error);
-          // Set the error message here, but do not break the loop
-          this.uploadMessages[section] = 'An error occurred while uploading the file: ' + error;
-          allFilesUploadedSuccessfully = false;
+          console.error('Error:', error);
+          // Handle errors as needed
         }
+  
+        // File uploaded successfully, so set the success message
+        this.uploadMessages[section] = 'File uploaded successfully.';
       }
     }
   
@@ -104,6 +130,23 @@ export class ApplicantAttachmentsComponent implements OnInit {
       // this.uploadMessages[section] = undefined;
     }
   }
-  
-  
 }  
+// ...
+(error: any) => {
+  console.error('Error storing file URL in the database', error);
+  if (error && error.message) {
+    // Check if error.message is a valid JSON string
+    try {
+      const errorMessage = JSON.parse(error.message);
+      console.error('Detailed error message:', errorMessage);
+    } catch (parseError) {
+      // If parsing fails, handle it as a regular string
+      console.error('Detailed error message parsing failed:', parseError);
+    }
+  } else {
+    // Handle error without a message property as a regular string
+    console.error('Detailed error message is unavailable.');
+  }
+  // Handle errors as needed
+}
+// ...

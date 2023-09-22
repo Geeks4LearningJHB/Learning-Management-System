@@ -5,7 +5,7 @@
     <span>1</span>
     <div class="menu-btn-icons">
       <button (click)="openPersonalInformationModal()">
-        <i class="fa-regular fa-circle-user fa-l"></i>
+        <i class="fa-regular fa-circle-user fa-xl"></i>
         <h4>Personal Information</h4>
       </button>
       <div class="menu-btn-icons">
@@ -34,15 +34,18 @@
       <div class="menu-btn-icons">
         <button (click)="openAttachmentsModal()">
           <i class="fa-solid fa-paperclip fa-xl"></i>
-          <h4>Attachments</h4>
+          <h4 >Attachments</h4>
         </button >
         <div class="menu-btn-icons">
           <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
         </div>
       </div>
-      <button class="submit" (click)="getEducationByUserId(userId)">Submit application</button>
+
+      <button class="submit" (click)="sendApplication(userId)">Submit application</button>
+
+        <div id="messageDiv" style="display: none;">You have already applied for the learnership</div>
+
+
     </div>
-
   </div>
-
 </div>

@@ -17,21 +17,21 @@
 
           <div class="radio-group-marks">
             <div class="math-subjects">
-              <span class="subject-label">Subject(Math) </span>
-              <select class="math-subjects-box" name="mathSubjects" formControlName="MathSubject">
+              <span class="subject-label">Subject(Mathematics) </span>
+              <select class="math-subjects-box" name="mathSubjects" [value]="educations.mathSubject" formControlName="MathSubject">
                 <option disabled selected hidden>Select math subject</option>
-                <option value="math-pure">Math Pure</option>
-                <option value="math-lit">Math Lit</option>
+                <option value="mathematics-pure">Mathematics Pure</option>
+                <option value="mathematics-literacy">Mathematics Lit</option>
               </select>
             </div>
             <div *ngIf="getFormControl('MathSubject').invalid && getFormControl('MathSubject').touched"
-                class="val text-danger">
-                Math subject is required.
-              </div>
+              class="val text-danger">
+              Mathematics subject is required.
+            </div>
           </div>
 
           <div class="math-labels">Math Mark:
-            <select class="mathmarks" name="mathmark" formControlName="MathMark">
+            <select class="mathmarks" name="mathmark" [value]="educations.mathMark" formControlName="MathMark">
               <option disabled selected hidden>Select mark range</option>
               <option value="30% - 39%">30% - 39%</option>
               <option value="40% - 49%">40% - 49%</option>
@@ -46,9 +46,9 @@
               Math mark is required.
             </div>
           </div>
-
+          
           <div class="eng-labels">English Mark:
-            <select class="englishmarks" name="englishMark" formControlName="EnglishMark">
+            <select class="englishmarks" name="englishMark" [value]="educations.englishMark" formControlName="EnglishMark">
               <option disabled selected hidden>Select mark range</option>
               <option value="30% - 39%">30% - 39%</option>
               <option value="40% - 49%">40% - 49%</option>
@@ -65,31 +65,28 @@
           </div>
 
           <div>
-            <p>
-              <label class="postMatricQualification" for="postMatricQualification">
-                Post Matric Qualification(Highest)</label>
-            </p>
-            <div class="dropdown-container col-4">
-              <select class="pmq-box" id="postMatricQualification" name="qualification"
-                formControlName="Qualifications">
-                <option disabled selected hidden>Select qualification</option>
-                <option value="None">None</option>
-                <option value="Higher-certificate">Higher certificate</option>
-                <option value="Bachelor-degree">Bachelor degree</option>
-                <option value="Diploma">Diploma</option>
-                <option value="Post-graduate">Post graduate</option>
-                <option value="Other">Other</option>
-              </select>
-              <div *ngIf="getFormControl('Qualifications').invalid && getFormControl('Qualifications').touched"
-                class="val text-danger">
-                Qualifications is required.
-              </div>
+            <h5 class="postMatricQualification" for="postMatricQualification">
+              Post Matric Qualification(Highest)</h5>
+
+            <label>Qualification(Highest) :</label>
+            <select class="pmq-box" id="postMatricQualification" name="qualification" [value]="educations.qualifications" formControlName="Qualifications">
+              <option disabled selected hidden>Select qualification</option>
+              <option value="None">None</option>
+              <option value="Higher-certificate">Higher certificate</option>
+              <option value="Bachelor-degree">Bachelor degree</option>
+              <option value="Diploma">Diploma</option>
+              <option value="Post-graduate">Post graduate</option>
+              <option value="Other">Other</option>
+            </select>
+            <div *ngIf="getFormControl('Qualifications').invalid && getFormControl('Qualifications').touched"
+              class="val text-danger">
+              Qualifications is required.
             </div>
           </div>
 
           <h5 class="fieldStudy-label">Field of Study</h5>
           <label class="field-label" for="fieldOfStudy">Field of Study:</label>
-          <select class="fieldOfStudy" id="fieldOfStudy" name="fieldOfStudy" formControlName="FieldOfStudy">
+          <select class="fieldOfStudy" id="fieldOfStudy" name="fieldOfStudy" [value]="educations.fieldOfStudy" formControlName="FieldOfStudy">
             <option disabled selected hidden>Select field of study</option>
             <option value="IT">I.T</option>
             <option value="Other">Other</option>
@@ -99,9 +96,9 @@
             Field Of Study is required.
           </div>
           <h5 class="course-label">Course of Interest</h5>
-
           <label class="course-label" for="course-interest">Course of interest:</label>
-          <select class="course-label-items" id="course-interest" name="CourseOfInterest" formControlName="CourseOfInterest">
+          <select class="course-label-items" id="course-interest" name="CourseOfInterest" [value]="educations.courseOfInterest"
+            formControlName="CourseOfInterest">
             <option disabled selected hidden>Select Course of interest</option>
             <option value="Software-testing">Software Testing(NQF 5)</option>
             <option value="System-support">System Support(NQF 5)</option>
@@ -115,14 +112,24 @@
           </div>
         </div>
         <div class="button-row mt-0 col-11">
-          <div class="button-container">
-            <button (click)= "onSaveAndCloseClick()" class="save-close-btn">
-              Save and Close
+          <div class="button-container" >
+            <button (click)="onUpdate()" class="save-close-btn">
+              Update and Close
             </button>
-            <button (click)="onSubmit()" class="done-btn">Done</button>
+           
+            <!-- <button (click)="onSubmit()" class="done-btn">Done</button> -->
+            <button *ngIf="!done"
+          (click)="onEducationBtnClick()"
+        
+          id="done-button"
+          class="done-btn"
+        >
+          Done
+        </button>
           </div>
         </div>
       </div>
+    
     </div>
   </form>
 </div>

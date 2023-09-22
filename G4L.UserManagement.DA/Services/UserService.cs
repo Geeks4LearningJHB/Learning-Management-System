@@ -17,7 +17,7 @@ using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace G4L.UserManagement.Infrustructure.Services
 {
-    public class UserService : IUserService 
+    public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
         private ITokenService _tokenService;
@@ -80,7 +80,6 @@ namespace G4L.UserManagement.Infrustructure.Services
             return await _userRepository.GetByUserByEmailAsync(email);
         }
 
-       
 
         public async Task<User> GetUserByIdAsync(Guid id)
         {
@@ -174,6 +173,11 @@ namespace G4L.UserManagement.Infrustructure.Services
         public async Task<IEnumerable<User>> GetUsersByRoleAsync(Role role)
         {
             return await _userRepository.GetUsersByRoleAsync(role);
+        }
+
+        public Task GetUserByEmailAsync(string to)
+        {
+            throw new NotImplementedException();
         }
     } 
 }

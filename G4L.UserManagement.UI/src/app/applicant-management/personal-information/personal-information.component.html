@@ -5,10 +5,10 @@
 	<div class="content">
 	  <form [formGroup]="personalDetails" (ngSubmit)="saveInformation()">
 		<div class="user-details">
-			<div [ngClass]="{ validation: getFormControl('Firstname').invalid && getFormControl('Firstname').touched, success: getFormControl('Firstname').valid && getFormControl('Firstname').touched }" class="input-box">
+			<div class="input-box">
 				<span class="details">First Name*</span>
-				<input type="text" placeholder="Enter your name" [value]="personalInformations.name" formControlName="Firstname">
-				<div *ngIf="getFormControl('Firstname').invalid && getFormControl('Firstname').touched" class="text-danger">
+				<input type="text" placeholder="Enter your name" [value]="personalInformations.name" formControlName="Name">
+				<div *ngIf="getFormControl('Name').invalid && getFormControl('Name').touched" class="text-danger">
 				  First name is required.
 				</div>
 			  </div>
@@ -46,11 +46,11 @@
 		  </div>
 		  <div class="input-box">
 			<span class="details">Enter Disability</span>
-			<input type="text" placeholder="Optional to specify" [value]="personalInformations.disability" maxlength="40">
+			<input type="text" placeholder="Optional to specify" [value]="personalInformations.disability" maxlength="40" formControlName= "Disability">
 		  </div>
 		  <div class="input-box">
 			<label class="gender-label" for="gender">Gender*</label>
-			<select id="gender" name="gender" class="category" formControlName="Gender">
+			<select id="gender" name="gender" class="category" [value]="personalInformations.gender" formControlName="Gender">
 			  <option value="" disabled selected>Select your gender</option>
 			  <option value="male">Male</option>
 			  <option value="female">Female</option>
@@ -62,7 +62,7 @@
 		  </div>
 		  <div class="input-box">
 			<label class="race-label" for="race">Race*</label>
-			<select id="race" name="race" class="category" formControlName="Race">
+			<select id="race" name="race" class="category" [value]="personalInformations.race" formControlName="Race">
 			  <option value="" disabled selected>Select your race</option>
 			  <option value="Black">Black</option>
 			  <option value="White">White</option>
@@ -77,12 +77,10 @@
 		</div>
 		<footer class="form-buttons">
 		  <div class="button">
-			<button class="button-save" type="submit" (click)="onSaveAndCloseClick()">Save and Close</button>
-			<button class="button" type="submit" (click)="onDoneClick()">Done</button>
+			<button class="button-save" type="submit" (click)="onSaveAndCloseClick()">Update and Close</button>
+			<button class="button" type="submit" (click)="onPersonalDetailsUpdate()">Done</button>
 		  </div>
 		</footer>
 	  </form>
-
 	</div>
   </div>
-  
