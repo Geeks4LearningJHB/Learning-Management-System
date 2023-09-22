@@ -7,8 +7,10 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { EnrolComponent } from 'src/app/user-management/enrol/enrol.component';
 import { LearnershipApplicationModalComponent } from './learnership-application-modal/learnership-application-modal.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 export interface Applicant {
+ id:"";
   userId: "";
   name: string;
   surname:string;
@@ -46,7 +48,7 @@ export class LearnershipApplicationsComponent implements OnInit {
  
 
   constructor(
-    private applicantService: ApplicantService,   private formBuilder: FormBuilder ,   private modalService: MdbModalService, private modalHandler: GoalModalHandlerService<any>
+    private applicantService: ApplicantService, private toastr: ToastrService,   private formBuilder: FormBuilder ,   private modalService: MdbModalService, private modalHandler: GoalModalHandlerService<any>
   ) {  this.courseFilterForm = this.formBuilder.group({
     courseOfInterest: ['all'] // Initialize the form control with a default value
   });
@@ -56,24 +58,33 @@ export class LearnershipApplicationsComponent implements OnInit {
   });}
 
   ngOnInit(): void {
-    this.applicantService.getAllApplicantions().subscribe(
-      (result) => {
-        this.applicants = result;
-        this.filterByStream('all');
-    
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
-      }
-    );
-  
+    this.getAllApplicantions();
   }
+
+  getAllApplicantions(){this.applicantService.getAllApplicantions().subscribe(
+    (result) => {
+      this.applicants = result;
+      this.filterByStream('all');
+  
+    },
+    (error) => {
+      console.error('Error fetching data:', error);
+    }
+  );
+}
+  
   filterByStream(stream: string) {
     if (stream === 'all') {
       this.filteredApplicants = [...this.applicants];
     } else {
       this.filteredApplicants = this.applicants.filter(applicant => applicant.courseOfInterest === stream);
     }
+  }
+  deleteApplication(email: any) {
+    this.applicantService.deleteApplication(email).subscribe((response: any) => {
+      this.toastr.success(`The application was successfully deleted`);
+       this. getAllApplicantions();
+    });
   }
 
   openEducationModal(): void {

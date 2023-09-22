@@ -48,18 +48,18 @@ namespace G4L.UserManagement.API.Controllers
             }
         }
 
-        [Authorize(Role.Super_Admin, Role.Admin)]
+        //[Authorize(Role.Super_Admin, Role.Admin)]
         [HttpGet]
         public async Task<IActionResult> GetApplicationsList()
         {
             return Ok(await _applicationsService.ListAsync());
         }
 
-        [Authorize(Role.Super_Admin, Role.Admin)]
+        [AllowAnonymous]
         [HttpDelete]
-        public async Task<IActionResult> DeleteAsync(Guid id)
+        public async Task<IActionResult> DeleteAsync(string email)
         {
-            await _applicationsService.DeleteApplicationUserAsync(id);
+            await _applicationsService.DeleteApplicationUserAsync(email);
             return Ok();
         }
         [HttpGet("{userId}")]

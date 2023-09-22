@@ -52,7 +52,13 @@ export class ApplicantService {
     return this.http.get(`${this.config.apiUrl}/user/${id}`);
   }
 
+  deleteApplication(email: any) {
+    return this.http.delete(`${this.config.apiUrl}/applications?email=${email}`);
+  }
 
+  getApplication(userId: any): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/applications/${userId}`);
+  }
   
 }
 

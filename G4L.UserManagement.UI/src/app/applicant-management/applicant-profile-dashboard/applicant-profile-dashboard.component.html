@@ -5,7 +5,7 @@
     <span>1</span>
     <div class="menu-btn-icons">
       <button (click)="openPersonalInformationModal()">
-        <i class="fa-regular fa-circle-user fa-l"></i>
+        <i class="fa-regular fa-circle-user fa-xl"></i>
         <h4>Personal Information</h4>
       </button>
       <div class="menu-btn-icons">
@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div class="content-container">
+  <div class="content-container" >
     <span class="span-two">2</span>
     <div class="menu-btn-icons">
       <button (click)="openEducationModal()">
@@ -40,8 +40,18 @@
         <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
       </div>
     </div>
-    <button class="submit" (click)="sendApplication(userId)" >Submit application</button>
-    <div *ngIf="serverErrorMessage" class="error-message">{{ serverErrorMessage }}</div>
+   
+    <button class="submit" (click)="sendApplication(userId)" [disabled]="shouldDisableButton()" [class.disabled-button]="shouldDisableButton()">Submit application</button>
+
+
+
+
+
+
+
+  
+    
+   
 
     
   </div>

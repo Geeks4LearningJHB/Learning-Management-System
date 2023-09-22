@@ -110,7 +110,19 @@ namespace G4L.UserManagement.DA.Repositories
             });
         }
 
+
+ 
+        public async Task DeleApplicationByUserIdAsync(string email)
+        {
+            var application = await _databaseContext.Set<Applications>()
+                                                    .FirstOrDefaultAsync(x => x.Email == email);
+
     
+                _databaseContext.Set<Applications>().Remove(application);
+                await _databaseContext.SaveChangesAsync();
+            
+        }
+
 
 
     }

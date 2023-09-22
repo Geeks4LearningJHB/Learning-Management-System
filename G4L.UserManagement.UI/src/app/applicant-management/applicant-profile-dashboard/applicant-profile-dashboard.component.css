@@ -115,4 +115,16 @@ h3 {
     background-color: #092f4f;
     font-family: 'Poppins', sans-serif;
   }
+  .disabled-button {
+background-color:rgb(238 238 238);
+color: black;
+    
+  }
+  .disabled-button:hover {
+    transform: none;
+    box-shadow: none;
+  
+  }
+  
+  
   

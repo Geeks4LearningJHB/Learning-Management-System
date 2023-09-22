@@ -16,6 +16,8 @@ using G4L.UserManagement.BL.Models.Request;
 using Azure.Core;
 using System.IO;
 using MimeKit.Utils;
+using Org.BouncyCastle.Asn1.Ocsp;
+using System.Numerics;
 
 namespace G4L.UserManagement.DA.Services
 {
@@ -39,11 +41,14 @@ namespace G4L.UserManagement.DA.Services
                 email.Subject = request.Subject;
                 email.Body = new TextPart(TextFormat.Html) { Text = request.Body };
 
+                // Create the email body using HTML
                 var bodyBuilder = new BodyBuilder();
                 bodyBuilder.HtmlBody = request.Body;
 
                 // Adding an image to the email signature
-                var image = bodyBuilder.LinkedResources.Add(@"C:\Users\User\Desktop\G4L\Learning-Management-System\G4L.UserManagement.UI\src\assets\assets\images\signature.png");
+
+                var image = bodyBuilder.LinkedResources.Add(Path.Combine("wwwroot", "images", "signature.png"));
+                image.ContentId = MimeUtils.GenerateMessageId();
 
                 //HTML tag to reference the image in the email body
                 bodyBuilder.HtmlBody += $"<br><img src=\"cid:{image.ContentId}\" alt=\"Signature Image\">";

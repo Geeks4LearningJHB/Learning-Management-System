@@ -10,6 +10,10 @@ import { UserService } from 'src/app/user-management/services/user.service';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 
+export interface Applicant {
+   userId:string;
+ 
+ }
 @Component({
   selector: 'app-applicant-profile-dashboard',
   templateUrl: './applicant-profile-dashboard.component.html',
@@ -18,7 +22,7 @@ import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 export class ApplicantProfileDashboardComponent implements OnInit {
   userId: any;
   serverErrorMessage: string = '';
-
+  applicants: Applicant[] = [];
   constructor(
     private userService: UserService,
     private applicantService: ApplicantService,
@@ -29,8 +33,11 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   ngOnInit(): void {
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
-  }
+    this.getAllApplicantions();
+    console.log(this.userId)
 
+
+  }
   sendApplication(userId: string): void {
     this.applicantService.applyForLearnership(userId).subscribe(
       (response) => {
@@ -43,7 +50,23 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       }
     );
   }
+  shouldDisableButton(): boolean {
+    const isUserIdPresent = this.applicants.some(applicant => applicant.userId === this.userId);
+    return isUserIdPresent;
+  }
 
+
+  getAllApplicantions(){this.applicantService.getAllApplicantions().subscribe(
+    (result) => {
+      this.applicants = result;
+      console.log(this.applicants)
+  
+    },
+    (error) => {
+      console.error('Error fetching data:', error);
+    }
+  );
+}
   openPersonalInformationModal(): void {
     this.modalHandler.openMdbModal<PersonalInformationComponent>({
       component: PersonalInformationComponent,
