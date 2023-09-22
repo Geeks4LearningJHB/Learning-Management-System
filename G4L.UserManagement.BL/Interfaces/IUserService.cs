@@ -24,7 +24,6 @@ namespace G4L.UserManagement.BL.Interfaces
         Task<IEnumerable<User>> GetPagedUsersAsync(int skip, int take);
         Task<IEnumerable<User>> GetUsersByRoleAsync(Role role);
         Task UpdatePersonalInformationAsync(PersonalInformationRequest model);
-    
         Task GetPersonalAsync(Guid id);
        
     }

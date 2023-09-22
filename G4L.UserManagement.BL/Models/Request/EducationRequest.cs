@@ -13,7 +13,6 @@ namespace G4L.UserManagement.BL.Models.Request
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public User User { get; set; }
         public string MathSubject { get; set; }
         public string MathMark { get; set; }
         public string EnglishMark { get; set; }

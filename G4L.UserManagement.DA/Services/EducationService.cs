@@ -50,8 +50,6 @@ namespace G4L.UserManagement.DA.Services
 
         public async Task RegisterUserAsync(EducationRequest education)
         {
-       
-
             await _educationRepository.PostQualifcationsAsync(education);
         }
 
@@ -60,6 +58,37 @@ namespace G4L.UserManagement.DA.Services
             return await _educationRepository.ListEducationAsync(userId);
         }
 
+        public async Task UpdateEducationAsync(EducationRequest model)
+        {
+            var education = await _educationRepository.GetEducationByUserIdAsync(model.UserId);
+            if (education == null)
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.UserNotFound.ToString(),
+                    Message = "Education information was not found"
+                }));
+
+            // Update the following if the fields in the model are not null or empty
+            if (!string.IsNullOrWhiteSpace(model.MathSubject))
+                education.MathSubject = model.MathSubject;
+
+            if (!string.IsNullOrWhiteSpace(model.MathMark))
+                education.MathMark = model.MathMark;
+
+            if (!string.IsNullOrWhiteSpace(model.EnglishMark))
+                education.EnglishMark = model.EnglishMark;
+
+            if (!string.IsNullOrWhiteSpace(model.Qualifications))
+                education.Qualifications = model.Qualifications;
+
+            if (!string.IsNullOrWhiteSpace(model.FieldOfStudy))
+                education.FieldOfStudy = model.FieldOfStudy;
+
+            if (!string.IsNullOrWhiteSpace(model.CourseOfInterest))
+                education.CourseOfInterest = model.CourseOfInterest;
+
+            await _educationRepository.UpdateAsync(education);
+        }
 
 
         public async Task<Education> GetEducationByUserIdAsync(Guid userId)
