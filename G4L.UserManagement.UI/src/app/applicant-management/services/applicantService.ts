@@ -6,18 +6,14 @@ import { AppConfig } from 'src/app/shared/app-config/app-config.interface';
 import { APP_SERVICE_CONFIG } from 'src/app/shared/app-config/app-config.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApplicantService {
-  deleteApplication(email: any) {
-    throw new Error('Method not implemented.');
-  }
   constructor(
     private http: HttpClient,
+
     @Inject(APP_SERVICE_CONFIG) private config: AppConfig,
   ) { }
-
-  
 
   onPersonalDetailsUpdate( body: any) {
     console.log(body);
@@ -34,8 +30,9 @@ export class ApplicantService {
     return this.http.put(`${this.config.apiUrl}/education`, body);
   }
 
+
   onSubmit(value: any): Observable<any> {
-    console.log("Post Payload:", value);
+    console.log('Post Payload:', value);
     return this.http.post(`${this.config.apiUrl}/education`, value);
   }
 
@@ -44,14 +41,18 @@ export class ApplicantService {
   }
 
   applyForLearnership(userId: string): Observable<any> {
-    return this.http.post<any>(`${this.config.apiUrl}/applications`, { userId });
+    return this.http.post<any>(`${this.config.apiUrl}/applications`, {
+      userId,
+    });
   }
 
   sendEmail(userId: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiUrl}/email`, { userId });
   }
 
-  getAllApplications(): Observable<any> {
+  
+  getAllApplicantions(): Observable<any>  {
+
     return this.http.get(`${this.config.apiUrl}/applications`);
   }
 
@@ -59,8 +60,9 @@ export class ApplicantService {
     return this.http.get(`${this.config.apiUrl}/education`);
   }
 
-  getApplicantEducationByUserId(userId: any): Observable<any> {
-    return this.http.get(`${this.config.apiUrl}/education/education/${userId}`);
+  getApplicantEducationByUserId(userId: any): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/education/education${userId}`);
+
   }
 
   onPersonalDetailsSubmit(id: any): Observable<any> {
@@ -68,6 +70,14 @@ export class ApplicantService {
   }
 
 
+  deleteApplication(email: any) {
+    return this.http.delete(`${this.config.apiUrl}/applications?email=${email}`);
+  }
+
+  getApplication(userId: any): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/applications/${userId}`);
+  }
+  
   documentUpload(body: any): Observable<any> {
     return this.http.post<any>(`${this.config.apiUrl}/applicantAttachments`, body);
   }
@@ -84,4 +94,5 @@ export class ApplicantService {
     // Implement this method as needed
   }
 }
+
 

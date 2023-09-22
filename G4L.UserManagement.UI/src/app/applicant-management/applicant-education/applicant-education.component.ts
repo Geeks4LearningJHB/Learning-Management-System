@@ -168,6 +168,7 @@ export class ApplicantEducationComponent implements OnInit {
       }
     );
   }
+  
 
   onUpdate(): void {
     // Form has data, indicating an update

@@ -120,9 +120,7 @@ namespace G4L.UserManagement.API.Controllers
             if (user == null)
                 return BadRequest("User Not Found");
             return Ok(user);
-            //await _userService.GetPersonalAsync(id);
-
-            //    return Ok(new { Message = "Personal information GET successful." }); 
+         
         }
     }
 }

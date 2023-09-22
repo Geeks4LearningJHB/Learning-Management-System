@@ -8,12 +8,13 @@ import { ApplicantAttachmentsComponent } from '../applicant-attachments/applican
 import { ApplicantService } from '../services/applicantService';
 import { UserService } from 'src/app/user-management/services/user.service';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
-import { error } from 'console';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
-import { response } from 'express';
-import { Observable } from 'rxjs';
 
 
+export interface Applicant {
+   userId:string;
+ 
+ }
 @Component({
   selector: 'app-applicant-profile-dashboard',
   templateUrl: './applicant-profile-dashboard.component.html',
@@ -21,7 +22,10 @@ import { Observable } from 'rxjs';
 })
 export class ApplicantProfileDashboardComponent implements OnInit {
   userId: any;
-  serverErrorMessage: any;
+
+  serverErrorMessage: string = '';
+  applicants: Applicant[] = [];
+
   showMessage!: boolean;
   application: any[] = [];
   message: any;
@@ -36,6 +40,10 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   ngOnInit(): void {
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
+    this.getAllApplicantions();
+
+
+
   }
 
   sendApplication(userId: string): void {
@@ -45,13 +53,70 @@ export class ApplicantProfileDashboardComponent implements OnInit {
         this.openSubmitModal();
       },
       (error) => {
-        alert('You have already applied for the learnership');
+     console.log(error)
       }
     );
   }
 
+  shouldDisableButton(): boolean {
+    const isUserIdPresent = this.applicants.some(applicant => applicant.userId === this.userId);
+    return isUserIdPresent;
+  }
+
+
+  getAllApplicantions(){this.applicantService.getAllApplicantions().subscribe(
+    (result) => {
+      this.applicants = result;
+      console.log(this.applicants)
+  
+    },
+    (error) => {
+      console.error('Error fetching data:', error);
+    }
+  );
+}
+
+  // getEducationByUserId(userId: number) {
+  //   console.log(userId);
+  //   this.applicantService
+  //     .getEducationByUserId(userId)
+  //     .subscribe((response: any) => {
+  //       console.log(response);
+  //       this.openEducationModal();
+  //     });
+
+  //   this.applicantService
+  //     .getEducationByUserId(userId)
+  //     .subscribe((response: any) => {
+  //       this.openEducationModal();
+  //     });
+  // }
+
+  openEducationModal(): void {
+    this.modalHandler.openMdbModal<ApplicantEducationComponent>({
+      component: ApplicantEducationComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 50,
+    });
+  }
+
+  openAttachmentsModal(): void {
+    this.modalHandler.openMdbModal<ApplicantAttachmentsComponent>({
+      component: ApplicantAttachmentsComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 75,
+    });
+  }
+
+
+
+
+
 
   sendEmail(userId: string): void {
+
     this.applicantService.sendEmail(userId).subscribe(
       (response) => {
         console.log('Email sent successfully:', response);
@@ -61,15 +126,6 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       }
     );
   }
-  openPersonalInformationModal(): void {
-    this.modalHandler.openMdbModal<PersonalInformationComponent>({
-      component: PersonalInformationComponent,
-      data: null,
-      ignoreBackdropClick: true,
-      width: 50,
-    });
-  }
-
   getEducationByUserId(userId: number) {
     console.log(userId); // Check the value in the console
     this.applicantService.getEducationByUserId(userId).subscribe((response: any) => {
@@ -85,27 +141,6 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   }
 
 
-
-  openEducationModal(): void {
-    this.modalHandler.openMdbModal<ApplicantEducationComponent>({
-      component: ApplicantEducationComponent,
-      data: null,
-      ignoreBackdropClick: true,
-      width: 50,
-
-
-    });
-  }
-
-  openAttachmentsModal(): void {
-    this.modalHandler.openMdbModal<ApplicantAttachmentsComponent>({
-      component: ApplicantAttachmentsComponent,
-      data: null,
-      ignoreBackdropClick: true,
-      width: 75,
-    });
-  }
-
   openSubmitModal(): void {
     this.modalHandler.openMdbModal<ApplicantSuccessComponent>({
       component: ApplicantSuccessComponent,
@@ -114,4 +149,13 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       width: 50,
     });
   }
+  openPersonalInformationModal(): void {
+    this.modalHandler.openMdbModal<PersonalInformationComponent>({
+      component: PersonalInformationComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 50,
+    });
+  }
+
 }

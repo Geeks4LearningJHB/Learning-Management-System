@@ -25,7 +25,7 @@ export class ApplicantionProgressComponent implements OnInit {
 onPersonalDetailsSubmit(userId: any) {
   this.applicantService.onPersonalDetailsSubmit(userId).subscribe(
     (data: any) => {
-      const totalFieldCount = 8;
+      const totalFieldCount = 7;
     
 
       // Log the entire data object received from the service
@@ -49,9 +49,7 @@ onPersonalDetailsSubmit(userId: any) {
       console.log("Phone:", data.phone);
       console.log("Race:", data.race);
       console.log("IdNumber:", data.idnumber);
-      console.log("Disability:", data.disability);
       console.log("Gender:", data.gender);
-      // Create an array to hold the names of fields with data
       const fieldsWithData = [];
 
       // Check and log fields with data
@@ -75,9 +73,7 @@ onPersonalDetailsSubmit(userId: any) {
       }
       if (data.idNumber !== undefined) {
         fieldsWithData.push("IdNumber");
-      }
-      if (data.disability !== undefined) {
-        fieldsWithData.push("Disability");
+      
       }
       // Calculate the profile progress based on fields with data
       const filledFieldCount = fieldsWithData.length;
@@ -103,7 +99,7 @@ onPersonalDetailsSubmit(userId: any) {
 
   //education progress
   getApplicantEducation(userId: any) {
-    this.applicantService.getApplicantEducationByUserId(userId).subscribe(
+    this.applicantService.getEducationByUserId(userId).subscribe(
       (data: any) => {
         const totalFieldCount = 6;
       
