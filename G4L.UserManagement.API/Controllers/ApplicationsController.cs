@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using Nest;
 using G4L.UserManagement.DA.Migrations;
 using System.Net;
+using G4L.UserManagement.DA;
 
 namespace G4L.UserManagement.API.Controllers
 {
@@ -70,5 +71,9 @@ namespace G4L.UserManagement.API.Controllers
                 return BadRequest("User Not Found");
             return Ok(application);
         }
-    }
+
+       
+        }
+
+    
 }

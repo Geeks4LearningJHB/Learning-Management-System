@@ -58,7 +58,10 @@ export class LearnershipApplicationsComponent implements OnInit {
   });}
 
   ngOnInit(): void {
+
     this.getAllApplicantions();
+
+
   }
 
   getAllApplicantions(){this.applicantService.getAllApplicantions().subscribe(

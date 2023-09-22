@@ -49,7 +49,7 @@ namespace G4L.UserManagement.API.Controllers
 
 
             request.Subject = "Learnership Application Confirmation";
-            request.Body = $"Dear {user.Name} {user.Surname},<br>" +
+            request.Body = $"Dear {user.Name} {user.Surname},<br><br>" +
     $" We sincerely appreciate your interest in the  {education.CourseOfInterest} Learnership opportunity.<br><br>" +
     "Please be informed that your application is presently under review, and we will promptly<br> furnish you with an update regarding the status of your application.<br><br>" +
 

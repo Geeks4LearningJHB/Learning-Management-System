@@ -45,10 +45,13 @@ export class ApplicantEducationComponent implements OnInit {
 
   educationForm!: FormGroup;
   
+  
   keys = Object.keys;
 
   userId : any
   serverErrorMessage: any;
+  buttonClicked = false;
+  done: boolean = false;
 
   constructor(
     private route: Router,
@@ -63,32 +66,44 @@ export class ApplicantEducationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.done);
     let user = this.tokenService.getDecodeToken();
     this.userId = user.id;
+    this.done = false;
+    // this.done = !this.hasFormValues(this.educations);
     this.buildForm();
     this.applicantService.getEducationByUserId(this.userId).subscribe((result) =>{
       this.educations  = result;
       console.log(this.educations)
+      
     })
     }
 
     buildForm() {
       this.educationForm = this.formBuilder.group({
         userId: [this.userId],
-        MathSubject: ['', [Validators.required]],
-        MathMark: ['', [Validators.required]],
-        EnglishMark: ['', [Validators.required]],
-        Qualifications: ['', [Validators.required]],
-        FieldOfStudy: ['', [Validators.required]],
-        CourseOfInterest: ['', Validators.required],
+        MathSubject: [this.educations.mathSubject || '', [Validators.required]],
+        MathMark: [this.educations.mathMark || '', [Validators.required]],
+        EnglishMark: [this.educations.englishMark || '', [Validators.required]],
+        Qualifications: [this.educations.qualifications || '', [Validators.required]],
+        FieldOfStudy: [this.educations.fieldOfStudy || '', [Validators.required]],
+        CourseOfInterest: [this.educations.courseOfInterest || '', Validators.required],
       })
+
+      
+      
+
 
     this.applicantService.getEducationByUserId(this.userId).subscribe(
       (result) => {
         
         this.educations = result;
-        console.log(this.educations)
+        this.educationForm.get('MathSubject')?.setValue(this.educations.mathSubject);
         this.educationForm.get('MathMark')?.setValue(this.educations.mathMark);
+        this.educationForm.get('EnglishMark')?.setValue(this.educations.englishMark);
+        this.educationForm.get('Qualifications')?.setValue(this.educations.qualifications);
+        this.educationForm.get('CourseOfInterest')?.setValue(this.educations.courseOfInterest);
+
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -109,69 +124,71 @@ export class ApplicantEducationComponent implements OnInit {
     }
     this.educationForm.updateValueAndValidity();
   }
+        
 
+  private hasFormValues(formValue: any): boolean {
+    for (const key in formValue) {
+      if (formValue[key] !== null && formValue[key] !== '') {
+        return true;
+      }
+    }
+    return false;
+  }
 
-  onSubmit(): void {
-    if (this.educationForm.invalid) {
-      alert('Form is not valid. Please fill in all required fields correctly.');
+  onEducationBtnClick(): void {
+    console.log(this.done);
+    
+    if (!this.hasFormValues(this.educationForm.value)) {
+      alert('Please fill in the education form before submitting.');
+      
       return;
     }
+
+    // Check if the button has been clicked before
+    if (this.buttonClicked) {
+      alert('Button has already been clicked.');
+      return;
+    }
+
+    // Set the button as clicked
+    this.buttonClicked = true;
+
     this.applicantService.onSubmit(this.educationForm.value).subscribe(
-      (response) => {
+      (response: any) => {
         console.log("POST request successful:", response);
         if (!this.serverErrorMessage) {
-          this.modalRef.close();
+          //this.modalRef.close();
+          this.done =  true;
         }
       },
       (error) => {
-        console.log("POST request error:", error);
-        this.serverErrorHandling(error);
-
+        console.log(error);
+        alert('Error submitting education information. Please try again.');
+        this.buttonClicked = true;  // Reset the button status on error
       }
     );
-
   }
   
+
+  onUpdate(): void {
+    // Form has data, indicating an update
+    this.applicantService.onEducationUpdate(this.educationForm.value).subscribe(
+      (response: any) => {
+        console.log("PUT request successful:", response);
+        if (!this.serverErrorMessage) {
+          this.modalRef.close();
+          
+        }
+      },
+      (error: any) => {
+        console.log(error);
+        // this.serverErrorHandling(error);
+        alert('Cannot update education form information if it was initially empty.');
+      }
+    );
+}
 
   onSaveAndCloseClick(): void {
     this.modalRef.close();
   }
 }
-
-/* VALIDATORS FOR PERSONAL PAGE
-
-getFormControl(control: String): AbstractControl {
-    return this.personalInformationForm.controls[`${control}`];
-  }
-
-  ngOnInit() {
-    Initialize the form with the form controls and their validations
-    this.personalInformationForm = new FormGroup({
-      Firstname: new FormControl(null, [Validators.required, Validators.required]),
-      Surname: new FormControl(null, Validators.required),
-      idNumber: ['', [Validators.required, Validators.pattern('^[0-9]{13}$')]],
-      email: ['', [Validators.required, Validators.email]],
-      gender: ['', Validators.required],
-      race: ['', Validators.required],
-    });
-  }
-
-
-  
-  get disabilityControl() {
-    return this.myForm.get('disability');
-  }
-
-  // Enable or disable the disabilityReason text box based on the selected value
-  onDisabilityChange() {
-    const isDisabilityEnabled = this.disabilityControl.value === 'Yes';
-    const disabilityReasonControl = this.myForm.get('disabilityReason');
-
-    if (isDisabilityEnabled) {
-      disabilityReasonControl.enable();
-    } else {
-      disabilityReasonControl.disable();
-    }
-  }
-}
-  */

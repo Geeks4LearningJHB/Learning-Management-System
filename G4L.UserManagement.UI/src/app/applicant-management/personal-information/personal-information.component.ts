@@ -13,6 +13,8 @@ import { UserService } from 'src/app/user-management/services/user.service';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 // import { personalInformation } from '../services/applicantService';
 import { ApplicantService } from '../services/applicantService';
+import { ToastrService } from 'ngx-toastr';
+
 
 export interface PersonalInformation {
   userId: string;
@@ -51,7 +53,7 @@ export class PersonalInformationComponent implements OnInit {
 
 
 
-  constructor(private route: Router, private applicantService: ApplicantService ,private formBuilder: FormBuilder, private userService: UserService, private tokenService: TokenService, public modalRef: MdbModalRef<any>) { }
+  constructor(private route: Router, private toastr: ToastrService,private applicantService: ApplicantService ,private formBuilder: FormBuilder, private userService: UserService, private tokenService: TokenService, public modalRef: MdbModalRef<any>) { }
 
   getFormControl(control: String): AbstractControl {
     return this.personalDetails.controls[`${control}`];
@@ -65,13 +67,15 @@ export class PersonalInformationComponent implements OnInit {
     this.applicantService.onPersonalDetailsSubmit(this.userId).subscribe((result) =>{
       this.personalInformations  = result;
       console.log(this.personalInformations)
+
+      
     })
   }
 
   buildForm() {
     this.personalDetails = this.formBuilder.group({
       userId: [this.userId],
-      Firstname: ['', [ CustomValidators.names]],//'Validators.required,' removed as it throws an exception even if field is filled
+      Name: ['', [ CustomValidators.names]],//'Validators.required,' removed as it throws an exception even if field is filled
       Surname: ['', [ CustomValidators.names]],//'Validators.required,' same reason above
       IdNumber: ['', [Validators.required, Validators.pattern('^[0-9]{13}$'), CustomValidators.IdNumber]],
       Email: ['', [Validators.email, CustomValidators.email]],
@@ -86,26 +90,44 @@ export class PersonalInformationComponent implements OnInit {
     this.serverErrorMessage = '';
   }
 
-  // onPersonalDetailsSubmit(): void {
-  //   if (this.personalDetails.valid) {
-  //     console.log(this.personalDetails.value)
-  //     console.log(Response)
-  //     this.userService.onPersonalDetailsSubmit(this.personalDetails.value).subscribe(
-  //       (response: any) => {
-  //         console.log("POST request successful:", response);
-  //         if (!this.serverErrorMessage) {
-  //           this.modalRef.close();
-  //         }
-  //       },
-  //       (error: any) => {
-  //         console.log(error)
-  //         // this.serverErrorHandling(error);
-  //         alert('Form is not valid. Please fill in all required fields correctly.');
-  //         return;
-  //       }
-  //     );
-  //   }
-  //}
+  onPersonalDetailsSubmit(): void {
+    if (this.personalDetails.valid) {
+      console.log(this.personalDetails.value)
+      console.log(Response)
+      this.userService.onPersonalDetailsSubmit(this.personalDetails.value).subscribe(
+        (response: any) => {
+          console.log("POST request successful:", response);
+          if (!this.serverErrorMessage) {
+            this.modalRef.close();
+          }
+        },
+        (error: any) => {
+          console.log(error)
+          // this.serverErrorHandling(error);
+          alert('Form is not valid. Please fill in all required fields correctly.');
+          return;
+        }
+      );
+    }
+  }
+
+  onPersonalDetailsUpdate(): void {
+    this.applicantService.onPersonalDetailsUpdate(this.personalDetails.value).subscribe(
+      (response: any) => {
+        console.log("PUT request successful:", response);
+        if (!this.serverErrorMessage) {
+          this.modalRef.close();
+        }
+      },
+      (error: any) => {
+        console.log(error)
+        // this.serverErrorHandling(error);
+        alert('Form is not valid. Please fill in all required fields correctly.');
+        return;
+      }
+    );
+  }
+  
   serverErrorHandling(error: any) {
     if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
       this.personalDetails.controls['Email'].setErrors({
@@ -115,8 +137,6 @@ export class PersonalInformationComponent implements OnInit {
     }
     this.personalDetails.updateValueAndValidity();
   }
-
-
   onDoneClick(): void {
     if (this.personalDetails.invalid) {
       alert('Form is not valid. Please fill in all required fields correctly.');
@@ -139,10 +159,12 @@ export class PersonalInformationComponent implements OnInit {
   }
 
   onSaveAndCloseClick(): void {
-    console.log(this.personalDetails)
-    this.modalRef.close();
-   
-  }
+    this.applicantService.onSaveAndClose(this.personalDetails.value).subscribe(
+      (response) => {
+        console.log("PUT request successful:", response);
+        console.log(this.personalDetails)
+        this.modalRef.close();})
+      }
 
   saveInformation() {
     console.log(this.personalDetails)
