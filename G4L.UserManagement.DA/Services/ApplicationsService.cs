@@ -35,6 +35,15 @@ namespace G4L.UserManagement.DA.Services
             return await _applicationsRepository.GetApplicantsByIdNumberAsync(idNumber);
         }
 
+
+
+        //public async Task<Applications> GetEmailByIdNumberAsync(string idNumber)
+        //{
+        //    //return await _applicationsRepository.GetEmailByIdNumberAsync(idNumber);
+        //}
+
+
+
         public async Task<IEnumerable<Applications>> ListAsync()
         {
             return await _applicationsRepository.ListAsync();

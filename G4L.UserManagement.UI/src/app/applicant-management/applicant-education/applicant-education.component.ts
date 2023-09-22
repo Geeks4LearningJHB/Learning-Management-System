@@ -15,6 +15,7 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 
+
 export interface Education{
   userId: string;
   mathSubject: string;
@@ -135,3 +136,41 @@ export class ApplicantEducationComponent implements OnInit {
     this.modalRef.close();
   }
 }
+
+/* VALIDATORS FOR PERSONAL PAGE
+
+getFormControl(control: String): AbstractControl {
+    return this.personalInformationForm.controls[`${control}`];
+  }
+
+  ngOnInit() {
+    Initialize the form with the form controls and their validations
+    this.personalInformationForm = new FormGroup({
+      Firstname: new FormControl(null, [Validators.required, Validators.required]),
+      Surname: new FormControl(null, Validators.required),
+      idNumber: ['', [Validators.required, Validators.pattern('^[0-9]{13}$')]],
+      email: ['', [Validators.required, Validators.email]],
+      gender: ['', Validators.required],
+      race: ['', Validators.required],
+    });
+  }
+
+
+  
+  get disabilityControl() {
+    return this.myForm.get('disability');
+  }
+
+  // Enable or disable the disabilityReason text box based on the selected value
+  onDisabilityChange() {
+    const isDisabilityEnabled = this.disabilityControl.value === 'Yes';
+    const disabilityReasonControl = this.myForm.get('disabilityReason');
+
+    if (isDisabilityEnabled) {
+      disabilityReasonControl.enable();
+    } else {
+      disabilityReasonControl.disable();
+    }
+  }
+}
+  */

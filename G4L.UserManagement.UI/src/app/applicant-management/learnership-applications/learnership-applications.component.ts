@@ -43,7 +43,7 @@ export class LearnershipApplicationsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.applicantService.getAllApplicantions().subscribe(
+    this.applicantService.getAllApplications().subscribe(
       (result) => {
         this.applicants = result;
     
