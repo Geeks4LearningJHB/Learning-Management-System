@@ -13,7 +13,6 @@ import { ApplicantSuccessComponent } from './applicant-success/applicant-success
 import { ApplicantionProgressComponent } from './applicantion-progress/applicantion-progress.component';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { ApplicantEducationComponent } from './applicant-education/applicant-education.component';
-
 import { LearnershipApplicationsComponent } from './learnership-applications/learnership-applications.component';
 import { LearnershipApplicationModalComponent } from './learnership-applications/learnership-application-modal/learnership-application-modal.component';
 

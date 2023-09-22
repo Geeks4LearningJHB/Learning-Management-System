@@ -53,5 +53,10 @@ namespace G4L.UserManagement.DA.Migrations
                 name: "Race",
                 table: "Users");
         }
+
+        public static object FirstOrDefault(Func<object, bool> value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
