@@ -26,8 +26,17 @@
   
   border-radius: 50px;
   width: 100%;
+  background-color: #ffb800;
   
 }
+
+.progress-bar-attachments{
+  animation: reverse progress-bar-stripes 0.40s linear infinite, animate-positive 2s;
+  border-radius: 50px;
+  width: 100%;
+  background-color: #06c818;
+}
+
 .progress .progress-value{
   position: relative;
   left: -70px;
@@ -37,7 +46,7 @@
   color: #fff;
   letter-spacing: 2px;
 }
-.progress-bar.active{
+.progress-bar.active {
   animation: reverse progress-bar-stripes 0.40s linear infinite, animate-positive 2s;
 
 }

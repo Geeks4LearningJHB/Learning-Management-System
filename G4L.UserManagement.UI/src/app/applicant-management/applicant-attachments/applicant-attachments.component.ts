@@ -5,6 +5,7 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { UploadService } from 'src/app/shared/service/fileupload.service';
 import { FileUpload } from 'src/app/leave-management/models/file-upload'; // Import the FileUpload model
 import { ApplicantService } from '../services/applicantService';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-applicant-attachments',
@@ -26,7 +27,8 @@ export class ApplicantAttachmentsComponent implements OnInit {
     private formBuilder: FormBuilder,
     public modalRef: MdbModalRef<any>,
     private applicantService: ApplicantService,
-    private uploadService: UploadService
+    private uploadService: UploadService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +63,7 @@ export class ApplicantAttachmentsComponent implements OnInit {
   async uploadFiles(section: string) {
     const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
     let allFilesUploadedSuccessfully = true;
-
+  
     if (!this.selectedFiles[section] || this.selectedFiles[section].length === 0) {
       this.selectFilesMessages[section] = 'Please select one or more files to upload.';
       allFilesUploadedSuccessfully = false;
@@ -72,7 +74,7 @@ export class ApplicantAttachmentsComponent implements OnInit {
           allFilesUploadedSuccessfully = false;
           break;
         }
-
+  
         const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
         const fileExtension = file.name.split('.').pop()?.toLowerCase();
         if (!allowedExtensions.includes(fileExtension || '')) {
@@ -80,7 +82,7 @@ export class ApplicantAttachmentsComponent implements OnInit {
           allFilesUploadedSuccessfully = false;
           break;
         }
-
+  
         // Create a FileUpload object
         const fileUpload: FileUpload = {
           file: file,
@@ -89,29 +91,37 @@ export class ApplicantAttachmentsComponent implements OnInit {
           name: '',
           uploadProgress: undefined
         };
-
+  
         console.log(fileUpload);
-
+  
         try {
           const data = await this.uploadService.genericUploadToStorage(fileUpload, section);
+          const fileUrl = data?.url;
           console.log('Data returned by file upload:', data);
-
-          // Assuming you have another service called 'userService' for user-related operations
-          const userUpdateResponse = await this.applicantService.documentUpload(data?.url);
-          console.log('User updated:', userUpdateResponse);
-          
-          this.logggedInUser.id_url = data?.url;
-          // Other code to update the user or perform additional actions
+  
+          // Send the file URL to your backend service using HttpClient
+          const userId = this.logggedInUser.id; // Replace with your actual user identifier
+          this.http.post('/storeFileUrl', { userId, fileUrl }).subscribe(
+            (userUpdateResponse: any) => {
+              console.log('User updated:', userUpdateResponse);
+              this.logggedInUser.id_url = fileUrl;
+              // Other code to update the user or perform additional actions
+            },
+            (error: any) => {
+              console.error('Error storing file URL in the database', error);
+              // Handle errors as needed
+            }
+          );
         } catch (error) {
           console.error('Error:', error);
           // Handle errors as needed
         }
-
+  
         // File uploaded successfully, so set the success message
         this.uploadMessages[section] = 'File uploaded successfully.';
       }
     }
-
+  
     if (allFilesUploadedSuccessfully) {
       // Display a success message if all files uploaded successfully
       this.uploadMessages[section] = 'All files uploaded successfully.';
@@ -120,4 +130,23 @@ export class ApplicantAttachmentsComponent implements OnInit {
       // this.uploadMessages[section] = undefined;
     }
   }
+}  
+// ...
+(error: any) => {
+  console.error('Error storing file URL in the database', error);
+  if (error && error.message) {
+    // Check if error.message is a valid JSON string
+    try {
+      const errorMessage = JSON.parse(error.message);
+      console.error('Detailed error message:', errorMessage);
+    } catch (parseError) {
+      // If parsing fails, handle it as a regular string
+      console.error('Detailed error message parsing failed:', parseError);
+    }
+  } else {
+    // Handle error without a message property as a regular string
+    console.error('Detailed error message is unavailable.');
+  }
+  // Handle errors as needed
 }
+// ...
