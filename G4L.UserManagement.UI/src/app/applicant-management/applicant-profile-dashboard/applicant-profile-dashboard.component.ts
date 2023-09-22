@@ -41,15 +41,13 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
     this.getAllApplicantions();
-
-
-
   }
 
   sendApplication(userId: string): void {
     this.applicantService.applyForLearnership(userId).subscribe(
       (response) => {
         this.sendEmail(userId);
+        console.log(this.sendEmail)
         this.openSubmitModal();
       },
       (error) => {
@@ -75,45 +73,6 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     }
   );
 }
-
-  // getEducationByUserId(userId: number) {
-  //   console.log(userId);
-  //   this.applicantService
-  //     .getEducationByUserId(userId)
-  //     .subscribe((response: any) => {
-  //       console.log(response);
-  //       this.openEducationModal();
-  //     });
-
-  //   this.applicantService
-  //     .getEducationByUserId(userId)
-  //     .subscribe((response: any) => {
-  //       this.openEducationModal();
-  //     });
-  // }
-
-  openEducationModal(): void {
-    this.modalHandler.openMdbModal<ApplicantEducationComponent>({
-      component: ApplicantEducationComponent,
-      data: null,
-      ignoreBackdropClick: true,
-      width: 50,
-    });
-  }
-
-  openAttachmentsModal(): void {
-    this.modalHandler.openMdbModal<ApplicantAttachmentsComponent>({
-      component: ApplicantAttachmentsComponent,
-      data: null,
-      ignoreBackdropClick: true,
-      width: 75,
-    });
-  }
-
-
-
-
-
 
   sendEmail(userId: string): void {
 
@@ -155,6 +114,24 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       data: null,
       ignoreBackdropClick: true,
       width: 50,
+    });
+  }
+  openEducationModal(): void {
+    this.modalHandler.openMdbModal<ApplicantEducationComponent>({
+      component: ApplicantEducationComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 50,
+    });
+  }
+
+  
+  openAttachmentsModal(): void {
+    this.modalHandler.openMdbModal<ApplicantAttachmentsComponent>({
+      component: ApplicantAttachmentsComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 75,
     });
   }
 

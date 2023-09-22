@@ -16,36 +16,33 @@
       </div>
     </div>
 
-    <div class="content-container">
-      <span class="span-two">2</span>
+   
+  </div>
+  <div class="content-container">
+    <span class="span-two">2</span>
+    <div class="menu-btn-icons">
+      <button (click)="openEducationModal()">
+        <i class="fa-solid fa-user-graduate fa-xl" ></i>
+
+        <h4>Education</h4>
+      </button>
       <div class="menu-btn-icons">
-        <button (click)="openEducationModal()">
-          <i class="fa-solid fa-user-graduate fa-xl" ></i>
-  
-          <h4>Education</h4>
-        </button>
-        <div class="menu-btn-icons">
-          <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
-        </div>
+        <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
       </div>
     </div>
-    <div class="content-container">
-      <span class="span-three">3</span>
+  </div>
+  <div class="content-container">
+    <span class="span-three">3</span>
+    <div class="menu-btn-icons">
+      <button (click)="openAttachmentsModal()">
+        <i class="fa-solid fa-paperclip fa-xl"></i>
+        <h4 >Attachments</h4>
+      </button >
       <div class="menu-btn-icons">
-        <button (click)="openAttachmentsModal()">
-          <i class="fa-solid fa-paperclip fa-xl"></i>
-          <h4 >Attachments</h4>
-        </button >
-        <div class="menu-btn-icons">
-          <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
-        </div>
+        <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
       </div>
-
-      <button class="submit" (click)="sendApplication(userId)">Submit application</button>
-
-        <div id="messageDiv" style="display: none;">You have already applied for the learnership</div>
-
-
     </div>
+
+    <button class="submit disabled-button" (click)="sendApplication(userId)" [disabled]="shouldDisableButton()">Submit application</button>
   </div>
 </div>
