@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApplicantSuccessComponent } from '../applicant-success/applicant-success.component';
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
@@ -12,15 +12,17 @@ import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 
 
 export interface Applicant {
-   userId:string;
- 
- }
+  userId: string;
+
+}
+
 @Component({
   selector: 'app-applicant-profile-dashboard',
   templateUrl: './applicant-profile-dashboard.component.html',
-  styleUrls: ['./applicant-profile-dashboard.component.css'],
+  styleUrls: ['./applicant-profile-dashboard.component.css']
 })
 export class ApplicantProfileDashboardComponent implements OnInit {
+
   userId: any;
 
   serverErrorMessage: string = '';
@@ -30,6 +32,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   application: any[] = [];
   message: any;
 
+
   constructor(
     private userService: UserService,
     private applicantService: ApplicantService,
@@ -38,22 +41,22 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
     this.getAllApplicantions();
-
-
-
   }
 
   sendApplication(userId: string): void {
+  
     this.applicantService.applyForLearnership(userId).subscribe(
       (response) => {
         this.sendEmail(userId);
+        console.log(this.sendEmail)
         this.openSubmitModal();
       },
       (error) => {
-     console.log(error)
+        console.log(error)
       }
     );
   }
@@ -64,56 +67,18 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   }
 
 
-  getAllApplicantions(){this.applicantService.getAllApplicantions().subscribe(
-    (result) => {
-      this.applicants = result;
-      console.log(this.applicants)
-  
-    },
-    (error) => {
-      console.error('Error fetching data:', error);
-    }
-  );
-}
+  getAllApplicantions() {
+    this.applicantService.getAllApplicantions().subscribe(
+      (result) => {
+        this.applicants = result;
+        console.log(this.applicants)
 
-  // getEducationByUserId(userId: number) {
-  //   console.log(userId);
-  //   this.applicantService
-  //     .getEducationByUserId(userId)
-  //     .subscribe((response: any) => {
-  //       console.log(response);
-  //       this.openEducationModal();
-  //     });
-
-  //   this.applicantService
-  //     .getEducationByUserId(userId)
-  //     .subscribe((response: any) => {
-  //       this.openEducationModal();
-  //     });
-  // }
-
-  openEducationModal(): void {
-    this.modalHandler.openMdbModal<ApplicantEducationComponent>({
-      component: ApplicantEducationComponent,
-      data: null,
-      ignoreBackdropClick: true,
-      width: 50,
-    });
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
   }
-
-  openAttachmentsModal(): void {
-    this.modalHandler.openMdbModal<ApplicantAttachmentsComponent>({
-      component: ApplicantAttachmentsComponent,
-      data: null,
-      ignoreBackdropClick: true,
-      width: 75,
-    });
-  }
-
-
-
-
-
 
   sendEmail(userId: string): void {
 
@@ -149,12 +114,32 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       width: 50,
     });
   }
+
   openPersonalInformationModal(): void {
     this.modalHandler.openMdbModal<PersonalInformationComponent>({
       component: PersonalInformationComponent,
       data: null,
       ignoreBackdropClick: true,
       width: 50,
+    });
+  }
+
+  openEducationModal(): void {
+    this.modalHandler.openMdbModal<ApplicantEducationComponent>({
+      component: ApplicantEducationComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 50,
+    });
+  }
+
+
+  openAttachmentsModal(): void {
+    this.modalHandler.openMdbModal<ApplicantAttachmentsComponent>({
+      component: ApplicantAttachmentsComponent,
+      data: null,
+      ignoreBackdropClick: true,
+      width: 75,
     });
   }
 

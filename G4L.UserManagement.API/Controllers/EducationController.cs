@@ -46,6 +46,7 @@ namespace G4L.UserManagement.API.Controllers
             }
             catch (Exception ex)
             {
+                
                 // Log the exception
                 return StatusCode(500, new { Message = "An error occurred while creating education." });
             }
@@ -60,6 +61,14 @@ namespace G4L.UserManagement.API.Controllers
             if (user == null)
                 return BadRequest("User Not Found");
             return Ok(user); 
+        }
+        [AllowAnonymous]
+        //[Authorize(Role.Super_Admin, Role.Admin, Role.Applicant)]
+        [HttpPut]
+        public async Task<IActionResult> PostAsync([FromBody] EducationRequest model)
+        {
+            await _educationService.UpdateEducationAsync(model);
+            return Ok(new { Message = "Education put successfully." });
         }
     }
 }
