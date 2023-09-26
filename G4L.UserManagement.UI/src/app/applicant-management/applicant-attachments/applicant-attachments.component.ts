@@ -1,10 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
-import { UploadService } from 'src/app/shared/service/fileupload.service';
-import { FileUpload } from 'src/app/leave-management/models/file-upload'; // Import the FileUpload model
-import { ApplicantService } from '../services/applicantService';
 
 @Component({
   selector: 'app-applicant-attachments',
@@ -12,27 +9,18 @@ import { ApplicantService } from '../services/applicantService';
   styleUrls: ['./applicant-attachments.component.css']
 })
 export class ApplicantAttachmentsComponent implements OnInit {
-  sections: string[] = ['cv', 'id', 'vaccination', 'qualifications'];
-  selectedFiles: { [section: string]: File[] } = {};
-  selectFilesMessages: { [section: string]: string | undefined } = {};
-  uploadMessages: { [section: string]: string | undefined } = {};
-  sizeErrors: { [section: string]: string | undefined } = {};
-  formatErrors: { [section: string]: string | undefined } = {};
-  logggedInUser: any;
-  @Input() modalData: any;
+  selectedFiles: File[] = [];
+  message: string | undefined;
+  sizeError: string | undefined;
+  formatError: string | undefined;
 
-  constructor(
-    private route: Router,
-    private formBuilder: FormBuilder,
-    public modalRef: MdbModalRef<any>,
-    private applicantService: ApplicantService,
-    private uploadService: UploadService
-  ) {}
+  // Variables to track the current error section
+  messageSection: string | undefined;
+  errorSection: string | undefined;
 
-  ngOnInit(): void {
-    this.logggedInUser = {}; // Initialize the loggedInUser object
-    this.logggedInUser.id = this.modalData.userId;
-  }
+  constructor(private route: Router, private formBuilder: FormBuilder, public modalRef: MdbModalRef<any>) { }
+
+  ngOnInit(): void {}
 
   onDoneClick(): void {
     this.modalRef.close();
@@ -45,79 +33,60 @@ export class ApplicantAttachmentsComponent implements OnInit {
   handleFileInput(event: Event, section: string) {
     const inputElement = event.target as HTMLInputElement;
     const newFiles: FileList | null = inputElement.files;
-
-    if (newFiles && newFiles.length > 0) {
-      this.selectedFiles[section] = Array.from(newFiles);
-    } else {
-      this.selectedFiles[section] = [];
+    if (newFiles) {
+      for (let i = 0; i < newFiles.length; i++) {
+        this.selectedFiles.push(newFiles[i]);
+      }
     }
-
-    this.selectFilesMessages[section] = undefined;
-    this.uploadMessages[section] = undefined;
-    this.sizeErrors[section] = undefined;
-    this.formatErrors[section] = undefined;
+    this.messageSection = section; // Set the current section for error messages
+    this.errorSection = section; // Set the current section for error divs
+    this.clearErrorMessages();
   }
 
-  async uploadFiles(section: string) {
+  uploadFiles(section: string) {
+    if (this.selectedFiles.length === 0) {
+      this.message = 'Please select one or more files to upload.';
+      return;
+    }
+
     const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
     let allFilesUploadedSuccessfully = true;
 
-    if (!this.selectedFiles[section] || this.selectedFiles[section].length === 0) {
-      this.selectFilesMessages[section] = 'Please select one or more files to upload.';
-      allFilesUploadedSuccessfully = false;
-    } else {
-      for (const file of this.selectedFiles[section]) {
-        if (file.size > maxSize) {
-          this.sizeErrors[section] = 'File size exceeds the limit of 5 MB.';
-          allFilesUploadedSuccessfully = false;
-          break;
-        }
+    for (const file of this.selectedFiles) {
+      if (file.size > maxSize) {
+        this.sizeError = 'File size exceeds the limit of 5 MB.';
+        allFilesUploadedSuccessfully = false;
+        return;
+      }
 
-        const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
-        const fileExtension = file.name.split('.').pop()?.toLowerCase();
-        if (!allowedExtensions.includes(fileExtension || '')) {
-          this.formatErrors[section] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
-          allFilesUploadedSuccessfully = false;
-          break;
-        }
-
-        // Create a FileUpload object
-        const fileUpload: FileUpload = {
-          file: file,
-          url: '',
-          key: undefined,
-          name: '',
-          uploadProgress: undefined
-        };
-
-        console.log(fileUpload);
-
-        try {
-          const data = await this.uploadService.genericUploadToStorage(fileUpload, section);
-          console.log('Data returned by file upload:', data);
-
-          // Assuming you have another service called 'userService' for user-related operations
-          const userUpdateResponse = await this.applicantService.documentUpload(data?.url);
-          console.log('User updated:', userUpdateResponse);
-          
-          this.logggedInUser.id_url = data?.url;
-          // Other code to update the user or perform additional actions
-        } catch (error) {
-          console.error('Error:', error);
-          // Handle errors as needed
-        }
-
-        // File uploaded successfully, so set the success message
-        this.uploadMessages[section] = 'File uploaded successfully.';
+      const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      if (!allowedExtensions.includes(fileExtension || '')) {
+        this.formatError = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
+        allFilesUploadedSuccessfully = false;
+        return;
       }
     }
 
     if (allFilesUploadedSuccessfully) {
-      // Display a success message if all files uploaded successfully
-      this.uploadMessages[section] = 'All files uploaded successfully.';
-    } else {
-      // Clear the message if there are errors
-      // this.uploadMessages[section] = undefined;
+      // Implement the upload logic for each file based on the section
+      this.message = 'File uploaded successfully.';
     }
+  }
+
+  getFileSize(size: number): string {
+    const fileSizeInKB = Math.round(size / 1024);
+    if (fileSizeInKB < 1024) {
+      return fileSizeInKB + ' KB';
+    } else {
+      const fileSizeInMB = (fileSizeInKB / 1024).toFixed(2);
+      return fileSizeInMB + ' MB';
+    }
+  }
+
+  clearErrorMessages() {
+    this.message = undefined;
+    this.sizeError = undefined;
+    this.formatError = undefined;
   }
 }

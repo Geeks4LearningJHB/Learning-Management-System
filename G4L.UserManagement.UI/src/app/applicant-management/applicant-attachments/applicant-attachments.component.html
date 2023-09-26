@@ -6,26 +6,30 @@
 
   <div class="horizontal-line"></div>
 
-  <div class="file-input-main">
-
-    <!-- CV Upload Section -->
-    <div class="file-upload">
-      <h6>Upload your cv</h6>
-      <label for="cvFileInput" class="uploadbox">
-        <input type="file" id="cvFileInput" (change)="handleFileInput($event, 'cv')" multiple />
-        <small class="text-muted">Allowed formats: JPEG, PNG, PDF. Max size: 5 MB</small><br /><br />
-        <div class="button">
-          <button class="upload" (click)="uploadFiles('cv')">Upload</button>
+    <div class="file-input-main">
+      
+      <!-- CV Upload Section -->
+      <div class="file-upload">
+        <h6>Upload your cv</h6>
+        <label for="cvFileInput" class="uploadbox">
+          <input type="file" id="cvFileInput" (change)="handleFileInput($event, 'cv')" multiple />
+          <small class="text-muted">Allowed formats: JPEG, PNG, PDF. Max size: 5 MB</small><br /><br />
+          <div class="button">
+            <button class="upload" (click)="uploadFiles('cv')">Upload</button>
+          </div>
+        </label>
+        <!-- Error and message divs for CV section -->
+        <div class="messages">
+          <div *ngIf="message && messageSection === 'cv'" class="message">{{ message }}</div>
+          
         </div>
-      </label>
-      <!-- Error and message divs for CV section -->
-      <div class="messages">
-        <div *ngIf="uploadMessages['cv']" class="message">{{ uploadMessages['cv'] }}</div>
-        <div *ngIf="sizeErrors['cv']" class="error-message">{{ sizeErrors['cv'] }}</div>
-        <div *ngIf="formatErrors['cv']" class="error-message">{{ formatErrors['cv'] }}</div>
+        <div class="sizeError">
+          <div *ngIf="sizeError && errorSection === 'cv'" class="error-message">{{ sizeError }}</div>
+        </div>
+        <div class="formatError">
+          <div *ngIf="formatError && errorSection === 'cv'" class="error-message">{{ formatError }}</div>
+        </div>
       </div>
-    </div>
-
     <!-- ID Copy Upload Section -->
     <div class="file-upload3">
       <h6>Upload your ID copy</h6>
@@ -38,12 +42,16 @@
       </label>
       <!-- Error and message divs for ID copy section -->
       <div class="id-messages">
-        <div *ngIf="uploadMessages['id']" class="message">{{ uploadMessages['id'] }}</div>
-        <div *ngIf="sizeErrors['id']" class="error-message">{{ sizeErrors['id'] }}</div>
-        <div *ngIf="formatErrors['id']" class="error-message">{{ formatErrors['id'] }}</div>
+        <div *ngIf="message && messageSection === 'id'" class="message">{{ message }}</div>
+      </div>
+      <div class="id-sizeError">
+        <div *ngIf="sizeError && errorSection === 'id'" class="error-message">{{ sizeError }}</div>
+      </div>
+      <div class="id-formatError">
+        <div *ngIf="formatError && errorSection === 'id'" class="error-message">{{ formatError }}</div>
       </div>
     </div>
-
+  
     <!-- Vaccination Card Upload Section -->
     <div class="file-upload2">
       <h6>Upload your vaccination card</h6>
@@ -56,12 +64,16 @@
       </label>
       <!-- Error and message divs for vaccination card section -->
       <div class="vc-messages">
-        <div *ngIf="uploadMessages['vaccination']" class="message">{{ uploadMessages['vaccination'] }}</div>
-        <div *ngIf="sizeErrors['vaccination']" class="error-message">{{ sizeErrors['vaccination'] }}</div>
-        <div *ngIf="formatErrors['vaccination']" class="error-message">{{ formatErrors['vaccination'] }}</div>
+        <div *ngIf="message && messageSection === 'vaccination'" class="message">{{ message }}</div>
+      </div>
+      <div class="vc-sizeError">
+        <div *ngIf="sizeError && errorSection === 'vaccination'" class="error-message">{{ sizeError }}</div>
+      </div>
+      <div class="vc-formatError">
+        <div *ngIf="formatError && errorSection === 'vaccination'" class="error-message">{{ formatError }}</div>
       </div>
     </div>
-
+  
     <!-- Qualifications Upload Section -->
     <div class="file-upload4">
       <h6>Upload your qualifications</h6>
@@ -74,13 +86,20 @@
       </label>
       <!-- Error and message divs for qualifications section -->
       <div class="qualifications-messages">
-        <div *ngIf="uploadMessages['qualifications']" class="message">{{ uploadMessages['qualifications'] }}</div>
-        <div *ngIf="sizeErrors['qualifications']" class="error-message">{{ sizeErrors['qualifications'] }}</div>
-        <div *ngIf="formatErrors['qualifications']" class="error-message">{{ formatErrors['qualifications'] }}</div>
+        <div *ngIf="message && messageSection === 'qualifications'" class="message">{{ message }}</div>
+      </div>
+      <div class="qualifications-sizeError">
+        <div *ngIf="sizeError && errorSection === 'qualifications'" class="error-message">{{ sizeError }}</div>
+      </div>
+      <div class="qualifications-formatError">
+        <div *ngIf="formatError && errorSection === 'qualifications'" class="error-message">{{ formatError }}</div>
       </div>
     </div>
   </div>
   <div class="button-container">
     <button (click)="onSaveClick()" class="save-button">Save and Close</button>
+    <!-- <button (click)="onSaveClick()" class="done-button">Done</button> -->
   </div>
-</div>
+
+  
+  
