@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
 h3 {
     background-color: #092f4f;
     color: #ffffff;
@@ -6,6 +8,7 @@ h3 {
     width: 90%;
     margin-left: 60px;
     border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
   }
   p {
     text-align: center;
@@ -22,6 +25,7 @@ h3 {
     width: 90%;
     background-color: #ffffff;
     border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
     
   }
   
@@ -98,6 +102,7 @@ h3 {
     width: 320px;
     color: white;
     background-color: #092f4f;
+    font-family: 'Poppins', sans-serif;
   }
   .disabled-button {
 background-color:rgb(238 238 238);
