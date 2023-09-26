@@ -15,19 +15,20 @@
         ></i>
       </div>
     </div>
-
-   
   </div>
   <div class="content-container">
     <span class="span-two">2</span>
     <div class="menu-btn-icons">
       <button (click)="openEducationModal()">
-        <i class="fa-solid fa-user-graduate fa-xl" ></i>
+        <i class="fa-solid fa-user-graduate fa-xl"></i>
 
         <h4>Education</h4>
       </button>
       <div class="menu-btn-icons">
-        <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
+        <i
+          class="fa-regular fa-circle-check fa-xl ml-2 mb-3"
+          style="color: #2be350"
+        ></i>
       </div>
     </div>
   </div>
@@ -36,13 +37,24 @@
     <div class="menu-btn-icons">
       <button (click)="openAttachmentsModal()">
         <i class="fa-solid fa-paperclip fa-xl"></i>
-        <h4 >Attachments</h4>
-      </button >
+        <h4>Attachments</h4>
+      </button>
       <div class="menu-btn-icons">
-        <i class="fa-regular fa-circle-check fa-xl ml-2 mb-3" style="color: #2be350;"></i>
+        <i
+          class="fa-regular fa-circle-check fa-xl ml-2 mb-3"
+          style="color: #2be350"
+        ></i>
       </div>
     </div>
 
-    <button class="submit disabled-button" (click)="sendApplication(userId)" [disabled]="shouldDisableButton()">Submit application</button>
+    <button
+  class="submit disabled-button d-flex flex-row"
+  (click)="sendApplication(userId)"
+  [disabled]="shouldDisableButton()"
+>
+  <i class="lock-icon mx-2" *ngIf="shouldDisableButton()">🔒</i>
+  Submit application
+</button>
+
   </div>
 </div>

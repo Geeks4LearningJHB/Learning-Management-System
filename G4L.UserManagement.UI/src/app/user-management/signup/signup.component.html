@@ -147,16 +147,19 @@
         >
           Password <span class="validation-error-text">*</span>
         </label>
-        <input
-          type="password"
-          class="form-control"
-          autocomplete="on"
-          id="inputPassword4"
-          formControlName="Password"
-          [ngClass]="{
-            'red-border': isTouched('Password') && !isValid('Password')
-          }"
-        />
+        <div class="password-input"> <!-- Add a div for the password input and the eye icon -->
+          <input
+            type="{{ showPassword ? 'text' : 'password' }}"
+            class="form-control"
+            autocomplete="on"
+            id="inputPassword4"
+            formControlName="Password"
+            [ngClass]="{
+              'red-border': isTouched('Password') && !isValid('Password')
+            }"
+          />
+          <i class="toggle-icon" (click)="togglePasswordVisibility()"></i>
+        </div>
         <div
           class="validation-error-text"
           *ngIf="isTouched('Password') && !isValid('Password')"
@@ -174,26 +177,30 @@
             at least one special character and one capital letter.
           </div>
         </div>
+       
       </div>
       <div class="col">
         <label class="form-label"
           >Confirm Password <span class="validation-error-text">*</span></label
         >
-        <input
-          type="password"
-          class="form-control"
-          autocomplete="on"
-          id="inputConfirmPassword"
-          formControlName="confirmPassword"
-        />
+        <div class="password-input">
+          <input
+            type="{{ showConfirmPassword ? 'text' : 'password' }}"
+            class="form-control"
+            autocomplete="on"
+            id="inputConfirmPassword"
+            formControlName="confirmPassword"
+          />
+          <i class="toggle-icon" (click)="toggleConfirmPasswordVisibility()"></i>
+        </div>
         <div
           class="validation-error-text"
           *ngIf="isTouched('confirmPassword') && !arePasswordsMatching()"
         >
-          <i class="fa-solid fa-exclamation-circle"></i> The passwords do not
-          match.
+          <i class="fa-solid fa-exclamation-circle"></i> The passwords do not match.
         </div>
       </div>
+     
     </div>
 
 

@@ -119,4 +119,27 @@
   color: #3c6aaf;
   opacity: 0.9;
 }
+
+.password-input {
+  position: relative;
+}
+
+.password-input .form-control {
+  padding-right: 40px; /* Adjust the padding to make space for the icon */
+}
+
+.toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Define your eye icon using CSS, for example: */
+.toggle-icon::before {
+  content: '\1F441'; /* Unicode character for eye icon */
+}
+
   

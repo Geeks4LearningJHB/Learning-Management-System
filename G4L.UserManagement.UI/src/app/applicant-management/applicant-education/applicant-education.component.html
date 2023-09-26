@@ -20,8 +20,8 @@
               <span class="subject-label">Subject(Mathematics) </span>
               <select class="math-subjects-box" name="mathSubjects" [value]="educations.mathSubject" formControlName="MathSubject">
                 <option disabled selected hidden>Select math subject</option>
-                <option value="mathematics-pure">Mathematics Pure</option>
-                <option value="mathematics-literacy">Mathematics Lit</option>
+                <option value="mathematics-pure">Mathematics</option>
+                <option value="mathematics-literacy">Mathematics Literacy</option>
               </select>
             </div>
             <div *ngIf="getFormControl('MathSubject').invalid && getFormControl('MathSubject').touched"
