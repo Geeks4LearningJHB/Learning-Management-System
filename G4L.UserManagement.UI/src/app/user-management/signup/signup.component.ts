@@ -23,6 +23,8 @@ import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 })
 export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
 
   keys = Object.keys;
 
@@ -86,13 +88,20 @@ export class SignupComponent implements OnInit {
     const pattern = /^(?=.*[!@#$%^&*])(?=.*[A-Z])/;
     return pattern.test(control.value) ? null : { passwordInvalid: true };
   }
+
   
   arePasswordsMatching(): boolean {
     const password = this.signupForm.get('Password')?.value;
     const confirmPassword = this.signupForm.get('confirmPassword')?.value;
     return password === confirmPassword;
   }
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
   serverErrorHandling(error: any) {
     if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
       this.signupForm.controls['Email'].setErrors({

@@ -1,46 +1,53 @@
 <div class="container-fluid py-4">
   <div class="row">
     <div class="col-lg-8 col-xl-8">
-      <!-- <div class="row">
-        <div class="col-lg-7 col-xl-8">
-          <div class="card shadow mb-4">
-            <div
-              class="card-header d-flex justify-content-between align-items-center"
-            >
-              <h6>Statistics</h6>
-            </div>
-            <div class="card-body">
-              <div class="chart-area">
-                <canvas
-                  id="myChart"
-                  height="320"
-                  style="display: block; width: 572px; height: 320px"
-                  width="572"
-                ></canvas>
+      <div class="row mb-3">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <!-- Total trainers -->
+          <app-widget>
+            <ng-container title>Total Trainers</ng-container>
+            <ng-container total>3</ng-container>
+            <ng-container icon>
+              <div
+                class="icon icon-shape bg-orange shadow text-center border-radius-md"
+              >
+                <i class="fa-solid fa-person-chalkboard"></i>
               </div>
-            </div>
-          </div>
+            </ng-container>
+          </app-widget>
         </div>
-        <div class="col-lg-5 col-xl-4">
-          <div class="card shadow mb-4">
-            <div
-              class="card-header d-flex justify-content-between align-items-center"
-            >
-              <h6>Course Activities</h6>
-            </div>
-            <div class="card-body">
-              <div class="chart-area">
-                <canvas
-                  id="myChartPie"
-                  height="320"
-                  style="display: block; width: 572px; height: 320px"
-                  width="572"
-                ></canvas>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <!-- Total learners -->
+          <app-widget>
+            <ng-container title>Total Learners</ng-container>
+            <ng-container total>150</ng-container>
+            <ng-container icon>
+              <div
+                class="icon icon-shape bg-purple shadow text-center border-radius-md"
+              >
+                <i class="fa-solid fa-users"></i>
               </div>
-            </div>
-          </div>
+            </ng-container>
+          </app-widget>
         </div>
-      </div> -->
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <!-- Total clients -->
+          <app-widget>
+            <ng-container title>Total Clients</ng-container>
+            <ng-container total>1</ng-container>
+            <ng-container icon>
+              <div
+                class="icon icon-shape bg-blue shadow text-center border-radius-md"
+              >
+                <i class="fa-solid fa-landmark"></i>
+              </div>
+            </ng-container>
+          </app-widget>
+        </div>
+        <!-- <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <app-widget></app-widget>
+        </div> -->
+      </div>
       <div class="row mb-3">
         <app-mini-table [ikmList]="ikmList"></app-mini-table>
       </div>

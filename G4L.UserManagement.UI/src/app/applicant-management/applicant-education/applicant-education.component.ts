@@ -113,6 +113,14 @@ export class ApplicantEducationComponent implements OnInit {
     this.serverErrorMessage = '';
   }
 
+   enableSubmitButton(): Validators {
+    return (control: AbstractControl): {[key: string]: any} | null => {
+      const formGroup = control as FormGroup;
+      const isFormValid = formGroup.valid;
+  
+      return isFormValid ? null : { 'invalidForm': true };
+    };
+  }
   serverErrorHandling(error: any) {
     if (error && error.errorCode === ServerErrorCodes.DuplicateEmail) {
       this.educationForm.controls['Email'].setErrors({
