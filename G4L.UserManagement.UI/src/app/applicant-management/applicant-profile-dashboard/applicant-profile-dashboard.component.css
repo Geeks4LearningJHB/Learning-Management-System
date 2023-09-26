@@ -22,7 +22,7 @@ h3 {
     width: 90%;
     background-color: #ffffff;
     border-radius: 10px;
-  
+    
   }
   
   span {
@@ -42,6 +42,7 @@ h3 {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-left: 20px;
   }
   
   button {
@@ -53,6 +54,7 @@ h3 {
     border: none;
    color: rgb(8, 8, 8);
     width: 600px;
+    height: 70%;
     border-radius: 10px;
     overflow: hidden;
     background-color: #eeeeee;
@@ -97,4 +99,16 @@ h3 {
     color: white;
     background-color: #092f4f;
   }
+  .disabled-button {
+background-color:rgb(238 238 238);
+color: black;
+    
+  }
+  .disabled-button:hover {
+    transform: none;
+    box-shadow: none;
+  
+  }
+  
+  
   
