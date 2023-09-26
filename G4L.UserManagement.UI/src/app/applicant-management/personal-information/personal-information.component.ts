@@ -161,7 +161,7 @@ export class PersonalInformationComponent implements OnInit {
   onSaveAndCloseClick(): void {
     this.applicantService.onSaveAndClose(this.personalDetails.value).subscribe(
       (response) => {
-        console.log("PUT request successful:", response);
+        console.log("PUT request was successful:", response);
         console.log(this.personalDetails)
         this.modalRef.close();})
       }
