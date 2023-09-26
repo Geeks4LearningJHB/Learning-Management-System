@@ -27,6 +27,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   applicants: Applicant[] = [];
 
   showMessage!: boolean;
+  isLocked: boolean = true;
   application: any[] = [];
   message: any;
 
