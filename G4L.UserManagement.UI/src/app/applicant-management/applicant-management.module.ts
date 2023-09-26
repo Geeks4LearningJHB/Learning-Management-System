@@ -16,6 +16,7 @@ import { ApplicantEducationComponent } from './applicant-education/applicant-edu
 import { LearnershipApplicationsComponent } from './learnership-applications/learnership-applications.component';
 import { LearnershipApplicationModalComponent } from './learnership-applications/learnership-application-modal/learnership-application-modal.component';
 
+
 @NgModule({
   declarations: [
  
@@ -27,7 +28,7 @@ import { LearnershipApplicationModalComponent } from './learnership-applications
     PersonalInformationComponent,
     ApplicantEducationComponent,
     LearnershipApplicationsComponent,
-    LearnershipApplicationModalComponent,
+    LearnershipApplicationModalComponent
     
   ],
   imports: [
