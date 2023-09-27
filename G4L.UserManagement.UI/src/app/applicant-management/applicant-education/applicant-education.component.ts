@@ -88,10 +88,6 @@ export class ApplicantEducationComponent implements OnInit {
         CourseOfInterest: [this.educations.courseOfInterest || '', Validators.required],
       })
 
-      
-      
-
-
     this.applicantService.getEducationByUserId(this.userId).subscribe(
       (result) => {
         
@@ -150,14 +146,14 @@ export class ApplicantEducationComponent implements OnInit {
       return;
     }
 
-    // Check if the button has been clicked before
-    if (this.buttonClicked) {
-      alert('Button has already been clicked.');
-      return;
-    }
+    
+    // if (this.buttonClicked) {
+    //   alert('Button has already been clicked.');
+    //   return;
+    // }
 
-    // Set the button as clicked
-    this.buttonClicked = true;
+  
+    // this.buttonClicked = true;
 
     this.applicantService.onSubmit(this.educationForm.value).subscribe(
       (response: any) => {
@@ -169,7 +165,7 @@ export class ApplicantEducationComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        alert('Error submitting education information. Please try again.');
+        alert('Once filled, use Update and Close button for making changes');
         this.buttonClicked = true;  // Reset the button status on error
       }
     );
