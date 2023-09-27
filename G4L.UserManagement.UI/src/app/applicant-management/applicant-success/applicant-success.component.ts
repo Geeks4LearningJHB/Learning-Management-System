@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 // import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
-import { ApplicantService} from '../services/applicantService';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
+import { ApplicantService } from '../services/applicantService';
 
 export interface Education {
   userId: string;
@@ -24,15 +24,14 @@ export class ApplicantSuccessComponent implements OnInit {
     englishMark: '',
     qualifications: ''
   };
-  
-  userId: any;
 
+  userId: any;
   constructor(private applicantService: ApplicantService,private tokenService: TokenService, public modalRef: MdbModalRef<any>) { }
 
   ngOnInit(): void {
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
-    this.applicantService.getApplicantEducationByUserId(this.userId).subscribe(
+    this.applicantService.getEducationByUserId(this.userId).subscribe(
       (result) => {
         // Bind Data to the View
         this.educations = result;
@@ -47,5 +46,10 @@ export class ApplicantSuccessComponent implements OnInit {
   onDoneClick(): void {
     // Close the modal when "Done" button is clicked
     this.modalRef.close();
-  }
+  this.reloadPage();
+}
+
+reloadPage(): void {
+  window.location.reload();
+}
 }

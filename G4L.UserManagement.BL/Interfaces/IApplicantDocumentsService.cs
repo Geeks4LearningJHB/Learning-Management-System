@@ -1,4 +1,5 @@
-﻿using G4L.UserManagement.BL.Models;
+﻿using G4L.UserManagement.BL.Entities;
+using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,7 @@ namespace G4L.UserManagement.BL.Interfaces
     public interface IApplicantDocumentsService
     {
         Task CreateDocumentsAsync(ApplicantAttachementRequest model);
+        Task<ApplicantAttachments> GetDocumentsByUserIdAsync(Guid userId);
+
     }
 }

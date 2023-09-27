@@ -5,6 +5,7 @@ using G4L.UserManagement.DA.Services;
 using G4L.UserManagement.Infrustructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace G4L.UserManagement.API.Controllers
@@ -26,6 +27,17 @@ namespace G4L.UserManagement.API.Controllers
         {
             await _applicantDocumentsService.CreateDocumentsAsync(documents);
             return Ok();
+        }
+
+        
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetPersonal(Guid userId)
+        {
+
+            var user = await _applicantDocumentsService.GetDocumentsByUserIdAsync(userId);
+            if (user == null)
+                return BadRequest("User Not Found");
+            return Ok(user);
         }
     }
 }

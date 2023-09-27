@@ -29,6 +29,11 @@ namespace G4L.UserManagement.DA.Services
         {
             await _applicantDocumentsRepository.DocumentsPostAsync(model);
         }
+        public async Task<ApplicantAttachments> GetDocumentsByUserIdAsync(Guid userId)
+        {
+            return await _applicantDocumentsRepository.GetDocumentsByUserIdAsync(userId);
+
+        }
     }
 }
 

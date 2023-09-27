@@ -73,7 +73,7 @@ namespace G4L.UserManagement.API.Controllers
             await _userService.DeleteUserAsync(id);
             return Ok();
         }
-        [Authorize(Role.Super_Admin, Role.Admin, Role.Applicant)]
+   
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {

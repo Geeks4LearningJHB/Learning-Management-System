@@ -42,7 +42,7 @@ namespace G4L.UserManagement.API.Controllers
             return Ok();
         }*/
 
-        [Authorize(Role.Super_Admin, Role.Admin, Role.Trainer, Role.Learner)]
+        [Authorize(Role.Super_Admin, Role.Admin, Role.Trainer, Role.Learner, Role.Applicant)]
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetAttendanceByUserIdAsync(Guid userId)
         {

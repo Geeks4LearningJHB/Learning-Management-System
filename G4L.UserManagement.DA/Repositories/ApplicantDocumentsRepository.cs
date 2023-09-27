@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
 using Elasticsearch.Net;
+using G4L.UserManagement.BL.Custom_Exceptions;
 using G4L.UserManagement.BL.Entities;
+using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
+using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
 using G4L.UserManagement.DA.Migrations;
 using G4L.UserManagement.Infrustructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +37,7 @@ namespace G4L.UserManagement.DA.Repositories
 
         public async Task DocumentsPostAsync(ApplicantAttachementRequest model)
         {
+            
             // map model to new user object
             var documents = _mapper.Map<ApplicantAttachments>(model);
             // hash password
@@ -40,7 +45,15 @@ namespace G4L.UserManagement.DA.Repositories
             await _databaseContext.ApplicantsAttachements.AddAsync(documents);
             await _databaseContext.SaveChangesAsync();
         }
+        public async Task<ApplicantAttachments> GetDocumentsByUserIdAsync(Guid userId)
+        {
+            return await Task.Run(() =>
+            {
+                return _databaseContext.Set<ApplicantAttachments>()
+                    .FirstOrDefault(x => x.UserId == userId);
+            });
 
+        }
     }
     
 }

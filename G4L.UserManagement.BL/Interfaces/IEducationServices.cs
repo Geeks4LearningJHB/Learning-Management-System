@@ -17,7 +17,10 @@ namespace G4L.UserManagement.BL.Interfaces
 
         Task<IEnumerable<Education>> ListEducationAsync(Guid id);
 
+
         Task<Education> GetEducationByUserIdAsync(Guid userId);
 
+        Task UpdateEducationAsync(EducationRequest model);
+        
     }
 }

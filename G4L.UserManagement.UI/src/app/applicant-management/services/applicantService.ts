@@ -82,6 +82,12 @@ export class ApplicantService {
     return this.http.post<any>(`${this.config.apiUrl}/applicantattachments`, body);
   }
 
+  // getdo(body: any): Observable<any> {
+  //   return this.http.post<any>(`${this.config.apiUrl}/applicantattachments`, body);
+  // }
+
+  // /api/ApplicantAttachments/{userId}
+
   setProfileCompleted(arg0: boolean) {
     // Implement this method as needed
   }

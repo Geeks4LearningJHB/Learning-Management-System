@@ -11,5 +11,7 @@ namespace G4L.UserManagement.BL.Interfaces
     public interface IApplicantDocumentsRepository :  IRepository<ApplicantAttachments>
     {
         Task DocumentsPostAsync(ApplicantAttachementRequest documents);
+
+        Task<ApplicantAttachments> GetDocumentsByUserIdAsync(Guid userId);
     }
 }
