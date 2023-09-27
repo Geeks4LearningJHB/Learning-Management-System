@@ -47,7 +47,7 @@ namespace G4L.UserManagement.DA.Services
 
                 // Adding an image to the email signature
 
-                var image = bodyBuilder.LinkedResources.Add(Path.Combine("wwwroot", "images", "signature.png"));
+                var image = bodyBuilder.LinkedResources.Add(Path.Combine("wwwroot", "images", "Footer.png"));
                 image.ContentId = MimeUtils.GenerateMessageId();
 
                 //HTML tag to reference the image in the email body

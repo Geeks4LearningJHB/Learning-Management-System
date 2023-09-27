@@ -41,8 +41,4 @@
     <ProjectReference Include="..\G4L.UserManagement.DA\G4L.UserManagement.DA.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
 </Project>
