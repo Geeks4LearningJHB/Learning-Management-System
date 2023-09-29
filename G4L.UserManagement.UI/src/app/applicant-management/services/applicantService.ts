@@ -82,7 +82,11 @@ export class ApplicantService {
   }
   
   documentUpload(body: any): Observable<any> {
-    return this.http.post<any>(`${this.config.apiUrl}/applicantAttachments`, body);
+    return this.http.post<any>(`${this.config.apiUrl}/applicantattachments`, body);
+  }
+  
+  getDocumentsByUserId(userId: any): Observable<any>  {
+    return this.http.get(`${this.config.apiUrl}/applicantattachments/${userId}`);
   }
 
   setProfileCompleted(arg0: boolean) {

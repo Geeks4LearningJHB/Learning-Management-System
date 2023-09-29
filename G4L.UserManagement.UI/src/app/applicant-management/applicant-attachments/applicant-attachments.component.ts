@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { UploadService } from 'src/app/shared/service/fileupload.service';
-import { FileUpload } from 'src/app/leave-management/models/file-upload'; // Import the FileUpload model
-import { ApplicantService } from '../services/applicantService';
-import { HttpClient } from '@angular/common/http';
+import { FileUpload } from 'src/app/leave-management/models/file-upload';
+import { TokenService } from 'src/app/user-management/login/services/token.service';
 
 @Component({
   selector: 'app-applicant-attachments',
@@ -13,6 +13,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./applicant-attachments.component.css']
 })
 export class ApplicantAttachmentsComponent implements OnInit {
+  fileUrl: string = '';
+  userId: any;
+  uploadedFileName: string = '';
   sections: string[] = ['cv', 'id', 'vaccination', 'qualifications'];
   selectedFiles: { [section: string]: File[] } = {};
   selectFilesMessages: { [section: string]: string | undefined } = {};
@@ -26,18 +29,16 @@ export class ApplicantAttachmentsComponent implements OnInit {
     private route: Router,
     private formBuilder: FormBuilder,
     public modalRef: MdbModalRef<any>,
-    private applicantService: ApplicantService,
     private uploadService: UploadService,
+    private tokenService: TokenService,
     private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    this.logggedInUser = {}; // Initialize the loggedInUser object
+    let user = this.tokenService.getDecodeToken();
+    this.userId = user.id;
+    this.logggedInUser = {};
     this.logggedInUser.id = this.modalData.userId;
-  }
-
-  onDoneClick(): void {
-    this.modalRef.close();
   }
 
   onSaveClick(): void {
@@ -49,7 +50,7 @@ export class ApplicantAttachmentsComponent implements OnInit {
     const newFiles: FileList | null = inputElement.files;
 
     if (newFiles && newFiles.length > 0) {
-      this.selectedFiles[section] = Array.from(newFiles);
+      this.selectedFiles[section] = Array. from(newFiles);
     } else {
       this.selectedFiles[section] = [];
     }
@@ -60,93 +61,462 @@ export class ApplicantAttachmentsComponent implements OnInit {
     this.formatErrors[section] = undefined;
   }
 
-  async uploadFiles(section: string) {
+  async uploadFiles() {
     const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
     let allFilesUploadedSuccessfully = true;
-  
-    if (!this.selectedFiles[section] || this.selectedFiles[section].length === 0) {
-      this.selectFilesMessages[section] = 'Please select one or more files to upload.';
+
+    const combinedFiles: File[] = [];
+    
+    // Combine all selected files into one array
+    for (const section of this.sections) {
+      if (this.selectedFiles[section] && this.selectedFiles[section].length > 0) {
+        combinedFiles.push(...this.selectedFiles[section]);
+      }
+    }
+
+    if (combinedFiles.length === 0) {
+      this.selectFilesMessages['all'] = 'Please select one or more files to upload.';
       allFilesUploadedSuccessfully = false;
     } else {
-      for (const file of this.selectedFiles[section]) {
+      for (const file of combinedFiles) {
         if (file.size > maxSize) {
-          this.sizeErrors[section] = 'File size exceeds the limit of 5 MB.';
+          this.sizeErrors['all'] = 'File size exceeds the limit of 5 MB.';
           allFilesUploadedSuccessfully = false;
           break;
         }
-  
+
         const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
         const fileExtension = file.name.split('.').pop()?.toLowerCase();
         if (!allowedExtensions.includes(fileExtension || '')) {
-          this.formatErrors[section] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
+          this.formatErrors['all'] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
           allFilesUploadedSuccessfully = false;
           break;
         }
-  
-        // Create a FileUpload object
+
         const fileUpload: FileUpload = {
           file: file,
           url: '',
           key: undefined,
           name: '',
-          uploadProgress: undefined
+          uploadProgress: undefined,
         };
-  
-        console.log(fileUpload);
-  
+
         try {
-          const data = await this.uploadService.genericUploadToStorage(fileUpload, section);
+          const data = await this.uploadService.genericUploadToStorage(fileUpload, 'all');
           const fileUrl = data?.url;
+          if (data?.file) {
+            this.uploadedFileName = data.file.name;
+          } else {
+            console.error('Error: File name is not available in data.');
+            // Handle the case where the name is not available in data.
+          }
           console.log('Data returned by file upload:', data);
-  
-          // Send the file URL to your backend service using HttpClient
-          const userId = this.logggedInUser.id; // Replace with your actual user identifier
-          this.http.post('/storeFileUrl', { userId, fileUrl }).subscribe(
-            (userUpdateResponse: any) => {
-              console.log('User updated:', userUpdateResponse);
-              this.logggedInUser.id_url = fileUrl;
-              // Other code to update the user or perform additional actions
-            },
-            (error: any) => {
-              console.error('Error storing file URL in the database', error);
-              // Handle errors as needed
-            }
-          );
+          console.log('name:', data?.file?.name);
+          if (fileUrl) {
+            const userId = this.logggedInUser.id;
+            this.documentUpload(userId, fileUrl);
+          } else {
+            console.error('Error: File URL is not available.');
+          }
         } catch (error) {
           console.error('Error:', error);
-          // Handle errors as needed
+          this.handleError(error);
         }
-  
-        // File uploaded successfully, so set the success message
-        this.uploadMessages[section] = 'File uploaded successfully.';
+
+        this.uploadMessages['all'] = 'File uploaded successfully.';
       }
     }
-  
+
     if (allFilesUploadedSuccessfully) {
-      // Display a success message if all files uploaded successfully
-      this.uploadMessages[section] = 'All files uploaded successfully.';
+      this.uploadMessages['all'] = 'All files uploaded successfully.';
     } else {
-      // Clear the message if there are errors
-      // this.uploadMessages[section] = undefined;
+      this.uploadMessages['all'] = undefined;
     }
   }
-}  
-// ...
-(error: any) => {
-  console.error('Error storing file URL in the database', error);
-  if (error && error.message) {
-    // Check if error.message is a valid JSON string
-    try {
-      const errorMessage = JSON.parse(error.message);
-      console.error('Detailed error message:', errorMessage);
-    } catch (parseError) {
-      // If parsing fails, handle it as a regular string
-      console.error('Detailed error message parsing failed:', parseError);
+
+
+  async cvUploadFiles() {
+    const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
+    let allFilesUploadedSuccessfully = true;
+
+    const combinedFiles: File[] = [];
+    
+    // Combine all selected files into one array
+    for (const section of this.sections) {
+      if (this.selectedFiles[section] && this.selectedFiles[section].length > 0) {
+        combinedFiles.push(...this.selectedFiles[section]);
+      }
     }
-  } else {
-    // Handle error without a message property as a regular string
-    console.error('Detailed error message is unavailable.');
+
+    if (combinedFiles.length === 0) {
+      this.selectFilesMessages['all'] = 'Please select one or more files to upload.';
+      allFilesUploadedSuccessfully = false;
+    } else {
+      for (const file of combinedFiles) {
+        if (file.size > maxSize) {
+          this.sizeErrors['all'] = 'File size exceeds the limit of 5 MB.';
+          allFilesUploadedSuccessfully = false;
+          break;
+        }
+
+        const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
+        const fileExtension = file.name.split('.').pop()?.toLowerCase();
+        if (!allowedExtensions.includes(fileExtension || '')) {
+          this.formatErrors['all'] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
+          allFilesUploadedSuccessfully = false;
+          break;
+        }
+
+        const fileUpload: FileUpload = {
+          file: file,
+          url: '',
+          key: undefined,
+          name: '',
+          uploadProgress: undefined,
+        };
+
+        try {
+          const data = await this.uploadService.genericUploadToStorage(fileUpload, 'all');
+          const fileUrl = data?.url;
+          if (data?.file) {
+            this.uploadedFileName = data.file.name;
+          } else {
+            console.error('Error: File name is not available in data.');
+            // Handle the case where the name is not available in data.
+          }
+          console.log('Data returned by file upload:', data);
+          console.log('name:', data?.file?.name);
+          if (fileUrl) {
+            const userId = this.logggedInUser.id;
+            this.cvDocumentUpload(userId, fileUrl);
+          } else {
+            console.error('Error: File URL is not available.');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          this.handleError(error);
+        }
+
+        this.uploadMessages['all'] = 'File uploaded successfully.';
+      }
+    }
+
+    if (allFilesUploadedSuccessfully) {
+      this.uploadMessages['all'] = 'All files uploaded successfully.';
+    } else {
+      this.uploadMessages['all'] = undefined;
+    }
   }
-  // Handle errors as needed
+  async idUploadFiles() {
+    const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
+    let allFilesUploadedSuccessfully = true;
+
+    const combinedFiles: File[] = [];
+    
+    // Combine all selected files into one array
+    for (const section of this.sections) {
+      if (this.selectedFiles[section] && this.selectedFiles[section].length > 0) {
+        combinedFiles.push(...this.selectedFiles[section]);
+      }
+    }
+
+    if (combinedFiles.length === 0) {
+      this.selectFilesMessages['all'] = 'Please select one or more files to upload.';
+      allFilesUploadedSuccessfully = false;
+    } else {
+      for (const file of combinedFiles) {
+        if (file.size > maxSize) {
+          this.sizeErrors['all'] = 'File size exceeds the limit of 5 MB.';
+          allFilesUploadedSuccessfully = false;
+          break;
+        }
+
+        const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
+        const fileExtension = file.name.split('.').pop()?.toLowerCase();
+        if (!allowedExtensions.includes(fileExtension || '')) {
+          this.formatErrors['all'] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
+          allFilesUploadedSuccessfully = false;
+          break;
+        }
+
+        const fileUpload: FileUpload = {
+          file: file,
+          url: '',
+          key: undefined,
+          name: '',
+          uploadProgress: undefined,
+        };
+
+        try {
+          const data = await this.uploadService.genericUploadToStorage(fileUpload, 'all');
+          const fileUrl = data?.url;
+          if (data?.file) {
+            this.uploadedFileName = data.file.name;
+          } else {
+            console.error('Error: File name is not available in data.');
+            // Handle the case where the name is not available in data.
+          }
+          console.log('Data returned by file upload:', data);
+          console.log('name:', data?.file?.name);
+          if (fileUrl) {
+            const userId = this.logggedInUser.id;
+            this.cvDocumentUpload(userId, fileUrl);
+          } else {
+            console.error('Error: File URL is not available.');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          this.handleError(error);
+        }
+
+        this.uploadMessages['all'] = 'File uploaded successfully.';
+      }
+    }
+
+    if (allFilesUploadedSuccessfully) {
+      this.uploadMessages['all'] = 'All files uploaded successfully.';
+    } else {
+      this.uploadMessages['all'] = undefined;
+    }
+  }
+  async UploadFiles() {
+    const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
+    let allFilesUploadedSuccessfully = true;
+
+    const combinedFiles: File[] = [];
+    
+    // Combine all selected files into one array
+    for (const section of this.sections) {
+      if (this.selectedFiles[section] && this.selectedFiles[section].length > 0) {
+        combinedFiles.push(...this.selectedFiles[section]);
+      }
+    }
+
+    if (combinedFiles.length === 0) {
+      this.selectFilesMessages['all'] = 'Please select one or more files to upload.';
+      allFilesUploadedSuccessfully = false;
+    } else {
+      for (const file of combinedFiles) {
+        if (file.size > maxSize) {
+          this.sizeErrors['all'] = 'File size exceeds the limit of 5 MB.';
+          allFilesUploadedSuccessfully = false;
+          break;
+        }
+
+        const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
+        const fileExtension = file.name.split('.').pop()?.toLowerCase();
+        if (!allowedExtensions.includes(fileExtension || '')) {
+          this.formatErrors['all'] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
+          allFilesUploadedSuccessfully = false;
+          break;
+        }
+
+        const fileUpload: FileUpload = {
+          file: file,
+          url: '',
+          key: undefined,
+          name: '',
+          uploadProgress: undefined,
+        };
+
+        try {
+          const data = await this.uploadService.genericUploadToStorage(fileUpload, 'all');
+          const fileUrl = data?.url;
+          if (data?.file) {
+            this.uploadedFileName = data.file.name;
+          } else {
+            console.error('Error: File name is not available in data.');
+            // Handle the case where the name is not available in data.
+          }
+          console.log('Data returned by file upload:', data);
+          console.log('name:', data?.file?.name);
+          if (fileUrl) {
+            const userId = this.logggedInUser.id;
+            this.cvDocumentUpload(userId, fileUrl);
+          } else {
+            console.error('Error: File URL is not available.');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          this.handleError(error);
+        }
+
+        this.uploadMessages['all'] = 'File uploaded successfully.';
+      }
+    }
+
+    if (allFilesUploadedSuccessfully) {
+      this.uploadMessages['all'] = 'All files uploaded successfully.';
+    } else {
+      this.uploadMessages['all'] = undefined;
+    }
+  }
+  async qualificationsUploadFiles() {
+    const maxSize = 5 * 1024 * 1024; // 5 MB in bytes
+    let allFilesUploadedSuccessfully = true;
+
+    const combinedFiles: File[] = [];
+    
+    // Combine all selected files into one array
+    for (const section of this.sections) {
+      if (this.selectedFiles[section] && this.selectedFiles[section].length > 0) {
+        combinedFiles.push(...this.selectedFiles[section]);
+      }
+    }
+
+    if (combinedFiles.length === 0) {
+      this.selectFilesMessages['all'] = 'Please select one or more files to upload.';
+      allFilesUploadedSuccessfully = false;
+    } else {
+      for (const file of combinedFiles) {
+        if (file.size > maxSize) {
+          this.sizeErrors['all'] = 'File size exceeds the limit of 5 MB.';
+          allFilesUploadedSuccessfully = false;
+          break;
+        }
+
+        const allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
+        const fileExtension = file.name.split('.').pop()?.toLowerCase();
+        if (!allowedExtensions.includes(fileExtension || '')) {
+          this.formatErrors['all'] = 'Invalid file format. Allowed formats: JPEG, PNG, PDF.';
+          allFilesUploadedSuccessfully = false;
+          break;
+        }
+
+        const fileUpload: FileUpload = {
+          file: file,
+          url: '',
+          key: undefined,
+          name: '',
+          uploadProgress: undefined,
+        };
+
+        try {
+          const data = await this.uploadService.genericUploadToStorage(fileUpload, 'all');
+          const fileUrl = data?.url;
+          if (data?.file) {
+            this.uploadedFileName = data.file.name;
+          } else {
+            console.error('Error: File name is not available in data.');
+            // Handle the case where the name is not available in data.
+          }
+          console.log('Data returned by file upload:', data);
+          console.log('name:', data?.file?.name);
+          if (fileUrl) {
+            const userId = this.logggedInUser.id;
+            this. qualificationsDocumentUpload(userId, fileUrl);
+          } else {
+            console.error('Error: File URL is not available.');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          this.handleError(error);
+        }
+
+        this.uploadMessages['all'] = 'File uploaded successfully.';
+      }
+    }
+
+    if (allFilesUploadedSuccessfully) {
+      this.uploadMessages['all'] = 'All files uploaded successfully.';
+    } else {
+      this.uploadMessages['all'] = undefined;
+    }
+  }
+  // Implement error handling based on your application's requirements
+  handleError(error: any) {
+    console.error('Error:', error);
+    // Handle the error here as needed
+  }
+
+  // Integrate the document upload function
+  documentUpload(userId: any, fileUrl: string) {
+    const data = {
+      userId: this.userId,
+      fileName: this.uploadedFileName,
+      filePath: fileUrl,
+    
+    };
+    
+
+    // Send the data to the API using HttpClient
+    this.http.post('https://localhost:44326/api/VaccinationDocuments', data).subscribe(
+      (response: any) => {
+        console.log('File metadata sent to the SQL database:', response);
+        // Handle success, e.g., update UI or show a success message
+      },
+      (error: any) => {
+        console.error('Error:', error);
+        // Handle the error here as needed
+        this.handleError(error);
+      }
+    );
+  }
+
+  cvDocumentUpload(userId: any, fileUrl: string) {
+    const data = {
+      userId: this.userId,
+      fileName: this.uploadedFileName,
+      filePath: fileUrl,
+    
+    };
+    
+
+    // Send the data to the API using HttpClient
+    this.http.post('https://localhost:44326/CvDocuments', data).subscribe(
+      (response: any) => {
+        console.log('File metadata sent to the SQL database:', response);
+        // Handle success, e.g., update UI or show a success message
+      },
+      (error: any) => {
+        console.error('Error:', error);
+        // Handle the error here as needed
+        this.handleError(error);
+      }
+    );
+  }
+  idDocumentUpload(userId: any, fileUrl: string) {
+    const data = {
+      userId: this.userId,
+      fileName: this.uploadedFileName,
+      filePath: fileUrl,
+    
+    };
+    
+
+    // Send the data to the API using HttpClient
+    this.http.post('https://localhost:44326/IdDocuments', data).subscribe(
+      (response: any) => {
+        console.log('File metadata sent to the SQL database:', response);
+        // Handle success, e.g., update UI or show a success message
+      },
+      (error: any) => {
+        console.error('Error:', error);
+        // Handle the error here as needed
+        this.handleError(error);
+      }
+    );
+  }
+  qualificationsDocumentUpload(userId: any, fileUrl: string) {
+    const data = {
+      userId: this.userId,
+      fileName: this.uploadedFileName,
+      filePath: fileUrl,
+    
+    };
+    
+
+    // Send the data to the API using HttpClient
+    this.http.post('https://localhost:44326/QualificationsDocuments', data).subscribe(
+      (response: any) => {
+        console.log('File metadata sent to the SQL database:', response);
+        // Handle success, e.g., update UI or show a success message
+      },
+      (error: any) => {
+        console.error('Error:', error);
+        // Handle the error here as needed
+        this.handleError(error);
+      }
+    );
+  }
 }
-// ...

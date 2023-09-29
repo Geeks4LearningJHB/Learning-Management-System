@@ -98,12 +98,12 @@ onPersonalDetailsSubmit(userId: any) {
 
 
   //education progress
-  getApplicantEducation(userId: any) {
-    this.applicantService.getEducationByUserId(userId).subscribe(
+      getApplicantEducation(userId: any) {
+      this.applicantService.getEducationByUserId(userId).subscribe(
       (data: any) => {
         const totalFieldCount = 6;
       
-  
+        
         // Log the entire data object received from the service
         console.log("Received data:", data);
   

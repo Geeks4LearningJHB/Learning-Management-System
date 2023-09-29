@@ -8,6 +8,12 @@ import { FileUpload } from 'src/app/leave-management/models/file-upload';
   providedIn: 'root'
 })
 export class UploadService {
+  documentUpload(arg0: string, data: { userId: any; fileUrl: string; }) {
+    throw new Error('Method not implemented.');
+  }
+  post(arg0: string, data: { userId: any; fileUrl: string; }) {
+    throw new Error('Method not implemented.');
+  }
 
   private basePath = '/uploads';
 
