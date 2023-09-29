@@ -45,10 +45,29 @@ namespace G4L.UserManagement.DA.Repositories
                 }));
             }
 
+            if (_databaseContext.Users == null || !_databaseContext.Users.Any())
+            {
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
+                    Message = "User with Id number already exists"
+                }));
+            }
 
+
+            if (_databaseContext.Educations == null || !_databaseContext.Educations.Any(x => x.UserId == id))
+            {
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
+                    Message = "The educations table is null or empty"
+                }));
+            }
             var dataFromEducation = await _databaseContext.Educations
-      .FirstOrDefaultAsync(e => e.UserId == model.UserId);
+                .FirstOrDefaultAsync(e => e.UserId == model.UserId);
 
+            var dataFromAttachements = await _databaseContext.ApplicantsAttachements
+                .FirstOrDefaultAsync(e => e.UserId == model.UserId);
 
             // Create an Applications object using the retrieved user data
             var application = new Applications
@@ -65,11 +84,17 @@ namespace G4L.UserManagement.DA.Repositories
                 MathSubject = dataFromEducation.MathSubject,
                 MathMark = dataFromEducation.MathMark,
                 EnglishMark = dataFromEducation.EnglishMark,
-                Qualifications =dataFromEducation.Qualifications,
-                FieldOfStudy  = dataFromEducation.FieldOfStudy,
+                Qualifications = dataFromEducation.Qualifications,
+                FieldOfStudy = dataFromEducation.FieldOfStudy,
                 CourseOfInterest = dataFromEducation.CourseOfInterest,
-    };
-            
+                //FileName = dataFromAttachements.FileName,
+                //FilePath = dataFromAttachements.FilePath,
+            };
+
+         
+
+            // Now 'additionalFileInfos' contains the extra FileName and FilePath pairs
+
             // Map the application to the desired type if needed
             var mappedApplication = _mapper.Map<Applications>(application);
 

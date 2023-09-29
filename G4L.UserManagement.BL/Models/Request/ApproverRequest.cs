@@ -16,5 +16,7 @@ namespace G4L.UserManagement.BL.Models.Request
         public Role Role { get; set; }
         public Status status { get; set; }
         public string Comments { get; set; }
+        public List<string> FileNames { get; set; } // List of file names
+        public List<string> FilePaths { get; set; } // List of file paths
     }
 }

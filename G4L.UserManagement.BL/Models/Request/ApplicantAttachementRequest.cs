@@ -11,5 +11,6 @@ namespace G4L.UserManagement.BL.Models.Request
         public Guid UserId { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
+
     }
 }

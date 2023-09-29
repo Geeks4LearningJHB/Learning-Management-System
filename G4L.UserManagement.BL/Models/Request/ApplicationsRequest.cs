@@ -24,6 +24,8 @@ namespace G4L.UserManagement.BL.Models.Request
         public string Qualifications { get; set; }
         public string FieldOfStudy { get; set; }
         public string CourseOfInterest { get; set; }
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
     }
 
 }

@@ -26,6 +26,8 @@ export interface Applicant {
   courseOfInterest:string;
   fieldOfStudy:string;
   qualifications:string;
+  fileName:string;
+  filePath:string;
 }
 @Component({
   selector: 'app-learnership-applications',
@@ -68,6 +70,7 @@ export class LearnershipApplicationsComponent implements OnInit {
     (result) => {
       this.applicants = result;
       this.filterByStream('all');
+      console.log(result)
   
     },
     (error) => {
