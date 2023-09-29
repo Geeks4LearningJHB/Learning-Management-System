@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace G4L.UserManagement.BL.Models.Request
 {
-    public class ApplicantAttachementRequest
+    public class IdDocumentsRequest
     {
         public Guid UserId { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
-
     }
 }
