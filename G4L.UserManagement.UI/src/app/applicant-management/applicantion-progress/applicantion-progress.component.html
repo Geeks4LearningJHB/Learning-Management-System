@@ -19,7 +19,7 @@
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                  Personal Information
+                 Track Your Application Progress
                 </button>
               </h2>
               <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
@@ -27,32 +27,28 @@
                     <div class="container">
                       <div class="row">
                           <div class="col-md-10">
-                            <div class="label">Profile</div>
+                            <div class="label">Personal Information</div>
                             <div class="progress-outer">
                               <div class="progress">
-                                <div class="progress-bar progress-bar-info progress-bar-striped active" [style.width]="profileProgress + '%'" style="width:100%; box-shadow:-1px 10px 10px;"></div>
-                                <div class="progress-value">{{ profileProgress | number:'1.0-0'  }}%</div>
+                                <div class="progress-bar progress-personal progress-bar-striped active progress-value" [style.width]="profileProgress + '%'" style="width:100%; box-shadow:-1px 10px 10px;">{{ profileProgress | number:'1.0-0'  }}%
+                                </div>                    
                               </div>
-                            </div>
-                            
+                            </div>                         
                               <div class="label">Education</div>
                               <div class="progress-outer">
                                   <div class="progress">
-                                      <div class="progress-bar-education progress-bar-success progress-bar-striped active" [style.width]="educationProgress + '%'" style="width:100%; "></div>
-                                      <div class="progress-value">{{ educationProgress | number:'1.0-0'  }}%</div>
-                                  </div>
+                                      <div class="progress-bar progress-bar-education progress-bar-striped active progress-value" [style.width]="educationProgress + '%'" style="width:100%; box-shadow:-1px 10px 10px;">{{ educationProgress | number:'1.0-0'  }}%</div>
+                                    </div>
                               </div>
                               <div class="label">Attachments</div>
                               <div class="progress-outer">
                                   <div class="progress">
-                                    
-                                      <div class="progress-bar-attachments progress-bar-warning progress-bar-striped active" style="width:100%; "></div>
+                                      <div class="progress-bar progress-bar-attachments progress-bar-striped active progress-value" [style.width]="educationProgress + '%' ">{{ educationProgress | number:'1.0-0'  }}%</div>
                                       <!-- <div class="progress-value">{{ attachmentProgress  | number:'1.0-0' }}%</div> -->
                                   </div>
                               </div>
                     <div class="progress-tracker">
                   </div>
-            
                 </div></div>
               </div>
             </div>
@@ -64,7 +60,7 @@
               </h2>
               <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
                 <div class="accordion-body">
-                  <strong>OMING SOON.</strong> 
+                  <strong>COMING SOON.</strong> 
                 </div>
               </div>
             </div>

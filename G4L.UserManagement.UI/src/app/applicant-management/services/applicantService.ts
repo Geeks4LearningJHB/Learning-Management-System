@@ -30,6 +30,9 @@ export class ApplicantService {
     return this.http.put(`${this.config.apiUrl}/education`, body);
   }
 
+  checkDataExistence(formData: any): Observable<boolean> {
+    return this.http.post<boolean>(`${this.config.apiUrl}/education`, formData);
+  }
 
   onSubmit(value: any): Observable<any> {
     console.log('Post Payload:', value);
