@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using G4L.UserManagement.BL.Entities;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models.Request;
 using G4L.UserManagement.DA.Repositories;
@@ -24,6 +25,10 @@ namespace G4L.UserManagement.DA.Services
         {
            
             await _qualificationsDocumentsRepository.PostQualificationsDocumentAsync(model);
+        }
+        public async Task<QualificationsDocuments> GetQualificationDocumentByUserIdAsync(Guid userId)
+        {
+            return await _qualificationsDocumentsRepository.GetQualificationDocumentByUserIdAsync(userId);
         }
     }
 }

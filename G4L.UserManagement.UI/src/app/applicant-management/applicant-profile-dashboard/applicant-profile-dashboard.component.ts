@@ -46,7 +46,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
     this.getAllApplicantions();
-    this.getDocumentsByUserId(this.userId);
+    // this.getDocumentsByUserId(this.userId);
   }
 
   sendApplication(userId: string): void {
@@ -107,13 +107,13 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     });
   }
 
-  getDocumentsByUserId(userId: number) {
-    console.log(userId); // Check the value in the console
-    this.applicantService.getDocumentsByUserId(userId).subscribe((response: any) => {
-      console.log(response); // Check the response if it arrives
+  // getDocumentsByUserId(userId: number) {
+  //   console.log(userId); // Check the value in the console
+  //   this.applicantService.getDocumentsByUserId(userId).subscribe((response: any) => {
+  //     console.log(response); // Check the response if it arrives
       
-    });
-  }
+  //   });
+  // }
   // getDocuments(userId: string): void {
   //   this.applicantService.getDocuments(userId).subscribe(
   //     (result) => {

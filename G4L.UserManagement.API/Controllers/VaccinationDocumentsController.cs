@@ -34,5 +34,10 @@ namespace G4L.UserManagement.API.Controllers
                 return StatusCode(500, new { Message = "An error occurred while creating the application.", Error = ex.Message });
             }
         }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetVaccinationDocumentByUserIdAsyn(Guid userId)
+        {
+            return Ok(await _vaccinationDocumentsService.GetVaccinationDocumentByUserIdAsync(userId));
+        }
     }
 }

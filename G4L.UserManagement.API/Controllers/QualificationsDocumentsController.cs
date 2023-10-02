@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using System;
+using G4L.UserManagement.DA.Services;
 
 namespace G4L.UserManagement.API.Controllers
 {
@@ -33,6 +34,11 @@ namespace G4L.UserManagement.API.Controllers
             {
                 return StatusCode(500, new { Message = "An error occurred while creating the application.", Error = ex.Message });
             }
+        }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetQualificationDocumentByUserIdAsync(Guid userId)
+        {
+            return Ok(await _qualificationsDocumentsService.GetQualificationDocumentByUserIdAsync(userId));
         }
     }
 }

@@ -41,6 +41,16 @@ namespace G4L.UserManagement.DA.Repositories
             _databaseContext.QualificationsDocuments.Add(qualificationsDocument); // Change 'CvDocuments' to 'QualificationsDocuments'
             await _databaseContext.SaveChangesAsync();
         }
+        public async Task<QualificationsDocuments> GetQualificationDocumentByUserIdAsync(Guid userId)
+        {
+            return await Task.Run(() =>
+            {
+
+                return _databaseContext.Set<QualificationsDocuments>()
+                    .FirstOrDefault(x => x.UserId == userId);
+
+            });
+        }
 
     }
 }

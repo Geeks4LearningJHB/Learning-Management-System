@@ -20,7 +20,7 @@ namespace G4L.UserManagement.API.Controllers
         {
             _logger = logger;
             _cvDocumentsservice = cvDocumentsService;
-         
+
         }
         [HttpPost]
         public async Task<IActionResult> CreateApplicationAsync([FromBody] CvDocumentsRequest model)
@@ -35,5 +35,11 @@ namespace G4L.UserManagement.API.Controllers
                 return StatusCode(500, new { Message = "An error occurred while creating the application.", Error = ex.Message });
             }
         }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetApplicationsList(Guid userId)
+        {
+            return Ok(await _cvDocumentsservice.GetCvDocumentByUserIdAsync(userId));
+        }
+      
     }
 }

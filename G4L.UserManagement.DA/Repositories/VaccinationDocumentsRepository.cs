@@ -41,6 +41,16 @@ namespace G4L.UserManagement.DA.Repositories
             _databaseContext.VaccinationDocuments.Add(vaccinationDocument);
             await _databaseContext.SaveChangesAsync();
         }
+        public async Task<VaccinationDocuments> GetVaccinationDocumentByUserIdAsync(Guid userId)
+        {
+            return await Task.Run(() =>
+            {
+
+                return _databaseContext.Set<VaccinationDocuments>()
+                    .FirstOrDefault(x => x.UserId == userId);
+
+            });
+        }
 
     }
 }

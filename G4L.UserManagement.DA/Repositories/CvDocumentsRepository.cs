@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace G4L.UserManagement.DA.Repositories
 {
@@ -41,6 +42,16 @@ namespace G4L.UserManagement.DA.Repositories
 
             _databaseContext.CvDocuments.Add(cvDocument); // Change 'Educations' to 'CvDocuments'
             await _databaseContext.SaveChangesAsync();
+        }
+        public async Task<CvDocuments> GetCvDocumentByUserIdAsync(Guid userId)
+        {
+            return await Task.Run(() =>
+            {
+               
+                return _databaseContext.Set<CvDocuments>()
+                    .FirstOrDefault(x => x.UserId == userId);
+          
+        });
         }
 
     }
