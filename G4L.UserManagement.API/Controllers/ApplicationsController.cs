@@ -71,9 +71,5 @@ namespace G4L.UserManagement.API.Controllers
                 return BadRequest("User Not Found");
             return Ok(application);
         }
-
-       
-        }
-
-    
+    }
 }

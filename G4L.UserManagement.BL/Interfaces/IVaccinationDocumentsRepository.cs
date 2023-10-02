@@ -8,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace G4L.UserManagement.BL.Interfaces
 {
-    public interface IApplicantDocumentsRepository :  IRepository<ApplicantAttachments>
+    public interface IVaccinationDocumentsRepository
     {
-        Task DocumentsPostAsync(ApplicantAttachementRequest documents);
+        Task<VaccinationDocuments> GetVaccinationDocumentByUserIdAsync(Guid userId);
+        Task PostVaccinationDocumentAsync(VaccinationDocumentsRequest model);
     }
 }

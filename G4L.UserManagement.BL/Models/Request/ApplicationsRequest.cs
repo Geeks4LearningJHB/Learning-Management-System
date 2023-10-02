@@ -24,6 +24,15 @@ namespace G4L.UserManagement.BL.Models.Request
         public string Qualifications { get; set; }
         public string FieldOfStudy { get; set; }
         public string CourseOfInterest { get; set; }
+        public string CvFileName { get; set; }
+        public string CvFilePath { get; set; }
+        public string IdFileName { get; set; }
+        public string IdFilePath { get; set; }
+        public string QualificationsFileName { get; set; }
+        public string QualificationsFilePath { get; set; }
+        public string VaccinationFileName { get; set; }
+        public string VaccinationFilePath { get; set; }
+
     }
 
 }

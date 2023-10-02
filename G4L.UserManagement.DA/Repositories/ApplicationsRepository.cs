@@ -45,10 +45,38 @@ namespace G4L.UserManagement.DA.Repositories
                 }));
             }
 
+            if (_databaseContext.Users == null || !_databaseContext.Users.Any())
+            {
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
+                    Message = "User with Id number already exists"
+                }));
+            }
 
+
+            if (_databaseContext.Educations == null || !_databaseContext.Educations.Any(x => x.UserId == id))
+            {
+                throw new AppException(JsonConvert.SerializeObject(new ExceptionObject
+                {
+                    ErrorCode = ServerErrorCodes.DuplicateIdNumber.ToString(),
+                    Message = "The educations table is null or empty"
+                }));
+            }
             var dataFromEducation = await _databaseContext.Educations
-      .FirstOrDefaultAsync(e => e.UserId == model.UserId);
+                .FirstOrDefaultAsync(e => e.UserId == model.UserId);
 
+            var dataFromVaccinationDocuments = await _databaseContext.VaccinationDocuments
+           .FirstOrDefaultAsync(e => e.UserId == model.UserId);
+
+            var dataFromIdDocuments = await _databaseContext.IdDocuments
+           .FirstOrDefaultAsync(e => e.UserId == model.UserId);
+
+            var dataFromQualificationsDocuments = await _databaseContext.QualificationsDocuments
+           .FirstOrDefaultAsync(e => e.UserId == model.UserId);
+
+            var dataFromCvDocuments = await _databaseContext.CvDocuments
+           .FirstOrDefaultAsync(e => e.UserId == model.UserId);
 
             // Create an Applications object using the retrieved user data
             var application = new Applications
@@ -65,11 +93,24 @@ namespace G4L.UserManagement.DA.Repositories
                 MathSubject = dataFromEducation.MathSubject,
                 MathMark = dataFromEducation.MathMark,
                 EnglishMark = dataFromEducation.EnglishMark,
-                Qualifications =dataFromEducation.Qualifications,
-                FieldOfStudy  = dataFromEducation.FieldOfStudy,
+                Qualifications = dataFromEducation.Qualifications,
+                FieldOfStudy = dataFromEducation.FieldOfStudy,
                 CourseOfInterest = dataFromEducation.CourseOfInterest,
-    };
+                CvFileName = dataFromCvDocuments.FileName,
+                CvFilePath = dataFromCvDocuments.FilePath,
+                IdFileName = dataFromCvDocuments.FileName,
+                IdFilePath = dataFromCvDocuments.FilePath,
+                QualificationsFileName = dataFromCvDocuments.FileName,
+                QualificationsFilePath = dataFromCvDocuments.FilePath,
+                VaccinationFileName = dataFromCvDocuments.FileName,
+                VaccinationFilePath = dataFromCvDocuments.FilePath,
             
+            };
+
+         
+
+            // Now 'additionalFileInfos' contains the extra FileName and FilePath pairs
+
             // Map the application to the desired type if needed
             var mappedApplication = _mapper.Map<Applications>(application);
 

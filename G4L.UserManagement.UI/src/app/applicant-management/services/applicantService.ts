@@ -30,6 +30,9 @@ export class ApplicantService {
     return this.http.put(`${this.config.apiUrl}/education`, body);
   }
 
+  checkDataExistence(formData: any): Observable<boolean> {
+    return this.http.post<boolean>(`${this.config.apiUrl}/education`, formData);
+  }
 
   onSubmit(value: any): Observable<any> {
     console.log('Post Payload:', value);
@@ -60,10 +63,7 @@ export class ApplicantService {
     return this.http.get(`${this.config.apiUrl}/education`);
   }
 
-  getApplicantEducationByUserId(userId: any): Observable<any>  {
-    return this.http.get(`${this.config.apiUrl}/education/education${userId}`);
 
-  }
 
   onPersonalDetailsSubmit(id: any): Observable<any> {
     return this.http.get(`${this.config.apiUrl}/user/${id}`);
@@ -78,10 +78,19 @@ export class ApplicantService {
     return this.http.get(`${this.config.apiUrl}/applications/${userId}`);
   }
   
-  documentUpload(body: any): Observable<any> {
-    return this.http.post<any>(`${this.config.apiUrl}/applicantAttachments`, body);
+  getQualificationDocumentsByUserId(userId: any): Observable<any> {
+    return this.http.get(`${this.config.apiUrl}/qualificationsDocuments/${userId}`)
   }
 
+  getIdDocumentsByUserId(userId: any): Observable<any> {
+    return this.http.get(`${this.config.apiUrl}/idDocuments/${userId}`)
+  }
+  getVaccinationDocumentsByUserId(userId: any): Observable<any> {
+    return this.http.get(`${this.config.apiUrl}/vaccinationDocuments/${userId}`)
+  }
+  getCvDocumentsByUserId(userId: any): Observable<any> {
+    return this.http.get(`${this.config.apiUrl}/cvDocuments/${userId}`)
+  }
   setProfileCompleted(arg0: boolean) {
     // Implement this method as needed
   }

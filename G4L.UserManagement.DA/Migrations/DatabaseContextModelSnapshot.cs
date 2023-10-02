@@ -19,32 +19,6 @@ namespace G4L.UserManagement.DA.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("G4L.UserManagement.BL.Entities.ApplicantAttachments", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FilePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ApplicantsAttachements");
-                });
-
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Applications", b =>
                 {
                     b.Property<Guid>("Id")
@@ -56,6 +30,12 @@ namespace G4L.UserManagement.DA.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("CvFileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CvFilePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Disability")
                         .HasColumnType("nvarchar(max)");
@@ -70,6 +50,12 @@ namespace G4L.UserManagement.DA.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdFileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdFilePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdNumber")
@@ -93,6 +79,12 @@ namespace G4L.UserManagement.DA.Migrations
                     b.Property<string>("Qualifications")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("QualificationsFileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QualificationsFilePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Race")
                         .HasColumnType("nvarchar(max)");
 
@@ -101,6 +93,12 @@ namespace G4L.UserManagement.DA.Migrations
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("VaccinationFileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VaccinationFilePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -172,14 +170,38 @@ namespace G4L.UserManagement.DA.Migrations
                     b.ToTable("Attendances");
                 });
 
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.CvDocuments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CvDocuments");
+                });
+
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Document", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                b.Property<DateTime>("CreatedDate")
-                    .HasColumnType("datetime2");
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -197,7 +219,6 @@ namespace G4L.UserManagement.DA.Migrations
 
                     b.HasKey("Id");
 
-                b.HasIndex("LeaveId");
                     b.HasIndex("LeaveId");
 
                     b.ToTable("Documents");
@@ -343,6 +364,32 @@ namespace G4L.UserManagement.DA.Migrations
                     b.ToTable("GoalTasks");
                 });
 
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.IdDocuments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IdDocuments");
+                });
+
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Leave", b =>
                 {
                     b.Property<Guid>("Id")
@@ -413,6 +460,32 @@ namespace G4L.UserManagement.DA.Migrations
                     b.HasIndex("LeaveId");
 
                     b.ToTable("LeaveSchedules");
+                });
+
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.QualificationsDocuments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QualificationsDocuments");
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Sponsor", b =>
@@ -529,6 +602,32 @@ namespace G4L.UserManagement.DA.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("G4L.UserManagement.BL.Entities.VaccinationDocuments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VaccinationDocuments");
+                });
+
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Approver", b =>
                 {
                     b.HasOne("G4L.UserManagement.BL.Entities.Leave", null)
@@ -548,12 +647,11 @@ namespace G4L.UserManagement.DA.Migrations
                 });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Document", b =>
-            {
-                b.HasOne("G4L.UserManagement.BL.Entities.Leave", null)
-                    .WithMany("Documents")
-                    .HasForeignKey("LeaveId");
-            });
-               
+                {
+                    b.HasOne("G4L.UserManagement.BL.Entities.Leave", null)
+                        .WithMany("Documents")
+                        .HasForeignKey("LeaveId");
+                });
 
             modelBuilder.Entity("G4L.UserManagement.BL.Entities.Goal", b =>
                 {
@@ -658,4 +756,3 @@ namespace G4L.UserManagement.DA.Migrations
         }
     }
 }
-

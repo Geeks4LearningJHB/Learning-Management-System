@@ -43,10 +43,13 @@ export class ApplicantSuccessComponent implements OnInit {
     );
   }
 
-
-
   onDoneClick(): void {
     // Close the modal when "Done" button is clicked
     this.modalRef.close();
-  }
+  this.reloadPage();
+}
+
+reloadPage(): void {
+  window.location.reload();
+}
 }

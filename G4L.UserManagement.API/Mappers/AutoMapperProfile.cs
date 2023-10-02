@@ -29,7 +29,10 @@ namespace G4L.UserManagement.API.Mappers
             CreateMap<PersonalInformationRequest, User>().ReverseMap();
 
             CreateMap<ApproverRequest, Approver>().ReverseMap();
-            CreateMap<ApplicantAttachementRequest, ApplicantAttachments>().ReverseMap();
+            CreateMap<CvDocumentsRequest, CvDocuments >().ReverseMap();
+            CreateMap<IdDocumentsRequest, IdDocuments >().ReverseMap();
+            CreateMap<QualificationsDocumentsRequest, QualificationsDocuments >().ReverseMap();
+            CreateMap<VaccinationDocumentsRequest, VaccinationDocuments >().ReverseMap();
             CreateMap<DocumentRequest, Document>().ReverseMap();
             CreateMap<LeaveScheduleRequest, LeaveSchedule>().ReverseMap();
 

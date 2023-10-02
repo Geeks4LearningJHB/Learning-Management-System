@@ -1,0 +1,11 @@
+.attachment-links{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color:#e9ecef;
+    border-radius: 5px;
+    height: 40px;
+    text-decoration: underline;   
+}

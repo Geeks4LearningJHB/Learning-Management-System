@@ -118,18 +118,18 @@
             </button>
            
             <!-- <button (click)="onSubmit()" class="done-btn">Done</button> -->
-            <button *ngIf="!done"
+            <button 
           (click)="onEducationBtnClick()"
         
           id="done-button"
           class="done-btn"
+          [disabled]="isDoneButtonDisabled()"
         >
           Done
         </button>
           </div>
         </div>
       </div>
-    
     </div>
   </form>
 </div>

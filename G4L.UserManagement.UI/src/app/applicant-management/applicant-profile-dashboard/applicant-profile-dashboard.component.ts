@@ -46,6 +46,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
     this.getAllApplicantions();
+    // this.getDocumentsByUserId(this.userId);
   }
 
   sendApplication(userId: string): void {
@@ -106,7 +107,6 @@ export class ApplicantProfileDashboardComponent implements OnInit {
     });
   }
 
-
   openSubmitModal(): void {
     this.modalHandler.openMdbModal<ApplicantSuccessComponent>({
       component: ApplicantSuccessComponent,
@@ -141,6 +141,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
       data: null,
       ignoreBackdropClick: true,
       width: 75,
+      
     });
   }
 
