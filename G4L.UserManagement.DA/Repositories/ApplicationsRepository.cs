@@ -66,8 +66,17 @@ namespace G4L.UserManagement.DA.Repositories
             var dataFromEducation = await _databaseContext.Educations
                 .FirstOrDefaultAsync(e => e.UserId == model.UserId);
 
-            var dataFromAttachements = await _databaseContext.ApplicantsAttachements
-                .FirstOrDefaultAsync(e => e.UserId == model.UserId);
+            var dataFromVaccinationDocuments = await _databaseContext.VaccinationDocuments
+           .FirstOrDefaultAsync(e => e.UserId == model.UserId);
+
+            var dataFromIdDocuments = await _databaseContext.IdDocuments
+           .FirstOrDefaultAsync(e => e.UserId == model.UserId);
+
+            var dataFromQualificationsDocuments = await _databaseContext.QualificationsDocuments
+           .FirstOrDefaultAsync(e => e.UserId == model.UserId);
+
+            var dataFromCvDocuments = await _databaseContext.CvDocuments
+           .FirstOrDefaultAsync(e => e.UserId == model.UserId);
 
             // Create an Applications object using the retrieved user data
             var application = new Applications
@@ -87,8 +96,15 @@ namespace G4L.UserManagement.DA.Repositories
                 Qualifications = dataFromEducation.Qualifications,
                 FieldOfStudy = dataFromEducation.FieldOfStudy,
                 CourseOfInterest = dataFromEducation.CourseOfInterest,
-                //FileName = dataFromAttachements.FileName,
-                //FilePath = dataFromAttachements.FilePath,
+                CvFileName = dataFromCvDocuments.FileName,
+                CvFilePath = dataFromCvDocuments.FilePath,
+                IdFileName = dataFromCvDocuments.FileName,
+                IdFilePath = dataFromCvDocuments.FilePath,
+                QualificationsFileName = dataFromCvDocuments.FileName,
+                QualificationsFilePath = dataFromCvDocuments.FilePath,
+                VaccinationFileName = dataFromCvDocuments.FileName,
+                VaccinationFilePath = dataFromCvDocuments.FilePath,
+            
             };
 
          

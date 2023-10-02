@@ -26,8 +26,15 @@ export interface Applicant {
   courseOfInterest:string;
   fieldOfStudy:string;
   qualifications:string;
-  fileName:string;
-  filePath:string;
+  cvFileName:string;
+  cvFilePath:string;
+  idFileName:string;
+  idFilePath:string;
+  qualificationsFileName: string;
+  qualificationsFilePath: string;
+  vaccinationFileName:string;
+  vaccinationFilePath:string;
+
 }
 @Component({
   selector: 'app-learnership-applications',
@@ -116,5 +123,4 @@ export class LearnershipApplicationsComponent implements OnInit {
     
     });
   }
-  
 }

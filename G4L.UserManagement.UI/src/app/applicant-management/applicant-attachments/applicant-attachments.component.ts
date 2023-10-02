@@ -260,7 +260,7 @@ export class ApplicantAttachmentsComponent implements OnInit {
           console.log('name:', data?.file?.name);
           if (fileUrl) {
             const userId = this.logggedInUser.id;
-            this.cvDocumentUpload(userId, fileUrl);
+            this.idDocumentUpload(userId, fileUrl);
           } else {
             console.error('Error: File URL is not available.');
           }
@@ -463,7 +463,7 @@ export class ApplicantAttachmentsComponent implements OnInit {
     
 
     // Send the data to the API using HttpClient
-    this.http.post('https://localhost:44326/CvDocuments', data).subscribe(
+    this.http.post('https://localhost:44326/api/CvDocuments', data).subscribe(
       (response: any) => {
         console.log('File metadata sent to the SQL database:', response);
         // Handle success, e.g., update UI or show a success message
@@ -485,7 +485,7 @@ export class ApplicantAttachmentsComponent implements OnInit {
     
 
     // Send the data to the API using HttpClient
-    this.http.post('https://localhost:44326/IdDocuments', data).subscribe(
+    this.http.post('https://localhost:44326/api/IdDocuments', data).subscribe(
       (response: any) => {
         console.log('File metadata sent to the SQL database:', response);
         // Handle success, e.g., update UI or show a success message
@@ -507,7 +507,7 @@ export class ApplicantAttachmentsComponent implements OnInit {
     
 
     // Send the data to the API using HttpClient
-    this.http.post('https://localhost:44326/QualificationsDocuments', data).subscribe(
+    this.http.post('https://localhost:44326/api/QualificationsDocuments', data).subscribe(
       (response: any) => {
         console.log('File metadata sent to the SQL database:', response);
         // Handle success, e.g., update UI or show a success message

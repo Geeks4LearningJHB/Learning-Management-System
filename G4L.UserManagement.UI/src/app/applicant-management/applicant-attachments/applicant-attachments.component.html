@@ -1,6 +1,9 @@
 <div class="Attachments">
   <div class="header">
-    <img class="nb3-middle-icon" src="../../../assets/images/Backlog count(3).svg" />
+    <img
+      class="nb3-middle-icon"
+      src="../../../assets/images/Backlog count(3).svg"
+    />
     <h3 class="attachments-heading">Attachments</h3>
   </div>
 
@@ -11,52 +14,61 @@
     <div class="file-upload">
       <h6>Upload your CV</h6>
       <label for="cvFileInput" class="uploadbox">
-        <input type="file" id="cvFileInput" (change)="handleFileInput($event, 'cv')" multiple />
-        <small class="text-muted">Allowed formats: JPEG, PNG, PDF. Max size: 5 MB</small><br /><br />
+        <input
+          type="file"
+          id="cvFileInput"
+          (change)="handleFileInput($event, 'cv')"
+          multiple
+        />
+        <small class="text-muted"
+          >Allowed formats: JPEG, PNG, PDF. Max size: 5 MB</small
+        ><br /><br />
       </label>
       <div id="filewrapper">
-        <h3 class="uploaded">Uploaded Files</h3>
-        <div class="showfilebox">
-          <div class="left">
-            <h3>uploaded file.pdf</h3>
-          </div>
-          <div class="right">
-            <span >&#215;</span>
-            <button class="upload" (click)="cvUploadFiles() ">Upload</button>
-          </div>
-        </div>
+        <button class="upload" (click)="cvUploadFiles()">Upload</button>
       </div>
       <!-- Error and message divs for CV section -->
       <div class="messages">
-        <div *ngIf="uploadMessages['cv']" class="message">{{ uploadMessages['cv'] }}</div>
-        <div *ngIf="sizeErrors['cv']" class="error-message">{{ sizeErrors['cv'] }}</div>
-        <div *ngIf="formatErrors['cv']" class="error-message">{{ formatErrors['cv'] }}</div>
+        <div *ngIf="uploadMessages['cv']" class="message">
+          {{ uploadMessages["cv"] }}
+        </div>
+        <div *ngIf="sizeErrors['cv']" class="error-message">
+          {{ sizeErrors["cv"] }}
+        </div>
+        <div *ngIf="formatErrors['cv']" class="error-message">
+          {{ formatErrors["cv"] }}
+        </div>
       </div>
     </div>
 
     <!-- ID Copy Upload Section -->
     <div class="file-upload3">
       <h6>Upload your ID copy</h6>
-      <label for= "idFileInput" class="uploadbox">
-        <input type="file" id="idFileInput" (change)="handleFileInput($event, 'id')" multiple />
-        <small class="text-muted">Allowed formats: JPEG, PNG, PDF. Max size: 5 MB</small><br /><br />
+      <label for="idFileInput" class="uploadbox">
+        <input
+          type="file"
+          id="idFileInput"
+          (change)="handleFileInput($event, 'id')"
+          multiple
+        />
+        <small class="text-muted"
+          >Allowed formats: JPEG, PNG, PDF. Max size: 5 MB</small
+        ><br /><br />
       </label>
       <div id="filewrapper">
-        <h3 class="uploaded">Uploaded Files</h3>
-        <div class="showfilebox">
-          <div class="left">
-            <h3>uploaded file.pdf</h3>
-            <button class="upload" (click)="idUploadFiles()  ">Upload</button>
-          </div>
-          <div class="right">
-            <span>&#215;</span>
-          </div>
-        </div>
+        <button class="upload" (click)="idUploadFiles()">Upload</button>
+
         <!-- Error and message divs for ID copy section -->
         <div class="id-messages">
-          <div *ngIf="uploadMessages['id']" class="message">{{ uploadMessages['id'] }}</div>
-          <div *ngIf="sizeErrors['id']" class="error-message">{{ sizeErrors['id'] }}</div>
-          <div *ngIf="formatErrors['id']" class="error-message">{{ formatErrors['id'] }}</div>
+          <div *ngIf="uploadMessages['id']" class="message">
+            {{ uploadMessages["id"] }}
+          </div>
+          <div *ngIf="sizeErrors['id']" class="error-message">
+            {{ sizeErrors["id"] }}
+          </div>
+          <div *ngIf="formatErrors['id']" class="error-message">
+            {{ formatErrors["id"] }}
+          </div>
         </div>
       </div>
 
@@ -65,25 +77,30 @@
     <div class="file-upload2">
       <h6>Upload your vaccination card</h6>
       <label for="vaccinationFileInput" class="uploadbox">
-        <input type="file" id="vaccinationFileInput" (change)="handleFileInput($event, 'vaccination')" multiple />
-        <small class="text-muted">Allowed formats: JPEG, PNG, PDF. Max size: 5 MB</small><br /><br />
+        <input
+          type="file"
+          id="vaccinationFileInput"
+          (change)="handleFileInput($event, 'vaccination')"
+          multiple
+        />
+        <small class="text-muted"
+          >Allowed formats: JPEG, PNG, PDF. Max size: 5 MB</small
+        ><br /><br />
       </label>
       <div id="filewrapper">
-        <h3 class="uploaded">Uploaded Files</h3>
-        <div class="showfilebox">
-          <div class="left">
-            <h3>uploaded file.pdf</h3>
-          </div>
-          <div class="right">
-            <span>&#215;</span>
-            <button class="upload" (click)="uploadFiles()">Upload</button>
-          </div>
-        </div>
+        <button class="upload" (click)="uploadFiles()">Upload</button>
+
         <!-- Error and message divs for vaccination card section -->
         <div class="vc-messages">
-          <div *ngIf="uploadMessages['vaccination']" class="message">{{ uploadMessages['vaccination'] }}</div>
-          <div *ngIf="sizeErrors['vaccination']" class="error-message">{{ sizeErrors['vaccination'] }}</div>
-          <div *ngIf="formatErrors['vaccination']" class="error-message">{{ formatErrors['vaccination'] }}</div>
+          <div *ngIf="uploadMessages['vaccination']" class="message">
+            {{ uploadMessages["vaccination"] }}
+          </div>
+          <div *ngIf="sizeErrors['vaccination']" class="error-message">
+            {{ sizeErrors["vaccination"] }}
+          </div>
+          <div *ngIf="formatErrors['vaccination']" class="error-message">
+            {{ formatErrors["vaccination"] }}
+          </div>
         </div>
       </div>
 
@@ -92,29 +109,34 @@
     <div class="file-upload4">
       <h6>Upload your qualification(Highest)</h6>
       <label for="qualificationsFileInput" class="uploadbox">
-        <input type="file" id="qualificationsFileInput" (change)="handleFileInput($event, 'qualifications')" multiple />
-        <small class="text-muted">Allowed formats: PDF. Max size: 5 MB</small><br /><br />
+        <input
+          type="file"
+          id="qualificationsFileInput"
+          (change)="handleFileInput($event, 'qualifications')"
+          multiple
+        />
+        <small class="text-muted">Allowed formats: PDF. Max size: 5 MB</small
+        ><br /><br />
       </label>
       <div id="filewrapper">
-        <h3 class="uploaded">Uploaded Files</h3>
-        <div class="showfilebox">
-          <div class="left">
-            <h3>uploaded file.pdf</h3>
-          </div>
-          <div class="right">
-            <span>&#215;</span>
-            <button class="upload" (click)="cvUploadFiles() ">Upload</button>
-          </div>
-        </div>
+        <button class="upload" (click)="qualificationsUploadFiles()">
+          Upload
+        </button>
         <!-- Error and message divs for qualifications section -->
         <div class="qualifications-messages">
-          <div *ngIf="uploadMessages['qualifications']" class="message">{{ uploadMessages['qualifications'] }}</div>
-          <div *ngIf="sizeErrors['qualifications']" class="error-message">{{ sizeErrors['qualifications'] }}</div>
-          <div *ngIf="formatErrors['qualifications']" class="error-message">{{ formatErrors['qualifications'] }}</div>
+          <div *ngIf="uploadMessages['qualifications']" class="message">
+            {{ uploadMessages["qualifications"] }}
+          </div>
+          <div *ngIf="sizeErrors['qualifications']" class="error-message">
+            {{ sizeErrors["qualifications"] }}
+          </div>
+          <div *ngIf="formatErrors['qualifications']" class="error-message">
+            {{ formatErrors["qualifications"] }}
+          </div>
         </div>
       </div>
     </div>
 
-    <button class="upload" (click)="uploadFiles()">Upload</button>
+    <button class="save-button" (click)="onSaveClick()">Close</button>
   </div>
 </div>

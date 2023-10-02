@@ -42,4 +42,5 @@ export class LearnershipApplicationModalComponent implements OnInit {
   close() {
     this.modalRef.close();
 }
+
 }

@@ -100,52 +100,29 @@
   <h3>Attachments</h3>
   <div class="row g-3 mb-3">
     <div class="col">
-      <label class="form-control-label" for="cv-attachment">CV</label>
-      <input
-        type="text"
-        id="cv-attachment"
-        class="form-control"
-        [value]="user.mathSubject"
-        disabled
-        readonly
-      />
+      <div class="attachment-links">
+        <a [href]="user.cvFilePath" target="_blank">CV</a>
+      </div>
     </div>
     <div class="col">
-      <label class="form-control-label" for="matric">Matric Certificate</label>
-      <input
-        id="matric"
-        type="text"
-        class="form-control"
-        [value]="user.mathMark"
-        disabled
-        readonly
-      />
+      <div class="attachment-links">
+        <a [href]="user.qualificationsFilePath" target="_blank">Qualificaion</a>
+      </div>
+  
+  
     </div>
   </div>
   <div class="row g-3 mb-3">
     <div class="col">
-      <label class="form-control-label" for="id-copy">Copy of Id</label>
-      <input
-        id="id-copy"
-        type="text"
-        class="form-control"
-        [value]="user.englishMark"
-        readonly
-        disabled
-      />
+      <div class="attachment-links">
+        <a [href]="user.idFilePath" target="_blank">Id Copy</a>
+      </div>
+  
     </div>
     <div class="col">
-      <label class="form-control-label" for="highest-qualifications"
-        >Highest Qualifcation</label
-      >
-      <input
-        id="highest-qualifications"
-        type="text"
-        class="form-control"
-        [value]="user.qualifications"
-        disabled
-        readonly
-      />
+      <div class="attachment-links">
+        <a [href]="user.vaccinationFilePath" target="_blank">Vaccination card</a>
+      </div>
     </div>
   </div>
 </div>
