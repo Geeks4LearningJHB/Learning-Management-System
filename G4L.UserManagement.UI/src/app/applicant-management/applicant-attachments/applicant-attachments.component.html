@@ -24,9 +24,11 @@
           >Allowed formats: JPEG, PNG, PDF. Max size: 5 MB</small
         ><br /><br />
       </label>
+
       <div id="filewrapper">
         <button class="upload" (click)="cvUploadFiles()">Upload</button>
       </div>
+
       <!-- Error and message divs for CV section -->
       <div class="messages">
         <div *ngIf="uploadMessages['cv']" class="message">
@@ -74,6 +76,7 @@
 
       <!-- Vaccination Card Upload Section -->
     </div>
+
     <div class="file-upload2">
       <h6>Upload your vaccination card</h6>
       <label for="vaccinationFileInput" class="uploadbox">
@@ -87,6 +90,7 @@
           >Allowed formats: JPEG, PNG, PDF. Max size: 5 MB</small
         ><br /><br />
       </label>
+
       <div id="filewrapper">
         <button class="upload" (click)="uploadFiles()">Upload</button>
 
@@ -118,6 +122,7 @@
         <small class="text-muted">Allowed formats: PDF. Max size: 5 MB</small
         ><br /><br />
       </label>
+
       <div id="filewrapper">
         <button class="upload" (click)="qualificationsUploadFiles()">
           Upload
@@ -137,6 +142,6 @@
       </div>
     </div>
 
-    <button class="save-button" (click)="onSaveClick()">Close</button>
   </div>
+  <button class="save-button" (click)="onSaveClick()">Save and Close</button>
 </div>

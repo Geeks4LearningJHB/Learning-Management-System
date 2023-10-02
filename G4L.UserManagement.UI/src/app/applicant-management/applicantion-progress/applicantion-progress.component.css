@@ -1,8 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-
+.container{
+  height: 48vh;
+}
+h3 {
+  background-color: #092f4f;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px;
+  width: 90%;
+  margin-left: 60px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+.accordion{
+  width: 90%;
+  margin-left: 60px;
+}
 .progress-outer{
   display: flex;
+  position: relative;
   background: #fff;
   height: 10%;
   border-radius: 50px;
@@ -20,15 +37,21 @@
   margin: 0;
   overflow: visible; 
   border-radius: 50px;
-  background: #eaedf3;
+  /* background: #eaedf3; */
   box-shadow: inset 0 10px  10px rgba(244, 245, 250,0.9);
 }
 .progress .progress-bar{
-  animation: ree progress-bar-stripes 0.40s linear infinite, animate-positive 3s;
+  animation: reverse progress-bar-stripes 0.40s linear infinite, animate-positive 3s;
+  border-radius: 50px;
+  width: 100%;
+  
+}
+
+.progress-personal {
+  animation: reverse progress-bar-stripes 0.40s linear infinite, animate-positive 3s;
   border-radius: 50px;
   width: 100%;
   background-color: #ffb800;
-  
 }
 
 .progress-bar-attachments{
@@ -38,7 +61,7 @@
   background-color: #06c818;
 }
 
-.progress-bar-education{
+.progress-bar-education {
   animation: reverse progress-bar-stripes 0.40s linear infinite, animate-positive 3s;
   border-radius: 50px;
   width: 100%;
@@ -47,8 +70,8 @@
 
 .progress .progress-value{
   position: relative;
-  left: -70px;
-  top: 4px;
+  left: 0px;
+  top: 0px;
   font-size: 14px;
   font-weight: bold;
   color: #fff;
@@ -71,6 +94,9 @@
   font-family: 'Poppins', sans-serif;
 }
 .button{
+  font-family: 'Poppins', sans-serif;
+}
+.accordion-button{
   font-family: 'Poppins', sans-serif;
 }
 .accordion-button{

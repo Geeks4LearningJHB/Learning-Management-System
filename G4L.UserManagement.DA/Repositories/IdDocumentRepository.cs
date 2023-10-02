@@ -41,6 +41,16 @@ namespace G4L.UserManagement.DA.Repositories
             _databaseContext.IdDocuments.Add(idDocument); // Change 'CvDocuments' to 'IdDocuments'
             await _databaseContext.SaveChangesAsync();
         }
+        public async Task<IdDocuments> GetIdDocumentByUserIdAsync(Guid userId)
+        {
+            return await Task.Run(() =>
+            {
+
+                return _databaseContext.Set<IdDocuments>()
+                    .FirstOrDefault(x => x.UserId == userId);
+
+            });
+        }
     }
    
 

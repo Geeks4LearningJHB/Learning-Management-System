@@ -42,5 +42,10 @@ namespace G4L.UserManagement.API.Controllers
 
             }
         }
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetIdDocument(Guid userId)
+        {
+            return Ok(await _idDocumentsService.GetIdDocumentByUserIdAsync(userId));
+        }
     }
 }

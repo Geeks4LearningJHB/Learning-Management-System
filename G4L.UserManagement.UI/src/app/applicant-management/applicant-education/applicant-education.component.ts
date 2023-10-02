@@ -50,6 +50,7 @@ export class ApplicantEducationComponent implements OnInit {
   serverErrorMessage: any;
   buttonClicked = false;
   done: boolean = false;
+  dataSubmitted: boolean = false;
 
   constructor(
     private route: Router,
@@ -137,58 +138,89 @@ export class ApplicantEducationComponent implements OnInit {
     return false;
   }
 
-  onEducationBtnClick(): void {
-    console.log(this.done);
-    
-    if (!this.hasFormValues(this.educationForm.value)) {
-      alert('Please fill in the education form before submitting.');
-      
-      return;
-    }
+  onEducationBtnClick(): void  {
+    if (this.educationForm.valid) {
+      const formData = this.educationForm.value;
 
-    
-    // if (this.buttonClicked) {
-    //   alert('Button has already been clicked.');
-    //   return;
-    // }
+      // Assuming there is only a POST API call
+      this.applicantService.onSubmit(formData).subscribe(
+        (response: any) => {
+          console.log('POST request successful:', response);
+          this.modalRef.close();
 
-  
-    // this.buttonClicked = true;
-
-    this.applicantService.onSubmit(this.educationForm.value).subscribe(
-      (response: any) => {
-        console.log("POST request successful:", response);
-        if (!this.serverErrorMessage) {
-          //this.modalRef.close();
-          this.done =  true;
+          // Reset the form after successful submission
+          this.educationForm.reset();
+          this.dataSubmitted = true; // Set the flag to true after successful submission
+        },
+        (error: any) => {
+          console.error('Error posting data:', error);
+          this.modalRef.close();
         }
-      },
-      (error) => {
-        console.log(error);
-        alert('Once filled, use Update and Close button for making changes');
-        this.buttonClicked = true;  // Reset the button status on error
-      }
-    );
+      );
+    } else {
+      // Form is invalid, display an alert to the user
+      alert('Please fill in all fields.');
+    }
   }
-  
+
+  isDoneButtonDisabled(): boolean {
+    return this.dataSubmitted;  // Disable the "Done" button if data is successfully submitted
+  }
+    
+
+  //   console.log(this.done);
+
+  //   if (this.hasFormValues(this.educationForm.value)) {
+  //     this.applicantService
+  //       .checkDataExistence(this.educationForm.value)
+  //       .subscribe(
+  //         (dataExists: boolean) => {
+  //           if (dataExists) {
+  //             this.applicantService
+  //               .onEducationUpdate(this.educationForm.value)
+  //               .subscribe(
+  //                 (response: any) => {
+  //                   console.log('PUT request successful:', response);
+  //                   if (!this.serverErrorMessage) {
+  //                     this.modalRef.close();
+  //                   }
+  //                 },
+  //                 (error: any) => {
+  //                   console.error(
+  //                     'Error checking data existence:',
+  //                     error
+  //                   );
+                    
+  //                   this.modalRef.close();
+  //                 }
+  //               );
+  //           }
+  //         },
+  //         (error: any) => {
+  //           console.error('Error checking data existence:', error);
+         
+  //           this.modalRef.close();
+  //         }
+  //       );
+  //   }
+  // }
 
   onUpdate(): void {
-    // Form has data, indicating an update
-    this.applicantService.onEducationUpdate(this.educationForm.value).subscribe(
-      (response: any) => {
-        console.log("PUT request successful:", response);
-        if (!this.serverErrorMessage) {
-          this.modalRef.close();
-          
+    this.applicantService
+      .onEducationUpdate(this.educationForm.value)
+      .subscribe(
+        (response: any) => {
+          console.log('PUT request successful:', response);
+          if (!this.serverErrorMessage) {
+            this.modalRef.close();
+          }
+        },
+        (error: any) => {
+          alert('Cannot update education form information if it was initially empty.');
+            this.modalRef.close();
         }
-      },
-      (error: any) => {
-        console.log(error);
-        // this.serverErrorHandling(error);
-        alert('Cannot update education form information if it was initially empty.');
-      }
-    );
-}
+      );
+  }
 
   onSaveAndCloseClick(): void {
     this.modalRef.close();
