@@ -40,7 +40,7 @@ namespace G4L.UserManagement.DA.Repositories
 
             var cvDocument = _mapper.Map<CvDocuments>(model);
 
-            _databaseContext.CvDocuments.Add(cvDocument); // Change 'Educations' to 'CvDocuments'
+            _databaseContext.CvDocuments.Add(cvDocument); 
             await _databaseContext.SaveChangesAsync();
         }
         public async Task<CvDocuments> GetCvDocumentByUserIdAsync(Guid userId)
