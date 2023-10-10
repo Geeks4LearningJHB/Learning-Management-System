@@ -30,5 +30,6 @@ namespace G4L.UserManagement.BL.Models
         public DateTime LearnershipStartDate { get; set; }
         [Required]
         public string Password { get; set; }
+     
     }
 }

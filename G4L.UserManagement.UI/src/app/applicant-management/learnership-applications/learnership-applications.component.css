@@ -4,4 +4,17 @@
   .active-button {
     display: none;
   }
+.filterByDate{
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.form-group{
+  padding-top: 10px;
+}
+#dateRange{margin-left: 10px;}
+#endDate{
+  margin-left: 76px;
+}
   

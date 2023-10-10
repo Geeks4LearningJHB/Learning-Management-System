@@ -1,14 +1,22 @@
 ﻿using G4L.UserManagement.API.Authorization;
+using G4L.UserManagement.BL.Entities;
 using G4L.UserManagement.BL.Enum;
 using G4L.UserManagement.BL.Interfaces;
 using G4L.UserManagement.BL.Models;
 using G4L.UserManagement.BL.Models.Request;
 using G4L.UserManagement.BL.Models.Response;
 using G4L.UserManagement.DA;
+using G4L.UserManagement.Infrustructure.Repositories;
+using G4L.UserManagement.Infrustructure.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Nest;
 using System;
 using System.Threading.Tasks;
+using AuthenticateRequest = G4L.UserManagement.BL.Models.Request.AuthenticateRequest;
 
 namespace G4L.UserManagement.API.Controllers
 {
@@ -17,13 +25,17 @@ namespace G4L.UserManagement.API.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
+        private readonly SignInManager<User> _signInManager;
+        private readonly IUserRepository _userRepository;
+        private ILogger<UserController> _logger;
         private readonly IUserService _userService;
 
-        public UserController(ILogger<UserController> logger, IUserService userService)
+        public UserController(ILogger<UserController> logger, IUserService userService, SignInManager<User> signInManager, IUserRepository userRepository)
         {
             _logger = logger;
             _userService = userService;
+            _signInManager = signInManager;
+            _userRepository = userRepository;
         }
 
         [AllowAnonymous]
@@ -64,6 +76,53 @@ namespace G4L.UserManagement.API.Controllers
         {
             await _userService.UpdateUserAsync(user);
             return Ok();
+        }
+        [AllowAnonymous]
+        [HttpGet("GoogleLogin")]
+        public IActionResult GoogleLogin()
+        {
+            var authenticationProperties = new AuthenticationProperties
+            {
+                RedirectUri = Url.Action("GoogleLoginCallback")
+            };
+
+            return Challenge(authenticationProperties, GoogleDefaults.AuthenticationScheme);
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet("GoogleLoginCallback")]
+        public async Task<IActionResult> GoogleLoginCallback()
+        {
+            var externalLoginInfo = await _signInManager.GetExternalLoginInfoAsync();
+            if (externalLoginInfo == null)
+            {
+                // Handle error
+                return BadRequest("User Not Found");
+
+            }
+
+            var user = await _userRepository.GetUserByGoogleProviderKeyAsync(externalLoginInfo.ProviderKey);
+
+            if (user == null)
+            {
+                // No user found, handle as needed
+                return BadRequest("User Not Found");
+            }
+
+            // User exists, perform login or additional logic
+            // For example, you can sign in the user with Identity Framework
+            var result = await _signInManager.ExternalLoginSignInAsync(externalLoginInfo.LoginProvider, externalLoginInfo.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+
+            if (result.Succeeded)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                // Handle login failure
+                return BadRequest("User Not Found");
+            }
         }
 
         [Authorize(Role.Super_Admin, Role.Admin)]
@@ -122,5 +181,6 @@ namespace G4L.UserManagement.API.Controllers
             return Ok(user);
          
         }
+     
     }
 }

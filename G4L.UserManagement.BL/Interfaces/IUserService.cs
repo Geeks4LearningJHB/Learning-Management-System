@@ -15,6 +15,7 @@ namespace G4L.UserManagement.BL.Interfaces
     {
         Task RegisterUserAsync(UserRequest user);
         Task<AuthenticateResponse> AuthenticateUserAsync(AuthenticateRequest model);
+        Task<User> GetUserByGoogleProviderKeyAsync(string providerKey);
         Task SignupUserAsync(AddUserRequest user);
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> GetUserByIdAsync(Guid id);
@@ -23,15 +24,9 @@ namespace G4L.UserManagement.BL.Interfaces
         Task<User> GetUserAsync(string email);
         Task<IEnumerable<User>> GetPagedUsersAsync(int skip, int take);
         Task<IEnumerable<User>> GetUsersByRoleAsync(Role role);
-
-        Task GetUserByEmailAsync(string to);
-
-
-   
-
+      
         Task UpdatePersonalInformationAsync(PersonalInformationRequest model);
         Task GetPersonalAsync(Guid id);
-       
-
+  
     }
 }

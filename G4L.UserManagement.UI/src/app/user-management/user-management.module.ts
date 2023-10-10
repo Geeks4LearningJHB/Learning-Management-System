@@ -7,6 +7,8 @@ import { MaterialModule } from '../shared/material/material.module';
 import { PipesModule } from '../shared/pipes/pipes.module';
 import { EnrolComponent } from './enrol/enrol.component';
 import { FooterComponent } from './login/footer/footer.component';
+
+
 import { IconsComponent } from './login/icons/icons.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';

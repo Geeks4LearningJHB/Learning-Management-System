@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdbModalModule } from 'mdb-angular-ui-kit/modal';
 import { MaterialModule } from '../shared/material/material.module';
 import { PipesModule } from '../shared/pipes/pipes.module';
@@ -15,6 +15,8 @@ import { PersonalInformationComponent } from './personal-information/personal-in
 import { ApplicantEducationComponent } from './applicant-education/applicant-education.component';
 import { LearnershipApplicationsComponent } from './learnership-applications/learnership-applications.component';
 import { LearnershipApplicationModalComponent } from './learnership-applications/learnership-application-modal/learnership-application-modal.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -32,13 +34,18 @@ import { LearnershipApplicationModalComponent } from './learnership-applications
     
   ],
   imports: [
+    BrowserModule,
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
     MdbModalModule,
     PipesModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    NgbModule,
+   
+   
    
   ],
 })
