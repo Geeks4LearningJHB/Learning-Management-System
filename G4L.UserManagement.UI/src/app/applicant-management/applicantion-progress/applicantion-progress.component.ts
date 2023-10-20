@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicantService } from '../services/applicantService';
-import { any } from 'ramda';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 
 @Component({
@@ -10,165 +9,88 @@ import { TokenService } from 'src/app/user-management/login/services/token.servi
 })
 export class ApplicantionProgressComponent implements OnInit {
   profileProgress: number = 0;
-  educationProgress: number = 0; // Initialize progress to 0
-  userId = any;
+  educationProgress: number = 0;
+  overallProgress: number = 0;
+  userId: number | undefined;
 
-  constructor(private applicantService: ApplicantService,  private tokenService: TokenService) {}
+  constructor(
+    private applicantService: ApplicantService,
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit(): void {
-    let user = this.tokenService.getDecodeToken();
-    this.userId = user.id;
-    this.getApplicantEducation(this.userId);
-    this.onPersonalDetailsSubmit(this.userId)
+    this.userId = this.tokenService.getDecodeToken().id;
+    this.calculateProfileProgress();
+    this.calculateEducationProgress();
+    this.calculateAttachmentProgress();
   }
-//personal information
-onPersonalDetailsSubmit(userId: any) {
-  this.applicantService.onPersonalDetailsSubmit(userId).subscribe(
-    (data: any) => {
-      const totalFieldCount = 7;
-    
 
-      // Log the entire data object received from the service
-      console.log("Received data:", data);
+  private calculateProgress(data: any, fieldsToCheck: string[], totalFieldCount: number): number {
+    const filledFieldCount = fieldsToCheck.reduce((count, field) => (data[field] !== undefined && data[field] !== null ? count + 1 : count), 0);
+    const progress = (filledFieldCount / totalFieldCount) * 100;
+  
+    console.log("Fields with data:", fieldsToCheck.filter(field => data[field] !== undefined && data[field] !== null));
+    console.log("Progress:", progress);
+  
+    return progress;
+  }
 
-      // Replace 'NULL' and null with undefined and normalize field names to lowercase
-      const normalizedData = {};
-      for (const key in data) {
-        const lowercaseKey = key.toLowerCase();
-        if (data[key] === 'NULL' || data[key] === null) {
-          data[lowercaseKey] = undefined;
-        } else {
-          data[lowercaseKey] = data[key];
-        }
-      }
+  calculateProfileProgress(): void {
+    this.applicantService.onPersonalDetailsSubmit(this.userId).subscribe((data: any) => {
+      const fieldsToCheck = ["name", "surname", "email", "phone", "race", "gender", "idNumber"];
+      this.profileProgress = this.calculateProgress(data, fieldsToCheck, 7);
+    });
+  }
 
-      // Log the values of each field after replacement
-      console.log("Name:", data.name);
-      console.log("Surname:", data.surname);
-      console.log("Email:", data.email);
-      console.log("Phone:", data.phone);
-      console.log("Race:", data.race);
-      console.log("IdNumber:", data.idnumber);
-      console.log("Gender:", data.gender);
-      const fieldsWithData = [];
+  calculateEducationProgress(): void {
+    this.applicantService.getEducationByUserId(this.userId).subscribe((data: any) => {
+      const fieldsToCheck = ["qualifications", "mathSubject", "mathMark", "englishMark", "fieldOfStudy", "courseOfInterest"];
+      this.educationProgress = this.calculateProgress(data, fieldsToCheck, 6);
+    });
+  }
 
-      // Check and log fields with data
-      if (data.name !== undefined) {
-        fieldsWithData.push("Name");
+  calculateAttachmentProgress(): void {
+    let filePathCount = 0; 
+  
+    this.applicantService.getIdDocumentsByUserId(this.userId).subscribe((idData: any) => {
+      if (idData.filePath) {
+        filePathCount++;
+        console.log(idData)
       }
-      if (data.surname !== undefined) {
-        fieldsWithData.push("Surname");
+    });
+  
+    this.applicantService.getCvDocumentsByUserId(this.userId).subscribe((cvData: any) => {
+      if (cvData.filePath) {
+        filePathCount++;
+        console.log(cvData)
       }
-      if (data.email !== undefined) {
-        fieldsWithData.push("Email");
+    });
+  
+    this.applicantService.getVaccinationDocumentsByUserId(this.userId).subscribe((vaccinationData: any) => {
+      if (vaccinationData.filePath) {
+        filePathCount++;
+        console.log(vaccinationData)
       }
-      if (data.phone !== undefined) {
-        fieldsWithData.push("Phone");
+    });
+  
+    this.applicantService.getQualificationDocumentsByUserId(this.userId).subscribe((qualificationData: any) => {
+      if (qualificationData.filePath) {
+        filePathCount++;
+        console.log(qualificationData)
       }
-      if (data.race !== undefined) {
-        fieldsWithData.push("Race");
-      }
-      if (data.gender !== undefined) {
-        fieldsWithData.push("Gender");
-      }
-      if (data.idNumber !== undefined) {
-        fieldsWithData.push("IdNumber");
-      
-      }
-      // Calculate the profile progress based on fields with data
-      const filledFieldCount = fieldsWithData.length;
-      const emptyFieldCount = totalFieldCount - filledFieldCount;
-      this.profileProgress = (filledFieldCount / totalFieldCount) * 100;
-
-      // Log fields with data, profile progress, and whether all required fields are filled
-      console.log("Fields with data:", fieldsWithData);
-      console.log("Profile Progress:", this.profileProgress);
-
-      if (filledFieldCount === totalFieldCount) {
-        console.log("All fields are filled");
-        this.applicantService.setProfileCompleted(true);
+  
+      // Calculate the overallProgress based on filePathCount
+      if (filePathCount === 0) {
+        this.overallProgress = 0;
+      } else if (filePathCount === 1) {
+        this.overallProgress = 25;
+      } else if (filePathCount === 2) {
+        this.overallProgress = 50;
+      } else if (filePathCount === 3) {
+        this.overallProgress = 75;
       } else {
-        console.log("Not all fields are filled");
-        console.log("Empty Field Count:", emptyFieldCount);
-        this.applicantService.setProfileCompleted(false);
+        this.overallProgress = 100;
       }
-    }
-  );
-}
-
-
-  //education progress
-      getApplicantEducation(userId: any) {
-      this.applicantService.getEducationByUserId(userId).subscribe(
-      (data: any) => {
-        const totalFieldCount = 6;
-      
-        
-        // Log the entire data object received from the service
-        console.log("Received data:", data);
-  
-        // Replace 'NULL' and null with undefined and normalize field names to lowercase
-        const normalizedData = {};
-        for (const key in data) {
-          const lowercaseKey = key.toLowerCase();
-          if (data[key] === 'NULL' || data[key] === null) {
-            data[lowercaseKey] = undefined;
-          } else {
-            data[lowercaseKey] = data[key];
-          }
-        }
-  
-        // Log the values of each field after replacement
-        console.log("MathSubject:", data.mathsubject);
-        console.log("MathMark:", data.mathmark);
-        console.log("EnglishMark:", data.englishmark);
-        console.log("Qualifications:", data.qualifications);
-        console.log("FieldOfStudy:", data.fieldofstudy);
-        console.log("CourseOfInterest:", data.courseofinterest);
-  
-        // Create an array to hold the names of fields with data
-        const fieldsWithData = [];
-  
-        // Check and log fields with data
-        if (data.mathsubject !== undefined) {
-          fieldsWithData.push("MathSubject");
-        }
-        if (data.mathmark !== undefined) {
-          fieldsWithData.push("MathMark");
-        }
-        if (data.englishmark !== undefined) {
-          fieldsWithData.push("EnglishMark");
-        }
-        if (data.qualifications !== undefined) {
-          fieldsWithData.push("Qualifications");
-        }
-        if (data.fieldofstudy !== undefined) {
-          fieldsWithData.push("FieldOfStudy");
-        }
-        if (data.courseofinterest !== undefined) {
-          fieldsWithData.push("CourseOfInterest");
-        }
-  
-        // Calculate the education progress based on fields with data
-        const filledFieldCount = fieldsWithData.length;
-        const emptyFieldCount = totalFieldCount - filledFieldCount;
-        this.educationProgress = (filledFieldCount / totalFieldCount) * 100;
-  
-        // Log fields with data, education progress, and whether all required fields are filled
-        console.log("Fields with data:", fieldsWithData);
-        console.log("Education Progress:", this.educationProgress);
-  
-        if (filledFieldCount === totalFieldCount) {
-          console.log("All fields are filled");
-          this.applicantService.setEducationCompleted(true);
-        } else {
-          console.log("Not all fields are filled");
-          console.log("Empty Field Count:", emptyFieldCount);
-          this.applicantService.setEducationCompleted(false);
-        }
-      }
-    );
+    });
   }
-  
- 
-}
+}  

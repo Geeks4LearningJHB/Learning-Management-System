@@ -168,43 +168,6 @@ export class ApplicantEducationComponent implements OnInit {
   }
     
 
-  //   console.log(this.done);
-
-  //   if (this.hasFormValues(this.educationForm.value)) {
-  //     this.applicantService
-  //       .checkDataExistence(this.educationForm.value)
-  //       .subscribe(
-  //         (dataExists: boolean) => {
-  //           if (dataExists) {
-  //             this.applicantService
-  //               .onEducationUpdate(this.educationForm.value)
-  //               .subscribe(
-  //                 (response: any) => {
-  //                   console.log('PUT request successful:', response);
-  //                   if (!this.serverErrorMessage) {
-  //                     this.modalRef.close();
-  //                   }
-  //                 },
-  //                 (error: any) => {
-  //                   console.error(
-  //                     'Error checking data existence:',
-  //                     error
-  //                   );
-                    
-  //                   this.modalRef.close();
-  //                 }
-  //               );
-  //           }
-  //         },
-  //         (error: any) => {
-  //           console.error('Error checking data existence:', error);
-         
-  //           this.modalRef.close();
-  //         }
-  //       );
-  //   }
-  // }
-
   onUpdate(): void {
     this.applicantService
       .onEducationUpdate(this.educationForm.value)

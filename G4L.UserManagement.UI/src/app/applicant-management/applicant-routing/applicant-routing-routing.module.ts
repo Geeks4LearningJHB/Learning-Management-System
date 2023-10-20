@@ -7,6 +7,7 @@ import { ApplicantSuccessComponent } from '../applicant-success/applicant-succes
 import { ApplicantionProgressComponent } from '../applicantion-progress/applicantion-progress.component';
 import { PersonalInformationComponent } from '../personal-information/personal-information.component';
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
+import { ApplicantDashboardComponent } from 'src/app/dashboard/views/applicant-dashboard/applicant-dashboard.component';
 
 const routes: Routes = [ {
   path: '',
@@ -17,7 +18,9 @@ const routes: Routes = [ {
     {path: 'applicant-success', component:ApplicantSuccessComponent},
     {path: 'application-progress', component:ApplicantionProgressComponent},
   
-    {path: 'applicant-education', component:ApplicantEducationComponent}
+    {path: 'applicant-education', component:ApplicantEducationComponent},
+    {path: 'applicant-dashboard', component:ApplicantDashboardComponent },
+
   ],
 },];
 

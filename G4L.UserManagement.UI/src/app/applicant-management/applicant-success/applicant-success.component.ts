@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 import { ApplicantService } from '../services/applicantService';
@@ -26,7 +27,8 @@ export class ApplicantSuccessComponent implements OnInit {
   };
 
   userId: any;
-  constructor(private applicantService: ApplicantService,private tokenService: TokenService, public modalRef: MdbModalRef<any>) { }
+  
+  constructor(private applicantService: ApplicantService, private router: Router,private tokenService: TokenService, public modalRef: MdbModalRef<any>) { }
 
   ngOnInit(): void {
     let user: any = this.tokenService.getDecodeToken();
@@ -46,7 +48,7 @@ export class ApplicantSuccessComponent implements OnInit {
   onDoneClick(): void {
     // Close the modal when "Done" button is clicked
     this.modalRef.close();
-  this.reloadPage();
+  this.router.navigate(['/dashboard']);
 }
 
 reloadPage(): void {

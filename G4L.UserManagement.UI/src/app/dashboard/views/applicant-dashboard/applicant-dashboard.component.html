@@ -1,4 +1,4 @@
-<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" *ngIf="!showSecondDashboard">
     <div class="carousel-indicators">
       <button
         type="button"
@@ -130,4 +130,133 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  
+
+
+<div id="hero-carousel" class="carousel slide2" data-bs-ride="carousel2" *ngIf="showSecondDashboard" >
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true"
+      aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
+
+  <div class="carousel-inner">
+    <h1 class="journey">Hello, {{applicants.name}}  {{applicants.surname}} </h1>
+    <div class="carousel-item active c-item">
+      <img src="../../../../assets/images/Picture.png" class="d-block w-100 c-img" alt="Slide 1" />
+      <div class="carousel-caption top-0 mt-4">
+        <p class="mt-5 fs-3">
+        <h2>Welcome to your journey to excellence!</h2>
+        <p>Congratulations on taking the first step towards unlocking your full potential.
+          At Geeks4Learning, we believe that learning is a lifelong journey,
+          and your decision to apply for our learnership program is a testament to your
+          commitment to growth and success.</p>
+
+        <img class="styled-image" src="../../../../assets/assets/images/g4l-round.svg" />
+      </div>
+    </div>
+
+    <div class="carousel-item c-item">
+      <img src="../../../../assets/images/gf.png" class="d-block w-100 c-img" alt="Slide 2" />
+      <div class="carousel-caption top-0 mt-4 my-4">
+        <p class=" fs-3 mt-5">
+          
+          <u>Student Testimonials</u>
+          
+        </p>
+        <p class=" fs-3 mt-2">
+        <p> Geeks4Learning offers a great self-study programme. It is easy to follow and all trainers and staff are
+          professional, helpful, kind, and friendly. It is also good having all the coders sitting around you if you
+          need any advice or help. The programme has boosted my confidence when I talk about and write in code. - <span
+            style="color: rgb(146, 233, 89);"> Kyle Harricharan</span></p>
+            <!-- <i class="fa-solid fa-quote-right fa-xl" style="color: #ffffff;"></i> -->
+        <p>Through Geeks4Learning I was able to learn some of the things that would be of great use as I pursue my
+          career. The learning material is so profound and even makes content easier to grasp. - <span
+            style="color: rgb(12, 175, 180);">Papi Mokoena</span></p>
+
+
+      </div>
+    </div>
+    <div class="carousel-item c-item">
+      <img src="../../../../assets/images/gf.png" class="d-block w-100 c-img" alt="Slide 2" />
+      <div class="carousel-caption top-0 mt-4 my-4">
+        <p class="mt-5 fs-3">
+          <u>About Us</u>
+        </p>
+        <p>Geeks4Learning is an accredited IT training academy with a mission to develop the next generation of top IT
+          talent.
+
+          We offer learners a range of certifications, courses and qualifications based on the latest global skillsets
+          and
+          programmes.
+
+          We also partner with South African companies to ensure that their skills development spend is put towards
+          impactful skills programmes that will produce quality IT professionals who are ready to add value to the
+          workplace.</p>
+
+
+
+        <div class="view-more">
+         <a href="https://geeks4learning.com/about-us/">View more</a>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="carousel-item c-item">
+      <img src="../../../../assets/images/gf.png" class="d-block w-100 c-img" alt="Slide 4" />
+      <div class="carousel-caption">
+        <p class="fs-3">
+          <u>Contact Us</u>
+        </p>
+        <p >
+          <i class="fa-solid fa-location-dot fa-2xl" style="color: #ffffff;"></i>
+        <p class="Location" >
+          <p>(Johannesburg) 10, Tuscany Office Park, 6 Coombe Place, Rivonia, Sandton,</p>
+        
+        <p> (Cape Town) 5th Floor,
+
+          Boulevard Place,
+
+          Heron Cresent,
+
+          Century City,</p>
+          <i class="fa-regular fa-envelope fa-2xl" style="color: #ffffff;"></i>
+        <p class=" enquiries">enquiries@geeks4learning.com</p>
+        <i class="fa-solid fa-phone fa-2xl" style="color: #ffffff;"></i>
+        <p class="phone">011 998 1960</p>
+
+        <div class="Socials">
+
+          <a href="https://twitter.com/geeks4learning/">
+            <i class="fa-brands fa-x-twitter" style="color: #FFFFFF;"></i>
+
+          </a>
+          <a href="https://facebook.com/geeks4learning/">
+            <i class="fa-brands fa-facebook" style="color: #ffffff;"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/geeks4learning/">
+            <i class="fa-brands fa-linkedin" style="color: #ffffff;"></i>
+          </a>
+          <a href="https://www.instagram.com/geeks4learning/">
+            <i class="fa-brands fa-instagram" style="color: #ffffff;"></i>
+          </a>
+          <a href="https://www.youtube.com/channel/UCTmdgeOYTwYQ4uSVLlApYxQ">
+            <i class="fa-brands fa-youtube" style="color: #ffffff;"></i>
+          </a>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

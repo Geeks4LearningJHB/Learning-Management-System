@@ -9,6 +9,27 @@ import { APP_SERVICE_CONFIG } from 'src/app/shared/app-config/app-config.service
   providedIn: 'root',
 })
 export class ApplicantService {
+  getPersonalDetails(userId: any) {
+    throw new Error('Method not implemented.');
+  }
+  getTableDataByUserId(userId: { <T>(fn: (a: T) => boolean, list: readonly T[]): boolean; <T>(fn: (a: T) => boolean): (list: readonly T[]) => boolean; }, tableName: string) {
+    throw new Error('Method not implemented.');
+  }
+  setAllDocumentsCompleted(arg0: boolean) {
+    throw new Error('Method not implemented.');
+  }
+  setQualificationDocumentCompleted(arg0: boolean) {
+    throw new Error('Method not implemented.');
+  }
+  setVaccinationDocumentCompleted(arg0: boolean) {
+    throw new Error('Method not implemented.');
+  }
+  setCvDocumentCompleted(arg0: boolean) {
+    throw new Error('Method not implemented.');
+  }
+  setIdDocumentCompleted(arg0: boolean) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     private http: HttpClient,
 
