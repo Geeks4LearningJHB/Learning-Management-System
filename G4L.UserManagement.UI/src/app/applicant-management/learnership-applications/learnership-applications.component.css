@@ -1,5 +1,5 @@
 .increase-font-size {
-    font-size: 16px; /* Adjust the value to increase or decrease the font size */
+    font-size: 16px; 
   }
   .active-button {
     display: none;
@@ -17,4 +17,29 @@
 #endDate{
   margin-left: 76px;
 }
-  
+.mat-paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+.filters{
+  display: flex;
+  flex-direction: row;
+   justify-content: space-between; 
+}
+.select-filter{
+  display: flex;
+  flex-direction: column;
+  margin: 22px 0 0 20px;
+}
+.filter-btn {
+  display: block;
+  margin: 10px auto;
+  border-radius: 5px;
+  width: 200px;
+  background-color: #092f4f;
+  color: #ffffff;
+  text-align: center;
+}

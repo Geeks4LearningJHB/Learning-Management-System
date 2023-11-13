@@ -10,12 +10,10 @@ import { UserService } from 'src/app/user-management/services/user.service';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
 import { ServerErrorCodes } from 'src/app/shared/global/server-error-codes';
 
-
 export interface Applicant {
   userId: string;
 
 }
-
 @Component({
   selector: 'app-applicant-profile-dashboard',
   templateUrl: './applicant-profile-dashboard.component.html',
@@ -26,7 +24,8 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   userId: any;
 
   serverErrorMessage: string = '';
-  applicants: Applicant[] = [];
+  applicants: Applicant = { userId: '' };
+
 
   showMessage!: boolean;
   isLocked: boolean = true;
@@ -45,7 +44,7 @@ export class ApplicantProfileDashboardComponent implements OnInit {
 
     let user: any = this.tokenService.getDecodeToken();
     this.userId = user.id;
-    this.getAllApplicantions();
+    this.getApplication(this.userId);
     // this.getDocumentsByUserId(this.userId);
   }
 
@@ -64,13 +63,12 @@ export class ApplicantProfileDashboardComponent implements OnInit {
   }
 
   shouldDisableButton(): boolean {
-    const isUserIdPresent = this.applicants.some(applicant => applicant.userId === this.userId);
+    const isUserIdPresent = this.applicants.userId === this.userId;
     return isUserIdPresent;
   }
-
-
-  getAllApplicantions() {
-    this.applicantService.getAllApplicantions().subscribe(
+  
+  getApplication(userId: any) {
+    this.applicantService.getApplication(this.userId).subscribe(
       (result) => {
         this.applicants = result;
         console.log(this.applicants)

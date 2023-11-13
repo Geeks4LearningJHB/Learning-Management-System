@@ -4,10 +4,11 @@ import { constants } from 'src/app/shared/global/global.constants';
 import { ApplicantEducationComponent } from '../applicant-education/applicant-education.component';
 import { GoalModalHandlerService } from 'src/app/goal-management/services/modals/goal-modal-handler.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
+
 import { LearnershipApplicationModalComponent } from './learnership-application-modal/learnership-application-modal.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { PageEvent } from '@angular/material/paginator';
 
 
 export interface Applicant {
@@ -36,6 +37,7 @@ export interface Applicant {
   vaccinationFileName: string;
   vaccinationFilePath: string;
   createdDate: string;
+ 
 }
 @Component({
   selector: 'app-learnership-applications',
@@ -44,14 +46,14 @@ export interface Applicant {
 })
 export class LearnershipApplicationsComponent implements OnInit {
   applicants: Applicant[] = [];
-
-  filteredApplicants: Applicant[] = [];
-  endDate!: string;
-  startDate!: string;
-  showFilter: string = ''; // Variable to track which filter to show ('date' or 'stream')
-  courseFilterForm!: FormGroup;
-  activeButton: string = 'personal';
-  hasApplied: boolean = false;
+  filteredApplicants: Applicant[] = []; 
+  page = 1;
+  pageSize = 10;
+  totalPages!: number;
+  searchQuery: string = '';
+  startDate: Date | null = null;
+  endDate: Date | null = null;
+  filterForm!: FormGroup;
   modalDialog: MdbModalRef<LearnershipApplicationModalComponent> | null = null;
 
 
@@ -62,64 +64,97 @@ export class LearnershipApplicationsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private modalService: MdbModalService,
     private modalHandler: GoalModalHandlerService<any>
-  ) {
-    this.courseFilterForm = this.formBuilder.group({
-      courseOfInterest: ['all'], // Initialize the form control with a default value
-    });
+  ) {this.filterForm = this.formBuilder.group({
+    courseOfInterest: [''],
+    searchQuery: [''],
+    startDate: [null],
+  endDate: [null], 
+  });
 
-    this.courseFilterForm
-      .get('courseOfInterest')
-      ?.valueChanges.subscribe((value) => {
-        this.filterByStream(value);
-      });
   }
 
   ngOnInit(): void {
-    this.getAllApplicantions();
-    this.showFilter = 'date'; 
-    this.filterByDate(); 
+    this.getList();
+  
   }
-
-  getAllApplicantions() {
-    this.applicantService.getAllApplicantions().subscribe(
+  
+  getList() {
+    const filters = this.filterForm.value;
+    this.applicantService.getList(
+      this.page,
+      this.pageSize,
+      filters.courseOfInterest,
+      filters.searchQuery,
+      filters.startDate,
+      filters.endDate
+    ).subscribe(
       (result) => {
         this.applicants = result;
-        this.filterByStream('all');
-        this.filterByDate();
-        console.log(result);
+        this.totalPages = Math.ceil(result.length / this.pageSize); // Use total count from backend
+        this.filteredApplicants = [...result];
+        console.log(this.filteredApplicants);
       },
       (error) => {
         console.error('Error fetching data:', error);
       }
     );
   }
-  toggleFilter(event: Event) {
-    const selectedValue = (event.target as HTMLSelectElement).value;
-    this.showFilter = selectedValue;
-}
-  filterByDate() {
-    if (this.startDate && this.endDate) {
-      const startDate = new Date(this.startDate);
-      const endDate = new Date(this.endDate);
   
-      this.filteredApplicants = this.applicants.filter((applicant) => {
-        const applicationDate = new Date(applicant.createdDate);
-        return applicationDate >= startDate && applicationDate <= endDate;
-      });
+  
+ 
+
+  nextPage() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.getList();
     }
   }
   
-
-  filterByStream(stream: string) {
-    if (stream === 'all') {
-      this.filteredApplicants = [...this.applicants];
-    } else {
-      this.filteredApplicants = this.applicants.filter(
-        (applicant) => applicant.courseOfInterest === stream
+  previousPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.getList();
+    }
+  }
+  onPageChange(event: PageEvent) {
+    console.log('Page change event:', event);
+    this.page = event.pageIndex + 1; 
+    this.pageSize = event.pageSize;
+    console.log('New page:', this.page, 'New page size:', this.pageSize);
+    this.getList();
+  }
+  applyFilters() {
+    const filters = this.filterForm.value;
+  
+    this.startDate = filters.startDate; 
+    this.endDate = filters.endDate;    
+    console.log('Start Date:', this.startDate); 
+    console.log('End Date:', this.endDate);    
+   
+    this.filteredApplicants = this.applicants.filter((applicant) => {
+     
+     
+      return (
+        (filters.courseOfInterest
+          ? applicant.courseOfInterest.includes(filters.courseOfInterest)
+          : true) &&
+        (filters.searchQuery
+          ? applicant.name.includes(filters.searchQuery) ||
+            applicant.surname.includes(filters.searchQuery) ||
+            applicant.email.includes(filters.searchQuery) ||
+            applicant.phone.toString().includes(filters.searchQuery)
+          : true) &&
+        (filters.startDate
+          ? new Date(applicant.createdDate) >= new Date(filters.startDate)
+          : true) &&
+        (filters.endDate
+          ? new Date(applicant.createdDate) <= new Date(filters.endDate)
+          : true)
       );
-    }
+    });
   }
-
+  
+ 
   openEducationModal(): void {
     this.modalHandler.openMdbModal<ApplicantEducationComponent>({
       component: ApplicantEducationComponent,

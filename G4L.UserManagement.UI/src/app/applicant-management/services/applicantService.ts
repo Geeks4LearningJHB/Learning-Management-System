@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Console, error } from 'console';
 import { Observable } from 'rxjs';
 import { AppConfig } from 'src/app/shared/app-config/app-config.interface';
 import { APP_SERVICE_CONFIG } from 'src/app/shared/app-config/app-config.service';
+import { Applicant } from '../learnership-applications/learnership-applications.component';
 
 @Injectable({
   providedIn: 'root',
@@ -52,18 +53,14 @@ export class ApplicantService {
   sendEmail(userId: string): Observable<any> {
     return this.http.post<any>(`${this.config.apiUrl}/email`, { userId });
   }
-
   
   getAllApplicantions(): Observable<any>  {
 
     return this.http.get(`${this.config.apiUrl}/applications`);
   }
-
   getApplicantEducation(): Observable<any> {
     return this.http.get(`${this.config.apiUrl}/education`);
   }
-
-
 
   onPersonalDetailsSubmit(id: any): Observable<any> {
     return this.http.get(`${this.config.apiUrl}/user/${id}`);
@@ -99,8 +96,34 @@ export class ApplicantService {
     // Implement this method as needed
   }
 
-  getProfileByUserId(userId: any) {
-    // Implement this method as needed
+  getList(
+    page: number,
+    pageSize: number,
+    courseOfInterest: string,
+    searchQuery: string,
+    startDate: string | null,
+    endDate: string | null
+  ) {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('pageSize', pageSize.toString())
+      .set('courseOfInterest', courseOfInterest)
+      .set('searchQuery', searchQuery);
+
+    if (startDate && endDate) {
+      const startDateObject = new Date(startDate);
+      const endDateObject = new Date(endDate);
+
+      if (!isNaN(startDateObject.getTime()) && !isNaN(endDateObject.getTime())) {
+        params = params
+          .set('startDate', startDateObject.toISOString())
+          .set('endDate', endDateObject.toISOString());
+      }
+    }
+
+    console.log('params:', params);
+
+    return this.http.get<any[]>(`${this.config.apiUrl}/applications`, { params });
   }
 }
 
