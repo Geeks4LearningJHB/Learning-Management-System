@@ -15,7 +15,6 @@ namespace G4L.UserManagement.BL.Interfaces
     {
         Task RegisterUserAsync(UserRequest user);
         Task<AuthenticateResponse> AuthenticateUserAsync(AuthenticateRequest model);
-        Task<User> GetUserByGoogleProviderKeyAsync(string providerKey);
         Task SignupUserAsync(AddUserRequest user);
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> GetUserByIdAsync(Guid id);

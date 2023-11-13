@@ -14,7 +14,7 @@ namespace G4L.UserManagement.BL.Interfaces
         Task<Applications> GetApplicantByIdNumberAsync(string idNumber);
         Task DeleteApplicationUserAsync(string email);
         Task<Applications> GetApplicationByUserIdAsync(Guid userId);
-        Task<IEnumerable<Applications>> ListAsync();
+        Task<IEnumerable<Applications>> ListAsync(int page = 1, int pageSize = 10, string courseOfInterest = null, string searchQuery = null, DateTime? startDate = null, DateTime? endDate = null);
 
     }
 }

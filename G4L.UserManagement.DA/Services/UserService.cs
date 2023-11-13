@@ -74,10 +74,6 @@ namespace G4L.UserManagement.Infrustructure.Services
             await _userRepository.DeleteAsync(id);
         }
 
-        public async Task<User> GetUserByGoogleProviderKeyAsync(string providerKey)
-        {
-           return await _userRepository.GetUserByGoogleProviderKeyAsync(providerKey);
-        }
 
         public async Task<User> GetUserAsync(string email)
         {

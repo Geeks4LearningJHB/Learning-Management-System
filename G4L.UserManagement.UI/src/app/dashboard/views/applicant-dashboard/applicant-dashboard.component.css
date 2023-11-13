@@ -1,49 +1,97 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 .c-item {
-    margin-left: 60px;
-      height:74vh;
-      width: 90%;
-    }
+  margin-left: 60px;
+  height: 74vh;
+  width: 90%;
+}
 
-    p{
-      font-family: 'Poppins', sans-serif;
-    }
-    span{
-      font-family: 'Poppins', sans-serif;
-    }
-    button{
-      font-family: 'Poppins', sans-serif;
-    }
-    h1{
-      text-align: center;
-      color: white;
-      font-size: 26px;
-      padding: 8px 0;
-      width: 90%;
-      margin: 0 0 20px 60px;
-      border-radius: 10px;
-      background-color: #092f4f;
-    }
-    .c-img {
-      height: 100%;
-      border-radius: 10px;
-      object-fit: cover;
-      filter: brightness(0.8);
-    }
-    .custom-btn-color {
-      width: 240px;
-      background-color: #092f4f;
-      border-color: #092f4f; 
-      color: #ffffff; 
-    }
-    .custom-btn-color:hover{
-      transform: scale(1.07);
-      box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
-    }
+p {
+  font-family: 'Poppins', sans-serif;
+}
 
-    .journey{
-      text-align: center;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
-    }
+span {
+  font-family: 'Poppins', sans-serif;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  font-size: 26px;
+  padding: 8px 0;
+  width: 90%;
+  margin: 0 0 20px 60px;
+  border-radius: 10px;
+  background-color: #092f4f;
+}
+
+.c-img {
+  height: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+  filter: brightness(0.8);
+ 
+  }
+
+.custom-btn-color {
+  width: 240px;
+  background-color: #092f4f;
+  border-color: #092f4f;
+  color: #ffffff;
+}
+
+.custom-btn-color:hover {
+  transform: scale(1.07);
+  box-shadow: 0px 6px 18px -9px rgba(0, 0, 0, 0.75);
+}
+
+.journey {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+
+}
+
+.button:hover {
+  background-color: #092f4f;
+}
+
+.Socials a{
+  margin: 0 10px;
+  font-size: xx-large;
+}
+
+.styled-image {
+margin-top: -17%;
+margin-left: -90%;
+  width: 700px;
+  height: 560px;
+}
+
+p {
+  font-size: large;
+  font-weight: 400;
+}
+
+.carousel-caption h2:last-of-type {
+  margin-top: -6%;
+  background-color: brown;
+  border-radius: 10px;
+  font-size: 40px;
+}
+.carousel-caption > p{
+  margin-top: 30px;
+  font-size: 21px;
+}
+.view-more a {
+  font-size: x-large;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+.view-more:hover {
+  background-color: #092f4f;
+}

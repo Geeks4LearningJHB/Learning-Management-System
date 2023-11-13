@@ -85,23 +85,7 @@ namespace G4L.UserManagement.Infrustructure.Repositories
             await _databaseContext.SaveChangesAsync();
         }
 
-        public async Task<User> GetUserByGoogleProviderKeyAsync(string providerKey)
-        {
-            return await _databaseContext.Users
-                .FirstOrDefaultAsync(u => u.GoogleProviderKey == providerKey);
-        }
 
-        public async Task SetGoogleProviderKeyAsync(Guid userId, string providerKey)
-        {
-            var user = await _databaseContext.Users
-                .FirstOrDefaultAsync(u => u.Id == userId);
-
-            if (user != null)
-            {
-                user.GoogleProviderKey = providerKey;
-                await _databaseContext.SaveChangesAsync();
-            }
-        }
 
         private async Task LinkSponsorAsync(UserRequest model, User user)
         {

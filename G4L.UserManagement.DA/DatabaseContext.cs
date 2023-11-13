@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace G4L.UserManagement.DA
 {
-    public class DatabaseContext: DbContext
+    public class DatabaseContext : DbContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
@@ -18,7 +18,7 @@ namespace G4L.UserManagement.DA
 
         // SQL Tables/Entity
         public DbSet<User> Users { get; set; }
-        public DbSet <Education> Educations { get; set; }
+        public DbSet<Education> Educations { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<CvDocuments> CvDocuments { get; set; }
         public DbSet<IdDocuments> IdDocuments { get; set; }
@@ -48,5 +48,5 @@ namespace G4L.UserManagement.DA
 
 
 
-    
+
 }

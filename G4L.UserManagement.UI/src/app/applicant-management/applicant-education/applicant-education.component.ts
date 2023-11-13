@@ -167,8 +167,6 @@ export class ApplicantEducationComponent implements OnInit {
     return this.dataSubmitted;  // Disable the "Done" button if data is successfully submitted
   }
     
-
- 
   onUpdate(): void {
     this.applicantService
       .onEducationUpdate(this.educationForm.value)

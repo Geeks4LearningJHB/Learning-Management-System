@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup } from '@angular/forms';
+// import { UntypedFormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { UploadService } from 'src/app/shared/service/fileupload.service';
@@ -27,7 +27,6 @@ export class ApplicantAttachmentsComponent implements OnInit {
 
   constructor(
     private route: Router,
-    private formBuilder: FormBuilder,
     public modalRef: MdbModalRef<any>,
     private uploadService: UploadService,
     private tokenService: TokenService,

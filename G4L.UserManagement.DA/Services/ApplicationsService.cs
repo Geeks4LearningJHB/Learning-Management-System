@@ -40,9 +40,9 @@ namespace G4L.UserManagement.DA.Services
             await _applicationsRepository.DeleApplicationByUserIdAsync(email);
         }
 
-        public async Task<IEnumerable<Applications>> ListAsync()
+        public async Task<IEnumerable<Applications>> ListAsync(int page = 1, int pageSize = 10, string courseOfInterest = null, string searchQuery = null, DateTime? startDate = null, DateTime? endDate = null)
         {
-            return await _applicationsRepository.ListAsync();
+            return await _applicationsRepository.ListAsync(page, pageSize, courseOfInterest, searchQuery, startDate, endDate);
         }
         public async Task<Applications> GetApplicationByUserIdAsync(Guid userId)
         {

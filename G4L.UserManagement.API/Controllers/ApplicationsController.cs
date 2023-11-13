@@ -15,6 +15,8 @@ using Nest;
 using G4L.UserManagement.DA.Migrations;
 using System.Net;
 using G4L.UserManagement.DA;
+using G4L.UserManagement.DA.Repositories;
+using MailKit.Search;
 
 namespace G4L.UserManagement.API.Controllers
 {
@@ -51,10 +53,13 @@ namespace G4L.UserManagement.API.Controllers
 
         //[Authorize(Role.Super_Admin, Role.Admin)]
         [HttpGet]
-        public async Task<IActionResult> GetApplicationsList()
+        public async Task<IActionResult> GetApplicationsList(int page = 1, int pageSize = 10, string courseOfInterest = null, string searchQuery = null, DateTime? startDate = null, DateTime? endDate = null)
         {
-            return Ok(await _applicationsService.ListAsync());
+            return Ok(await _applicationsService.ListAsync(page, pageSize,courseOfInterest,searchQuery,startDate,endDate));
         }
+
+      
+
 
         [AllowAnonymous]
         [HttpDelete]

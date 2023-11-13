@@ -28,7 +28,7 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 using G4L.UserManagement.BL.Entities;
-using Microsoft.AspNetCore.Identity;
+
 
 namespace G4L.UserManagement.API
 {
@@ -81,18 +81,12 @@ namespace G4L.UserManagement.API
                                .AllowAnyMethod();
                     });
             });
-            services.AddAuthentication()
-    .AddGoogle(options =>
-    {
-        options.ClientId = Configuration["1020926342112-pmsu051jltobv30pg8iksesb76sp9utc.apps.googleusercontent.com"];
-        options.ClientSecret = Configuration["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"];
-        options.SignInScheme = IdentityConstants.ExternalScheme;
-    });
+
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IGoogleCalendarAPI, GoogleCalendarAPI>();
 
             services.AddScoped<IUserService, UserService>();
-          
+
 
             services.AddScoped<IEducationService, EducationService>();
 

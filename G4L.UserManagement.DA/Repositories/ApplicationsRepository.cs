@@ -135,14 +135,42 @@ namespace G4L.UserManagement.DA.Repositories
                 .Where(x => x.Email == email)
                 .FirstOrDefaultAsync();
         }
-        public async Task<IEnumerable<Applications>> ListAsync()
+        public async Task<IEnumerable<Applications>> ListAsync(int page = 1, int pageSize = 4, string courseOfInterest = null, string searchQuery = null, DateTime? startDate = null, DateTime? endDate = null)
         {
-            return await _databaseContext.Set<Applications>()
-                                         .OrderByDescending(app => app.CreatedDate)
-                                         .ToListAsync();
+            var query = _databaseContext.Set<Applications>().AsQueryable();
+
+          
+            if (!string.IsNullOrEmpty(courseOfInterest))
+            {
+                query = query.Where(app => app.CourseOfInterest == courseOfInterest);
+            }
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                query = query.Where(app => app.Name.Contains(searchQuery) || app.Surname.Contains(searchQuery));
+            }
+
+            if (startDate.HasValue)
+            {
+              
+                startDate = startDate.Value.Date;
+                endDate = endDate.Value.Date;
+                query = query.Where(app => app.CreatedDate.Date >= startDate && app.CreatedDate.Date <= endDate);
+            }
+
+         
+            query = query.OrderByDescending(app => app.CreatedDate);
+
+     
+            query = query.Skip((page - 1) * pageSize).Take(pageSize);
+
+            return await query.ToListAsync();
         }
 
+
+
         public async Task<Applications> GetApplicationByUserIdAsync(Guid userId)
+        
         {
             return await Task.Run(() =>
             {
@@ -163,8 +191,6 @@ namespace G4L.UserManagement.DA.Repositories
                 await _databaseContext.SaveChangesAsync();
             
         }
-
-
 
     }
 }
