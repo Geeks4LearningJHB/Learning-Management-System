@@ -4,6 +4,7 @@ import { Chart, registerables } from 'chart.js';
 import { constants } from '../shared/global/global.constants';
 import { Roles } from '../shared/global/roles';
 Chart.register(...registerables);
+import { Observable, BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -17,11 +18,26 @@ export class DashboardComponent implements OnInit {
   isTrainer: boolean | undefined;
   isLearner: boolean | undefined;
 
+  subject = new BehaviorSubject<any[]>(['Thapelo', 'Mg']);
+  
+  obsData = this.subject.asObservable();
+
   constructor() { }
 
   ngOnInit(): void {
     const role = sessionStorage.getItem(constants.role);
     this.determinRole(role);
+    this.obsData.subscribe(data =>{
+      console.log(data);
+     }
+    )
+  }
+
+  addData(){
+    const name = 'Anton';
+    const oldData = this.subject.getValue();
+    const newData = [...oldData, name];
+    this.subject.next(newData);
   }
 
   determinRole(role: string | null) {

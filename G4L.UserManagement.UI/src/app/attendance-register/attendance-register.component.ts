@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { ToastrService } from 'ngx-toastr';
 import { CaptureGoalsComponent } from '../goal-management/modals/capture-goals/capture-goals.component';
@@ -28,7 +28,9 @@ export class AttendanceRegisterComponent implements OnInit {
     private modalService: MdbModalService,
     private toastr: ToastrService,
 
-  ) { }
+  ) { 
+
+  }
 
   isAdmin: boolean | undefined;
   isTrainer: boolean | undefined;
@@ -39,6 +41,17 @@ export class AttendanceRegisterComponent implements OnInit {
     const role = getSessionStorageValue(constants.role);
     this.determinRole(role);
   }
+
+  ngOnDestroy(){
+
+  }
+
+  ngOnChanges(){
+    
+  }
+
+
+
   determinRole(role: string | null) {
     switch (role) {
       case Roles.Super_Admin:
