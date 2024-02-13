@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-applicant-education',
@@ -9,8 +9,8 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 })
 export class ApplicantEducationComponent implements OnInit {
 
-   personalInformationForm!: FormGroup;
-  constructor(private route: Router, private formBuilder: FormBuilder) { }
+   personalInformationForm!: UntypedFormGroup;
+  constructor(private route: Router, private formBuilder: UntypedFormBuilder) { }
   
   ngOnInit(): void {
     throw new Error('Method not implemented.');

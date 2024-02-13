@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { AttendanceService } from 'src/app/attendance-register/services/attendance.service';
 import { Roles } from 'src/app/shared/global/roles';
@@ -23,7 +23,7 @@ import { NavItem } from '../models/nav-item';
   styleUrls: ['./side-nav.component.css'],
 })
 export class SideNavComponent implements OnInit {
-  holdingArray: FormGroup = new FormGroup({});
+  holdingArray: UntypedFormGroup = new UntypedFormGroup({});
   user: any;
   navItems: NavItem[] = [];
   modalDialog: MdbModalRef<EnrolComponent> | null = null;
@@ -38,7 +38,7 @@ export class SideNavComponent implements OnInit {
     private userService: UserService,
     private tokenService: TokenService,
     private attendanceService: AttendanceService,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {}
 
   ngOnInit(): void {

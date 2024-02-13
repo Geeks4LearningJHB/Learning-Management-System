@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 
 @Component({
@@ -8,8 +8,8 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
   styleUrls: ['./create-goal-task.component.css']
 })
 export class CreateGoalTaskComponent implements OnInit {
-  taskFormGroup: FormGroup = new FormGroup({
-    Task: new FormControl(null, [Validators.required])
+  taskFormGroup: UntypedFormGroup = new UntypedFormGroup({
+    Task: new UntypedFormControl(null, [Validators.required])
   })
 
   constructor(private taskModalRef: MdbModalRef<CreateGoalTaskComponent>) { }

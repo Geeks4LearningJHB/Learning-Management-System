@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { GoalModel } from '../../models/goal-model';
 
@@ -9,8 +9,8 @@ import { GoalModel } from '../../models/goal-model';
   styleUrls: ['./add-extra-goal-time.component.css']
 })
 export class AddExtraGoalTimeComponent implements OnInit {
-  extraTimeFormGroup: FormGroup = new FormGroup({
-    Time: new FormControl(null, [Validators.required])
+  extraTimeFormGroup: UntypedFormGroup = new UntypedFormGroup({
+    Time: new UntypedFormControl(null, [Validators.required])
   })
 
   constructor(

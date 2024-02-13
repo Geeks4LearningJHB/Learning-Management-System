@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 // import { AttendanceStatus } from 'src/app/attendance-register/models/attendance-type';
 import { UserService } from 'src/app/user-management/services/user.service';
 import { AttendanceService } from '../../services/attendance.service';
@@ -13,12 +13,12 @@ export class AdminComponent implements OnInit {
   attendences: any[] = [];
   users: any;
   ids: any;
-  testing: FormGroup = new FormGroup({});
+  testing: UntypedFormGroup = new UntypedFormGroup({});
   date: any;
   // testing data
 
   constructor(
-    private formBuider: FormBuilder,
+    private formBuider: UntypedFormBuilder,
     private attendenceService: AttendanceService,
     private userService: UserService
   ) {}

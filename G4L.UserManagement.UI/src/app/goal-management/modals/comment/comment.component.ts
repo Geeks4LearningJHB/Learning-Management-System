@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { goalStatus } from '../../models/goal-model';
@@ -16,8 +16,8 @@ import { GoalCommentService } from '../../services/logic-handlers/goal-comment.s
 export class CommentComponent implements OnInit {
   commentType!: goalStatus;
 
-  formGroup: FormGroup = new FormGroup({
-    comment: new FormControl(null, [Validators.required]),
+  formGroup: UntypedFormGroup = new UntypedFormGroup({
+    comment: new UntypedFormControl(null, [Validators.required]),
   });
 
   constructor(private goalCommentService: GoalCommentService) {}

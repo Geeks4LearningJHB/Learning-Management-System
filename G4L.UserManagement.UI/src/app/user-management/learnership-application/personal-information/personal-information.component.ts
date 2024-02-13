@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-personal-information',
@@ -9,22 +9,22 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 })
 export class PersonalInformationComponent implements OnInit {
 
-  personalDetails!: FormGroup;
-  constructor(private route: Router, private formBuilder: FormBuilder) { }
+  personalDetails!: UntypedFormGroup;
+  constructor(private route: Router, private formBuilder: UntypedFormBuilder) { }
 
   getFormControl(control: String): AbstractControl {
     return this.personalDetails.controls[`${control}`];
   }
 
   ngOnInit(): void {
-    this.personalDetails = new FormGroup({
-      Firstname: new FormControl(null, [Validators.required, Validators.required]),
-      Surname: new FormControl(null, Validators.required),
-      ID: new FormControl(null, [Validators.required, Validators.required]),
-      Email: new FormControl(null, Validators.email),
-      Gender: new FormControl(null, [Validators.required, Validators.required]),
-      Race: new FormControl(null, Validators.required),
-      Disability: new FormControl(null, [Validators.required, Validators.required]),
+    this.personalDetails = new UntypedFormGroup({
+      Firstname: new UntypedFormControl(null, [Validators.required, Validators.required]),
+      Surname: new UntypedFormControl(null, Validators.required),
+      ID: new UntypedFormControl(null, [Validators.required, Validators.required]),
+      Email: new UntypedFormControl(null, Validators.email),
+      Gender: new UntypedFormControl(null, [Validators.required, Validators.required]),
+      Race: new UntypedFormControl(null, Validators.required),
+      Disability: new UntypedFormControl(null, [Validators.required, Validators.required]),
     });
   }
 

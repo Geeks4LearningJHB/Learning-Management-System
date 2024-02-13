@@ -1,6 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ToastrService } from 'ngx-toastr';
 import { constants } from 'src/app/shared/global/global.constants';
@@ -38,7 +38,7 @@ export class EnrolComponent implements OnInit, DoCheck {
   dropdownSettings: any = {};
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private userService: UserService,
     public modalRef: MdbModalRef<EnrolComponent>,
     private toastr: ToastrService,

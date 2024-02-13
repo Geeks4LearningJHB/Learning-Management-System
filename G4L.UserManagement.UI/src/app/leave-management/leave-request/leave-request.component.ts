@@ -2,7 +2,7 @@ import { SponsorService } from './../../user-management/services/sponsor.service
 import { LeaveTypes } from './../../shared/global/leave-types';
 import { LeaveDayType } from './../../shared/global/leave-day-type';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, UntypedFormBuilder, Validators } from '@angular/forms';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ToastrService } from 'ngx-toastr';
 import { TokenService } from 'src/app/user-management/login/services/token.service';
@@ -43,7 +43,7 @@ export class LeaveRequestComponent implements OnInit {
 
   constructor(
     public modalRef: MdbModalRef<LeaveRequestComponent>,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private leaveService: LeaveService,
     private toastr: ToastrService,
     private tokenService: TokenService,

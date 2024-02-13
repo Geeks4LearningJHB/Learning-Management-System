@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 // import { AttendanceStatus } from 'src/app/attendance-register/models/attendance-type';
 
@@ -21,7 +21,7 @@ export class TraineeComponent implements OnInit {
   modalRef: any;
   date: any;
   userId: any | null;
-  holdingArray: FormGroup = new FormGroup({});
+  holdingArray: UntypedFormGroup = new UntypedFormGroup({});
   attendances!: AttendanceModel[];
   id!: string;
   loginTime: any;
@@ -38,7 +38,7 @@ export class TraineeComponent implements OnInit {
   constructor(
     private tokenService: TokenService,
     private attendanceService: AttendanceService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private modalService: MdbModalService,
     private captureGoalService: CaptureGoalService
   ) {}

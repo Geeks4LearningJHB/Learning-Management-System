@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { toNumber } from 'lodash';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { maxToastrTimeout, minGoalDuration } from 'src/app/shared/constants/goal-boundaries';
@@ -19,10 +19,10 @@ export class CaptureGoalsComponent {
   attendanceId: any;
   minimumGoalDuration: number = minGoalDuration;
 
-  formModel: FormGroup = new FormGroup({
-    title: new FormControl('', [Validators.required]),
-    duration: new FormControl(`00:${this.minimumGoalDuration}`, [Validators.required]),
-    description: new FormControl(''),
+  formModel: UntypedFormGroup = new UntypedFormGroup({
+    title: new UntypedFormControl('', [Validators.required]),
+    duration: new UntypedFormControl(`00:${this.minimumGoalDuration}`, [Validators.required]),
+    description: new UntypedFormControl(''),
   });
 
   goalObject: GoalModel = {

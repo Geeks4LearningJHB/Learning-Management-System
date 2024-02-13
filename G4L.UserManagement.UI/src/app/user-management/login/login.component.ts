@@ -1,4 +1,4 @@
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { constants } from 'src/app/shared/global/global.constants';
@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
   result: any;
   userId: any = '156b5e89-99ad-47aa-2895-08da80ffdfed';
   captureGoalsTime: any;
-  loginForm!: FormGroup;
-  holdingArray: FormGroup = new FormGroup({});
+  loginForm!: UntypedFormGroup;
+  holdingArray: UntypedFormGroup = new UntypedFormGroup({});
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      Email: new FormControl(null, [Validators.required, Validators.email]),
-      Password: new FormControl(null, Validators.required),
+    this.loginForm = new UntypedFormGroup({
+      Email: new UntypedFormControl(null, [Validators.required, Validators.email]),
+      Password: new UntypedFormControl(null, Validators.required),
     });
 
     // Clearing errors when making username changes

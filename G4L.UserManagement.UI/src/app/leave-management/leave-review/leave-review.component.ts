@@ -1,6 +1,6 @@
 import { SponsorService } from 'src/app/user-management/services/sponsor.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ToastrService } from 'ngx-toastr';
 import { constants } from 'src/app/shared/global/global.constants';
@@ -42,7 +42,7 @@ export class LeaveReviewComponent implements OnInit {
 
   constructor(
     public modalRef: MdbModalRef<LeaveReviewComponent>,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private leaveService: LeaveService,
     private sponsorService: SponsorService,
     private toastr: ToastrService,
@@ -314,7 +314,7 @@ export class LeaveReviewComponent implements OnInit {
   }
 
   setNewApprover() {
-    let approverForm = this.formModel.get('approvers').at(0) as FormGroup;
+    let approverForm = this.formModel.get('approvers').at(0) as UntypedFormGroup;
     let trainer = this.trainers.find(x => x.id === approverForm.get('userId')?.value);
     approverForm.controls['fullName'].setValue(`${trainer?.name} ${trainer?.surname}`);
 }
