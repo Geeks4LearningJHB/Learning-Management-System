@@ -6,7 +6,7 @@
     }}</span>
     <app-content class="taskCount rounded-circle">
       <div class="countContainer d-flex w-100 h-100">
-        <span class="text-dark">{{ goalObject?.tasks?.length }}</span>
+        <span class="text-dark">{{ goalObject.tasks?.length }}</span>
       </div>
     </app-content>
     <i
@@ -18,7 +18,7 @@
 
   <div
     cdkDropList
-    [cdkDropListData]="goalObject?.tasks"
+    [cdkDropListData]="goalObject.tasks"
     (cdkDropListDropped)="onDropTask($event)"
     class="p-2"
   >
