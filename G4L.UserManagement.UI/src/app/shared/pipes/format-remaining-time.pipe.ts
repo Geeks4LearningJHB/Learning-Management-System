@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { toNumber } from 'lodash';
+import * as lodash from 'lodash-es';
 
 @Pipe({
   name: 'formatRemainingTime'
@@ -10,12 +10,12 @@ export class FormatRemainingTimePipe implements PipeTransform {
 
     let timerFormat = ``
 
-    if (toNumber(hours) > 0)
-      timerFormat += `${toNumber(hours)} hr ${toNumber(minutes)} min `
-    else if (toNumber(minutes) > 0)
-      timerFormat += `${toNumber(minutes)} min `
+    if (lodash.toNumber(hours) > 0)
+      timerFormat += `${lodash.toNumber(hours)} hr ${lodash.toNumber(minutes)} min `
+    else if (lodash.toNumber(minutes) > 0)
+      timerFormat += `${lodash.toNumber(minutes)} min `
 
-    timerFormat += `${toNumber(seconds)} sec`
+    timerFormat += `${lodash.toNumber(seconds)} sec`
 
     return timerFormat;
   }

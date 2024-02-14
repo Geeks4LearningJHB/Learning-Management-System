@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { toNumber } from 'lodash';
+import * as lodash from 'lodash-es';
 import { ActiveGoalService } from 'src/app/goal-management/services/logic-handlers/active-goal.service';
 import { ViewGoalService } from 'src/app/goal-management/services/logic-handlers/view-goal.service';
 import { goalDangerTime, goalWarningTime, maxToastrTimeout } from 'src/app/shared/constants/goal-boundaries';
@@ -34,8 +35,8 @@ export class ActiveGoalCardComponent implements OnInit {
 
   changeCardState(timeparts: Array<string>): void {
     const [hours, minutes, _s] = timeparts
-
-    if (toNumber(hours) === 0 && toNumber(minutes) < goalDangerTime) {
+    
+    if (lodash.toNumber(hours) === 0 && lodash.toNumber(minutes) < goalDangerTime) {
       this.activeGoalStatus = "danger";
 
       if (!getSessionStorageValue("warningShown")) {
@@ -47,7 +48,7 @@ export class ActiveGoalCardComponent implements OnInit {
         )
       }
     }
-    else if (toNumber(hours) === 0 && toNumber(minutes) < goalWarningTime) this.activeGoalStatus = "warning"
+    else if (lodash.toNumber(hours) === 0 && lodash.toNumber(minutes) < goalWarningTime) this.activeGoalStatus = "warning"
     else this.activeGoalStatus = "good"
   }
 

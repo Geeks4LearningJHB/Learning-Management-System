@@ -1,4 +1,4 @@
-import * as lodash from "lodash";
+import * as lodash from "lodash-es";
 import { GoalModel, GoalTaskModel, goalStatus } from "../../models/goal-model";
 let goalProgress: number = 0
 

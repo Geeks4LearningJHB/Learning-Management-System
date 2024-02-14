@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { toNumber } from 'lodash';
+import * as lodash from 'lodash-es';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ActiveGoalService } from 'src/app/goal-management/services/logic-handlers/active-goal.service';
 import { GoalButtonActionService } from 'src/app/goal-management/services/logic-handlers/goal-button-action.service';
@@ -91,8 +91,8 @@ export class ViewSelectedGoalComponent implements OnInit {
 
     const durationDateObject = new Date(`${getStringDate()}T${prevTime}`)
 
-    durationDateObject.setHours(durationDateObject.getHours() + toNumber(newHours));
-    durationDateObject.setMinutes(durationDateObject.getMinutes() + toNumber(newMinutes));
+    durationDateObject.setHours(durationDateObject.getHours() + lodash.toNumber(newHours));
+    durationDateObject.setMinutes(durationDateObject.getMinutes() + lodash.toNumber(newMinutes));
 
     return getStringTimeFromDateObject(durationDateObject);
   }

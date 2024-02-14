@@ -9,9 +9,10 @@ import { EventService } from 'src/app/leave-management/services/event.service';
 export class EventCardComponent implements OnChanges {
 
   title: string = 'Public Holidays';
-  events = this.eventService.holidays.value;
+  events: any = null;
 
   constructor(private eventService: EventService) {
+    this.events = this.eventService.holidays.value;
    }
 
   ngOnChanges(changes: any) {

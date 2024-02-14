@@ -18,11 +18,13 @@ export class UploadService {
 
   private basePath = '/uploads';
 
-  app = initializeApp(this.config.firebase);
+  app: any = null;
 
-  private storage = getStorage(this.app);
+  private storage: any = null;
 
   constructor(@Inject(APP_SERVICE_CONFIG) private config : AppConfig,private toastr: ToastrService) {
+    this.app = initializeApp(this.config.firebase);
+    this.storage = getStorage(this.app);
   }
 
   getStorage() {

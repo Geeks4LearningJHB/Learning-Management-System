@@ -10,7 +10,7 @@ import { GoalCommentService } from './goal-comment.service';
 import { GoalManagementApiService } from '../api/goal-management-api.service';
 import { ActiveGoalService } from './active-goal.service';
 import { GoalButtonActionService } from './goal-button-action.service';
-import { toNumber } from 'lodash';
+import * as lodash from 'lodash-es';
 import { changeGoalState, incrementPausedCount, resetGoalMetadata } from '../helpers/goal-button-actions.helper';
 
 
@@ -85,7 +85,7 @@ export class GoalManagementDragDropService {
           break;
         case pausedState:
           // If the [pauseLimit] has been reached!
-          if (toNumber(event.previousContainer.data[event.previousIndex].pausedCount) > 0 && toNumber(event.previousContainer.data[event.previousIndex].pausedCount) % maxPauseCount === 0) {
+          if (lodash.toNumber(event.previousContainer.data[event.previousIndex].pausedCount) > 0 && lodash.toNumber(event.previousContainer.data[event.previousIndex].pausedCount) % maxPauseCount === 0) {
             this.goalCommentService.getUserGoalCommentActionByGoalStatus(pausedState, event.previousContainer.data[event.previousIndex],
               (userComment: string | null, goalToUpdate: GoalModel) => {
                 if (userComment) {

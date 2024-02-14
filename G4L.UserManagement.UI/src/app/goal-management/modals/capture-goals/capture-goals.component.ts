@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { toNumber } from 'lodash';
+import * as lodash from 'lodash-es';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { maxToastrTimeout, minGoalDuration } from 'src/app/shared/constants/goal-boundaries';
 import { ToastrMessagesService } from 'src/app/shared/global/toastr-messages.service';
@@ -92,7 +92,7 @@ export class CaptureGoalsComponent {
     const [hours, minutes] = this.getFormControl('duration').value.split(':');
 
     // Business rule [Goals must have a minumum duration of 25 minutes]
-    if (toNumber(hours) === 0 && toNumber(minutes) < minGoalDuration) {
+    if (lodash.toNumber(hours) === 0 && lodash.toNumber(minutes) < minGoalDuration) {
       this.toastrMessageService.showErrorMessage(
         'Create New Goal',
         `Cannot set a goal with a duration less than ${minGoalDuration} minutes`,
