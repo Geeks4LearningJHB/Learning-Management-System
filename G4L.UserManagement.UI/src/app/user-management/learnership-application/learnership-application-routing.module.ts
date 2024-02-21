@@ -6,31 +6,31 @@ import { ApplicantEducationComponent } from './applicant-education/applicant-edu
 import { ApplicantAttachmentsComponent } from './applicant-attachments/applicant-attachments.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: LearnershipApplicationComponent,
-    children: [
-      {
-        path: 'personal-information',
-        component: PersonalInformationComponent,
-      },
+  // {
+  //   path: '',
+  //   component: LearnershipApplicationComponent,
+  //   children: [
+  //     {
+  //       path: 'personal-information',
+  //       component: PersonalInformationComponent,
+  //     },
 
-      {
-        path: 'education',
-        component: ApplicantEducationComponent,
-      },
-      {
-        path: 'attachments',
-        component: ApplicantAttachmentsComponent,
-      },
-      {
-        path: '**',
-        pathMatch: 'full',
-        redirectTo: 'personal-information',
-      }
+  //     {
+  //       path: 'education',
+  //       component: ApplicantEducationComponent,
+  //     },
+  //     {
+  //       path: 'attachments',
+  //       component: ApplicantAttachmentsComponent,
+  //     },
+  //     {
+  //       path: '**',
+  //       pathMatch: 'full',
+  //       redirectTo: 'personal-information',
+  //     }
 
-    ],
-  },
+  //   ],
+  // },
 
 ];
 

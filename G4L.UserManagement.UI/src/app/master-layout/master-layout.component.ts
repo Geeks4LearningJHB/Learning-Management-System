@@ -7,7 +7,7 @@ import { GoalModel } from '../goal-management/models/goal-model';
 import { GoalManagementApiService } from '../goal-management/services/api/goal-management-api.service';
 import { ActiveGoalService } from '../goal-management/services/logic-handlers/active-goal.service';
 import { CaptureGoalService } from '../goal-management/services/logic-handlers/capture-goal.service';
-import { EventService } from '../leave-management/services/event.service';
+//import { EventService } from '../leave-management/services/event.service';
 import {
   archivedState,
   backlogState,
@@ -35,7 +35,7 @@ export class MasterLayoutComponent implements OnInit {
   constructor(
     private tokenService: TokenService,
     private attendanceService: AttendanceService,
-    private eventService: EventService,
+    //private eventService: EventService,
     private captureGoalService: CaptureGoalService,
     private goalManagementApiService: GoalManagementApiService,
     private activeGoalPopupService: ActiveGoalService
@@ -52,9 +52,9 @@ export class MasterLayoutComponent implements OnInit {
         });
       });
 
-    this.getPublicHoildays(
-      'en%2Esa%23holiday%40group%2Ev%2Ecalendar%2Egoogle%2Ecom'
-    );
+    // this.getPublicHoildays(
+    //   'en%2Esa%23holiday%40group%2Ev%2Ecalendar%2Egoogle%2Ecom'
+    // );
     this.captureGoal();
 
     if (
@@ -77,9 +77,9 @@ export class MasterLayoutComponent implements OnInit {
     console.log(this.testTime);
   }
 
-  getPublicHoildays(calendarId: string) {
-    this.eventService.getCalendarEvents(calendarId);
-  }
+  // getPublicHoildays(calendarId: string) {
+  //   this.eventService.getCalendarEvents(calendarId);
+  // }
 
   getUserGoals(user_id: string) {
     console.log('Loading Goals');

@@ -65,10 +65,6 @@ export class SideNavComponent implements OnInit {
       case Roles.Super_Admin:
         return [
           Dashboard,
-          UserManagement,
-          AttendanceRegister,
-          LeaveManagement,
-          IKMManagement,
           GoalManagement,
         ];
       case Roles.Admin:
@@ -133,22 +129,5 @@ export class SideNavComponent implements OnInit {
         });
       });
   }
-  logout() {
-    console.log(this.holdingArray.value);
-    //clear the sessionStorage and reload
-    switch (this.user?.role) {
-      case Roles.Learner:
-        this.attendanceService
-          .updateAttendance(this.holdingArray.value)
-          .subscribe((_: any) => {
-            sessionStorage.clear();
-            window.location.reload();
-          });
-        break;
-      default:
-        sessionStorage.clear();
-        window.location.reload();
-        break;
-    }
-  }
+  
 }
